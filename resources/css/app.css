@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+}
+
+@layer components {
+    .glass-effect {
+        @apply backdrop-blur-xl bg-white/80;
+    }
+    
+    .card-3d {
+        @apply transition-all duration-300 hover:-translate-y-1;
+    }
+    
+    .sidebar-link {
+        @apply transition-all duration-200;
+    }
+    
+    .sidebar-link:hover {
+        @apply translate-x-1;
+    }
+}
