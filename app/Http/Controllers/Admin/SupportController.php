@@ -69,6 +69,10 @@ class SupportController extends Controller
             'message' => 'required|string|max:5000',
         ]);
 
+        if ($ticket->isClosed()) {
+            return back()->with('error', 'This ticket is closed and cannot receive replies.');
+        }
+
         $admin = Auth::guard('admin')->user();
 
         TicketReply::create([

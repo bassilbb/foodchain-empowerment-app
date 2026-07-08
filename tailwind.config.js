@@ -9,6 +9,17 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    safelist: [
+        'stat-card',
+        'stat-card-accent',
+        'stat-card-warning',
+        'stat-card-info',
+        'card-3d',
+        'sidebar-link',
+        'header-blur',
+        'bell-blink',
+    ],
+
     theme: {
         extend: {
             fontFamily: {

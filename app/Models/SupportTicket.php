@@ -14,6 +14,8 @@ class SupportTicket extends Model
         'user_id',
         'subject',
         'message',
+        'attachment_path',
+        'category',
         'priority',
         'status',
         'assigned_to',
@@ -39,7 +41,7 @@ class SupportTicket extends Model
     public static function generateTicketNumber(): string
     {
         do {
-            $number = 'TKT-' . strtoupper(substr(uniqid(), -8));
+            $number = 'TKT-'.strtoupper(substr(uniqid(), -8));
         } while (self::where('ticket_number', $number)->exists());
 
         return $number;
@@ -80,6 +82,14 @@ class SupportTicket extends Model
     public function scopeUnassigned($query)
     {
         return $query->whereNull('assigned_to');
+    }
+
+    // Accessors
+    public function getLastActivityAtAttribute()
+    {
+        $lastReply = $this->replies()->latest('created_at')->first();
+
+        return $lastReply ? $lastReply->created_at : $this->created_at;
     }
 
     // Helper Methods
@@ -124,4 +134,3 @@ class SupportTicket extends Model
         ]);
     }
 }
-

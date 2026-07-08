@@ -49,8 +49,8 @@ class BankAccount extends Model
         return static::active()->default()->first() ?? static::active()->first();
     }
 
-    public static function getAllActive(): array
+    public static function getAllActive()
     {
-        return static::active()->orderByDesc('is_default')->get()->toArray();
+        return static::active()->orderByDesc('is_default')->get();
     }
 }

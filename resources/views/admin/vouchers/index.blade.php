@@ -1,129 +1,139 @@
 @extends('admin.layouts.app')
 
 @section('title', 'Vouchers')
-@section('page-title', 'Voucher Management')
-
 @section('header', 'Vouchers')
 @section('subheader', 'Manage food collection vouchers')
 
 @section('content')
-<!-- Create Voucher -->
-<div class="card-3d p-6 mb-6">
-    <h3 class="text-lg font-bold text-slate-800 mb-4">Issue New Voucher</h3>
-    <form method="POST" action="{{ route('admin.vouchers.store') }}" class="flex flex-wrap gap-4 items-end">
-        @csrf
-        <div class="flex-1 min-w-[200px]">
-            <label class="block text-sm font-medium text-slate-700 mb-2">User</label>
-            <select name="user_id" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500" required>
-                <option value="">Select User</option>
-                @foreach(\App\Models\User::where('is_active', true)->limit(50)->get() as $user)
-                <option value="{{ $user->id }}">{{ $user->full_name }} ({{ $user->email }})</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="flex-1 min-w-[200px]">
-            <label class="block text-sm font-medium text-slate-700 mb-2">Distribution (optional)</label>
-            <select name="food_distribution_id" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500">
-                <option value="">Select Distribution</option>
-                @foreach(\App\Models\FoodDistribution::where('status', 'approved')->limit(20)->get() as $dist)
-                <option value="{{ $dist->id }}">{{ $dist->name }} - {{ $dist->distribution_date->format('M d, Y') }}</option>
-                @endforeach
-            </select>
-        </div>
-        <button type="submit" class="px-5 py-2.5 bg-primary-500 text-white font-medium rounded-xl hover:bg-primary-600 transition-colors">
-            Issue Voucher
-        </button>
-    </form>
+<div class="page-card">
+    <div class="page-card-header">
+        <h3 class="page-card-title">Issue New Voucher</h3>
+    </div>
+    <div class="page-card-body">
+        <form method="POST" action="{{ route('admin.vouchers.store') }}" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+            @csrf
+            <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label class="form-label">User</label>
+                <select name="user_id" required class="form-select">
+                    <option value="">Select User</option>
+                    @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->full_name }} ({{ $user->email }})</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label class="form-label">Distribution (optional)</label>
+                <select name="food_distribution_id" class="form-select">
+                    <option value="">Select Distribution</option>
+                    @foreach($distributions as $dist)
+                    <option value="{{ $dist->id }}">{{ $dist->name }} - {{ $dist->distribution_date ? $dist->distribution_date->format('M d, Y') : 'No date' }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Issue Voucher
+            </button>
+        </form>
+    </div>
 </div>
 
-<!-- Filters -->
-<div class="card-3d p-4 mb-6">
-    <form method="GET" class="flex flex-wrap gap-4">
-        <div class="flex-1 min-w-[200px]">
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by voucher number, collection code..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500">
-        </div>
-        <select name="status" class="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500">
-            <option value="">All Status</option>
-            <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
-            <option value="issued" {{ request('status') === 'issued' ? 'selected' : '' }}>Issued</option>
-            <option value="collected" {{ request('status') === 'collected' ? 'selected' : '' }}>Collected</option>
-            <option value="expired" {{ request('status') === 'expired' ? 'selected' : '' }}>Expired</option>
-        </select>
-        <button type="submit" class="px-5 py-2.5 bg-primary-500 text-white font-medium rounded-xl hover:bg-primary-600 transition-colors">
-            Filter
-        </button>
-    </form>
+<div class="page-card">
+    <div class="page-card-body">
+        <form method="GET" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+            <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label class="form-label">Search</label>
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by voucher number, collection code..." class="form-input">
+            </div>
+            <div class="form-group" style="min-width: 150px; margin-bottom: 0;">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
+                    <option value="">All Status</option>
+                    <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="issued" {{ request('status') === 'issued' ? 'selected' : '' }}>Issued</option>
+                    <option value="collected" {{ request('status') === 'collected' ? 'selected' : '' }}>Collected</option>
+                    <option value="expired" {{ request('status') === 'expired' ? 'selected' : '' }}>Expired</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Filter
+            </button>
+        </form>
+    </div>
 </div>
 
-<!-- Vouchers Table -->
-<div class="card-3d overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead class="bg-slate-50 border-b border-slate-200">
+<div class="page-card">
+    <div class="page-card-body" style="padding: 0;">
+        <table class="data-table">
+            <thead>
                 <tr>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Voucher #</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">User</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Collection Code</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Distribution</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Created</th>
-                    <th class="text-right py-4 px-6 text-sm font-semibold text-slate-600">Actions</th>
+                    <th>Voucher #</th>
+                    <th>User</th>
+                    <th>Collection Code</th>
+                    <th>Distribution</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th style="text-align: right;">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
                 @forelse($vouchers as $voucher)
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-4 px-6">
-                        <span class="font-mono font-semibold text-slate-800">{{ $voucher->voucher_number }}</span>
-                    </td>
-                    <td class="py-4 px-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white text-xs font-bold">
-                                {{ substr($voucher->user->first_name ?? 'U', 0, 1) }}
+                <tr>
+                    <td style="font-family: monospace; font-weight: 700; color: #1e293b;">{{ $voucher->voucher_number }}</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #10b981, #0ea5e9); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 700;">
+                                {{ substr($voucher->user?->first_name ?? 'U', 0, 1) }}
                             </div>
-                            <span class="font-medium text-slate-800">{{ $voucher->user->full_name ?? 'N/A' }}</span>
+                            <span style="font-weight: 600; color: #1e293b;">{{ $voucher->user?->full_name ?? 'N/A' }}</span>
                         </div>
                     </td>
-                    <td class="py-4 px-6">
+                    <td>
                         @if($voucher->collection_code)
-                        <span class="font-mono text-sm text-slate-600">{{ $voucher->collection_code }}</span>
+                        <span style="font-family: monospace; font-size: 0.875rem; color: #64748b;">{{ $voucher->collection_code }}</span>
                         @else
-                        <span class="text-slate-400">-</span>
+                        <span style="color: #94a3b8;">-</span>
                         @endif
                     </td>
-                    <td class="py-4 px-6 text-slate-600">
+                    <td>
                         @if($voucher->distribution)
                         {{ $voucher->distribution->name }}
                         @else
-                        <span class="text-slate-400">Manual</span>
+                        <span style="color: #94a3b8;">Manual</span>
                         @endif
                     </td>
-                    <td class="py-4 px-6">
-                        <span class="px-2 py-1 rounded-full text-xs font-medium
-                            {{ $voucher->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
-                            {{ $voucher->status === 'issued' ? 'bg-blue-100 text-blue-700' : '' }}
-                            {{ $voucher->status === 'collected' ? 'bg-green-100 text-green-700' : '' }}
-                            {{ $voucher->status === 'expired' ? 'bg-slate-100 text-slate-600' : '' }}">
+                    <td>
+                        <span class="badge
+                            @if($voucher->status === 'pending') badge-warning
+                            @elseif($voucher->status === 'issued') badge-info
+                            @elseif($voucher->status === 'collected') badge-success
+                            @else badge-dark
+                            @endif">
                             {{ ucfirst($voucher->status) }}
                         </span>
                     </td>
-                    <td class="py-4 px-6 text-slate-500 text-sm">{{ $voucher->created_at->format('M d, Y') }}</td>
-                    <td class="py-4 px-6 text-right">
-                        <a href="{{ route('admin.vouchers.show', $voucher) }}" class="text-primary-600 hover:text-primary-700 font-medium">View</a>
+                    <td style="font-size: 0.875rem; color: #64748b;">{{ $voucher->created_at->format('M d, Y') }}</td>
+                    <td style="text-align: right;">
+                        <a href="{{ route('admin.vouchers.show', $voucher) }}" class="action-link">View</a>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="py-8 text-center text-slate-500">No vouchers found</td>
+                    <td colspan="7">
+                        <div class="empty-state">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                            <p>No vouchers found</p>
+                        </div>
+                    </td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-    @if($vouchers->hasPages())
-    <div class="px-6 py-4 border-t border-slate-100">
-        {{ $vouchers->links() }}
-    </div>
-    @endif
 </div>
+
+@if($vouchers->hasPages())
+<div class="pagination">
+    {{ $vouchers->links() }}
+</div>
+@endif
 @endsection

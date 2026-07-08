@@ -18,6 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'permission' => \App\Http\Middleware\CheckPermission::class,
             'membership' => \App\Http\Middleware\CheckMembership::class,
+            'role' => \App\Http\Middleware\CheckRole::class,
+        ]);
+
+        $middleware->validateCsrfTokens(except: [
+            'payment/manual',
+            'paystack/webhook',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

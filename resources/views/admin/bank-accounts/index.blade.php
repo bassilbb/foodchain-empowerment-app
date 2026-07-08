@@ -7,77 +7,77 @@
 @section('subheader', 'Manage payment bank accounts')
 
 @section('content')
-<div class="mb-6 flex items-center justify-between">
-    <div>
-        <p class="text-slate-500">Manage bank accounts for manual payment transfers</p>
-    </div>
-    <button onclick="document.getElementById('addAccountModal').classList.remove('hidden')" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transform hover:-translate-y-0.5 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+@if(session('success'))
+<div class="alert alert-success">{{ session('success') }}</div>
+@endif
+@if(session('error'))
+<div class="alert alert-error">{{ session('error') }}</div>
+@endif
+
+<div class="page-card-header">
+    <p style="margin: 0;">Manage bank accounts for manual payment transfers</p>
+    <button onclick="document.getElementById('addAccountModal').style.display = 'block'" class="btn-primary">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
         Add Bank Account
     </button>
 </div>
 
-<!-- Bank Accounts Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px;">
     @forelse($accounts as $account)
-    <div class="card-3d p-6 relative">
+    <div class="page-card" style="padding: 24px; position: relative;">
         @if($account->is_default)
-        <div class="absolute top-3 right-3">
-            <span class="px-2 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700">Default</span>
+        <div style="position: absolute; top: 12px; right: 12px;">
+            <span class="badge badge-primary">Default</span>
         </div>
         @endif
-        
-        <div class="flex items-center gap-4 mb-4">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
             </div>
             <div>
-                <h3 class="font-bold text-slate-800">{{ $account->bank_name }}</h3>
-                <p class="text-sm text-slate-500">{{ $account->account_type ?? 'Current' }}</p>
+                <h3 style="font-weight: 700; margin: 0;">{{ $account->bank_name }}</h3>
+                <p style="font-size: 14px; color: #64748b; margin: 0;">{{ $account->account_type ?? 'Current' }}</p>
             </div>
         </div>
 
-        <div class="space-y-2 mb-4">
-            <div>
-                <p class="text-xs text-slate-400">Account Number</p>
-                <p class="font-mono font-semibold text-slate-800">{{ $account->account_number }}</p>
+        <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 12px;">
+                <p style="font-size: 12px; color: #94a3b8; margin: 0 0 4px 0;">Account Number</p>
+                <p style="font-family: monospace; font-weight: 600; margin: 0;">{{ $account->account_number }}</p>
             </div>
             <div>
-                <p class="text-xs text-slate-400">Account Name</p>
-                <p class="font-medium text-slate-800">{{ $account->account_name }}</p>
+                <p style="font-size: 12px; color: #94a3b8; margin: 0 0 4px 0;">Account Name</p>
+                <p style="font-weight: 500; margin: 0;">{{ $account->account_name }}</p>
             </div>
         </div>
 
         @if($account->instructions)
-        <div class="mb-4 p-3 rounded-lg bg-slate-50">
-            <p class="text-xs text-slate-500">Instructions</p>
-            <p class="text-sm text-slate-700">{{ $account->instructions }}</p>
+        <div style="margin-bottom: 16px; padding: 12px; border-radius: 12px; background: #f8fafc;">
+            <p style="font-size: 12px; color: #64748b; margin: 0 0 4px 0;">Instructions</p>
+            <p style="font-size: 14px; color: #475569; margin: 0;">{{ $account->instructions }}</p>
         </div>
         @endif
 
-        <div class="flex gap-2 pt-4 border-t border-slate-100">
-            <span class="px-2 py-1 rounded-full text-xs font-medium {{ $account->is_active ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500' }}">
+        <div style="display: flex; gap: 8px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+            <span class="badge badge-{{ $account->is_active ? 'success' : 'dark' }}">
                 {{ $account->is_active ? 'Active' : 'Inactive' }}
             </span>
             @if(!$account->is_default)
-            <form method="POST" action="{{ route('admin.bank-accounts.update', $account) }}" class="ml-auto">
+            <form method="POST" action="{{ route('admin.bank-accounts.update', $account) }}" style="margin-left: auto;">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="is_default" value="1">
-                <button type="submit" class="text-xs text-primary-600 hover:text-primary-700 font-medium">Set as Default</button>
+                <button type="submit" class="btn-secondary btn-sm" style="background: none; border: none; font-weight: 500; cursor: pointer;">Set as Default</button>
             </form>
             @endif
         </div>
     </div>
     @empty
-    <div class="col-span-full">
-        <div class="card-3d p-12 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-            </div>
-            <h3 class="text-lg font-semibold text-slate-800 mb-2">No Bank Accounts</h3>
-            <p class="text-slate-500 mb-4">Add a bank account to receive manual payments</p>
-            <button onclick="document.getElementById('addAccountModal').classList.remove('hidden')" class="px-5 py-2.5 bg-primary-500 text-white font-medium rounded-xl hover:bg-primary-600 transition-colors">
+    <div style="grid-column: 1 / -1;">
+        <div class="empty-state">
+            <p>No bank accounts found. Add a bank account to receive manual payments.</p>
+            <button onclick="document.getElementById('addAccountModal').style.display = 'block'" class="btn-primary" style="margin-top: 12px;">
                 Add First Account
             </button>
         </div>
@@ -85,46 +85,45 @@
     @endforelse
 </div>
 
-<!-- Add Account Modal -->
-<div id="addAccountModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen px-4">
-        <div class="fixed inset-0 bg-black/50 transition-opacity" onclick="document.getElementById('addAccountModal').classList.add('hidden')"></div>
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
-            <h3 class="text-lg font-bold text-slate-800 mb-4">Add Bank Account</h3>
-            <form method="POST" action="{{ route('admin.bank-accounts.store') }}" class="space-y-4">
+<div id="addAccountModal" style="display: none; position: fixed; inset: 0; z-index: 50; overflow-y: auto;">
+    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 16px;">
+        <div style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7);" onclick="document.getElementById('addAccountModal').style.display = 'none'"></div>
+        <div class="page-card" style="position: relative; width: 100%; max-width: 480px; padding: 24px;">
+            <h3 class="page-card-title" style="margin: 0 0 20px 0;">Add Bank Account</h3>
+            <form method="POST" action="{{ route('admin.bank-accounts.store') }}">
                 @csrf
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Bank Name</label>
-                    <input type="text" name="bank_name" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500" placeholder="e.g., First Bank">
+                <div class="form-group">
+                    <label class="form-label">Bank Name</label>
+                    <input type="text" name="bank_name" required class="form-input" placeholder="e.g., First Bank">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Account Number</label>
-                    <input type="text" name="account_number" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500" placeholder="e.g., 1234567890">
+                <div class="form-group">
+                    <label class="form-label">Account Number</label>
+                    <input type="text" name="account_number" required class="form-input" placeholder="e.g., 1234567890">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Account Name</label>
-                    <input type="text" name="account_name" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500" placeholder="e.g., FoodChain Ltd">
+                <div class="form-group">
+                    <label class="form-label">Account Name</label>
+                    <input type="text" name="account_name" required class="form-input" placeholder="e.g., FoodChain Ltd">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Account Type</label>
-                    <select name="account_type" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500">
+                <div class="form-group">
+                    <label class="form-label">Account Type</label>
+                    <select name="account_type" class="form-select">
                         <option value="current">Current</option>
                         <option value="savings">Savings</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Instructions (optional)</label>
-                    <textarea name="instructions" rows="2" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-primary-500" placeholder="Payment instructions..."></textarea>
+                <div class="form-group">
+                    <label class="form-label">Instructions (optional)</label>
+                    <textarea name="instructions" rows="2" class="form-input" placeholder="Payment instructions..."></textarea>
                 </div>
-                <label class="flex items-center gap-3">
-                    <input type="checkbox" name="is_default" value="1" class="w-4 h-4 rounded border-slate-300 text-primary-500">
-                    <span class="text-sm text-slate-600">Set as default account</span>
+                <label style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                    <input type="checkbox" name="is_default" value="1" style="width: 18px; height: 18px; accent-color: #10b981;">
+                    <span style="font-size: 14px; color: #64748b;">Set as default account</span>
                 </label>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="document.getElementById('addAccountModal').classList.add('hidden')" class="flex-1 px-4 py-3 bg-slate-100 text-slate-600 font-medium rounded-xl hover:bg-slate-200 transition-colors">
+                <div style="display: flex; gap: 12px; padding-top: 16px;">
+                    <button type="button" onclick="document.getElementById('addAccountModal').style.display = 'none'" class="btn-secondary" style="flex: 1;">
                         Cancel
                     </button>
-                    <button type="submit" class="flex-1 px-4 py-3 bg-primary-500 text-white font-medium rounded-xl hover:bg-primary-600 transition-colors">
+                    <button type="submit" class="btn-primary" style="flex: 1;">
                         Add Account
                     </button>
                 </div>

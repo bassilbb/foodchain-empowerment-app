@@ -24,7 +24,7 @@ class ReferralService
             return false;
         }
 
-        DB::transaction(function () use ($referrer, $referredUser) {
+        DB::transaction(function () use ($referrer, $referredUser, $referralCode) {
             // Update referred_by on the new user
             $referredUser->update(['referred_by' => $referrer->id]);
 

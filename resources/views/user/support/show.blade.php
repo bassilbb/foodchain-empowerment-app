@@ -1,111 +1,123 @@
-{{-- resources/views/user/support/show.blade.php --}}
 @extends('layouts.user')
 @section('title', 'Ticket #' . $ticket->id)
+@section('header', 'Support Ticket')
+@section('subheader', $ticket->subject)
+
 @section('content')
-<div class="mb-6">
-    <a href="{{ route('support.index') }}" class="flex items-center text-sm text-gray-600 hover:text-gray-900">
-        <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
+<div style="margin-bottom: 1rem;">
+    <a href="{{ route('support.index') }}" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 0.25rem;">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         Back to Tickets
     </a>
 </div>
 
-<div class="bg-white shadow rounded-lg overflow-hidden">
-    <!-- Ticket Header -->
-    <div class="px-6 py-5 border-b border-gray-200">
-        <div class="flex justify-between items-start">
-            <div>
-                <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium
-                    @if($ticket->status === 'open') bg-blue-100 text-blue-800
-                    @elseif($ticket->status === 'in_progress') bg-yellow-100 text-yellow-800
-                    @else bg-green-100 text-green-800
-                    @endif">
+<div class="page-card">
+    <div class="page-card-header">
+        <div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span class="badge"
+                    @if($ticket->status === 'open') style="background: #dbeafe; color: #2563eb;" @endif
+                    @if($ticket->status === 'in_progress') style="background: #fef3c7; color: #d97706;" @endif
+                    @if($ticket->status === 'resolved') style="background: #dcfce7; color: #16a34a;" @endif
+                    @if($ticket->status === 'closed') style="background: #f1f5f9; color: #64748b;" @endif>
                     {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                 </span>
-                <h1 class="text-xl font-bold text-gray-900 mt-2">{{ $ticket->subject }}</h1>
-                <p class="text-sm text-gray-500 mt-1">
-                    Category: {{ ucfirst($ticket->category) }} • Created {{ $ticket->created_at->format('M d, Y \a\t g:i A') }}
-                </p>
+                @if($ticket->priority)
+                <span class="badge"
+                    @if($ticket->priority === 'urgent') style="background: #fee2e2; color: #dc2626;" @endif
+                    @if($ticket->priority === 'high') style="background: #ffedd5; color: #ea580c;" @endif
+                    @if($ticket->priority === 'medium') style="background: #fef3c7; color: #d97706;" @endif
+                    @if($ticket->priority === 'low') style="background: #f3f4f6; color: #4b5563;" @endif>
+                    {{ ucfirst($ticket->priority) }}
+                </span>
+                @endif
             </div>
-            @if($ticket->status !== 'resolved')
-                <form action="{{ route('support.close', $ticket) }}" method="POST" onsubmit="return confirm('Are you sure you want to close this ticket?');">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit"
-                        class="px-3 py-1.5 text-xs font-medium text-red-600 hover:text-red-800 border border-red-300 rounded-md hover:bg-red-50">
-                        Close Ticket
-                    </button>
-                </form>
-            @endif
+            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; color: #1e293b;">{{ $ticket->subject }}</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.25rem;">
+                @if($ticket->category)Category: {{ ucfirst($ticket->category) }} &bull; @endif
+                Created {{ $ticket->created_at->format('M d, Y \a\t g:i A') }}
+            </p>
         </div>
+        @if(!in_array($ticket->status, ['resolved', 'closed']))
+            <button type="button" onclick="showCloseModal()" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">
+                Close Ticket
+            </button>
+        @endif
     </div>
-
-    <!-- Messages Timeline -->
-    <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900 mb-4">Conversation</h2>
-
-        <div class="space-y-6">
-            <!-- Original Message -->
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <div class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold">
-                        {{ substr($user->first_name, 0, 1) }}
-                    </div>
+    <div class="page-card-body">
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; gap: 0.75rem;">
+                <div style="width: 2rem; height: 2rem; border-radius: 9999px; background: #94a3b8; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;">
+                    {{ substr(Auth::user()->first_name, 0, 1) }}
                 </div>
-                <div class="ml-3 flex-1">
-                    <div class="bg-gray-100 rounded-lg p-4">
-                        <p class="text-sm text-gray-800 whitespace-pre-wrap">{{ $ticket->message }}</p>
-                    </div>
-                    <p class="mt-1 text-xs text-gray-500">You • {{ $ticket->created_at->format('M d, Y \a\t g:i A') }}</p>
-                </div>
-            </div>
-
-            <!-- Replies -->
-            @foreach($ticket->replies as $reply)
-                <div class="flex">
-                    <div class="flex-shrink-0">
-                        @if($reply->is_support)
-                            <div class="h-8 w-8 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs font-bold">
-                                S
-                            </div>
-                        @else
-                            <div class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold">
-                                {{ substr(Auth::user()->first_name, 0, 1) }}
-                            </div>
+                <div style="flex: 1;">
+                    <div style="background: #f8fafc; border-radius: 0.5rem; padding: 1rem;">
+                        <p style="margin: 0; color: #475569; white-space: pre-wrap;">{{ $ticket->message }}</p>
+                        @if($ticket->attachment_path)
+                        <div style="margin-top: 0.75rem;">
+                            <a href="{{ asset('storage/'.$ticket->attachment_path) }}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; font-size: 0.8rem; color: #2563eb; font-weight: 500;">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+                                View Attachment
+                            </a>
+                        </div>
                         @endif
                     </div>
-                    <div class="ml-3 flex-1">
-                        <div class="bg-{{ $reply->is_support ? 'purple-50' : 'gray-100' }} rounded-lg p-4">
-                            <p class="text-sm text-gray-800 whitespace-pre-wrap">{{ $reply->message }}</p>
-                        </div>
-                        <p class="mt-1 text-xs text-gray-500">
-                            {{ $reply->is_support ? 'Support Team' : 'You' }} • {{ $reply->created_at->format('M d, Y \a\t g:i A') }}
-                        </p>
-                    </div>
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.25rem;">You &bull; {{ $ticket->created_at->format('M d, Y \a\t g:i A') }}</p>
                 </div>
+            </div>
+
+            @foreach($ticket->replies as $reply)
+            <div style="display: flex; gap: 0.75rem; {{ $reply->isFromAdmin() ? 'flex-direction: row-reverse;' : '' }}">
+                <div style="width: 2rem; height: 2rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; {{ $reply->isFromAdmin() ? 'background: #8b5cf6;' : 'background: #94a3b8;' }}">
+                    {{ $reply->isFromAdmin() ? 'S' : substr(Auth::user()->first_name, 0, 1) }}
+                </div>
+                <div style="flex: 1; {{ $reply->isFromAdmin() ? 'text-align: right;' : '' }}">
+                    <div style="border-radius: 0.5rem; padding: 1rem; {{ $reply->isFromAdmin() ? 'background: #f3e8ff;' : 'background: #f8fafc;' }} {{ $reply->isFromAdmin() ? '' : '' }}">
+                        <p style="margin: 0; color: #475569; white-space: pre-wrap;">{{ $reply->message }}</p>
+                    </div>
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.25rem;">
+                        {{ $reply->isFromAdmin() ? 'Support Team' : 'You' }} &bull; {{ $reply->created_at->format('M d, Y \a\t g:i A') }}
+                    </p>
+                </div>
+            </div>
             @endforeach
         </div>
 
-        <!-- Reply Form (if open) -->
         @if(in_array($ticket->status, ['open', 'in_progress']))
-            <div class="mt-8 pt-6 border-t border-gray-200">
-                <h3 class="text-lg font-medium text-gray-900 mb-3">Add a Reply</h3>
-                <form action="{{ route('support.reply', $ticket) }}" method="POST">
-                    @csrf
-                    <div class="mb-4">
-                        <textarea name="message" rows="3"
-                            class="block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-green-500 focus:border-green-500"
-                            placeholder="Type your message...">{{ old('message') }}</textarea>
-                        @error('message')<span class="text-red-500 text-xs">{{ $message }}</span>@enderror
-                    </div>
-                    <button type="submit"
-                        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium">
-                        Send Reply
-                    </button>
-                </form>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
+        <h4 style="font-weight: 600; color: #1e293b; margin: 0 0 1rem 0;">Add a Reply</h4>
+        <form action="{{ route('support.reply', $ticket) }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <textarea name="message" rows="4" class="form-input" placeholder="Type your message...">{{ old('message') }}</textarea>
+                @error('message')<p style="color: #dc2626; font-size: 0.75rem; margin-top: 0.25rem;">{{ $message }}</p>@enderror
             </div>
+            <button type="submit" class="btn btn-primary">Send Reply</button>
+        </form>
         @endif
     </div>
 </div>
+<div class="modal-overlay" id="closeModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 16px; padding: 2rem; max-width: 400px; width: 90%; box-shadow: 0 25px 80px rgba(0,0,0,0.3); text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: #fef3c7; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 28px; height: 28px; color: #d97706;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        </div>
+        <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin: 0 0 0.5rem;">Close Ticket?</h3>
+        <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 1.5rem;">Are you sure you want to close this ticket? You won't be able to reply once it's closed.</p>
+        <div style="display: flex; gap: 0.75rem; justify-content: center;">
+            <button onclick="hideCloseModal()" class="btn btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.875rem;">Cancel</button>
+            <form action="{{ route('support.close', $ticket) }}" method="POST" style="margin: 0;">
+                @csrf
+                <button type="submit" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.875rem; background: #dc2626; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">Yes, Close Ticket</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function showCloseModal() { document.getElementById('closeModal').style.display = 'flex'; }
+function hideCloseModal() { document.getElementById('closeModal').style.display = 'none'; }
+document.getElementById('closeModal').addEventListener('click', function(e) { if (e.target === this) hideCloseModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hideCloseModal(); });
+</script>
 @endsection

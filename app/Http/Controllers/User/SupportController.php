@@ -11,9 +11,8 @@ class SupportController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         $tickets = $user->supportTickets()
-            ->with('admin')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -29,17 +28,23 @@ class SupportController extends Controller
     {
         $request->validate([
             'subject' => 'required|string|max:255',
-            'category' => 'required|string|in:payment,membership,distribution,technical,other',
-            'description' => 'required|string',
+            'category' => 'required|string|in:billing,referrals,account,technical,other',
+            'message' => 'required|string',
+            'attachment' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $user = auth()->user();
+
+        $attachmentPath = $request->hasFile('attachment')
+            ? $request->file('attachment')->store('support-attachments', 'public')
+            : null;
 
         $ticket = SupportTicket::create([
             'user_id' => $user->id,
             'subject' => $request->subject,
             'category' => $request->category,
-            'description' => $request->description,
+            'message' => $request->message,
+            'attachment_path' => $attachmentPath,
             'status' => 'open',
         ]);
 
@@ -55,7 +60,7 @@ class SupportController extends Controller
             abort(403);
         }
 
-        $ticket->load(['replies.admin', 'admin']);
+        $ticket->load(['replies.sender']);
 
         return view('user.support.show', compact('ticket'));
     }
@@ -72,11 +77,30 @@ class SupportController extends Controller
             abort(403);
         }
 
+        if ($ticket->isClosed()) {
+            return back()->with('error', 'This ticket is closed and cannot receive replies.');
+        }
+
         $ticket->replies()->create([
-            'user_id' => $user->id,
+            'sender_type' => get_class($user),
+            'sender_id' => $user->id,
             'message' => $request->message,
         ]);
 
         return back()->with('success', 'Reply added successfully');
+    }
+
+    public function close(SupportTicket $ticket)
+    {
+        $user = auth()->user();
+
+        if ($ticket->user_id !== $user->id) {
+            abort(403);
+        }
+
+        $ticket->close();
+
+        return redirect()->route('support.index')
+            ->with('success', 'Ticket closed successfully');
     }
 }

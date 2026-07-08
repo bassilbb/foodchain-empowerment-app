@@ -1,12 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\MembershipTier;
+use App\Models\User;
 use App\Services\ReferralService;
 use App\Services\TierProgressionService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -19,10 +22,10 @@ class UserController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%")
-                  ->orWhere('referral_code', 'like', "%{$search}%");
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%")
+                    ->orWhere('referral_code', 'like', "%{$search}%");
             });
         }
 
@@ -60,8 +63,9 @@ class UserController extends Controller
         $referralTree = $referralService->getReferralTree($user, 2);
 
         $tierHistory = app(TierProgressionService::class)->getTierHistory($user);
+        $tiers = MembershipTier::ordered()->get();
 
-        return view('admin.users.show', compact('user', 'referralStats', 'referralTree', 'tierHistory'));
+        return view('admin.users.show', compact('user', 'referralStats', 'referralTree', 'tierHistory', 'tiers'));
     }
 
     public function referrals(User $user)
@@ -96,7 +100,6 @@ class UserController extends Controller
 
         $user->update(['current_tier_id' => $newTier->id]);
 
-        // If upgrading to Emerald, remove expiry
         if ($newTier->isEmerald()) {
             $user->update(['membership_expires_at' => null]);
         }
@@ -104,9 +107,28 @@ class UserController extends Controller
         return back()->with('success', "User upgraded to {$newTier->name} tier successfully.");
     }
 
+    public function updateTier(Request $request, User $user)
+    {
+        $request->validate([
+            'tier_id' => 'required|exists:membership_tiers,id',
+        ]);
+
+        $newTier = MembershipTier::findOrFail($request->tier_id);
+        $oldTier = $user->currentTier;
+
+        $user->update(['current_tier_id' => $newTier->id]);
+
+        if ($newTier->isEmerald()) {
+            $user->update(['membership_expires_at' => null]);
+        } elseif ($oldTier && $oldTier->isEmerald()) {
+            $user->update(['membership_expires_at' => now()->addYear()]);
+        }
+
+        return back()->with('success', "User tier changed from {$oldTier->name} to {$newTier->name}.");
+    }
+
     public function exportExcel()
     {
-        // TODO: Implement Excel export using Laravel Excel
-        return back()->with('info', 'Excel export feature coming soon.');
+        return Excel::download(new UsersExport, 'users-'.date('Y-m-d').'.xlsx');
     }
 }

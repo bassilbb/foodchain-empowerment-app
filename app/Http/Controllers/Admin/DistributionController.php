@@ -6,10 +6,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\FoodDistribution;
-use App\Models\User;
+use App\Models\FoodItem;
 use App\Models\FoodPackage;
 use App\Models\PickupLocation;
-use App\Models\FoodItem;
+use App\Models\User;
 use App\Services\DistributionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,11 +48,11 @@ class DistributionController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('distribution_number', 'like', "%{$search}%")
-                  ->orWhereHas('user', function ($q) use ($search) {
-                      $q->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('first_name', 'like', "%{$search}%")
+                            ->orWhere('last_name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -66,8 +66,23 @@ class DistributionController extends Controller
         $users = User::active()->get();
         $foodItems = FoodItem::active()->get();
         $locations = PickupLocation::active()->get();
+        $packages = FoodPackage::active()->get();
 
-        return view('admin.distributions.create', compact('users', 'foodItems', 'locations'));
+        return view('admin.distributions.create', compact('users', 'foodItems', 'locations', 'packages'));
+    }
+
+    public function packageItems(FoodPackage $package)
+    {
+        $items = $package->items()->with('foodItem')->get()->map(function ($pi) {
+            return [
+                'food_item_id' => $pi->food_item_id,
+                'food_item_name' => $pi->foodItem->name,
+                'quantity' => $pi->quantity,
+                'unit_value' => $pi->unit_value,
+            ];
+        });
+
+        return response()->json($items);
     }
 
     public function store(Request $request)
@@ -98,6 +113,56 @@ class DistributionController extends Controller
             ->with('success', 'Discretionary distribution created successfully.');
     }
 
+    public function edit(FoodDistribution $distribution)
+    {
+        $users = User::active()->get();
+        $foodItems = FoodItem::active()->get();
+        $locations = PickupLocation::active()->get();
+
+        $distribution->load('items');
+
+        return view('admin.distributions.edit', compact('distribution', 'users', 'foodItems', 'locations'));
+    }
+
+    public function update(Request $request, FoodDistribution $distribution)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'location_id' => 'required|exists:pickup_locations,id',
+            'items' => 'required|array|min:1',
+            'items.*.food_item_id' => 'required|exists:food_items,id',
+            'items.*.quantity' => 'required|numeric|min:0.01',
+            'items.*.unit_value' => 'required|numeric|min:0',
+            'status' => 'required|in:pending,approved,packaged,dispatched,delivered,completed,cancelled',
+            'notes' => 'nullable|string|max:1000',
+        ]);
+
+        $distribution->update([
+            'user_id' => $request->user_id,
+            'pickup_location_id' => $request->location_id,
+            'status' => $request->status,
+            'admin_notes' => $request->notes,
+        ]);
+
+        // Update items
+        $distribution->items()->delete();
+        $totalValue = 0;
+        foreach ($request->items as $item) {
+            $distribution->items()->create([
+                'food_item_id' => $item['food_item_id'],
+                'quantity' => $item['quantity'],
+                'unit_value' => $item['unit_value'],
+                'total_value' => $item['quantity'] * $item['unit_value'],
+            ]);
+            $totalValue += $item['quantity'] * $item['unit_value'];
+        }
+
+        $distribution->update(['total_value' => $totalValue]);
+
+        return redirect()->route('admin.distributions.show', $distribution)
+            ->with('success', 'Distribution updated successfully.');
+    }
+
     public function show(FoodDistribution $distribution)
     {
         $distribution->load([
@@ -107,7 +172,7 @@ class DistributionController extends Controller
             'items.foodItem',
             'pickupLocation',
             'approvedBy',
-            'packagedBy'
+            'packagedBy',
         ]);
 
         return view('admin.distributions.show', compact('distribution'));
@@ -129,7 +194,7 @@ class DistributionController extends Controller
             $request->notes
         );
 
-        if (!$success) {
+        if (! $success) {
             return back()->with('error', 'Distribution cannot be approved. It may already be processed.');
         }
 

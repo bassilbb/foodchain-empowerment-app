@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\ManualPayment;
 use App\Models\BankAccount;
-use App\Models\Payment;
+use App\Models\ManualPayment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ManualPaymentController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        
+
         $payments = $user->manualPayments()
             ->with(['bankAccount', 'payment'])
             ->orderBy('created_at', 'desc')
@@ -26,10 +24,10 @@ class ManualPaymentController extends Controller
     public function create(Request $request)
     {
         $user = auth()->user();
-        
+
         $type = $request->get('type', 'membership');
         $amount = $request->get('amount', 0);
-        
+
         $bankAccounts = BankAccount::getAllActive();
 
         return view('user.manual-payments.create', compact('type', 'amount', 'bankAccounts'));
@@ -38,7 +36,7 @@ class ManualPaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:membership,starter_pack,instant_food_pack,delivery,union_equity,loan_repayment',
+            'type' => 'required|in:membership,starter_pack,instant_food_pack,delivery,union_equity,loan_repayment,assistance_processing_fee,assistance_first_installment,assistance_weekly_repayment,support_plan_contribution,wallet_topup',
             'amount' => 'required|numeric|min:100',
             'bank_account_id' => 'required|exists:bank_accounts,id',
             'sender_name' => 'required|string|max:255',
@@ -49,7 +47,7 @@ class ManualPaymentController extends Controller
         ]);
 
         $user = auth()->user();
-        
+
         $bankAccount = BankAccount::findOrFail($request->bank_account_id);
 
         $proofPath = $request->file('proof_image')->store('manual-payments/proofs', 'public');
@@ -67,6 +65,11 @@ class ManualPaymentController extends Controller
             'proof_image_path' => $proofPath,
             'status' => 'pending',
         ]);
+
+        if ($request->type === 'wallet_topup') {
+            return redirect()->route('user.accounts.wallet')
+                ->with('success', 'Top-up submitted successfully. Your wallet will be credited once the payment is verified.');
+        }
 
         return redirect()->route('manual-payments.show', $manualPayment->id)
             ->with('success', 'Payment submitted successfully. Please wait for admin verification.');
@@ -86,7 +89,7 @@ class ManualPaymentController extends Controller
     public function bankAccounts()
     {
         $accounts = BankAccount::getAllActive();
-        
+
         return response()->json([
             'success' => true,
             'data' => $accounts,

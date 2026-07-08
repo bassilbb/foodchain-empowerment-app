@@ -13,7 +13,7 @@ class DistributionController extends Controller
         $user = auth()->user();
         
         $distributions = $user->distributions()
-            ->with(['tier', 'items.foodItem'])
+            ->with(['tier', 'items.foodItem', 'package'])
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 

@@ -13,16 +13,16 @@ class CheckMembership
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = auth()->user();
+        $user = $request->user();
 
-        if (!$user->is_active) {
-            return redirect()->route('membership.renew')
-                ->with('warning', 'Please activate your membership to continue.');
-        }
-
-        if (!$user->isMembershipActive()) {
-            return redirect()->route('membership.renew')
-                ->with('warning', 'Your membership has expired. Please renew to continue.');
+        if ($user && ! $user->is_active) {
+            if (! $request->routeIs('dashboard', 'payments.index', 'payments.renew', 'payments.initiate', 'profile.*', 'logout', 'manual-payments.*', 'support.*', 'distributions.*', 'quarterly-benefits.*', 'referrals.*', 'unions.*', 'user.incidents.*', 'notifications.*', 'user.food-assistance.*', 'user.food-support.*', 'user.accounts.*', 'switch-account')) {
+                return redirect()->route('payment.pending', [
+                    'user_id' => $user->id,
+                    'amount' => 5000,
+                    'payment_type' => 'membership',
+                ])->with('warning', 'Please complete your payment to activate your account.');
+            }
         }
 
         return $next($request);

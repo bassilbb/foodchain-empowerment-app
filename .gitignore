@@ -22,3 +22,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+nul
+null
+_update_opt.php
+test_dump.php
+storage/_update_opt.php
+storage/test_dump.php

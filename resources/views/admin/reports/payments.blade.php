@@ -5,96 +5,114 @@
 @section('page-title', 'Payment Reports & Revenue Analytics')
 
 @section('content')
-<!-- Date Filter -->
-<div class="mb-6 bg-white p-4 rounded-lg shadow">
-    <form method="GET" class="flex gap-4 items-end">
+<style>
+    .filter-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 24px; }
+    .input-field { background: linear-gradient(180deg, #f8fafc, #f1f5f9); border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 16px; font-size: 14px; transition: all 0.3s ease; }
+    .input-field:focus { background: #ffffff; border-color: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); outline: none; }
+    .btn-filter { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; font-weight: 600; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; }
+    .btn-filter:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+    .btn-reset { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); color: #64748b; font-weight: 600; padding: 12px 24px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; }
+    .btn-reset:hover { background: #e2e8f0; }
+    .revenue-card { background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 20px; padding: 28px; color: white; box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4); transition: all 0.3s ease; }
+    .revenue-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px -12px rgba(16, 185, 129, 0.5); }
+    .revenue-card.blue { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.4); }
+    .revenue-card.blue:hover { box-shadow: 0 20px 50px -12px rgba(59, 130, 246, 0.5); }
+    .revenue-card.purple { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.4); }
+    .revenue-card.purple:hover { box-shadow: 0 20px 50px -12px rgba(139, 92, 246, 0.5); }
+    .revenue-label { color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 4px; }
+    .revenue-value { font-size: 32px; font-weight: 700; }
+    .status-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); padding: 20px; transition: all 0.3s ease; }
+    .status-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(0,0,0,0.15); }
+    .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-successful { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #065f46; }
+    .badge-pending { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; }
+    .badge-failed { background: linear-gradient(135deg, #fee2e2, #fecaca); color: #991b1b; }
+    .status-count { font-size: 24px; font-weight: 700; color: #1e293b; }
+    .status-amount { font-size: 20px; font-weight: 600; color: #10b981; }
+    .chart-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 24px; }
+    .chart-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
+    .table-container { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); overflow: hidden; }
+    .table-header { background: linear-gradient(180deg, #f8fafc, #f1f5f9); border-bottom: 1px solid #e2e8f0; }
+    .table-header th { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; padding: 16px; text-align: left; }
+    .table-row { border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; }
+    .table-row:hover { background: linear-gradient(180deg, #f0fdf4, #dcfce7); }
+    .table-cell { padding: 16px; color: #475569; font-size: 14px; }
+    .mono-text { font-family: monospace; font-size: 13px; }
+    .amount-text { font-weight: 600; color: #10b981; }
+</style>
+
+<div class="filter-card">
+    <form method="GET" style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
-            <input type="date" name="start_date" value="{{ $startDate->format('Y-m-d') }}"
-                   class="px-4 py-2 border rounded-lg">
+            <label style="display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">From Date</label>
+            <input type="date" name="start_date" value="{{ $startDate->format('Y-m-d') }}" class="input-field">
         </div>
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
-            <input type="date" name="end_date" value="{{ $endDate->format('Y-m-d') }}"
-                   class="px-4 py-2 border rounded-lg">
+            <label style="display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">To Date</label>
+            <input type="date" name="end_date" value="{{ $endDate->format('Y-m-d') }}" class="input-field">
         </div>
-        <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Apply Filter
-        </button>
-        <a href="{{ route('admin.reports.payments') }}" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
-            Reset
-        </a>
+        <button type="submit" class="btn-filter">Apply Filter</button>
+        <a href="{{ route('admin.reports.payments') }}" class="btn-reset">Reset</a>
     </form>
 </div>
 
-<!-- Revenue Summary Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <div class="bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-lg shadow-lg">
-        <p class="text-green-100 text-sm mb-1">Total Revenue</p>
-        <p class="text-4xl font-bold">{{ format_currency($totalRevenue) }}</p>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
+    <div class="revenue-card">
+        <p class="revenue-label">Total Revenue</p>
+        <p class="revenue-value">{{ format_currency($totalRevenue) }}</p>
     </div>
-    <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-lg shadow-lg">
-        <p class="text-blue-100 text-sm mb-1">Membership Revenue</p>
-        <p class="text-4xl font-bold">{{ format_currency($membershipRevenue) }}</p>
+    <div class="revenue-card blue">
+        <p class="revenue-label">Membership Revenue</p>
+        <p class="revenue-value">{{ format_currency($membershipRevenue) }}</p>
     </div>
-    <div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white p-6 rounded-lg shadow-lg">
-        <p class="text-purple-100 text-sm mb-1">Starter Pack Revenue</p>
-        <p class="text-4xl font-bold">{{ format_currency($starterPackRevenue) }}</p>
+    <div class="revenue-card purple">
+        <p class="revenue-label">Starter Pack Revenue</p>
+        <p class="revenue-value">{{ format_currency($starterPackRevenue) }}</p>
     </div>
 </div>
 
-<!-- Payment Status Breakdown -->
-<div class="bg-white rounded-lg shadow p-6 mb-8">
-    <h3 class="text-lg font-semibold mb-4">Payment Status Breakdown</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="chart-card">
+    <h3 class="chart-title">Payment Status Breakdown</h3>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
         @foreach($paymentsByStatus as $status)
-        <div class="border rounded-lg p-4">
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-sm font-medium capitalize">{{ $status->status }}</span>
-                <span class="px-2 py-1 text-xs font-semibold rounded
-                    {{ $status->status === 'successful' ? 'bg-green-100 text-green-800' : '' }}
-                    {{ $status->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                    {{ $status->status === 'failed' ? 'bg-red-100 text-red-800' : '' }}">
-                    {{ $status->count }}
-                </span>
+        <div class="status-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-size: 14px; font-weight: 500; color: #475569; text-transform: capitalize;">{{ $status->status }}</span>
+                <span class="status-badge {{ $status->status === 'successful' ? 'badge-successful' : ($status->status === 'pending' ? 'badge-pending' : 'badge-failed') }}">{{ $status->count }}</span>
             </div>
-            <p class="text-2xl font-bold">{{ format_currency($status->total) }}</p>
+            <p class="status-amount">{{ format_currency($status->total) }}</p>
         </div>
         @endforeach
     </div>
 </div>
 
-<!-- Daily Revenue Chart -->
-<div class="bg-white rounded-lg shadow p-6 mb-8">
-    <h3 class="text-lg font-semibold mb-4">Daily Revenue Trend</h3>
+<div class="chart-card">
+    <h3 class="chart-title">Daily Revenue Trend</h3>
     <canvas id="revenueChart"></canvas>
 </div>
 
-<!-- Recent Transactions -->
-<div class="bg-white rounded-lg shadow overflow-hidden">
-    <div class="px-6 py-4 border-b">
-        <h3 class="text-lg font-semibold">Recent Successful Transactions</h3>
+<div class="table-container">
+    <div style="padding: 16px 24px; border-bottom: 1px solid #e2e8f0; background: linear-gradient(180deg, #f8fafc, #f1f5f9);">
+        <h3 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">Recent Successful Transactions</h3>
     </div>
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead class="table-header">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reference</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
+                <th>Date</th>
+                <th>Reference</th>
+                <th>User</th>
+                <th>Type</th>
+                <th style="text-align: right;">Amount</th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody>
             @foreach($dailyRevenue->take(15) as $day)
-            <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ \Carbon\Carbon::parse($day->date)->format('M d, Y') }}</td>
-                <td class="px-6 py-4 whitespace-nowrap font-mono text-sm">-</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $day->count }} transactions</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">Mixed</td>
-                <td class="px-6 py-4 whitespace-nowrap text-right font-semibold text-green-600">
-                    {{ format_currency($day->total) }}
-                </td>
+            <tr class="table-row">
+                <td class="table-cell" style="color: #64748b;">{{ \Carbon\Carbon::parse($day->date)->format('M d, Y') }}</td>
+                <td class="table-cell mono-text">-</td>
+                <td class="table-cell">{{ $day->count }} transactions</td>
+                <td class="table-cell">Mixed</td>
+                <td class="table-cell" style="text-align: right;"><span class="amount-text">{{ format_currency($day->total) }}</span></td>
             </tr>
             @endforeach
         </tbody>
@@ -112,31 +130,13 @@ new Chart(ctx, {
         datasets: [{
             label: 'Daily Revenue (₦)',
             data: @json($dailyRevenue->pluck('total')),
-            borderColor: 'rgb(34, 197, 94)',
-            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.1)',
             tension: 0.4,
             fill: true
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value) {
-                        return '₦' + value.toLocaleString();
-                    }
-                }
-            }
-        }
-    }
+    options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: function(value) { return '₦' + value.toLocaleString(); } } } } }
 });
 </script>
 @endpush

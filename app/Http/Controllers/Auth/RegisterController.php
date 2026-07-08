@@ -1,13 +1,12 @@
 <?php
-// app/Http/Controllers/Auth/RegisterController.php
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\MembershipTier;
 use App\Models\PickupLocation;
-use App\Services\PaymentService;
+use App\Models\SavingsPlan;
+use App\Models\User;
 use App\Services\ReferralService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,8 +25,23 @@ class RegisterController extends Controller
 
         $tiers = MembershipTier::active()->ordered()->get();
         $locations = PickupLocation::active()->get();
+        $savingsPlans = SavingsPlan::with('activeOptions')->active()->get();
 
-        return view('auth.register', compact('referralCode', 'referrer', 'tiers', 'locations'));
+        $plansData = $savingsPlans->mapWithKeys(function ($plan) {
+            return [$plan->id => [
+                'name' => $plan->name,
+                'target' => $plan->target_amount,
+                'options' => $plan->activeOptions->map(function ($option) {
+                    return [
+                        'id' => $option->id,
+                        'weeks' => $option->duration_weeks,
+                        'amount' => (float) $option->weekly_contribution,
+                    ];
+                }),
+            ]];
+        });
+
+        return view('auth.register', compact('referralCode', 'referrer', 'tiers', 'locations', 'savingsPlans', 'plansData'));
     }
 
     public function register(Request $request)
@@ -42,14 +56,17 @@ class RegisterController extends Controller
             'city' => 'required|string|max:100',
             'state' => 'required|string|max:100',
             'referral_code' => 'nullable|exists:users,referral_code',
-            'payment_type' => 'required|in:membership_only,with_starter_pack',
+            'payment_type' => 'required|in:membership_only,with_savings_plan',
+            'selected_tier_id' => 'nullable|exists:membership_tiers,id',
+            'savings_plan_option_id' => 'nullable|exists:savings_plan_options,id',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        // Create user
+        $tier = MembershipTier::find($request->selected_tier_id) ?? MembershipTier::where('slug', 'bronze')->first();
+
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -60,45 +77,26 @@ class RegisterController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'country' => 'Nigeria',
-            'current_tier_id' => 1, // Bronze by default
-            'is_active' => false, // Will be activated after payment
+            'current_tier_id' => $tier->id,
+            'is_active' => false,
         ]);
 
-        // Track referral if provided
         if ($request->referral_code) {
             app(ReferralService::class)->trackReferral($user, $request->referral_code);
         }
 
-        // Calculate payment amount
-        $amount = 5000; // Membership fee
-        if ($request->payment_type === 'with_starter_pack') {
-            $amount += 20000; // Add starter pack
-        }
+        $amount = $tier->annual_fee;
 
-        // Initialize payment
-        $paymentService = app(PaymentService::class);
-        $paymentType = $request->payment_type === 'membership_only' ? 'membership' : 'starter_pack';
+        session([
+            'pending_registration_user_id' => $user->id,
+            'pending_savings_plan_option_id' => $request->savings_plan_option_id,
+        ]);
 
-        $result = $paymentService->initializePayment(
-            $user,
-            $paymentType,
-            $amount,
-            [
-                'payment_type' => $request->payment_type,
-                'includes_starter_pack' => $request->payment_type === 'with_starter_pack',
-            ]
-        );
-
-        if ($result['status'] === 'success') {
-            // Store user_id in session for callback
-            session(['pending_registration_user_id' => $user->id]);
-
-            // Redirect to Paystack
-            return redirect($result['authorization_url']);
-        }
-
-        // Payment initialization failed
-        $user->delete();
-        return back()->with('error', $result['message'])->withInput();
+        return redirect()->route('payment.pending', [
+            'user_id' => $user->id,
+            'amount' => $amount,
+            'payment_type' => $request->payment_type,
+            'tier_id' => $tier->id,
+        ]);
     }
 }

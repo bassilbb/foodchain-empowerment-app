@@ -1,113 +1,129 @@
-{{-- resources/views/admin/payments/index.blade.php --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Payments')
-@section('page-title', 'Payment Management')
+@section('header', 'Payment Management')
+@section('subheader', 'Track and manage all platform payments')
 
 @section('content')
-<!-- Stats Cards -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-    <div class="bg-white p-6 rounded-lg shadow">
-        <p class="text-gray-500 text-sm">Total Revenue</p>
-        <p class="text-2xl font-bold">{{ format_currency($totalAmount) }}</p>
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon emerald">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <p class="stat-label">Total Revenue</p>
+        <p class="stat-value">{{ format_currency($totalAmount) }}</p>
     </div>
-    <div class="bg-green-50 p-6 rounded-lg shadow">
-        <p class="text-gray-500 text-sm">Successful</p>
-        <p class="text-2xl font-bold text-green-600">{{ $successfulCount }}</p>
+    <div class="stat-card success-card">
+        <div class="stat-icon emerald">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <p class="stat-label">Successful</p>
+        <p class="stat-value">{{ $successfulCount }}</p>
     </div>
-    <div class="bg-yellow-50 p-6 rounded-lg shadow">
-        <p class="text-gray-500 text-sm">Pending</p>
-        <p class="text-2xl font-bold text-yellow-600">{{ $pendingCount }}</p>
+    <div class="stat-card warning">
+        <div class="stat-icon amber">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <p class="stat-label">Pending</p>
+        <p class="stat-value">{{ $pendingCount }}</p>
     </div>
-    <div class="bg-red-50 p-6 rounded-lg shadow">
-        <p class="text-gray-500 text-sm">Failed</p>
-        <p class="text-2xl font-bold text-red-600">{{ $failedCount }}</p>
+    <div class="stat-card danger">
+        <div class="stat-icon red">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <p class="stat-label">Failed</p>
+        <p class="stat-value">{{ $failedCount }}</p>
     </div>
 </div>
 
-<!-- Filters -->
-<div class="mb-6 bg-white p-4 rounded-lg shadow">
-    <form method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
-               class="px-4 py-2 border rounded-lg">
-
-        <select name="type" class="px-4 py-2 border rounded-lg">
-            <option value="">All Types</option>
-            <option value="membership" {{ request('type') == 'membership' ? 'selected' : '' }}>Membership</option>
-            <option value="starter_pack" {{ request('type') == 'starter_pack' ? 'selected' : '' }}>Starter Pack</option>
-        </select>
-
-        <select name="status" class="px-4 py-2 border rounded-lg">
-            <option value="">All Status</option>
-            <option value="successful" {{ request('status') == 'successful' ? 'selected' : '' }}>Successful</option>
-            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-            <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Failed</option>
-        </select>
-
-        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Filter
-        </button>
-        <a href="{{ route('admin.payments.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 text-center">
-            Reset
-        </a>
-    </form>
+<div class="page-card">
+    <div class="page-card-body">
+        <form method="GET" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+            <div class="form-group" style="flex: 1; min-width: 200px; margin-bottom: 0;">
+                <label class="form-label">Search</label>
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..." class="form-input">
+            </div>
+            <div class="form-group" style="min-width: 150px; margin-bottom: 0;">
+                <label class="form-label">Type</label>
+                <select name="type" class="form-select">
+                    <option value="">All Types</option>
+                    <option value="membership" {{ request('type') == 'membership' ? 'selected' : '' }}>Membership</option>
+                    <option value="starter_pack" {{ request('type') == 'starter_pack' ? 'selected' : '' }}>Starter Pack</option>
+                </select>
+            </div>
+            <div class="form-group" style="min-width: 150px; margin-bottom: 0;">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
+                    <option value="">All Status</option>
+                    <option value="successful" {{ request('status') == 'successful' ? 'selected' : '' }}>Successful</option>
+                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="failed" {{ request('status') == 'failed' ? 'selected' : '' }}>Failed</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="{{ route('admin.payments.index') }}" class="btn btn-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
 </div>
 
-<!-- Payments Table -->
-<div class="bg-white rounded-lg shadow overflow-hidden">
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reference</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-            @forelse($payments as $payment)
-            <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-mono text-gray-900">{{ $payment->reference }}</div>
-                </td>
-                <td class="px-6 py-4">
-                    <div class="text-sm font-medium text-gray-900">{{ $payment->user->full_name }}</div>
-                    <div class="text-sm text-gray-500">{{ $payment->user->email }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    {{ ucfirst(str_replace('_', ' ', $payment->type)) }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold">
-                    {{ format_currency($payment->amount) }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-semibold rounded
-                        {{ $payment->status === 'successful' ? 'bg-green-100 text-green-800' : '' }}
-                        {{ $payment->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                        {{ $payment->status === 'failed' ? 'bg-red-100 text-red-800' : '' }}">
-                        {{ ucfirst($payment->status) }}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ $payment->created_at->format('M d, Y h:i A') }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    <a href="{{ route('admin.payments.show', $payment) }}" class="text-blue-600 hover:text-blue-900">View</a>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="7" class="px-6 py-4 text-center text-gray-500">No payments found</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+<div class="page-card">
+    <div class="page-card-body" style="padding: 0;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($payments as $payment)
+                <tr>
+                    <td style="font-family: monospace; font-size: 0.875rem; color: #1e293b;">{{ $payment->reference }}</td>
+                    <td>
+                        <div style="font-weight: 600; color: #1e293b;">{{ $payment->user?->full_name ?? 'Unknown' }}</div>
+                        <div style="font-size: 0.875rem; color: #64748b;">{{ $payment->user?->email ?? '-' }}</div>
+                    </td>
+                    <td style="text-transform: capitalize;">{{ str_replace('_', ' ', $payment->type) }}</td>
+                    <td style="font-weight: 700; color: #1e293b;">{{ format_currency($payment->amount) }}</td>
+                    <td>
+                        <span class="badge
+                            @if($payment->status === 'successful') badge-success
+                            @elseif($payment->status === 'pending') badge-warning
+                            @else badge-error
+                            @endif">
+                            {{ ucfirst($payment->status) }}
+                        </span>
+                    </td>
+                    <td style="font-size: 0.875rem; color: #64748b;">{{ $payment->created_at->format('M d, Y h:i A') }}</td>
+                    <td>
+                        <a href="{{ route('admin.payments.show', $payment) }}" class="action-link">View</a>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-state">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                            <p>No payments found</p>
+                        </div>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="mt-6">
+@if($payments->hasPages())
+<div class="pagination">
     {{ $payments->links() }}
 </div>
+@endif
 @endsection

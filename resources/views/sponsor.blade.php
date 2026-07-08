@@ -1,12 +1,19 @@
+@if(!App\Models\PageContent::isPageActive('sponsor'))
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
+    <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
+    </html>
+@else
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <base target="_self" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FCCEI Platform</title>
-  <meta name="description" content="Join ReferralPro - The ultimate multi-level referral subscription platform. Earn through referrals, grow your network, and maximize your income potential." />
-  <meta name="keywords" content="referral program, MLM, subscription platform, network marketing, passive income" />
+  <title>{{ App\Models\PageContent::getContent('sponsor', 'page_title', 'Become a Sponsor') }}</title>
+  <meta name="description" content="{{ App\Models\PageContent::getContent('sponsor', 'page_subtitle', 'Partner with FoodChain Community Empowerment Initiative as a sponsor.') }}" />
+  <meta name="keywords" content="FCCEI, sponsor, partnership, food security, community empowerment" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -84,28 +91,28 @@
         <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
             </svg>
           </a>
           <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a>
-            <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
+            <a href="{{ route('landing') }}#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a>
+            <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
             </svg>
           </a>
           <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallary</a>
+            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
           </div>
         </div>
 
@@ -128,7 +135,7 @@
         </div>
 
 
-        <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
           <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
@@ -151,82 +158,6 @@
 
 <!-- Main Content -->
 <main class="flex-1">
-
-  <!-- Sponsor Section -->
-  <!-- <section class="py-12 max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">Our Esteemed Sponsors</h2>
-    <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
-      Our sponsors are dedicated organizations and individuals who believe in our mission. They have generously contributed resources, funding, and support to help us reach more communities and eradicate hunger. Their commitment drives our efforts forward and inspires positive change.
-    </p> -->
-    <!-- Board Members styled images -->
-    <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> -->
-      <!-- Example Board Member -->
-      <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-        <img src="https://via.placeholder.com/150x150?text=Board+Member+1" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-        <h3 class="text-xl font-semibold mb-2">Jane Doe</h3>
-        <p class="text-gray-600">Founder of Green Foods, dedicated to sustainable agriculture and food security.</p>
-      </div> -->
-      <!-- Repeat for other board members -->
-      <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-        <img src="https://via.placeholder.com/150x150?text=Board+Member+2" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-        <h3 class="text-xl font-semibold mb-2">John Smith</h3>
-        <p class="text-gray-600">CEO of FoodTech Inc., innovating food distribution and logistics.</p>
-      </div>
-      <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-        <img src="https://via.placeholder.com/150x150?text=Board+Member+3" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-        <h3 class="text-xl font-semibold mb-2">Emily Johnson</h3>
-        <p class="text-gray-600">Philanthropist supporting food empowerment programs.</p>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- Sponsor Section -->
-<!-- <section class="py-12 max-w-7xl mx-auto px-4">
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">Our Esteemed Sponsors</h2>
-  <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
-    Our sponsors are dedicated organizations and individuals who believe in our mission. They have generously contributed resources, funding, and support to help us reach more communities and eradicate hunger. Their commitment drives our efforts forward and inspires positive change.
-  </p> -->
-  <!-- Board Members styled images -->
-  <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"> -->
-    <!-- Example Board Member -->
-    <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="https://via.placeholder.com/150x150?text=Board+Member+1" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-      <h3 class="text-xl font-semibold mb-2">Jane Doe</h3>
-      <p class="text-gray-600">Founder of Green Foods, dedicated to sustainable agriculture and food security.</p>
-    </div> -->
-    <!-- Repeat for other board members -->
-    <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="https://via.placeholder.com/150x150?text=Board+Member+2" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-      <h3 class="text-xl font-semibold mb-2">John Smith</h3>
-      <p class="text-gray-600">CEO of FoodTech Inc., innovating food distribution and logistics.</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="https://via.placeholder.com/150x150?text=Board+Member+3" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
-      <h3 class="text-xl font-semibold mb-2">Emily Johnson</h3>
-      <p class="text-gray-600">Philanthropist supporting food empowerment programs.</p>
-    </div>
-  </div> -->
-  <!-- Button to open the modal -->
-  <!-- <div class="text-center">
-    <button
-      class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition"
-      onclick="toggleSponsorModal()"
-    >
-      Become a Sponsor
-    </button>
-  </div>
-</section> -->
-
-  <!-- Sponsor Logos -->
-  <!-- <section class="py-12 bg-gray-100">
-    <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">Our Partners & Sponsors</h2>
-    <div class="flex flex-wrap justify-center items-center gap-8">
-      <img src="https://via.placeholder.com/150x60?text=Sponsor+1" alt="Sponsor 1" class="h-16 object-contain mx-2" />
-      <img src="https://via.placeholder.com/150x60?text=Sponsor+2" alt="Sponsor 2" class="h-16 object-contain mx-2" />
-      <img src="https://via.placeholder.com/150x60?text=Sponsor+3" alt="Sponsor 3" class="h-16 object-contain mx-2" />
-      <img src="https://via.placeholder.com/150x60?text=Sponsor+4" alt="Sponsor 4" class="h-16 object-contain mx-2" />
-    </div>
-  </section> -->
 
   <!-- Sponsor Modal -->
 <!-- Sponsor Modal -->
@@ -274,12 +205,14 @@
     <button class="absolute top-2 right-2 text-gray-600 hover:text-gray-900" onclick="toggleSponsorModal()" aria-label="Close modal">
       &times;
     </button>
-    <h2 class="text-xl font-bold mb-4 text-center text-green-600">Become a Sponsor</h2>
-    <form class="flex flex-col space-y-4" onsubmit="event.preventDefault(); alert('Thank you for your sponsorship!');">
+    <h2 class="text-xl font-bold mb-4 text-center text-green-600">{{ App\Models\PageContent::getContent('sponsor', 'page_title', 'Become a Sponsor') }}</h2>
+    <form method="POST" action="{{ route('landing.sponsor') }}" class="flex flex-col space-y-4">
+      @csrf
       <div>
         <label class="block mb-1 font-semibold" for="sponsorOrganization">Organization</label>
         <input
           type="text"
+          name="organization"
           id="sponsorOrganization"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
           placeholder="Your Organization"
@@ -290,6 +223,7 @@
         <label class="block mb-1 font-semibold" for="sponsorName">Name</label>
         <input
           type="text"
+          name="name"
           id="sponsorName"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
           placeholder="Your Name"
@@ -300,6 +234,7 @@
         <label class="block mb-1 font-semibold" for="sponsorEmail">Email</label>
         <input
           type="email"
+          name="email"
           id="sponsorEmail"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
           placeholder="Your Email"
@@ -309,6 +244,7 @@
       <div>
         <label class="block mb-1 font-semibold" for="sponsorMessage">Message</label>
         <textarea
+          name="message"
           id="sponsorMessage"
           rows="4"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
@@ -355,7 +291,7 @@
       <div>
           <div class="flex items-center space-x-4">
             <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-              <img src="{{ asset('assets/landing/images/FCCEILOGOr.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
+              <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
             </div>
             <div class="flex flex-col">
               <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
@@ -388,10 +324,10 @@
       <div>
         <h4 class="text-lg font-bold mb-6">Quick Links</h4>
         <ul class="space-y-3">
-          <li><a href="#home" class="hover:text-white transition">Home</a></li>
-          <li><a href="#about" class="hover:text-white transition">About Us</a></li>
-          <li><a href="#products" class="hover:text-white transition">Products</a></li>
-          <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
+          <li><a href="{{ route('landing') }}" class="hover:text-white transition">Home</a></li>
+          <li><a href="{{ route('landing') }}#about" class="hover:text-white transition">About Us</a></li>
+          <li><a href="{{ route('landing') }}#products" class="hover:text-white transition">Products</a></li>
+          <li><a href="{{ route('landing') }}#blog" class="hover:text-white transition">Blog</a></li>
         </ul>
       </div>
       <!-- Legal -->
@@ -435,5 +371,13 @@
         </div>
   </a>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-button');
+    var menu = document.getElementById('mobile-menu');
+    if (btn && menu) { btn.addEventListener('click', function() { menu.classList.toggle('hidden'); }); }
+});
+</script>
 </body>
 </html>
+@endif

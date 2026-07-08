@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\DistributionsExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Payment;
@@ -11,6 +12,7 @@ use App\Models\FoodItem;
 use App\Models\MembershipTier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -77,7 +79,9 @@ class ReportController extends Controller
             ->get();
 
         // Top referrers
-        $topReferrers = User::orderBy('direct_referrals_count', 'desc')
+        $topReferrers = User::with('currentTier')
+            ->withCount('activeReferrals')
+            ->orderBy('direct_referrals_count', 'desc')
             ->limit(10)
             ->get();
 
@@ -215,5 +219,10 @@ class ReportController extends Controller
             'startDate',
             'endDate'
         ));
+    }
+
+    public function exportDistributions()
+    {
+        return Excel::download(new DistributionsExport, 'distributions-' . now()->format('Y-m-d') . '.xlsx');
     }
 }

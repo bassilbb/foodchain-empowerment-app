@@ -18,6 +18,7 @@ class Payment extends Model
         'payment_method',
         'paystack_reference',
         'paystack_response',
+        'manual_payment_id',
         'paid_at',
         'meta',
     ];

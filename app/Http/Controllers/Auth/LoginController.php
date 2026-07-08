@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -26,8 +27,6 @@ class LoginController extends Controller
         )) {
             $request->session()->regenerate();
 
-         
-
             $user = Auth::user();
             $user->updateLastLogin();
 
@@ -45,6 +44,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
 }

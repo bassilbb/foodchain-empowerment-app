@@ -5,250 +5,212 @@
 @section('page-title', 'Distribution Reports & Analytics')
 
 @section('content')
-<!-- Date Filter -->
-<div class="mb-6 bg-white p-4 rounded-lg shadow">
-    <form method="GET" class="flex gap-4 items-end">
+<style>
+    .filter-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 24px; }
+    .input-field { background: linear-gradient(180deg, #f8fafc, #f1f5f9); border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 16px; font-size: 14px; transition: all 0.3s ease; }
+    .input-field:focus { background: #ffffff; border-color: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); outline: none; }
+    .btn-filter { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; font-weight: 600; padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; }
+    .btn-filter:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+    .btn-reset { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); color: #64748b; font-weight: 600; padding: 12px 24px; border: 1px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; }
+    .btn-reset:hover { background: #e2e8f0; }
+    .stat-card { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-radius: 20px; padding: 28px; color: white; box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.4); transition: all 0.3s ease; }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px -12px rgba(59, 130, 246, 0.5); }
+    .stat-card.green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.4); }
+    .stat-card.green:hover { box-shadow: 0 20px 50px -12px rgba(16, 185, 129, 0.5); }
+    .stat-label { color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 4px; }
+    .stat-value { font-size: 32px; font-weight: 700; }
+    .stat-sub { color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 8px; }
+    .chart-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); padding: 24px; }
+    .chart-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
+    .progress-bar { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); border-radius: 10px; height: 8px; overflow: hidden; }
+    .progress-fill { background: linear-gradient(135deg, #10b981, #059669); height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+    .progress-fill.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .tier-row { margin-bottom: 16px; }
+    .tier-name { font-size: 14px; font-weight: 500; color: #1e293b; }
+    .tier-count { font-size: 14px; color: #64748b; }
+    .status-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .status-item { background: linear-gradient(180deg, #ffffff, #f8fafc); border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: center; transition: all 0.3s ease; }
+    .status-item:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -4px rgba(0,0,0,0.15); }
+    .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; margin-bottom: 8px; }
+    .status-badge.pending { background: #fef3c7; color: #92400e; }
+    .status-badge.approved { background: #dbeafe; color: #1e40af; }
+    .status-badge.packaged { background: #ede9fe; color: #7c3aed; }
+    .status-badge.dispatched { background: #e0e7ff; color: #4338ca; }
+    .status-badge.delivered { background: #d1fae5; color: #065f46; }
+    .status-badge.cancelled { background: #fee2e2; color: #991b1b; }
+    .status-count { font-size: 28px; font-weight: 700; color: #1e293b; }
+    .status-percent { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+    .table-container { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); overflow: hidden; }
+    .table-header { background: linear-gradient(180deg, #f8fafc, #f1f5f9); border-bottom: 1px solid #e2e8f0; }
+    .table-header th { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; padding: 16px; text-align: left; }
+    .table-row { border-bottom: 1px solid #f1f5f9; transition: all 0.2s ease; }
+    .table-row:hover { background: linear-gradient(180deg, #f0fdf4, #dcfce7); }
+    .table-cell { padding: 16px; color: #475569; font-size: 14px; }
+    .mono-text { font-family: monospace; font-size: 13px; color: #1e293b; }
+    .user-name { font-weight: 500; color: #1e293b; }
+    .user-email { font-size: 12px; color: #94a3b8; }
+    .value-text { font-weight: 600; color: #10b981; }
+    .view-link { color: #10b981; font-weight: 500; text-decoration: none; }
+    .view-link:hover { color: #059669; }
+    .export-card { background: linear-gradient(180deg, #ffffff, #f8fafc); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 20px; margin-top: 24px; }
+    .export-title { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+    .export-desc { font-size: 14px; color: #64748b; margin-bottom: 16px; }
+    .btn-export { padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; }
+    .btn-print { background: linear-gradient(180deg, #f1f5f9, #e2e8f0); color: #64748b; }
+    .btn-excel { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+    .btn-pdf { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+</style>
+
+<div class="filter-card">
+    <form method="GET" style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
-            <input type="date" name="start_date" value="{{ $startDate->format('Y-m-d') }}"
-                   class="px-4 py-2 border rounded-lg">
+            <label style="display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">From Date</label>
+            <input type="date" name="start_date" value="{{ $startDate->format('Y-m-d') }}" class="input-field">
         </div>
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
-            <input type="date" name="end_date" value="{{ $endDate->format('Y-m-d') }}"
-                   class="px-4 py-2 border rounded-lg">
+            <label style="display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-transform: uppercase;">To Date</label>
+            <input type="date" name="end_date" value="{{ $endDate->format('Y-m-d') }}" class="input-field">
         </div>
-        <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Apply Filter
-        </button>
-        <a href="{{ route('admin.reports.distributions') }}" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
-            Reset
-        </a>
+        <button type="submit" class="btn-filter">Apply Filter</button>
+        <a href="{{ route('admin.reports.distributions') }}" class="btn-reset">Reset</a>
     </form>
 </div>
 
-<!-- Summary Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-lg shadow-lg">
-        <p class="text-blue-100 text-sm mb-1">Total Distributions</p>
-        <p class="text-4xl font-bold">{{ number_format($totalDistributions) }}</p>
-        <p class="text-blue-100 text-xs mt-2">In selected period</p>
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 32px;">
+    <div class="stat-card">
+        <p class="stat-label">Total Distributions</p>
+        <p class="stat-value">{{ number_format($totalDistributions) }}</p>
+        <p class="stat-sub">In selected period</p>
     </div>
-    <div class="bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-lg shadow-lg">
-        <p class="text-green-100 text-sm mb-1">Total Value Distributed</p>
-        <p class="text-4xl font-bold">{{ format_currency($totalValue) }}</p>
-        <p class="text-green-100 text-xs mt-2">Food packages distributed</p>
+    <div class="stat-card green">
+        <p class="stat-label">Total Value Distributed</p>
+        <p class="stat-value">{{ format_currency($totalValue) }}</p>
+        <p class="stat-sub">Food packages distributed</p>
     </div>
 </div>
 
-<!-- Charts Row -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-    <!-- By Status -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4">Distribution by Status</h3>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
+    <div class="chart-card">
+        <h3 class="chart-title">Distribution by Status</h3>
         <canvas id="statusChart"></canvas>
-        <div class="mt-4 space-y-2">
-            @foreach($distributionsByStatus as $status)
-            <div class="flex justify-between items-center text-sm">
-                <span class="capitalize">{{ $status->status }}</span>
-                <span class="font-semibold">{{ $status->count }}</span>
-            </div>
-            @endforeach
-        </div>
     </div>
 
-    <!-- By Tier -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4">Distribution by Membership Tier</h3>
-        <div class="space-y-3">
+    <div class="chart-card">
+        <h3 class="chart-title">Distribution by Membership Tier</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
             @foreach($distributionsByTier as $tier)
-            <div>
-                <div class="flex justify-between items-center mb-1">
-                    <span class="text-sm font-medium">{{ $tier->tier->name }}</span>
-                    <span class="text-sm text-gray-600">{{ $tier->count }}</span>
+            <div class="tier-row">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span class="tier-name">{{ $tier->tier->name }}</span>
+                    <span class="tier-count">{{ $tier->count }}</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <div class="flex-1 bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-600 h-2 rounded-full"
-                             style="width: {{ ($tier->count / $totalDistributions) * 100 }}%"></div>
-                    </div>
-                    <span class="text-xs text-gray-500 font-mono">{{ format_currency($tier->total_value) }}</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ ($tier->count / $totalDistributions) * 100 }}%"></div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
 
-    <!-- By Type -->
-    <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4">Distribution by Type</h3>
-        <div class="space-y-4">
+    <div class="chart-card">
+        <h3 class="chart-title">Distribution by Type</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
             @foreach($distributionsByType as $type)
-            <div class="border-b pb-3 last:border-b-0">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-sm font-medium capitalize">{{ str_replace('_', ' ', $type->distribution_type) }}</span>
-                    <span class="px-2 py-1 text-xs font-semibold rounded bg-blue-100 text-blue-800">
-                        {{ $type->count }}
-                    </span>
+            <div style="padding-bottom: 12px; border-bottom: 1px solid #f1f5f9;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 14px; font-weight: 500; color: #1e293b; text-transform: capitalize;">{{ str_replace('_', ' ', $type->distribution_type) }}</span>
+                    <span class="status-badge packaged">{{ $type->count }}</span>
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="bg-purple-600 h-2 rounded-full"
-                         style="width: {{ ($type->count / $totalDistributions) * 100 }}%"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill purple" style="width: {{ ($type->count / $totalDistributions) * 100 }}%"></div>
                 </div>
-                <p class="text-xs text-gray-500 mt-1">
-                    {{ number_format(($type->count / $totalDistributions) * 100, 1) }}% of total
-                </p>
+                <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">{{ number_format(($type->count / $totalDistributions) * 100, 1) }}% of total</p>
             </div>
             @endforeach
         </div>
     </div>
 </div>
 
-<!-- Distribution Status Breakdown -->
-<div class="bg-white rounded-lg shadow p-6 mb-8">
-    <h3 class="text-lg font-semibold mb-4">Distribution Status Breakdown</h3>
-    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+<div class="chart-card" style="margin-bottom: 24px;">
+    <h3 class="chart-title">Distribution Status Breakdown</h3>
+    <div class="status-grid">
         @foreach($distributionsByStatus as $status)
-        <div class="text-center p-4 border rounded-lg hover:shadow-md transition">
-            <div class="mb-2">
-                <span class="px-3 py-1 text-xs font-semibold rounded
-                    {{ $status->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                    {{ $status->status === 'approved' ? 'bg-blue-100 text-blue-800' : '' }}
-                    {{ $status->status === 'packaged' ? 'bg-purple-100 text-purple-800' : '' }}
-                    {{ $status->status === 'dispatched' ? 'bg-indigo-100 text-indigo-800' : '' }}
-                    {{ $status->status === 'delivered' ? 'bg-green-100 text-green-800' : '' }}
-                    {{ $status->status === 'cancelled' ? 'bg-red-100 text-red-800' : '' }}">
-                    {{ ucfirst($status->status) }}
-                </span>
-            </div>
-            <p class="text-3xl font-bold text-gray-800">{{ $status->count }}</p>
-            <p class="text-xs text-gray-500 mt-1">
-                {{ number_format(($status->count / $totalDistributions) * 100, 1) }}%
-            </p>
+        <div class="status-item">
+            <div><span class="status-badge {{ $status->status }}">{{ ucfirst($status->status) }}</span></div>
+            <p class="status-count">{{ $status->count }}</p>
+            <p class="status-percent">{{ number_format(($status->count / $totalDistributions) * 100, 1) }}%</p>
         </div>
         @endforeach
     </div>
 </div>
 
-<!-- Value by Tier Chart -->
-<div class="bg-white rounded-lg shadow p-6 mb-8">
-    <h3 class="text-lg font-semibold mb-4">Distribution Value by Tier</h3>
+<div class="chart-card" style="margin-bottom: 24px;">
+    <h3 class="chart-title">Distribution Value by Tier</h3>
     <canvas id="tierValueChart"></canvas>
 </div>
 
-<!-- Recent Distributions Table -->
-<div class="bg-white rounded-lg shadow overflow-hidden">
-    <div class="px-6 py-4 border-b flex justify-between items-center">
-        <h3 class="text-lg font-semibold">Recent Distributions (Last 25)</h3>
-        <a href="{{ route('admin.distributions.index') }}" class="text-sm text-blue-600 hover:underline">
-            View All →
-        </a>
+<div class="table-container">
+    <div style="padding: 16px 24px; border-bottom: 1px solid #e2e8f0; background: linear-gradient(180deg, #f8fafc, #f1f5f9); display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">Recent Distributions (Last 25)</h3>
+        <a href="{{ route('admin.distributions.index') }}" style="font-size: 14px; color: #10b981; text-decoration: none; font-weight: 500;">View All →</a>
     </div>
-    <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Distribution #</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tier</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Value</th>
-                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @php
-                    $recentDistributions = \App\Models\FoodDistribution::with(['user', 'tier'])
-                        ->whereBetween('created_at', [$startDate, $endDate])
-                        ->latest()
-                        ->take(25)
-                        ->get();
-                @endphp
-                @forelse($recentDistributions as $dist)
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                        {{ $dist->created_at->format('M d, Y') }}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="font-mono text-sm font-medium text-gray-900">
-                            {{ $dist->distribution_number }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm">
-                            <div class="font-medium text-gray-900">{{ $dist->user->full_name }}</div>
-                            <div class="text-gray-500 text-xs">{{ $dist->user->email }}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 py-1 text-xs font-semibold rounded {{ tier_badge_color($dist->tier->slug) }} text-white">
-                            {{ $dist->tier->name }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-sm capitalize text-gray-700">
-                            {{ str_replace('_', ' ', $dist->distribution_type) }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                        <span class="text-sm font-semibold text-green-600">
-                            {{ format_currency($dist->package_value) }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <span class="px-2 py-1 text-xs font-semibold rounded
-                            {{ $dist->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                            {{ $dist->status === 'approved' ? 'bg-blue-100 text-blue-800' : '' }}
-                            {{ $dist->status === 'packaged' ? 'bg-purple-100 text-purple-800' : '' }}
-                            {{ $dist->status === 'dispatched' ? 'bg-indigo-100 text-indigo-800' : '' }}
-                            {{ $dist->status === 'delivered' ? 'bg-green-100 text-green-800' : '' }}
-                            {{ $dist->status === 'cancelled' ? 'bg-red-100 text-red-800' : '' }}">
-                            {{ ucfirst($dist->status) }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                        <a href="{{ route('admin.distributions.show', $dist) }}"
-                           class="text-blue-600 hover:text-blue-900 text-sm font-medium">
-                            View
-                        </a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="px-6 py-8 text-center">
-                        <div class="text-gray-400">
-                            <svg class="mx-auto h-12 w-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                            </svg>
-                            <p class="text-sm">No distributions found in the selected date range</p>
-                        </div>
-                    </td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead class="table-header">
+            <tr>
+                <th>Date</th>
+                <th>Distribution #</th>
+                <th>User</th>
+                <th>Tier</th>
+                <th>Type</th>
+                <th style="text-align: right;">Value</th>
+                <th style="text-align: center;">Status</th>
+                <th style="text-align: center;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                $recentDistributions = \App\Models\FoodDistribution::with(['user', 'tier'])
+                    ->whereBetween('created_at', [$startDate, $endDate])
+                    ->latest()
+                    ->take(25)
+                    ->get();
+            @endphp
+            @forelse($recentDistributions as $dist)
+            <tr class="table-row">
+                <td class="table-cell" style="color: #64748b;">{{ $dist->created_at->format('M d, Y') }}</td>
+                <td class="table-cell"><span class="mono-text">{{ $dist->distribution_number }}</span></td>
+                <td class="table-cell">
+                    <div class="user-name">{{ $dist->user->full_name }}</div>
+                    <div class="user-email">{{ $dist->user->email }}</div>
+                </td>
+                <td class="table-cell">
+                    <span class="status-badge" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">{{ $dist->tier->name }}</span>
+                </td>
+                <td class="table-cell" style="text-transform: capitalize;">{{ str_replace('_', ' ', $dist->distribution_type) }}</td>
+                <td class="table-cell" style="text-align: right;"><span class="value-text">{{ format_currency($dist->package_value) }}</span></td>
+                <td class="table-cell" style="text-align: center;">
+                    <span class="status-badge {{ $dist->status }}">{{ ucfirst($dist->status) }}</span>
+                </td>
+                <td class="table-cell" style="text-align: center;">
+                    <a href="{{ route('admin.distributions.show', $dist) }}" class="view-link">View</a>
+                </td>
+            </tr>
+            @empty
+            <tr><td colspan="8" style="text-align: center; padding: 32px; color: #94a3b8;">No distributions found</td></tr>
+            @endforelse
+        </tbody>
+    </table>
 </div>
 
-<!-- Export Options -->
-<div class="mt-6 bg-white rounded-lg shadow p-4">
-    <div class="flex justify-between items-center">
+<div class="export-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div>
-            <h4 class="font-semibold text-gray-800">Export Report</h4>
-            <p class="text-sm text-gray-600">Download this report in various formats</p>
+            <h4 class="export-title">Export Report</h4>
+            <p class="export-desc">Download this report in various formats</p>
         </div>
-        <div class="flex gap-2">
-            <button onclick="window.print()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm font-medium">
-                🖨️ Print
-            </button>
-            <button onclick="alert('Excel export feature coming soon!')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-medium">
-                📊 Export Excel
-            </button>
-            <button onclick="alert('PDF export feature coming soon!')" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium">
-                📄 Export PDF
-            </button>
+        <div style="display: flex; gap: 12px;">
+            <button onclick="window.print()" class="btn-export btn-print">Print</button>
+            <a href="{{ route('admin.reports.distributions.export') }}" class="btn-export btn-excel">Export Excel</a>
         </div>
     </div>
 </div>
@@ -256,134 +218,10 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Status Distribution Chart
 const statusCtx = document.getElementById('statusChart').getContext('2d');
-new Chart(statusCtx, {
-    type: 'doughnut',
-    data: {
-        labels: @json($distributionsByStatus->pluck('status')->map(function($s) { return ucfirst($s); })),
-        datasets: [{
-            data: @json($distributionsByStatus->pluck('count')),
-            backgroundColor: [
-                'rgba(251, 191, 36, 0.8)',  // pending - yellow
-                'rgba(59, 130, 246, 0.8)',  // approved - blue
-                'rgba(168, 85, 247, 0.8)',  // packaged - purple
-                'rgba(99, 102, 241, 0.8)',  // dispatched - indigo
-                'rgba(34, 197, 94, 0.8)',   // delivered - green
-                'rgba(239, 68, 68, 0.8)'    // cancelled - red
-            ],
-            borderColor: [
-                'rgba(251, 191, 36, 1)',
-                'rgba(59, 130, 246, 1)',
-                'rgba(168, 85, 247, 1)',
-                'rgba(99, 102, 241, 1)',
-                'rgba(34, 197, 94, 1)',
-                'rgba(239, 68, 68, 1)'
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    padding: 10,
-                    font: {
-                        size: 11
-                    }
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        let label = context.label || '';
-                        let value = context.parsed || 0;
-                        let total = context.dataset.data.reduce((a, b) => a + b, 0);
-                        let percentage = ((value / total) * 100).toFixed(1);
-                        return label + ': ' + value + ' (' + percentage + '%)';
-                    }
-                }
-            }
-        }
-    }
-});
-
-// Tier Value Chart
+new Chart(statusCtx, { type: 'doughnut', data: { labels: @json($distributionsByStatus->pluck('status')->map(function($s) { return ucfirst($s); })), datasets: [{ data: @json($distributionsByStatus->pluck('count')), backgroundColor: ['rgba(251, 191, 36, 0.8)', 'rgba(59, 130, 246, 0.8)', 'rgba(168, 85, 247, 0.8)', 'rgba(99, 102, 241, 0.8)', 'rgba(34, 197, 94, 0.8)', 'rgba(239, 68, 68, 0.8)'], borderWidth: 2 }] }, options: { responsive: true, plugins: { legend: { position: 'bottom' } } } });
 const tierValueCtx = document.getElementById('tierValueChart').getContext('2d');
-new Chart(tierValueCtx, {
-    type: 'bar',
-    data: {
-        labels: @json($distributionsByTier->pluck('tier.name')),
-        datasets: [{
-            label: 'Total Value (₦)',
-            data: @json($distributionsByTier->pluck('total_value')),
-            backgroundColor: [
-                'rgba(255, 159, 64, 0.6)',  // Bronze
-                'rgba(192, 192, 192, 0.6)', // Silver
-                'rgba(255, 205, 86, 0.6)',  // Gold
-                'rgba(75, 192, 192, 0.6)'   // Emerald
-            ],
-            borderColor: [
-                'rgba(255, 159, 64, 1)',
-                'rgba(192, 192, 192, 1)',
-                'rgba(255, 205, 86, 1)',
-                'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 2
-        }, {
-            label: 'Distribution Count',
-            data: @json($distributionsByTier->pluck('count')),
-            backgroundColor: 'rgba(59, 130, 246, 0.6)',
-            borderColor: 'rgba(59, 130, 246, 1)',
-            borderWidth: 2,
-            yAxisID: 'y1'
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        interaction: {
-            mode: 'index',
-            intersect: false,
-        },
-        plugins: {
-            legend: {
-                position: 'top'
-            }
-        },
-        scales: {
-            y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                ticks: {
-                    callback: function(value) {
-                        return '₦' + value.toLocaleString();
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Total Value (₦)'
-                }
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                grid: {
-                    drawOnChartArea: false,
-                },
-                title: {
-                    display: true,
-                    text: 'Distribution Count'
-                }
-            }
-        }
-    }
-});
+new Chart(tierValueCtx, { type: 'bar', data: { labels: @json($distributionsByTier->pluck('tier.name')), datasets: [{ label: 'Total Value (₦)', data: @json($distributionsByTier->pluck('total_value')), backgroundColor: 'rgba(16, 185, 129, 0.6)', borderColor: '#10b981', borderWidth: 2 }, { label: 'Count', data: @json($distributionsByTier->pluck('count')), backgroundColor: 'rgba(59, 130, 246, 0.6)', borderColor: '#3b82f6', borderWidth: 2, yAxisID: 'y1' }] }, options: { responsive: true, scales: { y: { ticks: { callback: function(v) { return '₦' + v.toLocaleString(); } } } } } });
 </script>
 @endpush
 @endsection

@@ -1,12 +1,19 @@
+@if(!App\Models\PageContent::isPageActive('team'))
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
+    <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
+    </html>
+@else
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <base target="_self" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FCCEI Platform</title>
-  <meta name="description" content="Join ReferralPro - The ultimate multi-level referral subscription platform. Earn through referrals, grow your network, and maximize your income potential." />
-  <meta name="keywords" content="referral program, MLM, subscription platform, network marketing, passive income" />
+  <title>{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</title>
+  <meta name="description" content="{{ App\Models\PageContent::getContent('team', 'page_subtitle', 'Meet the dedicated people behind FoodChain.') }}" />
+  <meta name="keywords" content="FCCEI, team, food chain, community, empowerment" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
@@ -84,28 +91,28 @@
         <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
             </svg>
           </a>
           <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a>
+            <a href="{{ route('landing') }}#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a>
             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
             </svg>
           </a>
           <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallary</a>
+            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
           </div>
         </div>
 
@@ -127,7 +134,7 @@
 
         </div>
 
-        <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
           <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
@@ -159,7 +166,7 @@
   </p> -->
 
   <!-- <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Introducing Our <span class="text-green-700">Exceptional Team</span></h2>
+        <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</h2>
         <p class="text-gray-600 max-w-2xl mx-auto">The passionate individuals behind FCCEI's success.</p>
     </div> -->
   <!-- Board Members styled images -->
@@ -248,7 +255,7 @@
 <section id="team" class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">Our <span class="text-green-700">Exceptional Team</span></h2>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">The passionate leaders driving food security and community empowerment.</p>
         </div>
 
@@ -477,7 +484,7 @@ function closeTeamModal() {
       <div>
           <div class="flex items-center space-x-4">
             <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-              <img src="{{ asset('assets/landing/images/FCCEILOGOr.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
+              <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
             </div>
             <div class="flex flex-col">
               <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
@@ -555,5 +562,13 @@ function closeTeamModal() {
         </div>
     </a>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-button');
+    var menu = document.getElementById('mobile-menu');
+    if (btn && menu) { btn.addEventListener('click', function() { menu.classList.toggle('hidden'); }); }
+});
+</script>
 </body>
 </html>
+@endif

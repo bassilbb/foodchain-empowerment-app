@@ -1,16 +1,16 @@
 <?php
 
-if (!function_exists('format_currency')) {
+if (! function_exists('format_currency')) {
     /**
      * Format amount as Nigerian Naira
      */
-    function format_currency(float $amount): string
+    function format_currency($amount): string
     {
-        return '₦' . number_format($amount, 2);
+        return '₦'.number_format($amount ?? 0, 2);
     }
 }
 
-if (!function_exists('setting')) {
+if (! function_exists('setting')) {
     /**
      * Get setting value
      */
@@ -20,7 +20,32 @@ if (!function_exists('setting')) {
     }
 }
 
-if (!function_exists('generate_referral_link')) {
+if (! function_exists('site_logo')) {
+    /**
+     * Get site logo URL
+     */
+    function site_logo(): ?string
+    {
+        $logo = \App\Models\Setting::where('key', 'site_logo')->first();
+        if ($logo && $logo->value) {
+            return asset('storage/'.$logo->value);
+        }
+
+        return null;
+    }
+}
+
+if (! function_exists('app_name')) {
+    /**
+     * Get application name
+     */
+    function app_name(): string
+    {
+        return \App\Models\Setting::get('app_name', 'FoodChain');
+    }
+}
+
+if (! function_exists('generate_referral_link')) {
     /**
      * Generate referral link for user
      */
@@ -30,24 +55,39 @@ if (!function_exists('generate_referral_link')) {
     }
 }
 
-if (!function_exists('admin_can')) {
+if (! function_exists('admin_can')) {
     /**
      * Check if admin has permission
      */
-    function admin_can(string $permission): bool
+    function admin_can($permission): bool
     {
-        $admin = auth()->guard('admin')->user();
-        return $admin && $admin->hasPermission($permission);
+        try {
+            $admin = auth()->guard('admin')->user();
+
+            return $admin && method_exists($admin, 'hasPermission') ? $admin->hasPermission($permission) : false;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }
 
-if (!function_exists('tier_badge_color')) {
+if (! function_exists('module_enabled')) {
+    /**
+     * Check if a user-facing module is enabled
+     */
+    function module_enabled(string $module): bool
+    {
+        return \App\Models\Setting::get('module_'.$module, 'true') === 'true';
+    }
+}
+
+if (! function_exists('tier_badge_color')) {
     /**
      * Get color class for tier badge
      */
-    function tier_badge_color(string $tierSlug): string
+    function tier_badge_color($tierSlug): string
     {
-        return match($tierSlug) {
+        return match ($tierSlug ?? 'bronze') {
             'bronze' => 'bg-orange-600',
             'silver' => 'bg-gray-400',
             'gold' => 'bg-yellow-500',

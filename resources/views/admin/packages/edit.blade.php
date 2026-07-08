@@ -114,7 +114,6 @@
     </form>
 </div>
 
-@push('scripts')
 <script>
 let itemIndex = {{ $package->items->count() }};
 
@@ -162,5 +161,4 @@ function calculateTotal() {
 // Calculate total on page load
 document.addEventListener('DOMContentLoaded', calculateTotal);
 </script>
-@endpush
 @endsection

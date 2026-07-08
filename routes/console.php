@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Schedule as ScheduleFacade; // Optional alias if needed
+
+// Optional alias if needed
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -62,4 +62,23 @@ app()->booted(function () {
         ->daily()
         ->withoutOverlapping()
         ->runInBackground();
+
+    // Process weekly contribution deductions from wallets (schedule customizable in admin settings)
+    if (\Illuminate\Support\Facades\Schema::hasTable('settings') && \App\Models\Setting::get('deduction_schedule_enabled', true)) {
+        $deductionDay = (int) \App\Models\Setting::get('deduction_day', 6);
+        $deductionTime = \App\Models\Setting::get('deduction_time', '02:00');
+
+        $schedule->command('accounts:process-weekly-deductions')
+            ->weeklyOn($deductionDay, $deductionTime)
+            ->withoutOverlapping()
+            ->runInBackground();
+
+        $retryDay = (int) \App\Models\Setting::get('deduction_retry_day', 0);
+        $retryTime = \App\Models\Setting::get('deduction_retry_time', '02:00');
+
+        $schedule->command('accounts:retry-defaulted-deductions')
+            ->weeklyOn($retryDay, $retryTime)
+            ->withoutOverlapping()
+            ->runInBackground();
+    }
 });

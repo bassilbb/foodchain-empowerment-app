@@ -22,6 +22,7 @@ class User extends Authenticatable
         'referred_by',
         'current_tier_id',
         'direct_referrals_count',
+        'wallet_balance',
         'membership_expires_at',
         'is_active',
         'address',
@@ -29,6 +30,8 @@ class User extends Authenticatable
         'state',
         'country',
         'last_login_at',
+        'total_community_count',
+        'membership_started_at',
     ];
 
     protected $hidden = [
@@ -39,8 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'membership_expires_at' => 'date',
+        'membership_started_at' => 'datetime',
         'last_login_at' => 'datetime',
         'is_active' => 'boolean',
+        'wallet_balance' => 'decimal:2',
         'password' => 'hashed',
     ];
 
@@ -92,6 +97,11 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
+    public function manualPayments()
+    {
+        return $this->hasMany(ManualPayment::class);
+    }
+
     public function starterPack()
     {
         return $this->hasOne(StarterPack::class);
@@ -100,6 +110,11 @@ class User extends Authenticatable
     public function distributions()
     {
         return $this->hasMany(FoodDistribution::class);
+    }
+
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class);
     }
 
     public function notifications()
@@ -132,6 +147,26 @@ class User extends Authenticatable
         return $this->hasMany(SupportTicket::class);
     }
 
+    public function linkedAccounts()
+    {
+        return $this->hasMany(UserAccount::class, 'primary_user_id');
+    }
+
+    public function accountTransactions()
+    {
+        return $this->hasMany(AccountTransaction::class, 'primary_user_id');
+    }
+
+    public function referredAccounts()
+    {
+        return $this->hasMany(UserAccount::class, 'referred_by');
+    }
+
+    public function unionMembership()
+    {
+        return $this->hasOne(UnionMember::class)->where('is_active', true);
+    }
+
     // Accessors
     public function getFullNameAttribute(): string
     {
@@ -162,13 +197,13 @@ class User extends Authenticatable
     public function scopeMembershipExpired($query)
     {
         return $query->whereNotNull('membership_expires_at')
-                     ->where('membership_expires_at', '<', now());
+            ->where('membership_expires_at', '<', now());
     }
 
     public function scopeMembershipExpiringSoon($query, $days = 30)
     {
         return $query->whereNotNull('membership_expires_at')
-                     ->whereBetween('membership_expires_at', [now(), now()->addDays($days)]);
+            ->whereBetween('membership_expires_at', [now(), now()->addDays($days)]);
     }
 
     // Helper Methods
@@ -190,10 +225,10 @@ class User extends Authenticatable
     public function canUpgradeTier(): bool
     {
         $nextTier = MembershipTier::where('min_referrals', '>', $this->currentTier->min_referrals)
-                                   ->orderBy('min_referrals', 'asc')
-                                   ->first();
+            ->orderBy('min_referrals', 'asc')
+            ->first();
 
-        if (!$nextTier) {
+        if (! $nextTier) {
             return false;
         }
 
@@ -203,15 +238,15 @@ class User extends Authenticatable
     public function getNextTier()
     {
         return MembershipTier::where('min_referrals', '>', $this->direct_referrals_count)
-                             ->orderBy('min_referrals', 'asc')
-                             ->first();
+            ->orderBy('min_referrals', 'asc')
+            ->first();
     }
 
     public function getReferralsNeededForNextTier(): int
     {
         $nextTier = $this->getNextTier();
-        
-        if (!$nextTier) {
+
+        if (! $nextTier) {
             return 0;
         }
 
@@ -226,5 +261,69 @@ class User extends Authenticatable
     public function updateLastLogin(): void
     {
         $this->update(['last_login_at' => now()]);
+    }
+
+    // Eligibility Helper Methods
+    public function hasActiveMembership(): bool
+    {
+        return $this->isMembershipActive();
+    }
+
+    public function isKycVerified(): bool
+    {
+        return $this->kyc_verified ?? false;
+    }
+
+    public function referralCount(): int
+    {
+        return $this->direct_referrals_count ?? $this->referrals()->count();
+    }
+
+    public function activeReferralCount(): int
+    {
+        return $this->activeReferrals()->count();
+    }
+
+    public function getMembershipDurationDays(): int
+    {
+        if (! $this->created_at) {
+            return 0;
+        }
+
+        return (int) $this->created_at->diffInDays(now());
+    }
+
+    public function getUnion(): ?\App\Models\Union
+    {
+        return $this->unionMembership?->union;
+    }
+
+    public function hasActiveUnion(): bool
+    {
+        $union = $this->getUnion();
+
+        return $union !== null && $union->status === 'active';
+    }
+
+    // Wallet Helpers
+    public function hasSufficientWalletBalance(float $amount): bool
+    {
+        return $this->wallet_balance >= $amount;
+    }
+
+    public function deductFromWallet(float $amount, ?string $description = null): bool
+    {
+        if (! $this->hasSufficientWalletBalance($amount)) {
+            return false;
+        }
+
+        $this->decrement('wallet_balance', $amount);
+
+        return true;
+    }
+
+    public function addToWallet(float $amount): void
+    {
+        $this->increment('wallet_balance', $amount);
     }
 }

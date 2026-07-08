@@ -1,69 +1,90 @@
-{{-- resources/views/admin/distributions/index.blade.php --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Distributions')
-@section('page-title', 'Food Distributions')
+@section('header', 'Food Distributions')
+@section('subheader', 'Manage food distribution packages')
 
 @section('content')
-<div class="mb-6 flex justify-between items-center">
-    <a href="{{ route('admin.distributions.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-        Create Distribution
-    </a>
+<div class="page-header">
+    <div>
+        <h1>@yield('header')</h1>
+        <p>@yield('subheader')</p>
+    </div>
+    <div class="header-actions-btns">
+        <a href="{{ route('admin.distributions.create') }}" class="btn btn-primary">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Create Distribution
+        </a>
+    </div>
 </div>
 
-<div class="bg-white rounded-lg shadow overflow-hidden">
-    <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Number</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tier</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Value</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-            @forelse($distributions as $distribution)
-            <tr class="hover:bg-gray-50">
-                <td class="px-6 py-4 whitespace-nowrap font-mono text-sm">
-                    {{ $distribution->distribution_number }}
-                </td>
-                <td class="px-6 py-4">
-                    <div class="text-sm font-medium">{{ $distribution->user->full_name }}</div>
-                    <div class="text-sm text-gray-500">{{ $distribution->user->email }}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-semibold rounded {{ tier_badge_color($distribution->tier->slug) }} text-white">
-                        {{ $distribution->tier->name }}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap font-semibold">
-                    {{ format_currency($distribution->package_value) }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 py-1 text-xs font-semibold rounded bg-blue-100 text-blue-800">
-                        {{ ucfirst($distribution->status) }}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ $distribution->created_at->format('M d, Y') }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    <a href="{{ route('admin.distributions.show', $distribution) }}" class="text-blue-600 hover:text-blue-900">View</a>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="7" class="px-6 py-4 text-center text-gray-500">No distributions found</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+<div class="page-card">
+    <div class="page-card-header">
+        <div>
+            <h3 class="page-card-title">All Distributions</h3>
+            <p class="page-card-subtitle">{{ $distributions->total() }} total</p>
+        </div>
+    </div>
+    <div class="page-card-body" style="padding: 0;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>User</th>
+                    <th>Tier</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($distributions as $distribution)
+                <tr>
+                    <td style="font-family: monospace; font-size: 13px; color: #1e293b;">{{ $distribution->distribution_number }}</td>
+                    <td>
+                        <div style="font-weight: 500; color: #1e293b;">{{ $distribution->user->full_name }}</div>
+                        <div style="font-size: 13px; color: #64748b;">{{ $distribution->user->email }}</div>
+                    </td>
+                    <td>
+                        <span class="badge emerald">{{ $distribution->tier->name }}</span>
+                    </td>
+                    <td style="font-weight: 600; color: #1e293b;">{{ format_currency($distribution->package_value) }}</td>
+                    <td>
+                        <span class="badge
+                            @if($distribution->status === 'approved') badge-success
+                            @elseif($distribution->status === 'pending') badge-warning
+                            @elseif($distribution->status === 'dispatched') badge-info
+                            @elseif($distribution->status === 'completed') badge-primary
+                            @else badge-dark
+                            @endif">
+                            {{ ucfirst($distribution->status) }}
+                        </span>
+                    </td>
+                    <td style="color: #94a3b8; font-size: 13px;">{{ $distribution->created_at->format('M d, Y') }}</td>
+                    <td>
+                        <div style="display: flex; gap: 12px;">
+                            <a href="{{ route('admin.distributions.edit', $distribution) }}" class="action-link">Edit</a>
+                            <a href="{{ route('admin.distributions.show', $distribution) }}" class="action-link">View</a>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="7">
+                        <div class="empty-state">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                            <p>No distributions found</p>
+                        </div>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="mt-6">
+<div class="pagination">
     {{ $distributions->links() }}
 </div>
 @endsection

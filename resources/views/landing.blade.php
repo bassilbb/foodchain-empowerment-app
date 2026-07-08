@@ -1,12 +1,19 @@
+@if(!App\Models\PageContent::isPageActive('landing'))
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
+    <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
+    </html>
+@else
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <base target="_self">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCCEI  Platform</title>
-    <meta name="description" content="Join ReferralPro - The ultimate multi-level referral subscription platform. Earn through referrals, grow your network, and maximize your income potential.">
-    <meta name="keywords" content="referral program, MLM, subscription platform, network marketing, passive income">
+    <title>{{ App\Models\PageContent::getContent('landing', 'hero_title', 'FCCEI Platform') }}</title>
+    <meta name="description" content="{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Join the food security network that empowers households with quality staple foods.') }}">
+    <meta name="keywords" content="FCCEI, food chain, community empowerment, food security, Nigeria">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Swiper CSS -->
@@ -255,8 +262,9 @@
                 <div class="hero-slide absolute inset-0 bg-slide-1 bg-cover bg-center flex items-center opacity-100 z-10">
                     <div class="container mx-auto px-4">
                         <div class="max-w-2xl animate-slide-in">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Zero Hunger <span class="text-secondary">Through Community</span></h1>
-                            <p class="text-xl text-white/90 mb-8">Join the food security network that empowers households with quality staple foods and growing the community .</p>
+                            @php $heroTitle = App\Models\PageContent::getContent('landing', 'hero_title', 'Zero Hunger Through Community'); @endphp
+                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">{!! $heroTitle !!}</h1>
+                            <p class="text-xl text-white/90 mb-8">{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Join the food security network that empowers households with quality staple foods.') }}</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('register') }}" class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark transition">Join the Initiative</a>
                                 <a href="#about" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Learn More</a>
@@ -304,15 +312,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div class="text-center">
                         <div class="text-5xl font-bold mb-2 gradient-text">50K+</div>
-                        <div class="text-gray-300">Active Members</div>
+                        <div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_members', 'Active Members') }}</div>
                     </div>
                     <div class="text-center">
                         <div class="text-5xl font-bold mb-2 gradient-text">₦10M+</div>
-                        <div class="text-gray-300">Food  Sustainable</div>
+                        <div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_distributions', 'Food Distributions') }}</div>
                     </div>
                     <div class="text-center">
                         <div class="text-5xl font-bold mb-2 gradient-text">20+</div>
-                        <div class="text-gray-300">States</div>
+                        <div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_communities', 'Communities Reached') }}</div>
                     </div>
                     <div class="text-center">
                         <div class="text-5xl font-bold mb-2 gradient-text">24/7</div>
@@ -556,7 +564,7 @@
                                 <span>Member Welcome Kit</span>
                             </li>
                         </ul>
-                        <a href="#register" class="block w-full py-3 border-2 border-orange-600 text-orange-600 text-center font-bold rounded-lg hover:bg-orange-600 hover:text-white transition-all">Join Now</a>
+                        <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-orange-600 text-orange-600 text-center font-bold rounded-lg hover:bg-orange-600 hover:text-white transition-all">Join Now</a>
                     </div>
                 </div>
 
@@ -694,7 +702,7 @@
               <span>Pickup & Delivery: Available (fees paid by member)</span>
             </li>
           </ul>
-          <a href="#register" class="block w-full py-3 border-2 border-orange-600 text-orange-600 text-center font-bold rounded-lg hover:bg-orange-600 hover:text-white transition-all">Join Now</a>
+          <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-orange-600 text-orange-600 text-center font-bold rounded-lg hover:bg-orange-600 hover:text-white transition-all">Join Now</a>
         </div>
       </div> --> -
 
@@ -1184,7 +1192,7 @@
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">About <span style="color: #26C1C9;">FCCEI</span></h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
 
                         <p class="text-gray-600 mb-6 leading-relaxed">
                             <strong>FoodChain Community Empowerment Initiative</strong> is a social enterprise from Doorstep Farms Limited designed to combat hunger and food insecurity among low-income earners in Nigeria. We address the social challenges caused by economic crisis, inflation, and unemployment.
@@ -1229,7 +1237,7 @@
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-                <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">About <span style="color: #26C1C9;">FCCEI</span></h2>
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
 
                 <p class="text-gray-600 mb-6 leading-relaxed">
                     <strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven social enterprise designed to combat hunger and food insecurity among women, low-income earners and students of tertiary institutions in Nigeria. It is an initiative from Doorstep Farms Limited <b> incorporated on 12th, February 2015 with RC Number 1241873.</b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and restiveness.
@@ -1291,10 +1299,9 @@
     </button>
     <!-- Left Content: Text -->
     <div class="flex-1 p-4 overflow-y-auto">
-    <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">About <span style="color: #26C1C9;">FCCEI</span></h2>
-      <!-- <h2 class="text-4xl mb-4 font-bold" <span style="color: #26C1C9;">FCCEI</span> style="color: #26C1C9;">About FCCEI</h2> -->
+    <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
       <p class="mb-4 leading-relaxed">
-        <strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven social enterprise designed to combat hunger and food insecurity among women, low-income earners and students of tertiary institutions in Nigeria. It is an initiative from Doorstep Farms Limited <b> incorporated on 12th, February 2015 with RC Number 1241873.</b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and restiveness.
+        <strong>FoodChain Community Empowerment Initiative</strong> is a technology - driven Social Enterprise designed to combat hunger and food insecurity among women, workforce in public and private sectors (employees and self-employed) and students of tertiary institutions in Nigeria. It is an initiative from FoodChain social enterprise Limited (RC: ...........)- a member of DOORSTEP FARMS LIMITED <b> incorporated on 12th, February 2015 with RC Number 1241873.</b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, under-employment, insecurity, social conflicts, social instability, policy changes and social unrest.
       </p>
       <p class="mb-4 leading-relaxed">
         Hunger is a significant driver of social unrest, conflict and criminal activities in Nigeria, therefore eradicating hunger would have profound social impacts, including: enhanced public safety and security, improved health and education outcomes, stronger community cohesion and a reduction in distress-driven migration. The second of the UN’s 17 Sustainable Development Goals is to end hunger, achieve food security and improved nutrition and promote sustainable agriculture.
@@ -2203,8 +2210,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <i class="fas fa-map-marker-alt text-primary"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-gray-900 mb-1">Office Address</h4>
-                                    <p class="text-gray-600">Food Store/ Warehouse: KM 54, Lagos - Ibadan Expressway, Mowe, <br>Ogun State</p>
+                                    <h4 class="font-bold text-gray-900 mb-1">Office Address / Collection Cenre:</h4>
+                                    <p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, <br> Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
                                 </div>
                             </div>
 
@@ -2297,6 +2304,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 </form>
             </div>
         </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-blue-600 to-teal-500">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold text-white mb-6">{{ App\Models\PageContent::getContent('landing', 'cta_title', 'Ready to Make a Difference?') }}</h2>
+                <p class="text-xl text-white/90 max-w-2xl mx-auto mb-8">{{ App\Models\PageContent::getContent('landing', 'cta_content', 'Join thousands of members already benefiting from FoodChain community programs.') }}</p>
+                <a href="{{ route('register') }}" class="inline-block px-10 py-4 bg-white text-blue-600 font-bold rounded-lg text-lg hover:bg-gray-100 transition">Get Started Today</a>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -2316,7 +2332,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- <div>
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
-                            <img src="C:\Users\Mquid Devops - 3\Downloads\FCCEI\images\FCCEILOGOr.png" alt="FCCEI Logo" class="object-contain w-full h-full">
+                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
                         </div>
 
                         <div class="flex flex-col">
@@ -2335,7 +2351,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                 <div class="flex items-center space-x-4">
                     <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-                        <img src="images\FCCEILOGOr.png" alt="FCCEI Logo" class="object-contain w-full h-full">
+                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
                     </div>
 
                     <div class="flex flex-col">
@@ -2424,14 +2440,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 "highlight": "Network",
                 "description": "Grow your team and maximize your earning potential with our advanced referral tracking system.",
                 "primaryButton": { "text": "Build Network", "url": "/register" },
-                "secondaryButton": { "text": "View Features", "url": "#features" }
+                "secondaryButton": { "text": "View Features", "url": "#products" }
             },
             {
                 "title": "Passive Income Stream",
                 "highlight": "Income",
                 "description": "Create multiple income streams with our tiered subscription model and referral bonuses.",
                 "primaryButton": { "text": "Start Today", "url": "/register" },
-                "secondaryButton": { "text": "View Plans", "url": "#pricing" }
+                "secondaryButton": { "text": "View Plans", "url": "#products" }
             }
         ];
 
@@ -2561,7 +2577,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hide all slides
             slides.forEach(slide => {
                 slide.style.opacity = '0';
-                slide.style.zIndex = '1';
+                slide.style.z
+                
+                = '1';
             });
 
             // Remove active class from all dots
@@ -2673,9 +2691,12 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         });
     </script>
+    
+    <!-- <a href="https://wa.me/+2348168018123" target="_blank" class="fixed bottom-8 right-8 z-[60] group"> -->
 
 
-<a href="https://wa.me/+2348168018123" target="_blank" class="fixed bottom-8 right-8 z-[60] group">
+
+<a href="https://chat.whatsapp.com/C8V1raWRahMEknKjmZUOmj" target="_blank" class="fixed bottom-8 right-8 z-[60] group">
         <span
             class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow-xl">
             Chat with an Event Manager
@@ -2690,3 +2711,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+@endif

@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\IncidentApiController;
 use App\Http\Controllers\Api\MembershipGradeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +11,7 @@ use App\Http\Controllers\Api\MembershipGradeController;
 */
 
 Route::prefix('v1')->group(function () {
-    
+
     // Public routes - Membership Grades
     Route::get('/membership-grades', [MembershipGradeController::class, 'index']);
     Route::get('/membership-grades/{slug}', [MembershipGradeController::class, 'show']);
@@ -19,7 +20,7 @@ Route::prefix('v1')->group(function () {
 
     // Protected routes - Require authentication
     Route::middleware('auth:sanctum')->group(function () {
-        
+
         // User membership endpoints
         Route::get('/my/membership', [MembershipGradeController::class, 'userMembership']);
         Route::get('/my/benefits/eligibility', [MembershipGradeController::class, 'checkBenefitEligibility']);
@@ -36,4 +37,10 @@ Route::get('/health', function () {
         'status' => 'ok',
         'timestamp' => now()->toIso8601String(),
     ]);
+});
+
+// Incident API routes for cascading dropdowns
+Route::prefix('v1/incidents')->group(function () {
+    Route::get('/branches/{branchId}/departments', [IncidentApiController::class, 'getDepartments']);
+    Route::get('/departments/{departmentId}/staff', [IncidentApiController::class, 'getStaff']);
 });

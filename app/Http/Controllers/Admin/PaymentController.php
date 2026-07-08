@@ -7,6 +7,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Services\PaymentService;
+use App\Exports\PaymentsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -72,17 +74,45 @@ class PaymentController extends Controller
 
     public function verify(Payment $payment)
     {
-        if ($payment->isSuccessful()) {
+        if ($payment->status === 'successful') {
             return back()->with('info', 'Payment is already verified.');
         }
 
-        $paymentService = app(PaymentService::class);
-        $result = $paymentService->verifyPayment($payment->reference);
+        // Manual verification - directly approve the payment
+        $payment->update([
+            'status' => 'successful',
+            'paid_at' => now(),
+        ]);
 
-        if ($result['status'] === 'success') {
-            return back()->with('success', 'Payment verified successfully.');
+        // Activate user if this is a membership payment
+        if ($payment->user) {
+            $payment->user->update([
+                'is_active' => true,
+                'membership_started_at' => now(),
+                'membership_expires_at' => now()->addYear(),
+            ]);
         }
 
-        return back()->with('error', $result['message'] ?? 'Payment verification failed.');
+        return back()->with('success', 'Payment verified successfully and user has been activated.');
+    }
+
+    public function export(Request $request)
+    {
+        $query = Payment::with('user');
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        if ($request->filled('from_date')) {
+            $query->whereDate('created_at', '>=', $request->from_date);
+        }
+        if ($request->filled('to_date')) {
+            $query->whereDate('created_at', '<=', $request->to_date);
+        }
+
+        return Excel::download(new PaymentsExport, 'payments-' . date('Y-m-d') . '.xlsx');
     }
 }

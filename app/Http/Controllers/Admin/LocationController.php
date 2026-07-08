@@ -35,7 +35,10 @@ class LocationController extends Controller
             'is_headquarters' => 'boolean',
         ]);
 
-        PickupLocation::create($request->all());
+        PickupLocation::create($request->only([
+            'name', 'address', 'city', 'state', 'phone', 'email', 'operating_hours',
+            'is_headquarters',
+        ]));
 
         return redirect()->route('admin.locations.index')
             ->with('success', 'Location created successfully.');
@@ -67,7 +70,10 @@ class LocationController extends Controller
             'is_headquarters' => 'boolean',
         ]);
 
-        $location->update($request->all());
+        $location->update($request->only([
+            'name', 'address', 'city', 'state', 'phone', 'email', 'operating_hours',
+            'is_active', 'is_headquarters',
+        ]));
 
         return redirect()->route('admin.locations.index')
             ->with('success', 'Location updated successfully.');

@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ManualPayment;
 use App\Models\BankAccount;
+use App\Models\FoodDistribution;
+use App\Models\ManualPayment;
 use App\Models\Payment;
-use App\Models\Voucher;
 use App\Models\User;
+use App\Models\Voucher;
+use App\Services\NotificationService;
 use App\Services\PaymentService;
+use App\Services\WalletService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ManualPaymentController extends Controller
@@ -30,12 +33,12 @@ class ManualPaymentController extends Controller
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('reference', 'like', "%{$request->search}%")
-                  ->orWhere('sender_name', 'like', "%{$request->search}%")
-                  ->orWhereHas('user', function ($uq) use ($request) {
-                      $uq->where('email', 'like', "%{$request->search}%")
-                         ->orWhere('first_name', 'like', "%{$request->search}%")
-                         ->orWhere('last_name', 'like', "%{$request->search}%");
-                  });
+                    ->orWhere('sender_name', 'like', "%{$request->search}%")
+                    ->orWhereHas('user', function ($uq) use ($request) {
+                        $uq->where('email', 'like', "%{$request->search}%")
+                            ->orWhere('first_name', 'like', "%{$request->search}%")
+                            ->orWhere('last_name', 'like', "%{$request->search}%");
+                    });
             });
         }
 
@@ -58,6 +61,12 @@ class ManualPaymentController extends Controller
         return view('admin.manual-payments.show', compact('manualPayment'));
     }
 
+    public function verifyForm(ManualPayment $manualPayment)
+    {
+        return redirect()->route('admin.manual-payments.show', $manualPayment)
+            ->with('error', 'Please use the "Submit" button on the Actions form below to verify or reject this payment.');
+    }
+
     public function verify(Request $request, ManualPayment $manualPayment)
     {
         $request->validate([
@@ -65,7 +74,7 @@ class ManualPaymentController extends Controller
             'notes' => 'nullable|string|max:500',
         ]);
 
-        $adminId = auth()->id();
+        $adminId = Auth::guard('admin')->id();
 
         DB::transaction(function () use ($manualPayment, $request, $adminId) {
             if ($request->action === 'verify') {
@@ -75,21 +84,21 @@ class ManualPaymentController extends Controller
             }
         });
 
-        $message = $request->action === 'verify' 
-            ? 'Payment verified successfully' 
+        $message = $request->action === 'verify'
+            ? 'Payment verified successfully'
             : 'Payment rejected';
 
         return redirect()->route('admin.manual-payments.index')
             ->with('success', $message);
     }
 
-    private function processVerifiedPayment(ManualPayment $manualPayment, int $adminId, string $notes = null): void
+    private function processVerifiedPayment(ManualPayment $manualPayment, int $adminId, ?string $notes = null): void
     {
         $manualPayment->verify($adminId, $notes);
 
         $payment = Payment::create([
             'user_id' => $manualPayment->user_id,
-            'reference' => 'MANUAL-' . $manualPayment->reference,
+            'reference' => 'MANUAL-'.$manualPayment->reference,
             'type' => $manualPayment->type,
             'amount' => $manualPayment->amount,
             'status' => 'successful',
@@ -105,13 +114,19 @@ class ManualPaymentController extends Controller
 
         $manualPayment->update(['payment_id' => $payment->id]);
 
-        app(PaymentService::class)->verifyPayment($payment->reference);
+        if ($manualPayment->type === 'wallet_topup') {
+            $user = $payment->user;
+            app(WalletService::class)->topUp($user, $payment->amount, 'wallet top-up: SUCCESSFUL-'.$manualPayment->reference);
+            app(NotificationService::class)->sendPaymentSuccessNotification($user, $payment);
+        } else {
+            app(PaymentService::class)->verifyPayment($payment->reference);
+        }
     }
 
     public function bankAccounts()
     {
         $accounts = BankAccount::active()->orderByDesc('is_default')->get();
-        
+
         return view('admin.bank-accounts.index', compact('accounts'));
     }
 
@@ -140,7 +155,7 @@ class ManualPaymentController extends Controller
     {
         $request->validate([
             'bank_name' => 'required|string|max:100',
-            'account_number' => 'required|string|max:20|unique:bank_accounts,account_number,' . $bankAccount->id,
+            'account_number' => 'required|string|max:20|unique:bank_accounts,account_number,'.$bankAccount->id,
             'account_name' => 'required|string|max:255',
             'account_type' => 'nullable|in:current,savings',
             'instructions' => 'nullable|string',
@@ -182,17 +197,20 @@ class ManualPaymentController extends Controller
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('voucher_number', 'like', "%{$request->search}%")
-                  ->orWhere('collection_code', 'like', "%{$request->search}%")
-                  ->orWhereHas('user', function ($uq) use ($request) {
-                      $uq->where('email', 'like', "%{$request->search}%")
-                         ->orWhere('first_name', 'like', "%{$request->search}%");
-                  });
+                    ->orWhere('collection_code', 'like', "%{$request->search}%")
+                    ->orWhereHas('user', function ($uq) use ($request) {
+                        $uq->where('email', 'like', "%{$request->search}%")
+                            ->orWhere('first_name', 'like', "%{$request->search}%");
+                    });
             });
         }
 
         $vouchers = $query->orderBy('created_at', 'desc')->paginate(20);
 
-        return view('admin.vouchers.index', compact('vouchers'));
+        $users = User::where('is_active', true)->limit(50)->get();
+        $distributions = FoodDistribution::where('status', 'approved')->limit(20)->get();
+
+        return view('admin.vouchers.index', compact('vouchers', 'users', 'distributions'));
     }
 
     public function issueVoucher(Request $request)
@@ -246,11 +264,11 @@ class ManualPaymentController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        if (!$voucher->verifyCollectionCode($request->collection_code)) {
+        if (! $voucher->verifyCollectionCode($request->collection_code)) {
             return redirect()->back()->with('error', 'Invalid collection code');
         }
 
-        $adminId = auth()->id();
+        $adminId = Auth::guard('admin')->id();
         $voucher->collect($adminId, $request->notes);
 
         return redirect()->route('admin.vouchers.index')

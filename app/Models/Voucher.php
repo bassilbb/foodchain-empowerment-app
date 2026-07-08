@@ -25,9 +25,20 @@ class Voucher extends Model
 
     protected $casts = [
         'issued_at' => 'datetime',
+        'acknowledged_at' => 'datetime',
         'collected_at' => 'datetime',
         'expires_at' => 'datetime',
     ];
+
+    public function isAcknowledged(): bool
+    {
+        return $this->acknowledged_at !== null;
+    }
+
+    public function acknowledge(): void
+    {
+        $this->update(['acknowledged_at' => now()]);
+    }
 
     public function user()
     {
@@ -74,7 +85,7 @@ class Voucher extends Model
         return $query->whereIn('status', ['pending', 'issued'])
             ->where(function ($q) {
                 $q->whereNull('expires_at')
-                  ->orWhere('expires_at', '>', now());
+                    ->orWhere('expires_at', '>', now());
             });
     }
 
@@ -95,19 +106,19 @@ class Voucher extends Model
 
     public function isExpired(): bool
     {
-        return $this->status === 'expired' || 
+        return $this->status === 'expired' ||
                ($this->expires_at && $this->expires_at->isPast());
     }
 
     public function isValid(): bool
     {
-        return in_array($this->status, ['pending', 'issued']) && !$this->isExpired();
+        return in_array($this->status, ['pending', 'issued']) && ! $this->isExpired();
     }
 
     public function issue(): void
     {
         $validityHours = (int) setting('voucher_validity_hours', 72);
-        
+
         $this->update([
             'status' => 'issued',
             'issued_at' => now(),
@@ -116,7 +127,7 @@ class Voucher extends Model
         ]);
     }
 
-    public function collect(int $collectedBy, string $notes = null): void
+    public function collect(int $collectedBy, ?string $notes = null): void
     {
         $this->update([
             'status' => 'collected',
@@ -151,7 +162,7 @@ class Voucher extends Model
     public static function generateVoucherNumber(): string
     {
         do {
-            $number = 'VCH-' . date('Y') . '-' . strtoupper(uniqid());
+            $number = 'VCH-'.date('Y').'-'.strtoupper(uniqid());
         } while (self::where('voucher_number', $number)->exists());
 
         return $number;

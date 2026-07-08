@@ -40,22 +40,26 @@ class PackageController extends Controller
             'items.*.unit_value' => 'required|numeric|min:0',
         ]);
 
+        $tier = MembershipTier::findOrFail($request->tier_id);
+        $totalValue = collect($request->items)->sum(fn($i) => $i['quantity'] * $i['unit_value']);
+        if ($totalValue > $tier->food_package_value) {
+            return back()->withErrors(['items' => "Total package value (₦" . number_format($totalValue, 2) . ") exceeds {$tier->name} tier food package value (₦" . number_format($tier->food_package_value, 2) . ")."])->withInput();
+        }
+
         $package = FoodPackage::create([
             'tier_id' => $request->tier_id,
             'name' => $request->name,
             'description' => $request->description,
-            'total_value' => 0,
+            'total_value' => $totalValue,
             'is_default' => $request->boolean('is_default'),
         ]);
 
-        $totalValue = 0;
         foreach ($request->items as $item) {
             $package->items()->create([
                 'food_item_id' => $item['food_item_id'],
                 'quantity' => $item['quantity'],
                 'unit_value' => $item['unit_value'],
             ]);
-            $totalValue += $item['quantity'] * $item['unit_value'];
         }
 
         $package->update(['total_value' => $totalValue]);
@@ -101,10 +105,17 @@ class PackageController extends Controller
             'items.*.unit_value' => 'required|numeric|min:0',
         ]);
 
+        $tier = MembershipTier::findOrFail($request->tier_id);
+        $totalValue = collect($request->items)->sum(fn($i) => $i['quantity'] * $i['unit_value']);
+        if ($totalValue > $tier->food_package_value) {
+            return back()->withErrors(['items' => "Total package value (₦" . number_format($totalValue, 2) . ") exceeds {$tier->name} tier food package value (₦" . number_format($tier->food_package_value, 2) . ")."])->withInput();
+        }
+
         $package->update([
             'tier_id' => $request->tier_id,
             'name' => $request->name,
             'description' => $request->description,
+            'total_value' => $totalValue,
             'is_active' => $request->boolean('is_active'),
             'is_default' => $request->boolean('is_default'),
         ]);
@@ -112,17 +123,13 @@ class PackageController extends Controller
         // Delete existing items and recreate
         $package->items()->delete();
 
-        $totalValue = 0;
         foreach ($request->items as $item) {
             $package->items()->create([
                 'food_item_id' => $item['food_item_id'],
                 'quantity' => $item['quantity'],
                 'unit_value' => $item['unit_value'],
             ]);
-            $totalValue += $item['quantity'] * $item['unit_value'];
         }
-
-        $package->update(['total_value' => $totalValue]);
 
         // If set as default, unset other defaults
         if ($request->boolean('is_default')) {

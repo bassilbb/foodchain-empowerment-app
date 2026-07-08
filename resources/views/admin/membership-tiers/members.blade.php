@@ -7,66 +7,71 @@
 @section('subheader', 'Members in this membership tier')
 
 @section('content')
-<div class="mb-6">
-    <a href="{{ route('admin.membership-tiers.show', $membershipTier) }}" class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ route('admin.membership-tiers.show', $membershipTier) }}" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #10b981; font-weight: 500; text-decoration: none;">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         Back to Tier
     </a>
 </div>
 
-<div class="card-3d overflow-hidden">
-    <div class="overflow-x-auto">
-        <table class="w-full">
-            <thead class="bg-slate-50 border-b border-slate-200">
+<div class="page-card" style="overflow: hidden;">
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
                 <tr>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Member</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Email</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Tier</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Status</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-slate-600">Joined</th>
-                    <th class="text-right py-4 px-6 text-sm font-semibold text-slate-600">Actions</th>
+                    <th style="text-align: left; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Member</th>
+                    <th style="text-align: left; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Email</th>
+                    <th style="text-align: left; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Tier</th>
+                    <th style="text-align: left; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Status</th>
+                    <th style="text-align: left; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Joined</th>
+                    <th style="text-align: right; padding: 1rem 1.5rem; font-size: 0.875rem; font-weight: 600; color: #475569;">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody style="border-top: 1px solid #f1f5f9;">
                 @forelse($members as $member)
-                <tr class="hover:bg-slate-50 transition-colors">
-                    <td class="py-4 px-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white font-bold">
+                <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+                    <td style="padding: 1rem 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, #10b981, #0ea5e9); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
                                 {{ substr($member->first_name, 0, 1) }}
                             </div>
                             <div>
-                                <p class="font-medium text-slate-800">{{ $member->full_name }}</p>
-                                <p class="text-sm text-slate-500">Ref: {{ $member->referral_code }}</p>
+                                <p style="font-weight: 500; color: #1e293b; margin: 0;">{{ $member->full_name }}</p>
+                                <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Ref: {{ $member->referral_code }}</p>
                             </div>
                         </div>
                     </td>
-                    <td class="py-4 px-6 text-slate-600">{{ $member->email }}</td>
-                    <td class="py-4 px-6">
-                        <span class="px-2 py-1 rounded-full text-xs font-medium {{ tier_badge_color($member->currentTier->slug ?? 'bronze') }} text-white">
+                    <td style="padding: 1rem 1.5rem; color: #475569;">{{ $member->email }}</td>
+                    <td style="padding: 1rem 1.5rem;">
+                        <span style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; color: white;
+                            @if(($member->currentTier->slug ?? 'bronze') === 'bronze') background: linear-gradient(135deg, #f59e0b, #d97706); @endif
+                            @if(($member->currentTier->slug ?? 'bronze') === 'silver') background: linear-gradient(135deg, #64748b, #475569); @endif
+                            @if(($member->currentTier->slug ?? 'bronze') === 'gold') background: linear-gradient(135deg, #eab308, #ca8a04); @endif
+                            @if(($member->currentTier->slug ?? 'bronze') === 'emerald') background: linear-gradient(135deg, #10b981, #059669); @endif">
                             {{ $member->currentTier->name ?? 'N/A' }}
                         </span>
                     </td>
-                    <td class="py-4 px-6">
-                        <span class="px-2 py-1 rounded-full text-xs font-medium {{ $member->is_active ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500' }}">
+                    <td style="padding: 1rem 1.5rem;">
+                        <span style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;
+                            @if($member->is_active) background: #dcfce7; color: #16a34a; @else background: #f1f5f9; color: #64748b; @endif">
                             {{ $member->is_active ? 'Active' : 'Inactive' }}
                         </span>
                     </td>
-                    <td class="py-4 px-6 text-slate-500">{{ $member->created_at->format('M d, Y') }}</td>
-                    <td class="py-4 px-6 text-right">
-                        <a href="{{ route('admin.users.show', ['user' => $member->id]) }}" class="text-primary-600 hover:text-primary-700 font-medium">View</a>
+                    <td style="padding: 1rem 1.5rem; color: #64748b;">{{ $member->created_at->format('M d, Y') }}</td>
+                    <td style="padding: 1rem 1.5rem; text-align: right;">
+                        <a href="{{ route('admin.users.show', ['user' => $member->id]) }}" style="color: #10b981; font-weight: 500; text-decoration: none;">View</a>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="py-8 text-center text-slate-500">No members found in this tier</td>
+                    <td colspan="6" style="padding: 2rem; text-align: center; color: #64748b;">No members found in this tier</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
     @if($members->hasPages())
-    <div class="px-6 py-4 border-t border-slate-100">
+    <div style="padding: 1rem 1.5rem; border-top: 1px solid #f1f5f9;">
         {{ $members->links() }}
     </div>
     @endif

@@ -1,10 +1,17 @@
+@if(!App\Models\PageContent::isPageActive('blog'))
+    <!DOCTYPE html>
+    <html lang="en">
+    <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
+    <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
+    </html>
+@else
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Posts</title>
+    <title>{{ App\Models\PageContent::getContent('blog', 'page_title', 'Our Blog') }}</title>
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
@@ -19,8 +26,8 @@
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo Section -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
+                <a href="{{ route('landing') }}" class="flex items-center space-x-4">
+                    <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
                         <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
                     </div>
                     <div class="flex flex-col justify-center">
@@ -29,7 +36,7 @@
                             Food Chain Community Empowerment Initiative
                         </span>
                     </div>
-                </div>
+                </a>
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('landing') }}"
@@ -37,7 +44,7 @@
                     <!-- <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">About</a> -->
                     <!-- About with dropdown -->
                     <div class="relative group">
-                        <a href="#about"
+                        <a href="{{ route('landing') }}#about"
                             class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
                             About
                             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
@@ -49,19 +56,19 @@
                         </a>
                         <!-- Dropdown menu -->
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                            <a href="#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board
+                            <a href="{{ route('landing') }}#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board
                                 Members</a>
                             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
                         </div>
                     </div>
 
-                    <a href="#products"
+                    <a href="{{ route('landing') }}#products"
                         class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
                     <!-- <a href="#team" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Team</a> -->
                     <!-- <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Blog</a> -->
                     <!-- Blog dropdown -->
                     <div class="relative group">
-                        <a href="#blog"
+                        <a href="{{ route('landing') }}#blog"
                             class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
                             Blog
                             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -71,7 +78,7 @@
                             </svg>
                         </a>
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallary</a>
+                            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
                         </div>
                     </div>
 
@@ -92,7 +99,7 @@
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
                             <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our
                                 Sponsor</a>
-                            <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become
+                            <a href="{{ route('supplier') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become
                                 supplier</a>
                             <a href="{{ route('rider') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our
                                 Logistics Channel (Rider Only)</a>
@@ -100,7 +107,7 @@
 
                     </div>
 
-                    <a href="#contact"
+                    <a href="{{ route('landing') }}#contact"
                         class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
                 </div>
                 <!-- Auth Buttons -->
@@ -122,7 +129,7 @@
                 <!-- <a href="#about" class="block py-2 text-gray-700 hover:text-primary font-medium">About</a> -->
                 <!-- About with dropdown -->
                 <div class="relative group">
-                    <a href="#about"
+                    <a href="{{ route('landing') }}#about"
                         class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
                         About
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
@@ -139,13 +146,13 @@
                     </div>
                 </div>
 
-                <a href="#products" class="block py-2 text-gray-700 hover:text-primary font-medium">Products</a>
+                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-primary font-medium">Products</a>
                 <!-- <a href="#team" class="block py-2 text-gray-700 hover:text-primary font-medium">Team</a>
         <a href="#blog" class="block py-2 text-gray-700 hover:text-primary font-medium">Blog</a> -->
 
                 <!-- Blog dropdown -->
                 <div class="relative group">
-                    <a href="#blog"
+                    <a href="{{ route('landing') }}#blog"
                         class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
                         Blog
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -184,7 +191,7 @@
                 </div>
 
 
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary font-medium">Contact</a>
+                <a href="{{ route('landing') }}#contact" class="block py-2 text-gray-700 hover:text-primary font-medium">Contact</a>
                 <div class="pt-4 space-y-2">
                     <a href="{{ route('login') }}"
                         class="block py-2 text-center text-primary font-medium border-2 border-primary rounded-lg">Login</a>
@@ -400,9 +407,9 @@
                 <!-- Company Info -->
                 <div>
                     <div class="flex items-center space-x-4">
-                        <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGOr.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-                        </div>
+                        <a href="{{ route('landing') }}" class="w-28 h-28 flex items-center justify-center overflow-hidden rounded-lg bg-white">
+                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
+                        </a>
                         <div class="flex flex-col">
                             <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
                             <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food
@@ -526,3 +533,4 @@
 </body>
 
 </html>
+@endif

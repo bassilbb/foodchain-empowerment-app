@@ -1,65 +1,58 @@
-{{-- resources/views/admin/packages/index.blade.php --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Packages')
 @section('page-title', 'Food Packages')
 
 @section('content')
-<div class="mb-6 flex justify-between items-center">
-    <a href="{{ route('admin.packages.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-        Create Package
-    </a>
+<div style="display: flex; justify-content: flex-end; margin-bottom: 24px;">
+    <a href="{{ route('admin.packages.create') }}" class="btn btn-primary">Create Package</a>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px;">
     @forelse($packages as $package)
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="flex justify-between items-start mb-4">
-            <div>
-                <h3 class="text-lg font-semibold">{{ $package->name }}</h3>
-                <span class="px-2 py-1 text-xs font-semibold rounded {{ tier_badge_color($package->tier->slug) }} text-white">
-                    {{ $package->tier->name }}
-                </span>
-                @if($package->is_default)
-                    <span class="ml-2 px-2 py-1 text-xs font-semibold rounded bg-green-100 text-green-800">Default</span>
-                @endif
+    <div class="page-card">
+        <div class="page-card-body">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                <div>
+                    <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">{{ $package->name }}</h3>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="badge badge-success">{{ $package->tier?->name ?? 'N/A' }}</span>
+                        @if($package->is_default)
+                            <span class="badge badge-success">Default</span>
+                        @endif
+                    </div>
+                </div>
+                <p style="font-size: 28px; font-weight: 700; color: #1e293b;">{{ format_currency($package->total_value) }}</p>
             </div>
-            <p class="text-2xl font-bold">{{ format_currency($package->total_value) }}</p>
-        </div>
 
-        @if($package->description)
-        <p class="text-gray-600 text-sm mb-4">{{ $package->description }}</p>
-        @endif
+            @if($package->description)
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 16px;">{{ $package->description }}</p>
+            @endif
 
-        <div class="border-t pt-4">
-            <h4 class="font-medium mb-2">Package Items:</h4>
-            <ul class="space-y-1 text-sm">
-                @foreach($package->items as $item)
-                <li class="flex justify-between">
-                    <span>{{ $item->foodItem->name }}</span>
-                    <span class="text-gray-600">{{ $item->quantity }} {{ $item->foodItem->unit }}</span>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 16px;">
+                <h4 style="font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Package Items:</h4>
+                <div>
+                    @foreach($package->items as $item)
+                    <div style="display: flex; justify-content: space-between; font-size: 14px; color: #475569; padding: 8px 0; border-bottom: 1px dashed #f1f5f9;">
+                        <span>{{ $item->foodItem?->name ?? 'N/A' }}</span>
+                        <span style="color: #64748b;">{{ $item->quantity }} {{ $item->foodItem?->unit ?? '' }}</span>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
 
-        <div class="mt-4 flex gap-2">
-            <a href="{{ route('admin.packages.edit', $package) }}" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded text-center hover:bg-blue-700">
-                Edit
-            </a>
-            <a href="{{ route('admin.packages.show', $package) }}" class="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded text-center hover:bg-gray-300">
-                View
-            </a>
+            <div style="display: flex; gap: 12px; margin-top: 16px;">
+                <a href="{{ route('admin.packages.edit', $package) }}" class="btn btn-primary" style="flex: 1;">Edit</a>
+                <a href="{{ route('admin.packages.show', $package) }}" class="btn btn-secondary" style="flex: 1;">View</a>
+            </div>
         </div>
     </div>
     @empty
-    <div class="col-span-2 text-center py-12 text-gray-500">
-        No packages found. Create your first package!
+    <div class="empty-state">
+        <p>No packages found. Create your first package!</p>
     </div>
     @endforelse
 </div>
 
-<div class="mt-6">
-    {{ $packages->links() }}
-</div>
+<div class="pagination">{{ $packages->links() }}</div>
 @endsection

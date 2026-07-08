@@ -439,7 +439,7 @@
                 <div>
                     <div class="flex items-center space-x-4">
                         <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGOr.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
+                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
                         </div>
                         <div class="flex flex-col">
                             <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>

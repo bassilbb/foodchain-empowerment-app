@@ -1,83 +1,70 @@
 @extends('admin.layouts.app')
 
 @section('title', 'Membership Tiers')
-@section('page-title', 'Membership Tiers Management')
-
 @section('header', 'Membership Tiers')
 @section('subheader', 'Manage membership grade levels and benefits')
 
 @section('content')
-<div class="mb-6 flex items-center justify-between">
-    <div>
-        <p class="text-slate-500">Configure the 4-tier membership system (Bronze, Silver, Gold, Emerald)</p>
-    </div>
-    <a href="{{ route('admin.membership-tiers.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transform hover:-translate-y-0.5 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+    <p style="color: #64748b; margin: 0;">Configure the 4-tier membership system (Bronze, Silver, Gold, Emerald)</p>
+    <a href="{{ route('admin.membership-tiers.create') }}" class="btn btn-primary">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
         Add New Tier
     </a>
 </div>
 
 <!-- Tiers Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
     @foreach($tiers as $tier)
-    <div class="card-3d p-6 relative overflow-hidden">
+    <div class="page-card" style="position: relative; overflow: hidden;">
         @if($tier->slug === 'bronze')
-            <div class="absolute top-0 right-0 w-24 h-24 bg-amber-400 rounded-full blur-[50px] opacity-20"></div>
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: #f59e0b; border-radius: 50%; filter: blur(40px); opacity: 0.2;"></div>
         @elseif($tier->slug === 'silver')
-            <div class="absolute top-0 right-0 w-24 h-24 bg-slate-400 rounded-full blur-[50px] opacity-20"></div>
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: #64748b; border-radius: 50%; filter: blur(40px); opacity: 0.2;"></div>
         @elseif($tier->slug === 'gold')
-            <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-400 rounded-full blur-[50px] opacity-20"></div>
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: #eab308; border-radius: 50%; filter: blur(40px); opacity: 0.2;"></div>
         @else
-            <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-400 rounded-full blur-[50px] opacity-20"></div>
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: #10b981; border-radius: 50%; filter: blur(40px); opacity: 0.2;"></div>
         @endif
-        
-        <div class="relative">
-            <div class="flex items-center justify-between mb-4">
-                <div class="w-12 h-12 rounded-2xl flex items-center justify-center
-                    {{ $tier->slug === 'bronze' ? 'bg-gradient-to-br from-amber-400 to-amber-600' : '' }}
-                    {{ $tier->slug === 'silver' ? 'bg-gradient-to-br from-slate-400 to-slate-600' : '' }}
-                    {{ $tier->slug === 'gold' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' : '' }}
-                    {{ $tier->slug === 'emerald' ? 'bg-gradient-to-br from-emerald-400 to-emerald-600' : '' }}
-                    text-white shadow-lg">
-                    @if($tier->slug === 'bronze')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                    @elseif($tier->slug === 'silver')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                    @elseif($tier->slug === 'gold')
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                    @else
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
-                    @endif
+
+        <div style="padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div style="width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    @if($tier->slug === 'bronze') background: linear-gradient(135deg, #f59e0b, #d97706); @endif
+                    @if($tier->slug === 'silver') background: linear-gradient(135deg, #64748b, #475569); @endif
+                    @if($tier->slug === 'gold') background: linear-gradient(135deg, #eab308, #ca8a04); @endif
+                    @if($tier->slug === 'emerald') background: linear-gradient(135deg, #10b981, #059669); @endif">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                 </div>
-                <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $tier->is_active ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500' }}">
+                <span class="badge badge-{{ $tier->is_active ? 'success' : 'dark' }}">
                     {{ $tier->is_active ? 'Active' : 'Inactive' }}
                 </span>
             </div>
-            
-            <h3 class="text-xl font-bold text-slate-800 mb-1">{{ $tier->name }}</h3>
-            <p class="text-sm text-slate-500">Min. {{ $tier->min_referrals }} referrals</p>
-            
-            <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-sm">
-                    <span class="text-slate-500">Annual Fee</span>
-                    <span class="font-semibold text-slate-800">{{ format_currency($tier->annual_fee) }}</span>
+
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0 0 0.25rem 0;">{{ $tier->name }}</h3>
+            <p style="font-size: 0.875rem; color: #64748b; margin: 0 0 1rem 0;">Min. {{ $tier->min_referrals }} referrals</p>
+
+            <div style="display: grid; gap: 0.5rem; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: #64748b;">Annual Fee</span>
+                    <span style="font-weight: 600; color: #1e293b;">{{ format_currency($tier->annual_fee) }}</span>
                 </div>
-                <div class="flex justify-between text-sm">
-                    <span class="text-slate-500">Union Size</span>
-                    <span class="font-semibold text-slate-800">{{ $tier->union_min_members }}+</span>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: #64748b;">Union Size</span>
+                    <span style="font-weight: 600; color: #1e293b;">{{ $tier->union_min_members }}+</span>
                 </div>
-                <div class="flex justify-between text-sm">
-                    <span class="text-slate-500">Community</span>
-                    <span class="font-semibold text-slate-800">{{ $tier->community_min_members }}-{{ $tier->community_max_members }}</span>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: #64748b;">Community</span>
+                    <span style="font-weight: 600; color: #1e293b;">{{ $tier->community_min_members }}-{{ $tier->community_max_members }}</span>
                 </div>
             </div>
-            
-            <div class="flex gap-2 pt-4 border-t border-slate-100">
-                <a href="{{ route('admin.membership-tiers.show', $tier) }}" class="flex-1 px-3 py-2 text-center text-sm font-medium text-primary-600 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors">
+
+            <div style="display: flex; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9;">
+                <a href="{{ route('admin.membership-tiers.show', $tier) }}" class="btn btn-secondary" style="flex: 1;">
                     View Details
                 </a>
-                <a href="{{ route('admin.membership-tiers.edit', $tier) }}" class="px-3 py-2 text-center text-sm font-medium text-slate-600 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
-                    <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                <a href="{{ route('admin.membership-tiers.edit', $tier) }}" class="btn btn-secondary">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 </a>
             </div>
         </div>
@@ -86,61 +73,63 @@
 </div>
 
 <!-- Benefits Overview -->
-<div class="card-3d p-6">
-    <h3 class="text-lg font-bold text-slate-800 mb-6">Tier Benefits Comparison</h3>
-    <div class="overflow-x-auto">
-        <table class="w-full">
+<div class="page-card">
+    <div class="page-card-header">
+        <h3 class="page-card-title">Tier Benefits Comparison</h3>
+    </div>
+    <div style="overflow-x: auto;">
+        <table class="data-table">
             <thead>
-                <tr class="border-b border-slate-200">
-                    <th class="text-left py-3 px-4 text-sm font-semibold text-slate-600">Benefit</th>
+                <tr>
+                    <th style="text-align: left;">Benefit</th>
                     @foreach($tiers as $tier)
-                    <th class="text-center py-3 px-4 text-sm font-semibold text-slate-600">{{ $tier->name }}</th>
+                    <th style="text-align: center;">{{ $tier->name }}</th>
                     @endforeach
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100">
+            <tbody>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Annual Fee</td>
+                    <td>Annual Fee</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">{{ format_currency($tier->annual_fee) }}</td>
+                    <td style="text-align: center; font-weight: 600; color: #1e293b;">{{ format_currency($tier->annual_fee) }}</td>
                     @endforeach
                 </tr>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Min. Referrals</td>
+                    <td>Min. Referrals</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">{{ $tier->min_referrals }}</td>
+                    <td style="text-align: center; font-weight: 600; color: #1e293b;">{{ $tier->min_referrals }}</td>
                     @endforeach
                 </tr>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Free Food Pack</td>
+                    <td>Free Food Pack</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">{{ ucfirst($tier->free_food_pack_type) }}</td>
+                    <td style="text-align: center; font-weight: 600; color: #1e293b; text-transform: capitalize;">{{ $tier->free_food_pack_type }}</td>
                     @endforeach
                 </tr>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Delivery</td>
+                    <td>Delivery</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">
+                    <td style="text-align: center; font-weight: 600; color: #1e293b;">
                         @if($tier->free_delivery)
-                            <span class="text-green-600">Free</span>
+                        <span style="color: #10b981;">Free</span>
                         @elseif($tier->has_delivery)
-                            <span>{{ $tier->delivery_subsidy_percentage }}% subsidized</span>
+                        <span>{{ $tier->delivery_subsidy_percentage }}% subsidized</span>
                         @else
-                            <span class="text-slate-400">Not available</span>
+                        <span style="color: #94a3b8;">Not available</span>
                         @endif
                     </td>
                     @endforeach
                 </tr>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Union Loan Equity</td>
+                    <td>Union Loan Equity</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">{{ $tier->union_equity_percentage }}%</td>
+                    <td style="text-align: center; font-weight: 600; color: #1e293b;">{{ $tier->union_equity_percentage }}%</td>
                     @endforeach
                 </tr>
                 <tr>
-                    <td class="py-3 px-4 text-sm text-slate-600">Loan Tenor</td>
+                    <td>Loan Tenor</td>
                     @foreach($tiers as $tier)
-                    <td class="py-3 px-4 text-sm text-center font-medium text-slate-800">{{ $tier->union_loan_tenor_months }} months</td>
+                    <td style="text-align: center; font-weight: 600; color: #1e293b;">{{ $tier->union_loan_tenor_months }} months</td>
                     @endforeach
                 </tr>
             </tbody>
