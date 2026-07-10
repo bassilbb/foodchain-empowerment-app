@@ -27,8 +27,9 @@ class SettingController extends Controller
         $rolePermissions = AdminRolePermission::all()->groupBy('role');
 
         $logoSetting = Setting::where('key', 'site_logo')->first();
+        $faviconSetting = Setting::where('key', 'site_favicon')->first();
 
-        return view('admin.settings.index', compact('settings', 'permissions', 'rolePermissions', 'logoSetting'));
+        return view('admin.settings.index', compact('settings', 'permissions', 'rolePermissions', 'logoSetting', 'faviconSetting'));
     }
 
     private function seedDefaultPermissions()
@@ -89,9 +90,11 @@ class SettingController extends Controller
         ]);
 
         foreach ($validated['settings'] as $key => $value) {
+            $existing = Setting::where('key', $key)->first();
+            $group = $existing ? $existing->group : (str_starts_with($key, 'module_') ? 'modules' : 'general');
             Setting::updateOrCreate(
                 ['key' => $key],
-                ['value' => $value ?? '', 'group' => 'general']
+                ['value' => $value ?? '', 'group' => $group]
             );
         }
 
@@ -104,25 +107,28 @@ class SettingController extends Controller
     public function updateLogo(Request $request)
     {
         $request->validate([
-            'logo' => 'required|image|mimes:png,jpg,jpeg,svg|max:2048',
+            'logo' => 'required|image|mimes:png,jpg,jpeg,svg,webp|max:10240',
         ]);
 
-        // Delete old logo if exists
-        $oldLogo = Setting::where('key', 'site_logo')->first();
-        if ($oldLogo && $oldLogo->value) {
-            Storage::disk('public')->delete($oldLogo->value);
+        try {
+            $oldLogo = Setting::where('key', 'site_logo')->first();
+            if ($oldLogo && $oldLogo->value) {
+                if (Storage::disk('public')->exists($oldLogo->value)) {
+                    Storage::disk('public')->delete($oldLogo->value);
+                }
+            }
+
+            $path = $request->file('logo')->store('logos', 'public');
+
+            Setting::updateOrCreate(
+                ['key' => 'site_logo'],
+                ['value' => $path, 'group' => 'general']
+            );
+
+            return back()->with('success', 'Logo uploaded successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Logo upload failed: '.$e->getMessage());
         }
-
-        // Store new logo
-        $path = $request->file('logo')->store('logos', 'public');
-
-        // Save to settings
-        Setting::updateOrCreate(
-            ['key' => 'site_logo'],
-            ['value' => $path, 'group' => 'general']
-        );
-
-        return back()->with('success', 'Logo uploaded successfully.');
     }
 
     public function deleteLogo()
@@ -134,6 +140,46 @@ class SettingController extends Controller
         }
 
         return back()->with('success', 'Logo deleted successfully.');
+    }
+
+    public function updateFavicon(Request $request)
+    {
+        $request->validate([
+            'favicon' => 'required|image|mimes:png,jpg,jpeg,svg,ico,webp|max:5120',
+        ]);
+
+        try {
+            $oldFavicon = Setting::where('key', 'site_favicon')->first();
+            if ($oldFavicon && $oldFavicon->value) {
+                if (Storage::disk('public')->exists($oldFavicon->value)) {
+                    Storage::disk('public')->delete($oldFavicon->value);
+                }
+            }
+
+            $path = $request->file('favicon')->store('favicons', 'public');
+
+            Setting::updateOrCreate(
+                ['key' => 'site_favicon'],
+                ['value' => $path, 'group' => 'general']
+            );
+
+            return back()->with('success', 'Favicon uploaded successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Favicon upload failed: '.$e->getMessage());
+        }
+    }
+
+    public function deleteFavicon()
+    {
+        $favicon = Setting::where('key', 'site_favicon')->first();
+        if ($favicon && $favicon->value) {
+            if (Storage::disk('public')->exists($favicon->value)) {
+                Storage::disk('public')->delete($favicon->value);
+            }
+            $favicon->delete();
+        }
+
+        return back()->with('success', 'Favicon deleted successfully.');
     }
 
     public function updateRolePermissions(Request $request)

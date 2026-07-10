@@ -63,14 +63,35 @@
             <span class="badge badge-{{ $account->is_active ? 'success' : 'dark' }}">
                 {{ $account->is_active ? 'Active' : 'Inactive' }}
             </span>
-            @if(!$account->is_default)
-            <form method="POST" action="{{ route('admin.bank-accounts.update', $account) }}" style="margin-left: auto;">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="is_default" value="1">
-                <button type="submit" class="btn-secondary btn-sm" style="background: none; border: none; font-weight: 500; cursor: pointer;">Set as Default</button>
-            </form>
-            @endif
+            <div style="margin-left: auto; display: flex; gap: 6px;">
+                <button type="button"
+                    style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(59,130,246,0.3);"
+                    onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''"
+                    onclick="openEditModal({{ $account->id }}, '{{ addslashes($account->bank_name) }}', '{{ addslashes($account->account_number) }}', '{{ addslashes($account->account_name) }}', '{{ $account->account_type ?? 'current' }}', '{{ addslashes($account->instructions ?? '') }}', {{ $account->is_active ? 'true' : 'false' }}, {{ $account->is_default ? 'true' : 'false' }})">
+                    Edit
+                </button>
+                <form method="POST" action="{{ route('admin.bank-accounts.destroy', $account) }}" onsubmit="return confirm('Are you sure you want to delete this bank account?')" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(239,68,68,0.3);"
+                        onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''">
+                        Delete
+                    </button>
+                </form>
+                @if(!$account->is_default)
+                <form method="POST" action="{{ route('admin.bank-accounts.update', $account) }}" style="display: inline;">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="is_default" value="1">
+                    <button type="submit"
+                        style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(16,185,129,0.3);"
+                        onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''">
+                        Default
+                    </button>
+                </form>
+                @endif
+            </div>
         </div>
     </div>
     @empty
@@ -131,4 +152,78 @@
         </div>
     </div>
 </div>
+
+<div id="editAccountModal" style="display: none; position: fixed; inset: 0; z-index: 50; overflow-y: auto;">
+    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 16px;">
+        <div style="position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7);" onclick="closeEditModal()"></div>
+        <div class="page-card" style="position: relative; width: 100%; max-width: 480px; padding: 24px;">
+            <h3 class="page-card-title" style="margin: 0 0 20px 0;">Edit Bank Account</h3>
+            <form method="POST" action="" id="editAccountForm">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label class="form-label">Bank Name</label>
+                    <input type="text" name="bank_name" id="edit_bank_name" required class="form-input" placeholder="e.g., First Bank">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Account Number</label>
+                    <input type="text" name="account_number" id="edit_account_number" required class="form-input" placeholder="e.g., 1234567890">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Account Name</label>
+                    <input type="text" name="account_name" id="edit_account_name" required class="form-input" placeholder="e.g., FoodChain Ltd">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Account Type</label>
+                    <select name="account_type" id="edit_account_type" class="form-select">
+                        <option value="current">Current</option>
+                        <option value="savings">Savings</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Instructions (optional)</label>
+                    <textarea name="instructions" id="edit_instructions" rows="2" class="form-input" placeholder="Payment instructions..."></textarea>
+                </div>
+                <div style="display: flex; gap: 16px; margin-top: 12px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #1e293b;">
+                        <input type="checkbox" name="is_active" id="edit_is_active" value="1" style="width: 18px; height: 18px; accent-color: #10b981;">
+                        Active
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #1e293b;">
+                        <input type="checkbox" name="is_default" id="edit_is_default" value="1" style="width: 18px; height: 18px; accent-color: #f59e0b;">
+                        Default Account
+                    </label>
+                </div>
+                <div style="display: flex; gap: 12px; padding-top: 16px;">
+                    <button type="button" onclick="closeEditModal()" class="btn-secondary" style="flex: 1;">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn-primary" style="flex: 1;">
+                        Update Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+function openEditModal(id, bankName, accountNumber, accountName, accountType, instructions, isActive, isDefault) {
+    document.getElementById('editAccountForm').action = '{{ route('admin.bank-accounts.update', '_id_') }}'.replace('_id_', id);
+    document.getElementById('edit_bank_name').value = bankName;
+    document.getElementById('edit_account_number').value = accountNumber;
+    document.getElementById('edit_account_name').value = accountName;
+    document.getElementById('edit_account_type').value = accountType;
+    document.getElementById('edit_instructions').value = instructions;
+    document.getElementById('edit_is_active').checked = isActive;
+    document.getElementById('edit_is_default').checked = isDefault;
+    document.getElementById('editAccountModal').style.display = 'block';
+}
+
+function closeEditModal() {
+    document.getElementById('editAccountModal').style.display = 'none';
+}
+</script>
+@endpush
 @endsection

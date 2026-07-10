@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <base target="_self" />
@@ -7,8 +7,8 @@
   <title>FCCEI Platform</title>
   <meta name="description" content="Join Foodchain Community Empowerment Initiative - Food Items Listing. Empower communities with food security programs." />
   <meta name="keywords" content="food security, empowerment, food items, community, initiative" />
+  <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,9 +17,9 @@
       theme: {
         extend: {
           colors: {
-            primary: { DEFAULT: "#4F46E5", light: "#6366F1", dark: "#4338CA" },
-            secondary: { DEFAULT: "#10B981", light: "#34D399", dark: "#059669" },
-            brandTeal: "#26C1C9"
+            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+            brandTeal: "#10B981"
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -42,16 +42,16 @@
           <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
         </div>
         <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #26C1C9;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+          <span class="text-3xl font-extrabold leading-tight" style="color: #10B981;">FCCEI</span>
+          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
         </div>
       </div>
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
+        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -62,10 +62,10 @@
             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -78,13 +78,12 @@
 
         <!-- Partner with dropdown -->
         <div class="relative group">
-            <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+            <a href="#" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
             Partner
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
             </svg>
             </a>
-            <!-- Dropdown menu -->
             <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
               <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Sponsor</a>
               <a href="{{ route('supplier') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become supplier</a>
@@ -92,11 +91,11 @@
             </div>
         </div>
 
-        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
-          <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
-          <a href="{{ route('register') }}" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
+          <a href="{{ route('login') }}" class="px-6 py-2 text-[#059669] font-medium hover:bg-[#059669] hover:text-white border-2 border-[#059669] rounded-lg transition-all duration-200">Login</a>
+          <a href="{{ route('register') }}" class="px-6 py-2 bg-[#059669] text-white font-medium hover:bg-[#047857] rounded-lg transition-all duration-200">Get Started</a>
         </div>
       </div>
       <!-- Mobile menu button -->
@@ -106,8 +105,7 @@
     </div>
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-primary font-medium">Home</a>
-      <!-- Repeat similar structure for mobile menu items with dropdowns as needed -->
+      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Home</a>
     </div>
   </nav>
 </header>
@@ -115,7 +113,6 @@
 <!-- Banner with Food Products Image -->
 <div class="my-8 mx-auto max-w-7xl px-4">
   <div class="relative rounded-lg overflow-hidden shadow-lg">
-    <!-- <img src="https://images.unsplash.com/photo-1606788075764-4ba3bde3f7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Food Products Banner" class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105" /> -->
    <img src="{{ asset('assets/landing/images/fooitmes.png') }}" alt="Food Products Banner" class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105" />
     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <h3 class="text-3xl md:text-4xl font-bold text-white text-center px-4" style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px;">
@@ -127,14 +124,14 @@
 
 <!-- Main Content -->
 <main class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-4xl font-bold text-center mb-10" style="color:#26C1C9;">
+    <h2 class="text-4xl font-bold text-center mb-10" style="color:#10B981;">
         Food Items Listing
     </h2>
 
     <!-- Food Assistance Plans -->
     <section class="mb-12">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold" style="color:#1D5FB5;">Food Assistance Plans</h3>
+            <h3 class="text-2xl font-bold" style="color:#047857;">Food Assistance Plans</h3>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -143,7 +140,7 @@
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
                 <div class="p-4 text-white" style="background:#CD7F32;">
                     <h4 class="text-xl font-bold">Bronze Plan</h4>
-                    <p class="text-sm opacity-90">₦100,000 Minimum Limit</p>
+                    <p class="text-sm opacity-90">N100,000 Minimum Limit</p>
                 </div>
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
@@ -164,7 +161,7 @@
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
                 <div class="p-4 text-white bg-gray-500">
                     <h4 class="text-xl font-bold">Silver Plan</h4>
-                    <p class="text-sm opacity-90">₦150,000 Limit</p>
+                    <p class="text-sm opacity-90">N150,000 Limit</p>
                 </div>
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
@@ -186,7 +183,7 @@
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border-2 border-yellow-400">
                 <div class="p-4 text-white bg-yellow-500">
                     <h4 class="text-xl font-bold">Gold Plan</h4>
-                    <p class="text-sm opacity-90">₦200,000 Limit</p>
+                    <p class="text-sm opacity-90">N200,000 Limit</p>
                 </div>
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
@@ -213,7 +210,7 @@
             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden">
                 <div class="p-4 text-white bg-emerald-600">
                     <h4 class="text-xl font-bold">Emerald Plan</h4>
-                    <p class="text-sm opacity-90">₦250,000 Max Limit</p>
+                    <p class="text-sm opacity-90">N250,000 Max Limit</p>
                 </div>
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
@@ -244,48 +241,8 @@
 
     <!-- Food Support Plans -->
     <section>
-        <h3 class="text-2xl font-bold mb-6" style="color:#1D5FB5;">Food Support Plans</h3>
+        <h3 class="text-2xl font-bold mb-6" style="color:#047857;">Food Support Plans</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-            <!-- 25 Weeks -->
-            <!-- Uncomment and customize as needed -->
-            <!--
-            <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
-                <h4 class="text-xl font-bold mb-2" style="color:#4F46E5;">Weekly for 25 Weeks</h4>
-                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 mb-4">
-                    ₦3,500 / Week
-                </span>
-                <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
-                    <li>✓ Rice – 25kg</li>
-                    <li>✓ Cooking Oil – 3 Litres</li>
-                    <li>✓ Seasoning Cubes – 100</li>
-                    <li>✓ Semovita – 10kg</li>
-                    <li>✓ Spaghetti – 20 Packs *500g</li>
-                    <li>✓ Tomato Paste (Pepper & Onions)</li>
-                    <li>✓ Curry</li>
-                    <li>✓ Thyme</li>
-                    <li>✓ Mayonnaise</li>
-                </ul>
-            </div>
-            -->
-
-            <!-- 50 Weeks -->
-            <!--
-            <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
-                <h4 class="text-xl font-bold mb-2" style="color:#4F46E5;">Weekly for 50 Weeks</h4>
-                <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700 mb-4">
-                    ₦3,500 / Week
-                </span>
-                <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
-                    <li>✓ Rice – 50kg</li>
-                    <li>✓ Cooking Oil – 5 Litres</li>
-                    <li>✓ Double Quantities</li>
-                    <li>✓ Chicken/Turkey – 2kg</li>
-                    <li>✓ Crayfish</li>
-                    <li>✓ Stock Fish</li>
-                </ul>
-            </div>
-            -->
 
             <!-- Cash Alternatives -->
             <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl shadow-lg p-6">
@@ -293,11 +250,11 @@
                 <div class="space-y-4">
                     <div class="bg-white/20 p-3 rounded-lg">
                         <p class="text-sm">N105,000 (for 25-week plan)</p>
-                        <p class="text-2xl font-bold">₦105,000</p>
+                        <p class="text-2xl font-bold">N105,000</p>
                     </div>
                     <div class="bg-white/20 p-3 rounded-lg">
                         <p class="text-sm">N210,000 (for 50-week plan)</p>
-                        <p class="text-2xl font-bold">₦210,000</p>
+                        <p class="text-2xl font-bold">N210,000</p>
                     </div>
                 </div>
             </div>
@@ -317,25 +274,25 @@
             <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
           </div>
           <div class="flex flex-col">
-            <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-            <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+            <span class="text-3xl font-extrabold leading-none" style="color: #10B981;">FCCEI</span>
+            <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
           </div>
         </div>
         <p class="text-gray-400 mb-6 -mt-2">
           Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.
         </p>
         <div class="flex space-x-4">
-          <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-facebook-f text-brandTeal group-hover:text-white"></i>
+          <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-facebook-f text-[#10B981] group-hover:text-white"></i>
           </a>
-          <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-tiktok text-brandTeal group-hover:text-white"></i>
+          <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-tiktok text-[#10B981] group-hover:text-white"></i>
           </a>
-          <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-instagram text-brandTeal group-hover:text-white"></i>
+          <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-instagram text-[#10B981] group-hover:text-white"></i>
           </a>
-          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-whatsapp text-brandTeal group-hover:text-white"></i>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-whatsapp text-[#10B981] group-hover:text-white"></i>
           </a>
         </div>
       </div>
@@ -343,30 +300,30 @@
       <div>
         <h4 class="text-lg font-bold mb-6">Quick Links</h4>
         <ul class="space-y-3">
-          <li><a href="#home" class="hover:text-white transition">Home</a></li>
-          <li><a href="#about" class="hover:text-white transition">About Us</a></li>
-          <li><a href="#products" class="hover:text-white transition">Products</a></li>
-          <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
+          <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+          <li><a href="#products" class="text-gray-400 hover:text-white transition">Products</a></li>
+          <li><a href="#blog" class="text-gray-400 hover:text-white transition">Blog</a></li>
         </ul>
       </div>
       <!-- Legal -->
       <div>
         <h4 class="text-lg font-bold mb-6">Legal</h4>
         <ul class="space-y-3">
-          <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
-          <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
-          <li><a href="/cookies" class="hover:text-white transition">Cookie Policy</a></li>
-          <li><a href="/compliance" class="hover:text-white transition">Compliance</a></li>
+          <li><a href="/privacy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+          <li><a href="/cookies" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
+          <li><a href="/compliance" class="text-gray-400 hover:text-white transition">Compliance</a></li>
         </ul>
       </div>
       <!-- Resources -->
       <div>
         <h4 class="text-lg font-bold mb-6">Resources</h4>
         <ul class="space-y-3">
-          <li><a href="/help" class="hover:text-white transition">Help Center</a></li>
-          <li><a href="/faq" class="hover:text-white transition">FAQ</a></li>
-          <li><a href="/community" class="hover:text-white transition">Community</a></li>
-          <li><a href="/affiliate" class="hover:text-white transition">Affiliate Program</a></li>
+          <li><a href="/help" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+          <li><a href="/faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+          <li><a href="/community" class="text-gray-400 hover:text-white transition">Community</a></li>
+          <li><a href="/affiliate" class="text-gray-400 hover:text-white transition">Affiliate Program</a></li>
         </ul>
       </div>
     </div>

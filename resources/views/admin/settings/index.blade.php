@@ -217,6 +217,12 @@
 @if(session('success'))
 <div class="alert alert-success">{{ session('success') }}</div>
 @endif
+@if(session('error'))
+<div class="alert alert-error">{{ session('error') }}</div>
+@endif
+@if($errors->any())
+<div class="alert alert-error">{{ $errors->first() }}</div>
+@endif
 
 {{-- Logo Settings (Separate Form) --}}
 <div class="page-card">
@@ -269,6 +275,58 @@
             <form method="POST" action="{{ route('admin.settings.delete-logo') }}" style="margin-top: 16px; text-align: center;">
                 @csrf
                 <button type="submit" style="padding: 8px 16px; background: #fee2e2; color: #dc2626; border: none; border-radius: 8px; font-size: 13px; cursor: pointer;">Remove Logo</button>
+            </form>
+            @endif
+        </div>
+    </div>
+</div>
+
+{{-- Favicon Settings --}}
+<div class="page-card">
+    <h3 class="page-card-title">
+        <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
+            <svg style="width: 20px; height: 20px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+        </div>
+        Favicon
+    </h3>
+    <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">Upload a favicon for the browser tab icon. Recommended size: 32x32 or 16x16 (ICO, PNG, SVG).</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+        <div style="flex: 1; min-width: 250px;">
+            <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Current Favicon</p>
+            @php
+            $faviconUrl = $faviconSetting && $faviconSetting->value ? asset('storage/' . $faviconSetting->value) : null;
+            @endphp
+            @if($faviconUrl)
+            <div style="width: 64px; height: 64px; background: #ffffff; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);">
+                <img src="{{ $faviconUrl }}" alt="Current Favicon" style="width: 32px; height: 32px; object-fit: contain; border-radius: 4px;">
+            </div>
+            @else
+            <div style="color: #94a3b8; text-align: center;">
+                <svg style="width: 48px; height: 48px; margin: 0 auto 8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                <p style="font-size: 14px;">No favicon uploaded</p>
+            </div>
+            @endif
+        </div>
+
+        <div style="flex: 1; min-width: 250px;">
+            <form method="POST" action="{{ route('admin.settings.update-favicon') }}" enctype="multipart/form-data">
+                @csrf
+                <div style="border: 2px dashed #e2e8f0; border-radius: 16px; padding: 24px; text-align: center;">
+                    <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Upload New Favicon</p>
+                    <input type="file" name="favicon" id="faviconInput" accept="image/*,.ico" style="display: none;" onchange="document.getElementById('faviconUploadBtn').style.display='inline-block'">
+                    <label for="faviconInput" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px;">
+                        <svg style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        Choose File
+                    </label>
+                    <p style="font-size: 12px; color: #94a3b8; margin: 0;">ICO, PNG, SVG (Max 5MB)</p>
+                    <button type="submit" id="faviconUploadBtn" style="display: none; margin-top: 12px; padding: 10px 20px; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Upload Favicon</button>
+                </div>
+            </form>
+            @if($faviconUrl)
+            <form method="POST" action="{{ route('admin.settings.delete-favicon') }}" style="margin-top: 16px; text-align: center;">
+                @csrf
+                <button type="submit" style="padding: 8px 16px; background: #fee2e2; color: #dc2626; border: none; border-radius: 8px; font-size: 13px; cursor: pointer;">Remove Favicon</button>
             </form>
             @endif
         </div>
@@ -415,7 +473,7 @@ function previewLogo(event) {
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
             <div class="form-group">
                 <label class="form-label">Currency Symbol</label>
-                <input type="text" name="settings[currency_symbol]" value="₦" class="form-input">
+                <input type="text" name="settings[currency_symbol]" value="{{ \App\Models\Setting::get('currency_symbol', '₦') }}" class="form-input">
             </div>
             <div class="form-group">
                 <label class="form-label">Timezone</label>
@@ -432,6 +490,10 @@ function previewLogo(event) {
                     <option value="d/m/Y">DD/MM/YYYY</option>
                     <option value="m/d/Y">MM/DD/YYYY</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Voucher Validity (hours)</label>
+                <input type="number" name="settings[voucher_validity_hours]" value="{{ \App\Models\Setting::get('voucher_validity_hours', 72) }}" class="form-input">
             </div>
             <div class="form-group">
                 <label class="form-label">Maintenance Mode</label>
@@ -616,7 +678,7 @@ function previewLogo(event) {
                 @foreach($group['keys'] as $key)
                 @php
                 $config = $moduleConfigs[$key];
-                $settingValue = $settings['modules']->firstWhere('key', $key);
+                $settingValue = isset($settings['modules']) ? $settings['modules']->firstWhere('key', $key) : null;
                 $currentValue = $settingValue ? $settingValue->value : 'true';
                 @endphp
                 <div style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 10px; padding: 14px;">
@@ -627,9 +689,9 @@ function previewLogo(event) {
                         </div>
                         <label style="position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0;">
                             <input type="hidden" name="settings[{{ $key }}]" value="false">
-                            <input type="checkbox" name="settings[{{ $key }}]" value="true" {{ $currentValue === 'true' ? 'checked' : '' }} onchange="this.previousElementSibling.value = this.checked ? 'true' : 'false'" style="opacity: 0; width: 0; height: 0;">
-                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: {{ $currentValue === 'true' ? '#10b981' : '#cbd5e1' }}; border-radius: 22px; transition: all 0.3s;">
-                                <span style="position: absolute; content: ''; height: 16px; width: 16px; left: {{ $currentValue === 'true' ? '20px' : '3px' }}; bottom: 3px; background: white; border-radius: 50%; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);"></span>
+                            <input type="checkbox" name="settings[{{ $key }}]" value="true" {{ $currentValue === 'true' ? 'checked' : '' }} onchange="toggleModule(this)" style="opacity: 0; width: 0; height: 0;">
+                            <span class="toggle-track" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: {{ $currentValue === 'true' ? '#10b981' : '#cbd5e1' }}; border-radius: 22px; transition: all 0.3s;">
+                                <span class="toggle-thumb" style="position: absolute; content: ''; height: 16px; width: 16px; left: {{ $currentValue === 'true' ? '20px' : '3px' }}; bottom: 3px; background: white; border-radius: 50%; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);"></span>
                             </span>
                         </label>
                     </div>
@@ -650,6 +712,17 @@ function previewLogo(event) {
 
 @push('scripts')
 <script>
+function toggleModule(checkbox) {
+    const hidden = checkbox.previousElementSibling;
+    const track = checkbox.nextElementSibling;
+    const thumb = track.querySelector('.toggle-thumb');
+    const isChecked = checkbox.checked;
+
+    hidden.value = isChecked ? 'true' : 'false';
+    track.style.background = isChecked ? '#10b981' : '#cbd5e1';
+    thumb.style.left = isChecked ? '20px' : '3px';
+}
+
 function toggleModuleGroup(id) {
     const container = document.getElementById('group-' + id);
     const arrow = container.parentElement.querySelector('.module-arrow');

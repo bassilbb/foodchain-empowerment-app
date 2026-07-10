@@ -14,8 +14,8 @@
   <title>{{ App\Models\PageContent::getContent('rider', 'page_title', 'Become a Dispatch Rider') }}</title>
   <meta name="description" content="{{ App\Models\PageContent::getContent('rider', 'page_subtitle', 'Join our delivery network.') }}" />
   <meta name="keywords" content="FCCEI, dispatch rider, delivery, logistics, food chain" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -27,9 +27,9 @@
       theme: {
         extend: {
           colors: {
-            primary: { DEFAULT: "#4F46E5", light: "#6366F1", dark: "#4338CA" },
-            secondary: { DEFAULT: "#10B981", light: "#34D399", dark: "#059669" },
-            accent: { DEFAULT: "#F59E0B", light: "#FBBF24", dark: "#D97706" }
+            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+            accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -82,16 +82,16 @@
           <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
         </div>
         <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #26C1C9;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+          <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
+          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
         </div>
       </div>
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
+        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -102,10 +102,10 @@
             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -118,7 +118,7 @@
 
         <!-- About with dropdown -->
         <div class="relative group">
-            <a href="{{ route('sponsor') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+            <a href="{{ route('sponsor') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Partner
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -134,11 +134,11 @@
 
         </div>
 
-        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
-          <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
-          <a href="{{ route('register') }}" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
+          <a href="{{ route('login') }}" class="px-6 py-2 text-emerald-600 font-medium hover:bg-emerald-600 hover:text-white border-2 border-emerald-600 rounded-lg transition-all duration-200">Login</a>
+          <a href="{{ route('register') }}" class="px-6 py-2 bg-emerald-600 text-white font-medium hover:bg-emerald-700 rounded-lg transition-all duration-200">Get Started</a>
         </div>
       </div>
       <!-- Mobile menu button -->
@@ -148,7 +148,7 @@
     </div>
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-primary font-medium">Home</a>
+      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
       <!-- Repeat similar structure for mobile menu items with dropdowns as needed -->
       <!-- ... -->
     </div>
@@ -159,7 +159,7 @@
 <main class="flex-1">
 <!-- Dispatch Rider Page -->
 <!-- <section class="py-12 max-w-7xl mx-auto px-4">
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
+  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
   <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">{{ App\Models\PageContent::getContent('rider', 'page_subtitle', 'Become a vital part of our delivery network!') }}</p>
     Become a vital part of our delivery network! As a dispatch rider, you'll help us reach customers faster, ensuring timely deliveries and excellent service. Fill out the registration form below to get started.
   </p> -->
@@ -186,10 +186,10 @@
 <!-- Original Content Section -->
 <section class="py-12 max-w-7xl mx-auto px-4">
   <!-- Initiative Name with Logo Color -->
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #1767dfd7;">Foodchain Empowerment Initiative</h2>
+  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">Foodchain Empowerment Initiative</h2>
 
   <!-- Existing Heading with Logo Color -->
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
+  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
 
   <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
     {{ App\Models\PageContent::getContent('rider', 'page_subtitle', 'Become a vital part of our delivery network!') }}
@@ -198,7 +198,7 @@
   <!-- Register Button with Logo Color -->
   <div class="text-center">
     <button
-      class="px-6 py-3 bg-[#1767dfd7] text-white font-semibold rounded-lg shadow-md hover:bg-[#E65B50] transition"
+      class="px-6 py-3 bg-[#059669] text-white font-semibold rounded-lg shadow-md hover:bg-[#047857] transition"
       onclick="toggleRegisterModal()"
     >
       Register as a Dispatch Rider
@@ -212,7 +212,7 @@
   <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg relative">
     <!-- Close Button -->
     <button class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl font-bold" onclick="toggleRegisterModal()" aria-label="Close modal">&times;</button>
-    <h2 class="text-xl font-bold mb-4 text-center text-green-600">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Dispatch Rider Registration') }}</h2>
+    <h2 class="text-xl font-bold mb-4 text-center text-emerald-600">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Dispatch Rider Registration') }}</h2>
     <form method="POST" action="{{ route('landing.rider') }}" class="flex flex-col space-y-4">
       @csrf
       <!-- Full Name -->
@@ -222,7 +222,7 @@
           type="text"
           name="name"
           id="drName"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
           placeholder="Your Full Name"
           required
         />
@@ -234,7 +234,7 @@
           type="tel"
           name="phone"
           id="drPhone"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
           placeholder="Your Phone Number"
           required
         />
@@ -246,7 +246,7 @@
           type="email"
           name="email"
           id="drEmail"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
           placeholder="Your Email"
           required
         />
@@ -258,7 +258,7 @@
           type="text"
           name="vehicle"
           id="drVehicle"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
           placeholder="Bike, Scooter, Car, etc."
           required
         />
@@ -270,7 +270,7 @@
           name="address"
           id="drAddress"
           rows="3"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
           placeholder="Your Delivery Area"
           required
         ></textarea>
@@ -278,7 +278,7 @@
       <!-- Submit Button -->
       <button
         type="submit"
-        class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition"
+        class="w-full bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition"
       >
         Submit Registration
       </button>
@@ -297,8 +297,8 @@
               <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
             </div>
             <div class="flex flex-col">
-              <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+              <span class="text-3xl font-extrabold leading-none" style="color: #059669;">FCCEI</span>
+              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
             </div>
           </div>
           <p class="text-gray-400 mb-6 -mt-2">

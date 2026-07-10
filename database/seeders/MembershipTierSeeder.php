@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,10 +16,10 @@ class MembershipTierSeeder extends Seeder
                 'min_referrals' => 0,
                 'annual_fee' => 5000.00,
                 'annual_fee_kobo' => 500000,
-                'food_package_value' => 22000.00,
+                'food_package_value' => 100000.00,
                 'distribution_frequency' => 'quarterly',
                 'benefits' => json_encode([
-                    'Starter food pack worth ₦22,000',
+                    'Starter food pack worth ₦100,000',
                     'Access to community support',
                     'Referral code to build community',
                     'Quarterly free food pack (10-40 community members)',
@@ -32,7 +31,7 @@ class MembershipTierSeeder extends Seeder
                         'type' => 'mini',
                         'min_community' => 10,
                         'max_community' => 40,
-                        'estimated_value' => 5000,
+                        'estimated_value' => 25000,
                     ],
                     'delivery' => [
                         'available' => true,
@@ -72,10 +71,10 @@ class MembershipTierSeeder extends Seeder
                 'min_referrals' => 10,
                 'annual_fee' => 5000.00,
                 'annual_fee_kobo' => 500000,
-                'food_package_value' => 30000.00,
+                'food_package_value' => 150000.00,
                 'distribution_frequency' => 'quarterly',
                 'benefits' => json_encode([
-                    'FREE food pack worth ₦30,000 annually',
+                    'FREE food pack worth ₦150,000 annually',
                     'Priority customer support',
                     'Community recognition',
                     'Quarterly free food pack (50-90 community members)',
@@ -87,7 +86,7 @@ class MembershipTierSeeder extends Seeder
                         'type' => 'average',
                         'min_community' => 50,
                         'max_community' => 90,
-                        'estimated_value' => 10000,
+                        'estimated_value' => 37500,
                     ],
                     'delivery' => [
                         'available' => true,
@@ -127,10 +126,10 @@ class MembershipTierSeeder extends Seeder
                 'min_referrals' => 100,
                 'annual_fee' => 5000.00,
                 'annual_fee_kobo' => 500000,
-                'food_package_value' => 100000.00,
+                'food_package_value' => 200000.00,
                 'distribution_frequency' => 'quarterly',
                 'benefits' => json_encode([
-                    'FREE food pack worth ₦100,000 annually',
+                    'FREE food pack worth ₦200,000 annually',
                     'VIP customer support',
                     'Community leadership recognition',
                     'Exclusive networking opportunities',
@@ -143,7 +142,7 @@ class MembershipTierSeeder extends Seeder
                         'type' => 'standard',
                         'min_community' => 100,
                         'max_community' => 499,
-                        'estimated_value' => 25000,
+                        'estimated_value' => 50000,
                     ],
                     'delivery' => [
                         'available' => true,
@@ -183,10 +182,10 @@ class MembershipTierSeeder extends Seeder
                 'min_referrals' => 500,
                 'annual_fee' => 0.00,
                 'annual_fee_kobo' => 0,
-                'food_package_value' => 200000.00,
+                'food_package_value' => 250000.00,
                 'distribution_frequency' => 'quarterly',
                 'benefits' => json_encode([
-                    'FREE quarterly food pack worth ₦200,000',
+                    'FREE quarterly food pack worth ₦250,000',
                     'Community Leader status',
                     'FREE annual membership (no renewal fee)',
                     'Exclusive leader events and training',
@@ -200,7 +199,7 @@ class MembershipTierSeeder extends Seeder
                         'type' => 'premium',
                         'min_community' => 500,
                         'max_community' => 1000,
-                        'estimated_value' => 50000,
+                        'estimated_value' => 62500,
                     ],
                     'delivery' => [
                         'available' => true,

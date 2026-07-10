@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             MembershipTierSeeder::class,
             FoodItemSeeder::class,
             AdminPermissionSeeder::class,
+            BankAccountSeeder::class,
             PickupLocationSeeder::class,
             SettingsSeeder::class,
             ContributionPlanSeeder::class,

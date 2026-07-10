@@ -14,78 +14,28 @@
     <title>{{ App\Models\PageContent::getContent('gallery', 'page_title', 'Our Gallery') }}</title>
     <meta name="description" content="{{ App\Models\PageContent::getContent('gallery', 'page_subtitle', 'Moments from our community programs and events.') }}">
     <meta name="keywords" content="FCCEI, gallery, food chain, community, events">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: "#4F46E5",
-                            light: "#6366F1",
-                            dark: "#4338CA"
-                        },
-                        secondary: {
-                            DEFAULT: "#10B981",
-                            light: "#34D399",
-                            dark: "#059669"
-                        },
-                        accent: {
-                            DEFAULT: "#F59E0B",
-                            light: "#FBBF24",
-                            dark: "#D97706"
-                        }
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                        'display': ['Poppins', 'system-ui', '-apple-system', 'sans-serif']
-                    },
-                    animation: {
-                        'slide-in': 'slideIn 0.5s ease-out',
-                        'fade-in': 'fadeIn 0.8s ease-out',
-                        'float': 'float 3s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        slideIn: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script> -->
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: { DEFAULT: "#4F46E5", light: "#6366F1", dark: "#4338CA" },
-                        secondary: { DEFAULT: "#10B981", light: "#34D399", dark: "#059669" },
-                        accent: { DEFAULT: "#F59E0B", light: "#FBBF24", dark: "#D97706" }
+                        primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+                        secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+                        accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
                     },
                     fontFamily: {
                         'sans': ['Inter', 'system-ui', 'sans-serif'],
                         'display': ['Poppins', 'system-ui', 'sans-serif']
                     },
                     backgroundImage: {
-                        /* Dark overlays added directly to config for better text contrast */
                         'slide-1': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/buildi.jpeg") }}')",
                         'slide-2': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/empowerment.jpeg") }}')",
                         'slide-3': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/foodchan.jpeg") }}')"
@@ -117,7 +67,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
         .hero-slide {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.9) 0%, rgba(16, 185, 129, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.9) 0%, rgba(16, 185, 129, 0.9) 100%);
         }
 
         .stat-card {
@@ -126,7 +76,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(90deg, #4F46E5 0%, #10B981 100%);
+            background: linear-gradient(90deg, #059669 0%, #10B981 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -143,7 +93,7 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #4F46E5;
+            background-color: #059669;
             transition: width 0.3s ease;
         }
 
@@ -183,46 +133,27 @@
         <nav class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <!-- <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-xl">RP</span>
-                    </div>
-                    <span class="text-2xl font-bold text-gray-900">Referral<span class="text-primary">Pro</span></span>
-                </div> -->
                 <div class="flex items-center space-x-4">
                     <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
                         <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
                     </div>
 
                     <div class="flex flex-col justify-center">
-                        <span class="text-3xl font-extrabold leading-tight" style="color: #26C1C9;">FCCEI</span>
+                        <span class="text-3xl font-extrabold leading-tight" style="color: #10B981;">FCCEI</span>
 
-                        <span class="text-sm font-bold uppercase tracking-widest" style="color: #1D5FB5;">
+                        <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">
                             Food Chain Community Empowerment Initiative
                         </span>
                     </div>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <!-- <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">About</a>
-                    <a href="#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
-                    <a href="#board-members" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Board Members</a>
-                    <a href="#team" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Team</a>
-                    <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Blog</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
-                    <a href="gallary.html" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Gallary</a>
-
-                </div> -->
-
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
+                    <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Home</a>
 
                     <!-- About with dropdown -->
                     <div class="relative group">
-                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         About
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -230,16 +161,15 @@
                         </a>
                         <!-- Dropdown menu -->
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <!-- <a href="#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a> -->
                         <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
                         </div>
                     </div>
 
-                    <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+                    <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Membership</a>
 
-                    <!-- About with dropdown -->
+                    <!-- Blog dropdown -->
                     <div class="relative group">
-                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         Blog
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -248,13 +178,12 @@
                         <!-- Dropdown menu -->
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
                         <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
-                        <!-- <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a> -->
                         </div>
                     </div>
 
-                    <!-- About with dropdown -->
+                    <!-- Partner dropdown -->
                     <div class="relative group">
-                        <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="#" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         Partner
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -270,20 +199,13 @@
 
                     </div>
 
-
-
-                    <!-- <a href="#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Blog</a> -->
-                    <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
-                    <!-- <a href="gallary.html" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Gallary</a> -->
+                    <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Contact</a>
                 </div>
 
                 <!-- Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
-                     <!-- <a href="/login" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a> -->
-                    <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
-                    <!-- <a href="/register" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a> -->
-                    <a href="{{ route('register') }}" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
-
+                    <a href="{{ route('login') }}" class="px-6 py-2 text-[#059669] font-medium hover:bg-[#059669] hover:text-white border-2 border-[#059669] rounded-lg transition-all duration-200">Login</a>
+                    <a href="{{ route('register') }}" class="px-6 py-2 bg-[#059669] text-white font-medium hover:bg-[#047857] rounded-lg transition-all duration-200">Get Started</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -294,12 +216,11 @@
 
             <!-- Mobile Navigation -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-                <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-primary font-medium">Home</a>
-                <!-- <a href="#about" class="block py-2 text-gray-700 hover:text-primary font-medium">About</a> -->
+                <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Home</a>
 
                  <!-- About with dropdown -->
                     <div class="relative group">
-                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         About
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -307,21 +228,15 @@
                         </a>
                         <!-- Dropdown menu -->
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <!-- <a href="#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a> -->
                         <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
                         </div>
                     </div>
 
-                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-primary font-medium">Membership</a>
+                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Membership</a>
 
-                <!-- <a href="#board-members" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Board Members</a> -->
-                <!-- <a href="#team" class="block py-2 text-gray-700 hover:text-primary font-medium">Team</a> -->
-
-                <!-- <a href="#blog" class="block py-2 text-gray-700 hover:text-primary font-medium">Blog</a> -->
-
-                  <!-- About with dropdown -->
+                  <!-- Blog dropdown -->
                     <div class="relative group">
-                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         Blog
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -330,13 +245,12 @@
                         <!-- Dropdown menu -->
                         <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
                         <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
-                        <!-- <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a> -->
                         </div>
                     </div>
 
-                    <!-- About with dropdown -->
+                    <!-- Partner dropdown -->
                     <div class="relative group">
-                        <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+                        <a href="#" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
                         Partner
                         <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -352,16 +266,14 @@
 
                     </div>
 
-
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary font-medium">Contact</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Contact</a>
                 <div class="pt-4 space-y-2">
-                    <a href="{{ route('login') }}" class="block py-2 text-center text-primary font-medium border-2 border-primary rounded-lg">Login</a>
-                    <a href="{{ route('register') }}" class="block py-2 text-center bg-primary text-white font-medium rounded-lg">Get Started</a>
+                    <a href="{{ route('login') }}" class="block py-2 text-center text-[#059669] font-medium border-2 border-[#059669] rounded-lg">Login</a>
+                    <a href="{{ route('register') }}" class="block py-2 text-center bg-[#059669] text-white font-medium rounded-lg">Get Started</a>
                 </div>
             </div>
         </nav>
     </header>
-
 
     <main class="container mx-auto px-4 py-12 flex-grow">
         <div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-6">
@@ -370,7 +282,7 @@
                 <p class="text-gray-500 mt-2">Quality essential food items for our community members.</p>
             </div>
             <div class="hidden md:block">
-                <span class="text-sm font-bold text-brandBlue bg-blue-50 px-6 py-2 rounded-full border border-blue-100">
+                <span class="text-sm font-bold text-[#10B981] bg-[#10B981]/10 px-6 py-2 rounded-full border border-[#10B981]/30">
                     500 Items in Stock
                 </span>
             </div>
@@ -382,13 +294,7 @@
                 <img src="{{ asset('assets/landing/images/rices.png') }}" class="w-full h-48 object-cover" alt="Rice">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Premium Local Rice</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Grains • 50kg</p>
-                    <div class="flex items-center justify-between">
-                        <!-- <span class="text-brandBlue font-black text-xl">N55,000</span> -->
-                        <!-- <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button> -->
-                    </div>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • 50kg</p>
                 </div>
             </div>
 
@@ -396,13 +302,7 @@
                 <img src="{{ asset('assets/landing/images/Beanscover.jpg') }}" class="w-full h-48 object-cover" alt="Beans">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Honey Beans (Oloyin)</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Grains • Paint</p>
-                    <div class="flex items-center justify-between">
-                        <!-- <span class="text-brandBlue font-black text-xl">N4,500</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button> -->
-                    </div>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Paint</p>
                 </div>
             </div>
 
@@ -410,13 +310,7 @@
                 <img src="{{ asset('assets/landing/images/vegetable.png') }}" class="w-full h-48 object-cover" alt="Oil">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Vegetable Oil</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Oils • 5 Liters</p>
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N8,500</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • 5 Liters</p>
                 </div>
             </div>
 
@@ -424,13 +318,7 @@
                 <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=500&q=80" class="w-full h-48 object-cover" alt="Eggs">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Farm Fresh Eggs</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Protein • Crate</p>
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N4,200</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Protein • Crate</p>
                 </div>
             </div>
 
@@ -438,36 +326,15 @@
                 <img src="{{ asset('assets/landing/images/semovita.png') }}" class="w-full h-48 object-cover" alt="Semo">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Semovita</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Flour • 10kg</p>
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N12,500</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Flour • 10kg</p>
                 </div>
             </div>
-
-            <!-- <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="images/palmoil.png" class="w-full h-48 object-cover" alt="Tomatoes">
-                <div class="p-6">
-                    <h3 class="font-black text-gray-800 text-lg">Fresh Palm Oil</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Oils • Liters</p> -->
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N2,500</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
-                <!-- </div>
-            </div> -->
 
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md">
                 <img src="{{ asset('assets/landing/images/plam.png') }}" class="w-full h-48 object-cover" alt="Palm Oil" />
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Fresh Palm Oil</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Oils • Liters</p>
-                    <!-- Optional additional content -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • Liters</p>
                 </div>
             </div>
 
@@ -475,13 +342,7 @@
                 <img src="{{ asset('assets/landing/images/spaghetti.png') }}" class="w-full h-48 object-cover" alt="Pasta">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Spaghetti</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Pasta • Carton</p>
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N14,000</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Pasta • Carton</p>
                 </div>
             </div>
 
@@ -489,13 +350,7 @@
                 <img src="{{ asset('assets/landing/images/garrirbg.png') }}" class="w-full h-48 object-cover" alt="Garri">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Ijebu Garri</h3>
-                    <p class="text-xs text-brandTeal font-bold uppercase mb-3">Grains • Bag</p>
-                    <!-- <div class="flex items-center justify-between">
-                        <span class="text-brandBlue font-black text-xl">N22,000</span>
-                        <button class="bg-brandTeal text-white p-2 rounded-lg hover:bg-brandBlue transition shadow-md">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div> -->
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Bag</p>
                 </div>
             </div>
 
@@ -503,14 +358,14 @@
     </main>
 
      <!-- Newsletter -->
-        <section class="py-16 bg-gradient-to-r from-primary to-secondary">
+        <section class="py-16 bg-gradient-to-r from-[#059669] to-[#0D9488]">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
                 <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
 
                 <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
                     <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
-                    <button type="submit" class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+                    <button type="submit" class="px-8 py-3 bg-white text-[#059669] font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
                 </form>
             </div>
         </section>
@@ -520,34 +375,6 @@
     <footer class="bg-gray-900 text-white">
         <div class="container mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <!-- <div>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">RP</span>
-                        </div>
-                        <span class="text-2xl font-bold text-white">Referral<span class="text-primary">Pro</span></span>
-                    </div>
-                    <p class="text-gray-400 mb-6">Empowering individuals to build sustainable income through smart referrals.</p>
-                </div> -->
-                <!-- <div>
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
-                        </div>
-
-                        <div class="flex flex-col">
-                            <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-                            <span class="text-[11px] font-bold text-white uppercase tracking-widest mt-1" style="color: #1D5FB5;">
-                                Food Chain Community Empowerment Initiative
-                            </span>
-                        </div>
-                    </div>
-
-                    <p class="text-gray-400 mb-6">
-                        Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.
-                    </p>
-                </div> -->
 
                 <div>
                 <div class="flex items-center space-x-4">
@@ -556,8 +383,8 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-                        <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">
+                        <span class="text-3xl font-extrabold leading-none" style="color: #10B981;">FCCEI</span>
+                        <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">
                             Food Chain Community Empowerment Initiative
                         </span>
                     </div>
@@ -567,22 +394,19 @@
                     Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.
                 </p>
                 <div class="flex space-x-4">
-                <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-                    <i class="fab fa-facebook-f text-brandTeal group-hover:text-white"></i>
-                </a>
-                <!-- <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-                    <i class="fab fa-tiktok text-brandTeal group-hover:text-white"></i>
-                </a> -->
-
-                <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-                    <i class="fab fa-tiktok text-brandTeal group-hover:text-white"></i>
+                <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+                    <i class="fab fa-facebook-f text-[#10B981] group-hover:text-white"></i>
                 </a>
 
-                <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-                    <i class="fab fa-instagram text-brandTeal group-hover:text-white"></i>
+                <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+                    <i class="fab fa-tiktok text-[#10B981] group-hover:text-white"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-                    <i class="fab fa-whatsapp text-brandTeal group-hover:text-white"></i>
+
+                <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+                    <i class="fab fa-instagram text-[#10B981] group-hover:text-white"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+                    <i class="fab fa-whatsapp text-[#10B981] group-hover:text-white"></i>
                 </a>
             </div>
             </div>

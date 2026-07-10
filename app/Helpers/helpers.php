@@ -38,6 +38,24 @@ if (! function_exists('site_logo')) {
     }
 }
 
+if (! function_exists('site_favicon')) {
+    function site_favicon(): ?string
+    {
+        if (! \Illuminate\Support\Facades\Schema::hasTable('settings')) {
+            return null;
+        }
+        $favicon = \App\Models\Setting::where('key', 'site_favicon')->first();
+        if ($favicon && $favicon->value) {
+            $path = 'storage/'.$favicon->value;
+            if (file_exists(public_path($path))) {
+                return asset($path);
+            }
+        }
+
+        return null;
+    }
+}
+
 if (! function_exists('app_name')) {
     /**
      * Get application name
@@ -80,7 +98,7 @@ if (! function_exists('module_enabled')) {
      */
     function module_enabled(string $module): bool
     {
-        return \App\Models\Setting::get('module_'.$module, 'true') === 'true';
+        return filter_var(\App\Models\Setting::get('module_'.$module, 'true'), FILTER_VALIDATE_BOOLEAN);
     }
 }
 

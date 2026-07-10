@@ -22,6 +22,7 @@ class SettingsSeeder extends Seeder
             ['key' => 'require_kyc', 'value' => 'true', 'type' => 'boolean', 'group' => 'general', 'description' => 'Require KYC verification for users'],
             ['key' => 'session_timeout', 'value' => '60', 'type' => 'integer', 'group' => 'general', 'description' => 'Session timeout in minutes'],
             ['key' => 'max_login_attempts', 'value' => '5', 'type' => 'integer', 'group' => 'general', 'description' => 'Maximum login attempts before lockout'],
+            ['key' => 'site_favicon', 'value' => '', 'type' => 'string', 'group' => 'general', 'description' => 'Site favicon'],
 
             // Payment Settings
             ['key' => 'paystack_public_key', 'value' => '', 'type' => 'string', 'group' => 'payment', 'description' => 'Paystack public key'],
@@ -57,6 +58,14 @@ class SettingsSeeder extends Seeder
             ['key' => 'voucher_expiry_days', 'value' => '30', 'type' => 'integer', 'group' => 'general', 'description' => 'Voucher expiry days'],
             ['key' => 'min_voucher_amount', 'value' => '1000', 'type' => 'decimal', 'group' => 'general', 'description' => 'Minimum voucher amount'],
             ['key' => 'max_voucher_amount', 'value' => '100000', 'type' => 'decimal', 'group' => 'general', 'description' => 'Maximum voucher amount'],
+
+            // Deduction Schedule Settings
+            ['key' => 'deduction_schedule_enabled', 'value' => 'true', 'type' => 'boolean', 'group' => 'general', 'description' => 'Enable weekly scheduled deductions'],
+            ['key' => 'deduction_day', 'value' => '6', 'type' => 'integer', 'group' => 'general', 'description' => 'Weekly deduction day (0=Sun, 6=Sat)'],
+            ['key' => 'deduction_time', 'value' => '02:00', 'type' => 'string', 'group' => 'general', 'description' => 'Weekly deduction time'],
+            ['key' => 'deduction_retry_day', 'value' => '0', 'type' => 'integer', 'group' => 'general', 'description' => 'Retry deduction day'],
+            ['key' => 'deduction_retry_time', 'value' => '02:00', 'type' => 'string', 'group' => 'general', 'description' => 'Retry deduction time'],
+            ['key' => 'voucher_validity_hours', 'value' => '72', 'type' => 'integer', 'group' => 'general', 'description' => 'Hours until voucher expires after issuance'],
 
             // Module Toggles (user-facing feature flags)
             ['key' => 'module_referrals', 'value' => 'true', 'type' => 'boolean', 'group' => 'modules', 'description' => 'Enable referral system for users'],

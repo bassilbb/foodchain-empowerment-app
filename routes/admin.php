@@ -99,11 +99,11 @@ Route::middleware(['admin'])->group(function () {
             Route::get('/', [IssuanceController::class, 'index'])->name('index');
             Route::match(['GET', 'POST'], '/lookup', [IssuanceController::class, 'lookup'])->name('lookup');
             Route::post('/{voucher}/link-distribution', [IssuanceController::class, 'linkDistribution'])->name('link-distribution');
-            Route::get('/{voucher}/link-distribution', function (App\Models\Voucher $voucher) {
+            Route::get('/{voucher}/link-distribution', function (\App\Models\Voucher $voucher) {
                 return redirect()->route('admin.issuance.lookup', ['search' => $voucher->collection_code ?? $voucher->voucher_number]);
             })->name('link-distribution.get');
             Route::post('/{voucher}/collect', [IssuanceController::class, 'collect'])->name('collect');
-            Route::get('/{voucher}/collect', function (App\Models\Voucher $voucher) {
+            Route::get('/{voucher}/collect', function (\App\Models\Voucher $voucher) {
                 return redirect()->route('admin.issuance.lookup', ['search' => $voucher->collection_code ?? $voucher->voucher_number]);
             })->name('collect.get');
         });
@@ -157,6 +157,8 @@ Route::middleware(['admin'])->group(function () {
             Route::post('/role-permissions', [SettingController::class, 'updateRolePermissions'])->name('update-role-permissions');
             Route::post('/logo', [SettingController::class, 'updateLogo'])->name('update-logo');
             Route::post('/logo/delete', [SettingController::class, 'deleteLogo'])->name('delete-logo');
+            Route::post('/favicon', [SettingController::class, 'updateFavicon'])->name('update-favicon');
+            Route::post('/favicon/delete', [SettingController::class, 'deleteFavicon'])->name('delete-favicon');
         });
 
         // Page Content Management

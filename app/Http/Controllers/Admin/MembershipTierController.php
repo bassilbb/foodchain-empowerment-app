@@ -12,7 +12,7 @@ class MembershipTierController extends Controller
     public function index()
     {
         $tiers = MembershipTier::ordered()->get();
-        
+
         return view('admin.membership-tiers.index', compact('tiers'));
     }
 
@@ -83,8 +83,8 @@ class MembershipTierController extends Controller
     public function update(Request $request, MembershipTier $membershipTier)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:50|unique:membership_tiers,name,' . $membershipTier->id,
-            'slug' => 'required|string|max:50|regex:/^[a-z0-9-]+$/|unique:membership_tiers,slug,' . $membershipTier->id,
+            'name' => 'required|string|max:50|unique:membership_tiers,name,'.$membershipTier->id,
+            'slug' => 'required|string|max:50|regex:/^[a-z0-9-]+$/|unique:membership_tiers,slug,'.$membershipTier->id,
             'min_referrals' => 'required|integer|min:0',
             'annual_fee' => 'required|numeric|min:0',
             'annual_fee_kobo' => 'required|integer|min:0',
@@ -136,7 +136,7 @@ class MembershipTierController extends Controller
 
     public function toggleStatus(MembershipTier $membershipTier)
     {
-        $membershipTier->update(['is_active' => !$membershipTier->is_active]);
+        $membershipTier->update(['is_active' => ! $membershipTier->is_active]);
 
         $status = $membershipTier->is_active ? 'activated' : 'deactivated';
 
@@ -145,6 +145,7 @@ class MembershipTierController extends Controller
 
     public function getPricing(Request $request)
     {
+        $request->validate(['tier_id' => 'required|integer|exists:membership_tiers,id']);
         $tier = MembershipTier::findOrFail($request->tier_id);
 
         return response()->json([

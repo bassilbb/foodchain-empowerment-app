@@ -129,6 +129,6 @@ class UserController extends Controller
 
     public function exportExcel()
     {
-        return Excel::download(new UsersExport, 'users-'.date('Y-m-d').'.xlsx');
+        return Excel::download(new UsersExport(User::with('currentTier')), 'users-'.date('Y-m-d').'.xlsx');
     }
 }

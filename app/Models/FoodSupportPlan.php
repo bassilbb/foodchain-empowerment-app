@@ -133,9 +133,9 @@ class FoodSupportPlan extends Model
         $distribution = FoodDistribution::create([
             'distribution_number' => 'FSP-'.strtoupper(Str::random(8)),
             'user_id' => $this->user_id,
-            'type' => 'support_plan_maturity',
+            'distribution_type' => 'support_plan_maturity',
             'status' => 'pending',
-            'total_value' => $this->total_payout_value,
+            'package_value' => $this->total_payout_value,
             'scheduled_date' => now(),
         ]);
 

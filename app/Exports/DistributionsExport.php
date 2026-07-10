@@ -9,9 +9,16 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class DistributionsExport implements FromCollection, WithHeadings, WithMapping
 {
+    protected $query;
+
+    public function __construct($query = null)
+    {
+        $this->query = $query;
+    }
+
     public function collection()
     {
-        return FoodDistribution::with(['user', 'tier', 'pickupLocation'])->get();
+        return ($this->query ? $this->query : FoodDistribution::with(['user', 'tier', 'pickupLocation']))->get();
     }
 
     public function headings(): array

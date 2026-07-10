@@ -14,8 +14,8 @@
   <title>{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</title>
   <meta name="description" content="{{ App\Models\PageContent::getContent('team', 'page_subtitle', 'Meet the dedicated people behind FoodChain.') }}" />
   <meta name="keywords" content="FCCEI, team, food chain, community, empowerment" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -27,9 +27,9 @@
       theme: {
         extend: {
           colors: {
-            primary: { DEFAULT: "#4F46E5", light: "#6366F1", dark: "#4338CA" },
-            secondary: { DEFAULT: "#10B981", light: "#34D399", dark: "#059669" },
-            accent: { DEFAULT: "#F59E0B", light: "#FBBF24", dark: "#D97706" }
+            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+            accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -82,16 +82,16 @@
           <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
         </div>
         <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #26C1C9;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+          <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
+          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
         </div>
       </div>
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
+        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -102,10 +102,10 @@
             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -118,7 +118,7 @@
 
         <!-- About with dropdown -->
         <div class="relative group">
-            <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+            <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Partner
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -134,11 +134,11 @@
 
         </div>
 
-        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
-          <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
-          <a href="{{ route('register') }}" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
+          <a href="{{ route('login') }}" class="px-6 py-2 text-emerald-600 font-medium hover:bg-emerald-600 hover:text-white border-2 border-emerald-600 rounded-lg transition-all duration-200">Login</a>
+          <a href="{{ route('register') }}" class="px-6 py-2 bg-emerald-600 text-white font-medium hover:bg-emerald-700 rounded-lg transition-all duration-200">Get Started</a>
         </div>
       </div>
       <!-- Mobile menu button -->
@@ -148,7 +148,7 @@
     </div>
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-primary font-medium">Home</a>
+      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
       <!-- Repeat similar structure for mobile menu items with dropdowns as needed -->
       <!-- ... -->
     </div>
@@ -160,7 +160,7 @@
 
 <!-- Sponsor Section -->
 <!-- <section class="py-12 max-w-7xl mx-auto px-4">
-  <!-- <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">Our Esteemed Sponsors</h2>
+  <!-- <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">Our Esteemed Sponsors</h2>
   <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
     Our sponsors are dedicated organizations and individuals who believe in our mission. They have generously contributed resources, funding, and support to help us reach more communities and eradicate hunger. Their commitment drives our efforts forward and inspires positive change.
   </p> -->
@@ -192,8 +192,8 @@
       <img src="images/basspix.png" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
       <h3 class="text-xl font-semibold mb-2">Bassey Eno</h3>
       <p class="text-gray-600">Chief Operating Officer.</p>
-      <p class="text-gray-600">Bassey Eno is the Chief Operating Officer of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization’s daily operations and ensures seamless coordination across all departments. He plays a key role in translating strategic goals into effective operational execution while maintaining efficiency, accountability, and organizational cohesion.
-        With over 10 years of experience in operations management and organizational strategy, Bassey has successfully implemented systems and processes that improve productivity, optimize resources, and strengthen internal collaboration. His leadership approach is results-driven, focused on continuous improvement, and aligned with the organization’s mission.
+      <p class="text-gray-600">Bassey Eno is the Chief Operating Officer of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's daily operations and ensures seamless coordination across all departments. He plays a key role in translating strategic goals into effective operational execution while maintaining efficiency, accountability, and organizational cohesion.
+        With over 10 years of experience in operations management and organizational strategy, Bassey has successfully implemented systems and processes that improve productivity, optimize resources, and strengthen internal collaboration. His leadership approach is results-driven, focused on continuous improvement, and aligned with the organization's mission.
         Bassey is deeply committed to sustainable growth and community development. He works closely with executive leadership to support long-term planning while ensuring operational integrity and service excellence.</p>
         <p>Under his guidance, FCCEI has enhanced member engagement, improved service delivery, and expanded its impact across both urban and rural communities.
         Known for his hands-on leadership style and strong problem-solving skills, Bassey fosters a transparent, inclusive, and performance-oriented organizational culture. His vision is to ensure that FCCEI consistently delivers meaningful value and lasting positive impact to every member of the communities it serves.</p>
@@ -203,13 +203,13 @@
       <img src="images/kingsleypics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
       <h3 class="text-xl font-semibold mb-2">Kingsley Johnson</h3>
       <p class="text-gray-600">Director, Investment, Intervention and Sustainability.</p>
-      <p class="text-gray-600">Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women’s empowerment, household resilience, and sustainable social interventions.
+      <p class="text-gray-600">Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women's empowerment, household resilience, and sustainable social interventions.
 
         Currently serving as Project Manager at the Health Empowerment and Livelihood Promotion (H.E.L.P) Initiative, Kingsley oversees strategic and operational planning, resource management, risk mitigation, and performance reporting across multiple community-based programs. He has successfully coordinated multidisciplinary teams, strengthened partnerships with donors and community stakeholders, and ensured compliance with best practices in program delivery.
 
-        His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI’s revolving food loan initiative.
+        His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.
 
-        Kingsley holds a Bachelor’s degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.
+        Kingsley holds a Bachelor's degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.
 
         As a Director of the Foodchain Community Empowerment Initiative (FCCEI), Kingsley provides strategic leadership, governance oversight, and operational guidance, ensuring that donor and investor resources are protected, programs are effectively implemented, and food security outcomes for women-led households are achieved sustainably.</p>
     </div>
@@ -236,9 +236,9 @@
       <img src="images/samuchepics.png" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
       <h3 class="text-xl font-semibold mb-2">Uchendu Samuel</h3>
       <p class="text-gray-600">Director, Technology infrastructure and Corporate Technical support</p>
-      <p class="text-gray-600">Uchendu Samuel serves as the Chief Technology Officer (CTO) of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this role, he ensures that FCCEI’s technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative’s long-term vision and operational objectives.
-        With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu delivers strong technical leadership across all digital platforms, including the organization’s website, member management systems, payment solutions, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and reliability.
-        Uchendu works closely with executive leadership and key stakeholders to define and execute FCCEI’s digital roadmap, introduce innovative technology solutions, and continuously improve operational efficiency through automation and data-driven decision-making.</p>
+      <p class="text-gray-600">Uchendu Samuel serves as the Chief Technology Officer (CTO) of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this role, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.
+        With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu delivers strong technical leadership across all digital platforms, including the organization's website, member management systems, payment solutions, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and reliability.
+        Uchendu works closely with executive leadership and key stakeholders to define and execute FCCEI's digital roadmap, introduce innovative technology solutions, and continuously improve operational efficiency through automation and data-driven decision-making.</p>
         <p>He is deeply committed to leveraging modern technologies to enhance member experience, strengthen data integrity, and support sustainable community growth.
         Recognized for his strategic mindset, hands-on technical expertise, and strong problem-solving capabilities, Uchendu is dedicated to building robust, future-ready digital systems that empower FCCEI, enhance organizational performance, and deliver long-term value to its members.</p>
 
@@ -247,7 +247,7 @@
       <img src="images/patrickpics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
       <h3 class="text-xl font-semibold mb-2">Patrick Ubi</h3>
       <p class="text-gray-600">Expert in digital engagement and strengthening brand visibility.</p>
-      <p class="text-gray-600">Patrick Ubi  is an experienced Social Media Manager responsible for managing  cooperative’s online presence across all social media platforms. With over six years of expertise, he creates engaging content, manages community interactions, and drives digital engagement to strengthen communication and visibility within and beyond the community  while building and nurturing communities across platforms, ensuring every post serves a purpose.</p>
+      <p class="text-gray-600">Patrick Ubi  is an experienced Social Media Manager responsible for managing  cooperative's online presence across all social media platforms. With over six years of expertise, he creates engaging content, manages community interactions, and drives digital engagement to strengthen communication and visibility within and beyond the community  while building and nurturing communities across platforms, ensuring every post serves a purpose.</p>
     </div>
   </div> -->
 <!-- </section>  -->
@@ -261,57 +261,57 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/frankojipicsxe.png') }}" alt="Frank Orji" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Frank Ogochukwu Orji</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">CEO & Founder</p>
-                <button onclick="openTeamModal('frank')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">CEO & Founder</p>
+                <button onclick="openTeamModal('frank')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/basspixxs.png') }}" alt="Bassey Eno" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Bassey Eno</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">Chief Operating Officer</p>
-                <button onclick="openTeamModal('bassey')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Chief Operating Officer</p>
+                <button onclick="openTeamModal('bassey')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/kingsleypics.jpeg') }}" alt="Kingsley Johnson" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Kingsley Johnson</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Investment, Intervention and Sustainability</p>
-                <button onclick="openTeamModal('kingsley')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Investment, Intervention and Sustainability</p>
+                <button onclick="openTeamModal('kingsley')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/Adenle.jpeg') }}" alt="Adenle Damola" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Adenle Olatunbosun Damola</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">Non-Executive Director</p>
-                <button onclick="openTeamModal('damola')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Non-Executive Director</p>
+                <button onclick="openTeamModal('damola')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/sampics.png') }}" alt="Uchendu Samuel" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Uchendu Samuel</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Technology infrastructure and Corporate Technical support</p>
-                <button onclick="openTeamModal('samuel')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Technology infrastructure and Corporate Technical support</p>
+                <button onclick="openTeamModal('samuel')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-green-100 overflow-hidden shadow-md">
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/patrickpics.jpeg') }}" alt="Patrick Ubi" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Patrick Ubi</h3>
-                <p class="text-green-700 font-bold text-[10px] uppercase tracking-widest mb-4">Head, Digital Media and communication Strategy</p>
-                <button onclick="openTeamModal('patrick')" class="mt-auto bg-green-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-green-800 transition shadow-md">View Full Bio</button>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Head, Digital Media and communication Strategy</p>
+                <button onclick="openTeamModal('patrick')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
         </div>
     </div>
@@ -319,7 +319,7 @@
 
 <!-- <div id="bioModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
     <div class="bg-white w-full max-w-5xl rounded-[2rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row h-auto max-h-[90vh]">
-        <button onclick="closeTeamModal()" class="absolute top-5 right-5 z-20 bg-white/90 p-2 rounded-full shadow-lg text-gray-500 hover:text-green-700 transition">
+        <button onclick="closeTeamModal()" class="absolute top-5 right-5 z-20 bg-white/90 p-2 rounded-full shadow-lg text-gray-500 hover:text-emerald-700 transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
         <div class="w-full md:w-2/5 bg-gray-100 border-r border-gray-50">
@@ -327,7 +327,7 @@
         </div>
         <div class="w-full md:w-3/5 p-8 md:p-14 overflow-y-auto bg-white">
             <h3 id="m-name" class="text-3xl font-bold text-gray-900 mb-2"></h3>
-            <p id="m-role" class="text-green-700 font-bold text-xs uppercase tracking-widest mb-8 border-b border-gray-100 pb-4"></p>
+            <p id="m-role" class="text-emerald-700 font-bold text-xs uppercase tracking-widest mb-8 border-b border-gray-100 pb-4"></p>
             <div id="m-bio" class="text-gray-600 space-y-5 text-base leading-relaxed"></div>
         </div>
     </div>
@@ -335,7 +335,7 @@
 <div id="bioModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
     <div class="bg-white w-full max-w-5xl rounded-[2rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row h-auto max-h-[90vh]">
 
-        <button onclick="closeTeamModal()" class="absolute top-5 right-5 z-20 bg-white/90 p-2 rounded-full shadow-lg text-gray-500 hover:text-green-700 transition">
+        <button onclick="closeTeamModal()" class="absolute top-5 right-5 z-20 bg-white/90 p-2 rounded-full shadow-lg text-gray-500 hover:text-emerald-700 transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -349,7 +349,7 @@
         <div class="w-full md:w-3/5 p-8 md:p-14 bg-white flex flex-col">
             <div class="overflow-y-auto pr-2 custom-scrollbar">
                 <h3 id="m-name" class="text-3xl font-bold text-gray-900 mb-2 font-display"></h3>
-                <p id="m-role" class="text-green-700 font-extrabold text-[11px] uppercase tracking-[0.2em] mb-8 border-b border-gray-100 pb-4"></p>
+                <p id="m-role" class="text-emerald-700 font-extrabold text-[11px] uppercase tracking-[0.2em] mb-8 border-b border-gray-100 pb-4"></p>
 
                 <div id="m-bio" class="text-gray-600 space-y-5 text-base leading-relaxed text-left">
                     </div>
@@ -367,7 +367,7 @@
         background: #f1f1f1;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #15803d;
+        background: #047857;
         border-radius: 10px;
     }
 </style>
@@ -390,7 +390,7 @@
         name: "Bassey Eno",
         role: "Chief Operating Officer",
         img: "{{ asset('assets/landing/images/basspixxs.png') }}",
-        bio: `<p>Bassey Eno is the Chief Operating Officer (COO) of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization’s day-to-day operations and ensures seamless coordination across all departments. He plays a pivotal role in translating FCCEI’s strategic vision into effective operational execution while maintaining high standards of efficiency, accountability, and organizational cohesion.</p>
+        bio: `<p>Bassey Eno is the Chief Operating Officer (COO) of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's day-to-day operations and ensures seamless coordination across all departments. He plays a pivotal role in translating FCCEI's strategic vision into effective operational execution while maintaining high standards of efficiency, accountability, and organizational cohesion.</p>
               <p>With over 10 years of experience in operations management and organizational strategy, Bassey brings a strong blend of leadership, business insight, and technical expertise to his role. He holds a Bachelor of Science degree from the National Open University of Nigeria, along with diplomas in IT Management and Software Systems and Executive Strategy and Management, and is a Cisco Certified Network Associate (CCNA – Networks). He is currently pursuing a Master of Business Administration (MBA) at the Atlanta College of Liberal Arts and Sciences, further strengthening his strategic, managerial, and organizational leadership capabilities.</p>
               <p>Throughout his career, Bassey has successfully designed and implemented systems and processes that enhance productivity, optimize resources, and foster collaboration across teams. His leadership approach is results-driven and anchored in continuous improvement, ensuring that organizational goals are met with precision and consistency.</p>
               <p>Bassey is deeply committed to sustainable growth and community development. He works closely with executive leadership to support long-term planning while safeguarding operational integrity and service excellence. Under his guidance, FCCEI has improved member engagement, strengthened service delivery, and expanded its reach and impact across both urban and rural communities.</p>
@@ -400,10 +400,10 @@
         name: "Kingsley Johnson",
         role: "Director, Investment, Intervention and Sustainability",
         img: "{{ asset('assets/landing/images/kingsleypics.jpeg') }}",
-        bio: `<p>Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women’s empowerment, household resilience, and sustainable social interventions.</p>
+        bio: `<p>Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women's empowerment, household resilience, and sustainable social interventions.</p>
               <p>Currently serving as Project Manager at the Health Empowerment and Livelihood Promotion (H.E.L.P) Initiative, Kingsley oversees strategic and operational planning, resource management, risk mitigation, and performance reporting across multiple community-based programs. He has successfully coordinated multidisciplinary teams, strengthened partnerships with donors and community stakeholders, and ensured compliance with best practices in program delivery.</p>
-              <p>His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI’s revolving food loan initiative.</p>
-              <p>Kingsley holds a Bachelor’s degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.</p>
+              <p>His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.</p>
+              <p>Kingsley holds a Bachelor's degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.</p>
               <p>As a Director of the Foodchain Community Empowerment Initiative (FCCEI), Kingsley provides strategic leadership, governance oversight, and operational guidance, ensuring that donor and investor resources are protected, programs are effectively implemented, and food security outcomes for women-led households are achieved sustainably.</p>`
 
     },
@@ -422,10 +422,10 @@
         name: "Uchendu Samuel",
         role: "Director, Technology infrastructure and Corporate Technical support",
         img: "{{ asset('assets/landing/images/sampics.png') }}",
-        bio: `<p>Uchendu Samuel serves as the Director, Technology infrastructure and Corporate Technical support of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this capacity, he ensures that FCCEI’s technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative’s long-term vision and operational objectives.</p>
+        bio: `<p>Uchendu Samuel serves as the Director, Technology infrastructure and Corporate Technical support of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this capacity, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.</p>
               <p>With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu brings a strong academic and professional foundation to his role. He holds a Bachelor of Science degree in Computer Science and is professionally trained as a Network Administrator, with advanced expertise as a Cisco Certified Network Associate (CCNA – Networks). He is also a trained SAP SD (Sales and Distribution) personnel, equipping him with deep insight into enterprise systems, process optimization, and data-driven operations.</p>
-              <p>Uchendu delivers robust technical leadership across all digital platforms, including the organization’s website, member management systems, payment and financial solutions, analytics tools, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and long-term reliability.</p>
-              <p>Working closely with executive leadership and key stakeholders, Uchendu defines and executes FCCEI’s digital roadmap, introduces innovative technology solutions, and drives continuous improvement through automation and intelligent system design. He is deeply committed to leveraging modern technologies to enhance member experience, strengthen data integrity, and support sustainable community growth.</p>
+              <p>Uchendu delivers robust technical leadership across all digital platforms, including the organization's website, member management systems, payment and financial solutions, analytics tools, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and long-term reliability.</p>
+              <p>Working closely with executive leadership and key stakeholders, Uchendu defines and executes FCCEI's digital roadmap, introduces innovative technology solutions, and drives continuous improvement through automation and intelligent system design. He is deeply committed to leveraging modern technologies to enhance member experience, strengthen data integrity, and support sustainable community growth.</p>
               <p>Recognized for his strategic mindset, hands-on technical expertise, and strong problem-solving capabilities, Uchendu is dedicated to building robust, future-ready digital systems that empower FCCEI, enhance organizational performance, and deliver lasting value to its members.</p>`
 
     },
@@ -433,9 +433,9 @@
         name: "Patrick Ubi",
         role: "Head, Digital Media and communication Strategy",
         img: "{{ asset('assets/landing/images/patrickpics.jpeg') }}",
-        bio: `<p>Patrick Ubi is an experienced Social Media Manager responsible for overseeing the cooperative’s online presence across all social media platforms. With over six years of professional experience, he creates compelling, purpose-driven content, manages community interactions, and drives digital engagement to strengthen communication, visibility, and brand consistency within and beyond the community.</p>
+        bio: `<p>Patrick Ubi is an experienced Social Media Manager responsible for overseeing the cooperative's online presence across all social media platforms. With over six years of professional experience, he creates compelling, purpose-driven content, manages community interactions, and drives digital engagement to strengthen communication, visibility, and brand consistency within and beyond the community.</p>
               <p>Backed by an academic foundation in Computer Science (HND) and professional training in Business Administration, Patrick combines technical understanding with strategic communication skills. His expertise is further enhanced through Google Skillshop certifications, enabling him to apply data-driven insights, digital marketing best practices, and performance optimization strategies to every campaign.</p>
-              <p>Passionate about community building, Patrick prioritizes meaningful engagement across platforms, ensuring that every post delivers value, drives interaction, and supports the cooperative’s growth and visibility.</p>`
+              <p>Passionate about community building, Patrick prioritizes meaningful engagement across platforms, ensuring that every post delivers value, drives interaction, and supports the cooperative's growth and visibility.</p>`
 
     }
 };
@@ -465,13 +465,13 @@ function closeTeamModal() {
 
 
 <!-- Newsletter -->
-<section class="py-16 bg-gradient-to-r from-primary to-secondary">
+<section class="py-16 bg-gradient-to-r from-emerald-600 to-teal-600">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
     <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
       <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-      <button type="submit" class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+      <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
     </form>
   </div>
 </section>
@@ -487,8 +487,8 @@ function closeTeamModal() {
               <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
             </div>
             <div class="flex flex-col">
-              <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+              <span class="text-3xl font-extrabold leading-none" style="color: #059669;">FCCEI</span>
+              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
             </div>
           </div>
           <p class="text-gray-400 mb-6 -mt-2">

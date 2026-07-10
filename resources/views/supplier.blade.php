@@ -14,8 +14,8 @@
   <title>{{ App\Models\PageContent::getContent('supplier', 'page_title', 'Register as a Supplier') }}</title>
   <meta name="description" content="{{ App\Models\PageContent::getContent('supplier', 'page_subtitle', 'Partner with FoodChain as a supplier.') }}" />
   <meta name="keywords" content="FCCEI, supplier, partnership, food security, community" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -27,9 +27,9 @@
       theme: {
         extend: {
           colors: {
-            primary: { DEFAULT: "#4F46E5", light: "#6366F1", dark: "#4338CA" },
-            secondary: { DEFAULT: "#10B981", light: "#34D399", dark: "#059669" },
-            accent: { DEFAULT: "#F59E0B", light: "#FBBF24", dark: "#D97706" }
+            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+            accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
           },
           fontFamily: {
             'sans': ['Inter', 'system-ui', 'sans-serif'],
@@ -82,16 +82,16 @@
           <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
         </div>
         <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #26C1C9;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+          <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
+          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
         </div>
       </div>
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Home</a>
+        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
         <!-- About dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -102,10 +102,10 @@
             <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
           </div>
         </div>
-        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Membership</a>
+        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Membership</a>
         <!-- Blog dropdown -->
         <div class="relative group">
-          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Blog
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -118,7 +118,7 @@
 
         <!-- About with dropdown -->
         <div class="relative group">
-            <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200 flex items-center">
+            <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             Partner
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -135,11 +135,11 @@
         </div>
 
 
-        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Contact</a>
         <!-- Auth buttons -->
         <div class="flex items-center space-x-4">
-          <a href="{{ route('login') }}" class="px-6 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
-          <a href="{{ route('register') }}" class="px-6 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
+          <a href="{{ route('login') }}" class="px-6 py-2 text-emerald-600 font-medium hover:bg-emerald-600 hover:text-white border-2 border-emerald-600 rounded-lg transition-all duration-200">Login</a>
+          <a href="{{ route('register') }}" class="px-6 py-2 bg-emerald-600 text-white font-medium hover:bg-emerald-700 rounded-lg transition-all duration-200">Get Started</a>
         </div>
       </div>
       <!-- Mobile menu button -->
@@ -149,7 +149,7 @@
     </div>
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-primary font-medium">Home</a>
+      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
       <!-- Repeat similar structure for mobile menu items with dropdowns as needed -->
       <!-- ... -->
     </div>
@@ -167,7 +167,7 @@
 
 <!-- Supplier Section -->
 <section class="py-12 max-w-7xl mx-auto px-4">
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #26C1C9;">Our Esteemed Suppliers</h2>
+  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">Our Esteemed Suppliers</h2>
   <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
     Our suppliers are dedicated organizations and individuals who believe in our mission. They have generously contributed resources, funding, and support to help us reach more communities and eradicate hunger. Their commitment drives our efforts forward and inspires positive change.
   </p>
@@ -194,7 +194,7 @@
   <!-- Button to open the modal -->
   <div class="text-center">
     <button
-      class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition"
+      class="px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg shadow-md hover:bg-emerald-700 transition"
       onclick="toggleSupplierModal()"
     >
       Register as a Supplier
@@ -212,26 +212,26 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    <h4 class="text-2xl font-semibold mb-4" style="color: #26C1C9;">{{ App\Models\PageContent::getContent('supplier', 'page_title', 'Register as a Supplier') }}</h4>
+    <h4 class="text-2xl font-semibold mb-4" style="color: #059669;">{{ App\Models\PageContent::getContent('supplier', 'page_title', 'Register as a Supplier') }}</h4>
     <form method="POST" action="{{ route('landing.supplier') }}" class="space-y-4" id="supplierForm">
       @csrf
       <div>
         <label for="name" class="block text-gray-700 mb-2">Name</label>
-        <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Your Name" />
+        <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Name" />
       </div>
       <div>
         <label for="organization" class="block text-gray-700 mb-2">Organization</label>
-        <input type="text" id="organization" name="organization" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Your Organization" />
+        <input type="text" id="organization" name="organization" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Organization" />
       </div>
       <div>
         <label for="email" class="block text-gray-700 mb-2">Email</label>
-        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="you@example.com" />
+        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="you@example.com" />
       </div>
       <div>
         <label for="message" class="block text-gray-700 mb-2">Message</label>
-        <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Tell us about your sponsorship interest"></textarea>
+        <textarea id="message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Tell us about your sponsorship interest"></textarea>
       </div>
-      <button type="submit" class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition">Send Inquiry</button>
+      <button type="submit" class="w-full px-4 py-2 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition">Send Inquiry</button>
     </form>
   </div>
 </div>
@@ -262,13 +262,13 @@
 </main>
 
 <!-- Newsletter -->
-<section class="py-16 bg-gradient-to-r from-primary to-secondary">
+<section class="py-16 bg-gradient-to-r from-emerald-600 to-teal-600">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
     <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
       <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-      <button type="submit" class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+      <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
     </form>
   </div>
 </section>
@@ -284,8 +284,8 @@
               <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
             </div>
             <div class="flex flex-col">
-              <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food Chain Community Empowerment Initiative</span>
+              <span class="text-3xl font-extrabold leading-none" style="color: #059669;">FCCEI</span>
+              <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
             </div>
           </div>
           <p class="text-gray-400 mb-6 -mt-2">

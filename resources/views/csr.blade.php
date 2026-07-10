@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -9,19 +9,16 @@
 <!-- Tailwind CSS & Font Awesome -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
 
 <script>
 tailwind.config = {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: "#26C1C9" },
-        secondary: { DEFAULT: "#1D5FB5" },
-        accent: { DEFAULT: "#F59E0B" },
-        bgGradient: {
-          start: "#26C1C9",
-          end: "#1D5FB5"
-        }
+        primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
+        secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
+        accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
       }
     }
   }
@@ -37,17 +34,17 @@ tailwind.config = {
     <div class="flex items-center space-x-3">
       <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-16 h-16 object-contain" />
       <div>
-        <h1 class="text-3xl font-bold text-[#26C1C9]">FCCEI</h1>
-        <p class="text-sm uppercase tracking-widest text-[#1D5FB5]">Corporate Social Responsibility</p>
+        <h1 class="text-3xl font-bold text-[#10B981]">FCCEI</h1>
+        <p class="text-sm uppercase tracking-widest text-[#047857]">Corporate Social Responsibility</p>
       </div>
     </div>
     <!-- Navigation -->
     <nav class="hidden md:flex space-x-8 font-medium text-gray-700">
-      <a href="#about" class="hover:text-[#26C1C9] transition">About CSR</a>
-      <a href="#initiatives" class="hover:text-[#26C1C9] transition">Initiatives</a>
-      <a href="#impact" class="hover:text-[#26C1C9] transition">Impact</a>
-      <a href="#get-involved" class="hover:text-[#26C1C9] transition">Get Involved</a>
-      <a href="#contact" class="hover:text-[#26C1C9] transition">Contact</a>
+      <a href="#about" class="hover:text-[#10B981] transition">About CSR</a>
+      <a href="#initiatives" class="hover:text-[#10B981] transition">Initiatives</a>
+      <a href="#impact" class="hover:text-[#10B981] transition">Impact</a>
+      <a href="#get-involved" class="hover:text-[#10B981] transition">Get Involved</a>
+      <a href="#contact" class="hover:text-[#10B981] transition">Contact</a>
     </nav>
     <!-- Mobile menu button -->
     <div class="md:hidden">
@@ -58,11 +55,11 @@ tailwind.config = {
   </div>
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-4 bg-white border-t border-gray-200">
-    <a href="#about" class="block py-2 hover:text-[#26C1C9] transition">About CSR</a>
-    <a href="#initiatives" class="block py-2 hover:text-[#26C1C9] transition">Initiatives</a>
-    <a href="#impact" class="block py-2 hover:text-[#26C1C9] transition">Impact</a>
-    <a href="#get-involved" class="block py-2 hover:text-[#26C1C9] transition">Get Involved</a>
-    <a href="#contact" class="block py-2 hover:text-[#26C1C9] transition">Contact</a>
+    <a href="#about" class="block py-2 hover:text-[#10B981] transition">About CSR</a>
+    <a href="#initiatives" class="block py-2 hover:text-[#10B981] transition">Initiatives</a>
+    <a href="#impact" class="block py-2 hover:text-[#10B981] transition">Impact</a>
+    <a href="#get-involved" class="block py-2 hover:text-[#10B981] transition">Get Involved</a>
+    <a href="#contact" class="block py-2 hover:text-[#10B981] transition">Contact</a>
   </div>
 </header>
 
@@ -70,37 +67,37 @@ tailwind.config = {
 <section class="relative bg-[#F0F9FA] py-20" id="about">
   <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
     <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-800">
-      Our <span class="text-[#26C1C9]">CSR Commitment</span>
+      Our <span class="text-[#10B981]">CSR Commitment</span>
     </h2>
     <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto md:mx-0">
       At FCCEI, we believe in giving back to the community by championing initiatives that foster sustainable development, food security, and social well-being. Our CSR efforts aim to create lasting positive change across Nigeria.
     </p>
-    <a href="#get-involved" class="px-8 py-3 bg-[#26C1C9] text-white rounded-lg font-semibold hover:bg-[#1D5FB5] transition">Join Our Initiatives</a>
+    <a href="#get-involved" class="px-8 py-3 bg-[#10B981] text-white rounded-lg font-semibold hover:bg-[#047857] transition">Join Our Initiatives</a>
   </div>
 </section>
 
 <!-- CSR Initiatives -->
 <section id="initiatives" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-6">
-    <h3 class="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800">Our Key <span class="text-[#26C1C9]">CSR Initiatives</span></h3>
+    <h3 class="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800">Our Key <span class="text-[#10B981]">CSR Initiatives</span></h3>
     <div class="grid md:grid-cols-3 gap-8 text-center">
       <!-- Initiative Card -->
       <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#26C1C9] rounded-full items-center">
+        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#059669] rounded-full items-center">
           <i class="fas fa-leaf text-white text-3xl"></i>
         </div>
         <h4 class="text-xl font-semibold mb-2">Community Food Programs</h4>
         <p class="text-gray-600 text-sm">Providing nutritious food to underserved communities and reducing hunger across Nigeria.</p>
       </div>
       <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#1D5FB5] rounded-full items-center">
+        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#047857] rounded-full items-center">
           <i class="fas fa-school text-white text-3xl"></i>
         </div>
         <h4 class="text-xl font-semibold mb-2">Educational Support</h4>
         <p class="text-gray-600 text-sm">Supporting schools and youth programs to empower the next generation.</p>
       </div>
       <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#F59E0B] rounded-full items-center">
+        <div class="flex justify-center mb-4 w-16 h-16 mx-auto bg-[#D97706] rounded-full items-center">
           <i class="fas fa-hand-holding-heart text-white text-3xl"></i>
         </div>
         <h4 class="text-xl font-semibold mb-2">Health & Wellness</h4>
@@ -114,30 +111,30 @@ tailwind.config = {
 <section id="impact" class="py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6 text-center">
     <h3 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800">
-      Our <span class="text-[#26C1C9]">Impact</span>
+      Our <span class="text-[#10B981]">Impact</span>
     </h3>
     <div class="grid md:grid-cols-4 gap-8 mb-12">
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="text-4xl font-bold mb-2 text-[#26C1C9]">200+</div>
+        <div class="text-4xl font-bold mb-2 text-[#10B981]">200+</div>
         <p class="text-gray-600 text-sm">Communities Transformed</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="text-4xl font-bold mb-2 text-[#26C1C9]">50,000+</div>
+        <div class="text-4xl font-bold mb-2 text-[#10B981]">50,000+</div>
         <p class="text-gray-600 text-sm">Lives Impacted</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="text-4xl font-bold mb-2 text-[#26C1C9]">95%</div>
+        <div class="text-4xl font-bold mb-2 text-[#10B981]">95%</div>
         <p class="text-gray-600 text-sm">Community Satisfaction</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-        <div class="text-4xl font-bold mb-2 text-[#26C1C9]">100+</div>
+        <div class="text-4xl font-bold mb-2 text-[#10B981]">100+</div>
         <p class="text-gray-600 text-sm">Partnerships & Collaborations</p>
       </div>
     </div>
     <!-- Impact Stories -->
     <div class="max-w-4xl mx-auto space-y-6">
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-        <p class="mb-4 italic">"FCCEI’s CSR initiatives have uplifted our community and brought hope to many families."</p>
+        <p class="mb-4 italic">"FCCEI's CSR initiatives have uplifted our community and brought hope to many families."</p>
         <div class="flex items-center space-x-4">
           <img src="{{ asset('assets/landing/images/testimonial1.jpg') }}" alt="Impact Testimonial" class="w-12 h-12 rounded-full object-cover" />
           <div>
@@ -164,12 +161,12 @@ tailwind.config = {
 <section id="get-involved" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-6 text-center">
     <h3 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800">
-      Be a <span class="text-[#26C1C9]">Changemaker</span>
+      Be a <span class="text-[#10B981]">Changemaker</span>
     </h3>
     <p class="mb-8 text-gray-600 max-w-2xl mx-auto">
-      Discover how you can support FCCEI’s CSR initiatives through donations, volunteering, or corporate partnerships. Your support helps us reach more communities and create sustainable change.
+      Discover how you can support FCCEI's CSR initiatives through donations, volunteering, or corporate partnerships. Your support helps us reach more communities and create sustainable change.
     </p>
-    <a href="#contact" class="px-8 py-3 bg-[#26C1C9] text-white rounded-lg font-semibold hover:bg-[#1D5FB5] transition">Get Involved</a>
+    <a href="#contact" class="px-8 py-3 bg-[#10B981] text-white rounded-lg font-semibold hover:bg-[#047857] transition">Get Involved</a>
   </div>
 </section>
 
@@ -183,7 +180,7 @@ tailwind.config = {
         <h4 class="text-2xl font-semibold mb-4 text-gray-800">Reach Out</h4>
         <div class="space-y-6 mb-8">
           <div class="flex items-start">
-            <div class="w-12 h-12 bg-[#26C1C9] rounded-lg flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-[#059669] rounded-lg flex items-center justify-center mr-4">
               <i class="fas fa-map-marker-alt text-white"></i>
             </div>
             <div>
@@ -192,7 +189,7 @@ tailwind.config = {
             </div>
           </div>
           <div class="flex items-start">
-            <div class="w-12 h-12 bg-[#10B981] rounded-lg flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-[#0D9488] rounded-lg flex items-center justify-center mr-4">
               <i class="fas fa-phone text-white"></i>
             </div>
             <div>
@@ -201,7 +198,7 @@ tailwind.config = {
             </div>
           </div>
           <div class="flex items-start">
-            <div class="w-12 h-12 bg-[#F59E0B] rounded-lg flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-[#D97706] rounded-lg flex items-center justify-center mr-4">
               <i class="fas fa-envelope text-white"></i>
             </div>
             <div>
@@ -214,16 +211,16 @@ tailwind.config = {
         <div>
           <h4 class="font-semibold mb-4">Follow Us</h4>
           <div class="flex space-x-4">
-            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
+            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#10B981] transition">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
+            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#10B981] transition">
               <i class="fab fa-twitter"></i>
             </a>
-            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
+            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#10B981] transition">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
+            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#10B981] transition">
               <i class="fab fa-linkedin"></i>
             </a>
           </div>
@@ -235,17 +232,17 @@ tailwind.config = {
         <form class="space-y-4" id="csrForm">
           <div>
             <label for="name" class="block mb-2 text-gray-700 font-medium">Full Name</label>
-            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#26C1C9]" placeholder="Your Name" />
+            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]" placeholder="Your Name" />
           </div>
           <div>
             <label for="email" class="block mb-2 text-gray-700 font-medium">Email</label>
-            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#26C1C9]" placeholder="you@example.com" />
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]" placeholder="you@example.com" />
           </div>
           <div>
             <label for="message" class="block mb-2 text-gray-700 font-medium">Message</label>
-            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#26C1C9]" placeholder="Your Message"></textarea>
+            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]" placeholder="Your Message"></textarea>
           </div>
-          <button type="submit" class="w-full px-4 py-3 bg-[#26C1C9] text-white rounded-lg font-semibold hover:bg-[#1D5FB5] transition">Send Message</button>
+          <button type="submit" class="w-full px-4 py-3 bg-[#10B981] text-white rounded-lg font-semibold hover:bg-[#047857] transition">Send Message</button>
         </form>
       </div>
     </div>
@@ -253,57 +250,71 @@ tailwind.config = {
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-gray-900 text-white mt-12">
-  <div class="max-w-7xl mx-auto px-6 py-8 grid md:grid-cols-4 gap-8">
-    <!-- Logo & Info -->
-    <div>
-      <div class="flex items-center mb-4 space-x-3">
-        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-16 h-16 object-contain" />
-        <div>
-          <h3 class="text-2xl font-bold" style="color:#26C1C9;">FCCEI</h3>
-          <p class="text-[11px] uppercase tracking-widest" style="color:#1D5FB5;">Food Chain Community Empowerment</p>
+<footer class="bg-gray-900 text-white">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Company Info -->
+      <div>
+        <div class="flex items-center space-x-4 mb-4">
+          <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
+            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
+          </div>
+          <div class="flex flex-col">
+            <span class="text-3xl font-extrabold leading-none" style="color: #10B981;">FCCEI</span>
+            <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
+          </div>
+        </div>
+        <p class="text-gray-400 mb-6 -mt-2">
+          Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-facebook-f text-[#10B981] group-hover:text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-twitter text-[#10B981] group-hover:text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-instagram text-[#10B981] group-hover:text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
+            <i class="fab fa-linkedin text-[#10B981] group-hover:text-white"></i>
+          </a>
         </div>
       </div>
-      <p class="text-gray-400 mb-4">Partner with us to create sustainable social change through impactful CSR programs.</p>
-      <div class="flex space-x-4">
-        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-[#26C1C9] transition">
-          <i class="fab fa-linkedin"></i>
-        </a>
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="text-gray-400 hover:text-white transition-colors duration-200">Home</a></li>
+          <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-200">About Us</a></li>
+          <li><a href="#products" class="text-gray-400 hover:text-white transition-colors duration-200">Products</a></li>
+          <li><a href="#blog" class="text-gray-400 hover:text-white transition-colors duration-200">Blog</a></li>
+        </ul>
+      </div>
+      <!-- Legal -->
+      <div>
+        <h4 class="text-lg font-bold mb-6">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-200">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200">Terms of Service</a></li>
+          <li><a href="/cookies" class="text-gray-400 hover:text-white transition-colors duration-200">Cookie Policy</a></li>
+          <li><a href="/compliance" class="text-gray-400 hover:text-white transition-colors duration-200">Compliance</a></li>
+        </ul>
+      </div>
+      <!-- Resources -->
+      <div>
+        <h4 class="text-lg font-bold mb-6">Resources</h4>
+        <ul class="space-y-3">
+          <li><a href="/help" class="text-gray-400 hover:text-white transition-colors duration-200">Help Center</a></li>
+          <li><a href="/faq" class="text-gray-400 hover:text-white transition-colors duration-200">FAQ</a></li>
+          <li><a href="/community" class="text-gray-400 hover:text-white transition-colors duration-200">Community</a></li>
+          <li><a href="/affiliate" class="text-gray-400 hover:text-white transition-colors duration-200">Affiliate Program</a></li>
+        </ul>
       </div>
     </div>
-    <!-- Quick Links -->
-    <div>
-      <h4 class="font-semibold mb-4">Quick Links</h4>
-      <ul class="space-y-2">
-        <li><a href="#about" class="hover:text-[#26C1C9] transition">About CSR</a></li>
-        <li><a href="#initiatives" class="hover:text-[#26C1C9] transition">Initiatives</a></li>
-        <li><a href="#impact" class="hover:text-[#26C1C9] transition">Impact</a></li>
-        <li><a href="#get-involved" class="hover:text-[#26C1C9] transition">Get Involved</a></li>
-        <li><a href="#contact" class="hover:text-[#26C1C9] transition">Contact</a></li>
-      </ul>
-    </div>
-    <!-- Legal & Resources -->
-    <div>
-      <h4 class="font-semibold mb-4">Legal</h4>
-      <ul class="space-y-2">
-        <li><a href="/privacy" class="hover:text-[#26C1C9] transition">Privacy Policy</a></li>
-        <li><a href="/terms" class="hover:text-[#26C1C9] transition">Terms of Use</a></li>
-        <li><a href="/help" class="hover:text-[#26C1C9] transition">Help Center</a></li>
-        <li><a href="/faq" class="hover:text-[#26C1C9] transition">FAQ</a></li>
-      </ul>
-    </div>
-    <!-- Bottom -->
-    <div class="col-span-4 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
-      &copy; 2024 FCCEI. All rights reserved. | Designed by Bassiprog Digital Solutions
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+      <p>&copy; 2024 FCCEI. All rights reserved. | Designed By Bassiprog Digital Solution</p>
     </div>
   </div>
 </footer>

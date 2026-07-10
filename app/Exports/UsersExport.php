@@ -9,9 +9,16 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class UsersExport implements FromCollection, WithHeadings, WithMapping
 {
+    protected $query;
+
+    public function __construct($query = null)
+    {
+        $this->query = $query;
+    }
+
     public function collection()
     {
-        return User::with('currentTier')->get();
+        return ($this->query ? $this->query : User::with('currentTier'))->get();
     }
 
     public function headings(): array

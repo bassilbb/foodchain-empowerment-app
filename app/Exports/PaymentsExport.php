@@ -9,9 +9,16 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class PaymentsExport implements FromCollection, WithHeadings, WithMapping
 {
+    protected $query;
+
+    public function __construct($query = null)
+    {
+        $this->query = $query;
+    }
+
     public function collection()
     {
-        return Payment::with('user')->get();
+        return ($this->query ? $this->query : Payment::with('user'))->get();
     }
 
     public function headings(): array

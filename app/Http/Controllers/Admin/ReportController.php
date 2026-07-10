@@ -1,15 +1,15 @@
 <?php
+
 // app/Http/Controllers/Admin/ReportController.php
 
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\DistributionsExport;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Payment;
 use App\Models\FoodDistribution;
 use App\Models\FoodItem;
-use App\Models\MembershipTier;
+use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -223,6 +223,6 @@ class ReportController extends Controller
 
     public function exportDistributions()
     {
-        return Excel::download(new DistributionsExport, 'distributions-' . now()->format('Y-m-d') . '.xlsx');
+        return Excel::download(new DistributionsExport(FoodDistribution::with(['user', 'tier', 'pickupLocation'])), 'distributions-'.now()->format('Y-m-d').'.xlsx');
     }
 }

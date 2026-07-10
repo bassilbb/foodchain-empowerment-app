@@ -18,6 +18,7 @@ class FoodLoan extends Model
         'amount_disbursed',
         'amount_repaid',
         'remaining_balance',
+        'loan_amount_approved',
         'tenor_months',
         'repayment_frequency_weeks',
         'total_installments',
@@ -123,6 +124,7 @@ class FoodLoan extends Model
         if ($this->total_installments <= 0) {
             return 0;
         }
+
         return $this->total_repayment_amount / $this->total_installments;
     }
 
@@ -131,6 +133,7 @@ class FoodLoan extends Model
         if ($this->total_repayment_amount <= 0) {
             return 0;
         }
+
         return ($this->amount_repaid / $this->total_repayment_amount) * 100;
     }
 
@@ -174,7 +177,7 @@ class FoodLoan extends Model
         $this->update(['status' => 'approved']);
     }
 
-    public function disburse(float $amount = null): void
+    public function disburse(?float $amount = null): void
     {
         $disbursementAmount = $amount ?? $this->principal_amount;
 
@@ -193,13 +196,13 @@ class FoodLoan extends Model
         $this->createRepaymentRecords();
     }
 
-    public function recordPayment(float $amount, int $installmentNumber = null): LoanRepayment
+    public function recordPayment(float $amount, ?int $installmentNumber = null): LoanRepayment
     {
         $repayment = $this->repayments()
             ->where('installment_number', $installmentNumber ?? $this->installments_paid + 1)
             ->first();
 
-        if (!$repayment) {
+        if (! $repayment) {
             throw new \Exception('Repayment record not found');
         }
 
@@ -250,7 +253,7 @@ class FoodLoan extends Model
     public static function generateUniqueReference(): string
     {
         do {
-            $reference = 'FL-' . strtoupper(uniqid());
+            $reference = 'FL-'.strtoupper(uniqid());
         } while (self::where('reference', $reference)->exists());
 
         return $reference;

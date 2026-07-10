@@ -4,12 +4,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PaymentsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
-use App\Services\PaymentService;
-use App\Exports\PaymentsExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaymentController extends Controller
 {
@@ -40,11 +39,11 @@ class PaymentController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('reference', 'like', "%{$search}%")
-                  ->orWhereHas('user', function ($q) use ($search) {
-                      $q->where('email', 'like', "%{$search}%")
-                        ->orWhere('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%");
-                  });
+                    ->orWhereHas('user', function ($q) use ($search) {
+                        $q->where('email', 'like', "%{$search}%")
+                            ->orWhere('first_name', 'like', "%{$search}%")
+                            ->orWhere('last_name', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -113,6 +112,6 @@ class PaymentController extends Controller
             $query->whereDate('created_at', '<=', $request->to_date);
         }
 
-        return Excel::download(new PaymentsExport, 'payments-' . date('Y-m-d') . '.xlsx');
+        return Excel::download(new PaymentsExport($query), 'payments-'.date('Y-m-d').'.xlsx');
     }
 }
