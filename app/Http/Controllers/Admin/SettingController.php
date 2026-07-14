@@ -10,7 +10,6 @@ use App\Models\AdminRolePermission;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -113,12 +112,16 @@ class SettingController extends Controller
         try {
             $oldLogo = Setting::where('key', 'site_logo')->first();
             if ($oldLogo && $oldLogo->value) {
-                if (Storage::disk('public')->exists($oldLogo->value)) {
-                    Storage::disk('public')->delete($oldLogo->value);
+                $oldPath = public_path('uploads/'.$oldLogo->value);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
 
-            $path = $request->file('logo')->store('logos', 'public');
+            $file = $request->file('logo');
+            $filename = 'logo_'.time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('uploads/logos'), $filename);
+            $path = 'logos/'.$filename;
 
             Setting::updateOrCreate(
                 ['key' => 'site_logo'],
@@ -135,7 +138,10 @@ class SettingController extends Controller
     {
         $logo = Setting::where('key', 'site_logo')->first();
         if ($logo && $logo->value) {
-            Storage::disk('public')->delete($logo->value);
+            $oldPath = public_path('uploads/'.$logo->value);
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
             $logo->delete();
         }
 
@@ -151,12 +157,16 @@ class SettingController extends Controller
         try {
             $oldFavicon = Setting::where('key', 'site_favicon')->first();
             if ($oldFavicon && $oldFavicon->value) {
-                if (Storage::disk('public')->exists($oldFavicon->value)) {
-                    Storage::disk('public')->delete($oldFavicon->value);
+                $oldPath = public_path('uploads/'.$oldFavicon->value);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
 
-            $path = $request->file('favicon')->store('favicons', 'public');
+            $file = $request->file('favicon');
+            $filename = 'favicon_'.time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('uploads/favicons'), $filename);
+            $path = 'favicons/'.$filename;
 
             Setting::updateOrCreate(
                 ['key' => 'site_favicon'],
@@ -173,8 +183,9 @@ class SettingController extends Controller
     {
         $favicon = Setting::where('key', 'site_favicon')->first();
         if ($favicon && $favicon->value) {
-            if (Storage::disk('public')->exists($favicon->value)) {
-                Storage::disk('public')->delete($favicon->value);
+            $oldPath = public_path('uploads/'.$favicon->value);
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
             }
             $favicon->delete();
         }

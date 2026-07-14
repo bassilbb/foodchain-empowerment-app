@@ -349,7 +349,7 @@
             <div class="product-card bg-white rounded-3xl overflow-hidden">
                 <img src="{{ asset('assets/landing/images/garrirbg.png') }}" class="w-full h-48 object-cover" alt="Garri">
                 <div class="p-6">
-                    <h3 class="font-black text-gray-800 text-lg">Ijebu Garri</h3>
+                    <h3 class="font-black text-gray-800 text-lg"> Garri</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Bag</p>
                 </div>
             </div>

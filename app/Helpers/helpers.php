@@ -28,6 +28,10 @@ if (! function_exists('site_logo')) {
     {
         $logo = \App\Models\Setting::where('key', 'site_logo')->first();
         if ($logo && $logo->value) {
+            if (file_exists(public_path('uploads/'.$logo->value))) {
+                return asset('uploads/'.$logo->value);
+            }
+
             return asset('storage/'.$logo->value);
         }
 
@@ -43,6 +47,10 @@ if (! function_exists('site_favicon')) {
         }
         $favicon = \App\Models\Setting::where('key', 'site_favicon')->first();
         if ($favicon && $favicon->value) {
+            if (file_exists(public_path('uploads/'.$favicon->value))) {
+                return asset('uploads/'.$favicon->value);
+            }
+
             return asset('storage/'.$favicon->value);
         }
 

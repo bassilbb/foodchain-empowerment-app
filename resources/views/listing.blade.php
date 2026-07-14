@@ -145,14 +145,23 @@
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
                         <li>✓ Rice – 25kg</li>
-                        <li>✓ Cooking Oil – 3 Litres</li>
-                        <li>✓ Seasoning Cubes – 100 Cubes</li>
-                        <li>✓ Semovita – 10kg</li>
-                        <li>✓ Salt – 1kg</li>
-                        <li>✓ Spaghetti – 20 Packs *500g</li>
-                        <li>✓ Tomato Paste (Pepper & Onions)</li>
-                        <li>✓ Curry & Thyme</li>
-                        <li>✓ Mayonnaise</li>
+                        <li>✓ Groundnut – Oil</li>
+                        <li>✓ Red – Oil</li>
+                        <li>✓ Seasoning Cubes – Maggi</li>
+                        <li>✓ Cray – Fish</li>
+                        <li>✓ Beverages – Tea</li>
+                        <li>✓ Milk </li>
+                        <li>✓ Sugar </li>
+                        <li>✓ Semovita </li>
+                        <li>✓ Spaghetti </li>
+                        <li>✓ Noodles </li>
+                        <li>✓ Stock – Fish </li>
+                        <li>✓ Tomato </li>
+                        <li>✓ Salt </li>
+                        <li>✓ Curry </li>
+                        <li>✓ Thyme </li>
+                        <li>✓ Beans </li>
+                        <li>✓ Garri</li>
                     </ul>
                 </div>
             </div>
@@ -165,16 +174,26 @@
                 </div>
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
-                        <li>✓ Rice – 50kg</li>
-                        <li>✓ Cooking Oil – 5 Litres</li>
-                        <li>✓ Seasoning Cubes – 100 Cubes</li>
-                        <li>✓ Semovita – 10kg</li>
-                        <li>✓ Salt – 1kg</li>
-                        <li>✓ Spaghetti – 20 Packs *500g</li>
-                        <li>✓ Tomato Paste (Pepper & Onions)</li>
-                        <li>✓ Curry & Thyme</li>
-                        <li>✓ Mayonnaise</li>
-                        <li>✓ Sugar – 1kg</li>
+                        <li>✓ Rice – 25kg</li>
+                        <li>✓ Groundnut – Oil</li>
+                        <li>✓ Red – Oil</li>
+                        <li>✓ Seasoning Cubes – Maggi</li>
+                        <li>✓ Cray – Fish</li>
+                        <li>✓ Beverages – Tea</li>
+                        <li>✓ Milk </li>
+                        <li>✓ Sugar </li>
+                        <li>✓ Semovita </li>
+                        <li>✓ Cartoons of – Spaghetti </li>
+                        <li>✓ Cartoons of – Noodles </li>
+                        <li>✓ Stock – Fish </li>
+                        <li>✓ Tomato </li>
+                        <li>✓ Salt </li>
+                        <li>✓ Curry </li>
+                        <li>✓ Thyme </li>
+                        <li>✓ Mayonnaise </li>
+                        <li>✓ Beans </li>
+                        <li>✓ Garri</li>
+                        <li>✓ Egg</li>
                     </ul>
                 </div>
             </div>
@@ -188,20 +207,29 @@
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
                         <li>✓ Rice – 50kg</li>
-                        <li>✓ Cooking Oil – 5 Litres</li>
-                        <li>✓ Seasoning Cubes – 100 Cubes</li>
-                        <li>✓ Semovita – 10kg</li>
-                        <li>✓ Salt – 1kg</li>
-                        <li>✓ Spaghetti – 20 Packs *500g</li>
-                        <li>✓ Tomato Paste (Pepper & Onions)</li>
-                        <li>✓ Curry & Thyme</li>
-                        <li>✓ Mayonnaise</li>
-                        <li>✓ Sugar – 1kg</li>
+                        <li>✓ Groundnut – Oil</li>
+                        <li>✓ Red – Oil</li>
+                        <li>✓ Seasoning Cubes – Maggi</li>
+                        <li>✓ Cray – Fish</li>
                         <li>✓ Beverages Refill Pack</li>
                         <li>✓ Milk Refill Pack</li>
+                        <li>✓ Sugar </li>
+                        <li>✓ 2 Semovita </li>
+                        <li>✓ 2 Cartoons of – Spaghetti </li>
+                        <li>✓ 2 Cartoons of – Noodles </li>
+                        <li>✓ Stock – Fish </li>
+                        <li>✓ Tomato </li>
+                        <li>✓ Salt </li>
+                        <li>✓ Curry </li>
+                        <li>✓ Thyme </li>
+                        <li>✓ Mayonnaise </li>
+                        <li>✓ Beans </li>
+                        <li>✓ Garri</li>
+                        <li>✓ Egg</li>
                         <li>✓ Cereals</li>
                         <li>✓ Custard</li>
-                        <li>✓ Garri & Other Spices</li>
+                        <li>✓ Other Spices</li>
+                        <li>✓ Chicken or Turkey – 2kg</li>
                     </ul>
                 </div>
             </div>
@@ -215,23 +243,29 @@
                 <div class="p-5">
                     <ul class="space-y-2 text-gray-700 text-sm list-disc list-inside">
                         <li>✓ Rice – 50kg</li>
-                        <li>✓ Honey Beans – 6kg</li>
-                        <li>✓ Cooking Oil – 5 Litres</li>
-                        <li>✓ Seasoning Cubes – 100 Cubes</li>
-                        <li>✓ Semovita – 10kg</li>
-                        <li>✓ Salt – 1kg</li>
-                        <li>✓ Spaghetti – 20 Packs *500g</li>
-                        <li>✓ Tomato Paste (Pepper & Onions)</li>
-                        <li>✓ Curry & Thyme</li>
-                        <li>✓ Mayonnaise</li>
-                        <li>✓ Sugar – 1kg</li>
+                        <li>✓ Groundnut – Oil</li>
+                        <li>✓ Red – Oil</li>
+                        <li>✓ Seasoning Cubes – Maggi</li>
+                        <li>✓ Cray – Fish</li>
                         <li>✓ Beverages Refill Pack</li>
                         <li>✓ Milk Refill Pack</li>
+                        <li>✓ Sugar </li>
+                        <li>✓ Semovita </li>
+                        <li>✓ Cartoons of – Spaghetti </li>
+                        <li>✓ Cartoons of – Noodles </li>
+                        <li>✓ Stock – Fish </li>
+                        <li>✓ Tomato </li>
+                        <li>✓ Salt </li>
+                        <li>✓ Curry </li>
+                        <li>✓ Thyme </li>
+                        <li>✓ Mayonnaise </li>
+                        <li>✓ Beans </li>
+                        <li>✓ Garri</li>
+                        <li>✓ Egg</li>
                         <li>✓ Cereals</li>
                         <li>✓ Custard</li>
-                        <li>✓ Garri & Other Spices</li>
-                        <li>✓ Chicken/Turkey – 2kg</li>
-                        <li>✓ Stock Fish</li>
+                        <li>✓ Other Spices</li>
+                        <li>✓ Chicken or Turkey – 3kg</li>
                     </ul>
                 </div>
             </div>
@@ -240,12 +274,12 @@
     </section>
 
     <!-- Food Support Plans -->
-    <section>
+    <!-- <section>
         <h3 class="text-2xl font-bold mb-6" style="color:#047857;">Food Support Plans</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"> -->
 
             <!-- Cash Alternatives -->
-            <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl shadow-lg p-6">
+            <!-- <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl shadow-lg p-6">
                 <h4 class="text-xl font-bold mb-4">Cash Alternatives</h4>
                 <div class="space-y-4">
                     <div class="bg-white/20 p-3 rounded-lg">
@@ -260,7 +294,7 @@
             </div>
 
         </div>
-    </section>
+    </section> -->
 </main>
 
 <!-- Footer -->

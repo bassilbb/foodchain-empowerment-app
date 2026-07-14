@@ -89,8 +89,8 @@
                 <div class="hero-slide absolute inset-0 bg-slide-2 bg-cover bg-center flex items-center opacity-0">
                     <div class="container mx-auto px-4">
                         <div class="max-w-2xl">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Build Your <span class="text-amber-400">Network</span></h1>
-                            <p class="text-xl text-white/90 mb-8">Grow your community and maximize your food benefits through our advanced food security system.</p>
+                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Make Your <span class="text-amber-400">Weekly</span> Payment</h1>
+                            <p class="text-xl text-white/90 mb-8">and be eligible to access Food Assistance and Support.</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('register') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30">Start Building</a>
                             </div>
@@ -101,7 +101,7 @@
                     <div class="container mx-auto px-4">
                         <div class="max-w-2xl">
                             <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Sustainable <span class="text-emerald-400">Empowerment</span></h1>
-                            <p class="text-xl text-white/90 mb-8">From Bronze to Emerald, secure your household's future by building your community sustainably.</p>
+                            <p class="text-xl text-white/90 mb-8">From Bronze to Emerald, secure your household's Food Security.</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">View Stages</a>
                             </div>
@@ -269,10 +269,10 @@
                     <div>
                         <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
                         <p class="text-gray-600 mb-6 leading-relaxed">
-                            <strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven social enterprise designed to combat hunger and food insecurity among women, low-income earners and students of tertiary institutions in Nigeria. It is an initiative from Doorstep Farms Limited <b>incorporated on 12th, February 2015 with RC Number 1241873.</b>
+                            <strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven food distribution network with social impact, designed to combat hunger and food insecurity among women, workforce in both public and private sectors, self-employed and low-income earners in Nigeria.
                         </p>
                         <p class="text-gray-600 mb-8 leading-relaxed">
-                            Hunger is a significant driver of social unrest, conflict and criminal activities in Nigeria, therefore eradicating hunger would have profound social impacts, including: enhanced public safety and security, improved health and education outcomes, stronger community cohesion and a reduction in distress-driven migration.
+                            It is an initiative from Foodchain Enterprises Limited – a member of Doorstep Farms Limited <b>incorporated on 12th, February 2015, RC: 1241873, </b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and social unrest.
                         </p>
                         <button id="openModalBtn" class="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition duration-300 shadow-lg shadow-emerald-600/30">
                             Read More
@@ -298,10 +298,13 @@
                 <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-3xl z-50">&times;</button>
                 <div class="flex-1 p-4 overflow-y-auto">
                     <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
-                    <p class="mb-4 leading-relaxed"><strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven Social Enterprise designed to combat hunger and food insecurity among women, workforce in public and private sectors and students of tertiary institutions in Nigeria. It is an initiative from FoodChain social enterprise Limited - a member of DOORSTEP FARMS LIMITED <b>incorporated on 12th, February 2015 with RC Number 1241873.</b></p>
-                    <p class="mb-4 leading-relaxed">Hunger is a significant driver of social unrest, conflict and criminal activities in Nigeria, therefore eradicating hunger would have profound social impacts, including: enhanced public safety and security, improved health and education outcomes, stronger community cohesion and a reduction in distress-driven migration. The second of the UN's 17 Sustainable Development Goals is to end hunger, achieve food security and improved nutrition and promote sustainable agriculture.</p>
-                    <p class="mb-4 leading-relaxed">People who are food insecure are disproportionately affected by diet-sensitive chronic diseases such as diabetes and high blood pressure, and according to research by the World Food Program (WFP), food insecurity is also linked to many adverse effects on overall health.</p>
-                    <p class="mb-4 leading-relaxed">Our unique value proposition is to establish a community of common-wealth among women, low-income households and students of tertiary institutions in rural, peri-urban, and urban underserved areas in Nigeria and the West African sub-region, where each member has access to Food Loan and FREE staple food items based on their needs.</p>
+                    <p class="mb-4 leading-relaxed"><strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven food distribution network with social impact, designed to combat hunger and food insecurity among women, workforce in both public and private sectors, self-employed and low-income earners in Nigeria. </p>
+                    <p class="mb-4 leading-relaxed">It is an initiative from Foodchain Enterprises Limited – a member of Doorstep Farms Limited <b>incorporated on 12th, February 2015, RC: 1241873, </b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and social unrest.</p>
+                    <p class="mb-4 leading-relaxed">Our core values hover around securing food for members of the community and make them affordable and accessible for members of the community. Our records show that greater number of the members of the community are satisfied with the exceptional and delightful experience. The food distribution network makes use of counter funding to purchase food items through our local suppliers and members access their staple food when due, at a very affordable rate, removing the bottle neck of food inflation caused by the market distribution and retail forces. This is to help the community members purchase staple food at more affordable prices and save more money for their families and other needs. </p>
+                    <p class="mb-4 leading-relaxed">We offer logistics to deliver food items to members at any place in Nigeria and we also operate micro-outlets as collection centres for pick-up within Lagos. The company pursue both financial stability and measurable social impact, which means that our commercial operations are been conducted in a manner that actively reduce food inflation, economic crisis, improves market access for members and enhances food security in Nigeria.</p>
+                    <p class="mb-4 leading-relaxed">The company’s objective is to establish a high-efficient retail distribution network, securing market share in high-density, low-income urban areas and making food affordable for the urban poor. We deploy micro-warehouses and informal retail partnerships to eliminate middleman inflation and lower retail food prices.</p>
+                    <p class="mb-4 leading-relaxed">Our unique value proposition is to establish a community of common-wealth among women, corporate employees, self-employed and low-income households in rural, peri-urban, and urban underserved areas in Nigeria where each member of the community has access to Food support based on their needs.</p>
+                    <p class="mb-4 leading-relaxed">Our benefits package is designed to encourage members to build resilience and create social impact which ensures continuous access to food support and assistance.</p>
                 </div>
                 <div class="flex-1 p-4 flex items-center justify-center">
                     <div class="w-full h-full relative">
@@ -551,7 +554,7 @@
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-phone text-cyan-600"></i></div>
-                                <div><h4 class="font-bold text-gray-900 mb-1">Phone Number</h4><p class="text-gray-600">+234 816 801 8123</p></div>
+                                <div><h4 class="font-bold text-gray-900 mb-1">Phone Number</h4><p class="text-gray-600">+234 816 801 8123, +234 807 070 1855</p></div>
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-envelope text-amber-600"></i></div>

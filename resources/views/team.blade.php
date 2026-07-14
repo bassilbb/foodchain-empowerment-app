@@ -305,14 +305,14 @@
                 <button onclick="openTeamModal('samuel')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
             </div>
 
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
+            <!-- <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
                     <img src="{{ asset('assets/landing/images/patrickpics.jpeg') }}" alt="Patrick Ubi" class="w-full h-full object-cover object-top" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Patrick Ubi</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Head, Digital Media and communication Strategy</p>
                 <button onclick="openTeamModal('patrick')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
@@ -429,15 +429,15 @@
               <p>Recognized for his strategic mindset, hands-on technical expertise, and strong problem-solving capabilities, Uchendu is dedicated to building robust, future-ready digital systems that empower FCCEI, enhance organizational performance, and deliver lasting value to its members.</p>`
 
     },
-    patrick: {
-        name: "Patrick Ubi",
-        role: "Head, Digital Media and communication Strategy",
-        img: "{{ asset('assets/landing/images/patrickpics.jpeg') }}",
-        bio: `<p>Patrick Ubi is an experienced Social Media Manager responsible for overseeing the cooperative's online presence across all social media platforms. With over six years of professional experience, he creates compelling, purpose-driven content, manages community interactions, and drives digital engagement to strengthen communication, visibility, and brand consistency within and beyond the community.</p>
-              <p>Backed by an academic foundation in Computer Science (HND) and professional training in Business Administration, Patrick combines technical understanding with strategic communication skills. His expertise is further enhanced through Google Skillshop certifications, enabling him to apply data-driven insights, digital marketing best practices, and performance optimization strategies to every campaign.</p>
-              <p>Passionate about community building, Patrick prioritizes meaningful engagement across platforms, ensuring that every post delivers value, drives interaction, and supports the cooperative's growth and visibility.</p>`
+    // patrick: {
+    //     name: "Patrick Ubi",
+    //     role: "Head, Digital Media and communication Strategy",
+    //     img: "{{ asset('assets/landing/images/patrickpics.jpeg') }}",
+    //     bio: `<p>Patrick Ubi is an experienced Social Media Manager responsible for overseeing the cooperative's online presence across all social media platforms. With over six years of professional experience, he creates compelling, purpose-driven content, manages community interactions, and drives digital engagement to strengthen communication, visibility, and brand consistency within and beyond the community.</p>
+    //           <p>Backed by an academic foundation in Computer Science (HND) and professional training in Business Administration, Patrick combines technical understanding with strategic communication skills. His expertise is further enhanced through Google Skillshop certifications, enabling him to apply data-driven insights, digital marketing best practices, and performance optimization strategies to every campaign.</p>
+    //           <p>Passionate about community building, Patrick prioritizes meaningful engagement across platforms, ensuring that every post delivers value, drives interaction, and supports the cooperative's growth and visibility.</p>`
 
-    }
+    // }
 };
 
 function openTeamModal(key) {
