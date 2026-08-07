@@ -22,9 +22,9 @@ class ProcessQuarterlyBenefits extends Command
     public function handle(): int
     {
         $this->info('Starting quarterly benefits processing...');
-        
+
         $dryRun = $this->option('dry-run');
-        
+
         if ($dryRun) {
             $this->warn('Running in DRY-RUN mode - no changes will be made');
         }
@@ -36,16 +36,18 @@ class ProcessQuarterlyBenefits extends Command
                 $results = $this->membershipService->processQuarterlyBenefitsForAllUsers();
             }
 
-            $this->info("Processing complete!");
+            $this->info('Processing complete!');
             $this->info("Total evaluated: {$results['total_evaluated']}");
             $this->info("Total qualified: {$results['total_qualified']}");
-            
-            if (!empty($results['errors'])) {
-                $this->warn('Errors encountered: ' . count($results['errors']));
+
+            if (! empty($results['errors'])) {
+                $this->warn('Errors encountered: '.count($results['errors']));
                 foreach ($results['errors'] as $error) {
                     $this->error("User {$error['user_id']}: {$error['error']}");
                 }
             }
+
+            \App\Helpers\CronLogger::logRun($this->signature);
 
             Log::info('Quarterly benefits command executed', [
                 'dry_run' => $dryRun,
@@ -58,6 +60,7 @@ class ProcessQuarterlyBenefits extends Command
             Log::error('Quarterly benefits processing failed', [
                 'error' => $e->getMessage(),
             ]);
+
             return Command::FAILURE;
         }
     }
@@ -81,9 +84,9 @@ class ProcessQuarterlyBenefits extends Command
             if ($tier) {
                 $communityCount = $this->membershipService->calculateUserCommunityCount($user);
                 $qualifies = $tier->qualifiesForFreeFoodPack($communityCount);
-                
+
                 $results['total_evaluated']++;
-                
+
                 if ($qualifies) {
                     $results['total_qualified']++;
                 }

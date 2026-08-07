@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\BankAccount;
 use App\Models\MembershipTier;
 use App\Models\PickupLocation;
 use App\Models\SavingsPlan;
@@ -26,6 +27,7 @@ class RegisterController extends Controller
         $tiers = MembershipTier::active()->ordered()->get();
         $locations = PickupLocation::active()->get();
         $savingsPlans = SavingsPlan::with('activeOptions')->active()->get();
+        $bankAccounts = BankAccount::getAllActive();
 
         $plansData = $savingsPlans->mapWithKeys(function ($plan) {
             return [$plan->id => [
@@ -41,7 +43,7 @@ class RegisterController extends Controller
             ]];
         });
 
-        return view('auth.register', compact('referralCode', 'referrer', 'tiers', 'locations', 'savingsPlans', 'plansData'));
+        return view('auth.register', compact('referralCode', 'referrer', 'tiers', 'locations', 'savingsPlans', 'plansData', 'bankAccounts'));
     }
 
     public function register(Request $request)

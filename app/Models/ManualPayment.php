@@ -83,8 +83,12 @@ class ManualPayment extends Model
         return $this->status === 'rejected';
     }
 
-    public function verify(int $adminId, string $notes = null): void
+    public function verify(int $adminId, ?string $notes = null): void
     {
+        if ($this->isVerified()) {
+            throw new \DomainException('This payment has already been verified.');
+        }
+
         $this->update([
             'status' => 'verified',
             'verified_by' => $adminId,
@@ -106,7 +110,7 @@ class ManualPayment extends Model
     public static function generateReference(): string
     {
         do {
-            $reference = 'MP-' . strtoupper(uniqid());
+            $reference = 'MP-'.strtoupper(uniqid());
         } while (self::where('reference', $reference)->exists());
 
         return $reference;

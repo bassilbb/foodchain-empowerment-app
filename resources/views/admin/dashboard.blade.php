@@ -359,6 +359,65 @@
         @endif
     </div>
 </div>
+
+<!-- Cron Job Status -->
+<div style="margin-top: 2rem;">
+    <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem;">
+        <svg style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        Cron Job Status
+        <span style="font-size: 12px; font-weight: 400; color: #94a3b8; margin-left: 8px;">Last 48h = OK, Older = Stale</span>
+    </h3>
+    <div class="stat-card" style="padding: 0; overflow: hidden;">
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <thead>
+                    <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc;">
+                        <th style="padding: 14px 20px; text-align: left; color: #64748b; font-weight: 600;">Task</th>
+                        <th style="padding: 14px 20px; text-align: left; color: #64748b; font-weight: 600;">Command</th>
+                        <th style="padding: 14px 20px; text-align: left; color: #64748b; font-weight: 600;">Last Run</th>
+                        <th style="padding: 14px 20px; text-align: left; color: #64748b; font-weight: 600;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($cronSummary as $cron)
+                    <tr style="border-bottom: 1px solid #f1f5f9;">
+                        <td style="padding: 14px 20px; color: #1e293b; font-weight: 500;">{{ $cron['label'] }}</td>
+                        <td style="padding: 14px 20px; color: #64748b; font-family: monospace; font-size: 13px;">{{ $cron['command'] }}</td>
+                        <td style="padding: 14px 20px; color: #64748b;">
+                            @if($cron['last_run'])
+                                {{ \Carbon\Carbon::parse($cron['last_run'])->diffForHumans() }}
+                            @else
+                                <span style="color: #94a3b8;">Never</span>
+                            @endif
+                        </td>
+                        <td style="padding: 14px 20px;">
+                            @if($cron['status'] === 'ok')
+                                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #d1fae5; color: #065f46;">
+                                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>
+                                    OK
+                                </span>
+                            @elseif($cron['status'] === 'stale')
+                                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #fef3c7; color: #92400e;">
+                                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #f59e0b;"></span>
+                                    Stale
+                                </span>
+                            @else
+                                <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #fee2e2; color: #991b1b;">
+                                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #ef4444;"></span>
+                                    Never Run
+                                </span>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p style="font-size: 12px; color: #94a3b8; margin-top: 8px;">
+        To manually test: <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">php artisan accounts:process-weekly-deductions</code>
+    </p>
+</div>
 @endsection
 
 @push('scripts')

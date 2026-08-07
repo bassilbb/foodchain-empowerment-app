@@ -238,7 +238,7 @@
         <div style="flex: 1; min-width: 250px;">
             <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Current Logo</p>
             @php
-            $logoUrl = $logoSetting && $logoSetting->value ? asset('storage/' . $logoSetting->value) : null;
+            $logoUrl = site_logo();
             @endphp
             @if($logoUrl)
             <div style="width: 120px; height: 120px; background: #ffffff; border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15), 0 8px 16px -4px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.05); transform: perspective(500px) rotateX(5deg);">
@@ -295,7 +295,7 @@
         <div style="flex: 1; min-width: 250px;">
             <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Current Favicon</p>
             @php
-            $faviconUrl = $faviconSetting && $faviconSetting->value ? asset('storage/' . $faviconSetting->value) : null;
+            $faviconUrl = site_favicon();
             @endphp
             @if($faviconUrl)
             <div style="width: 64px; height: 64px; background: #ffffff; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);">
@@ -544,13 +544,8 @@ function previewLogo(event) {
             </div>
             <div class="form-group">
                 <label class="form-label">Deduction Time</label>
-                <select name="settings[deduction_time]" class="form-select">
-                    @php $deductionTime = \App\Models\Setting::get('deduction_time', '02:00'); @endphp
-                    @for($h = 0; $h <= 23; $h++)
-                    @php $t = sprintf('%02d:00', $h); @endphp
-                    <option value="{{ $t }}" {{ $deductionTime === $t ? 'selected' : '' }}>{{ \Carbon\Carbon::createFromFormat('H:i', $t)->format('g:i A') }}</option>
-                    @endfor
-                </select>
+                <input type="time" name="settings[deduction_time]" value="{{ \App\Models\Setting::get('deduction_time', '02:00') }}" class="form-input">
+                <p style="font-size: 12px; color: #94a3b8; margin-top: 6px;">Set any time (HH:MM) for testing. For example, set 5 minutes from now to test quickly.</p>
             </div>
             <div class="form-group">
                 <label class="form-label">Retry Day</label>
@@ -564,13 +559,7 @@ function previewLogo(event) {
             </div>
             <div class="form-group">
                 <label class="form-label">Retry Time</label>
-                <select name="settings[deduction_retry_time]" class="form-select">
-                    @php $retryTime = \App\Models\Setting::get('deduction_retry_time', '02:00'); @endphp
-                    @for($h = 0; $h <= 23; $h++)
-                    @php $t = sprintf('%02d:00', $h); @endphp
-                    <option value="{{ $t }}" {{ $retryTime === $t ? 'selected' : '' }}>{{ \Carbon\Carbon::createFromFormat('H:i', $t)->format('g:i A') }}</option>
-                    @endfor
-                </select>
+                <input type="time" name="settings[deduction_retry_time]" value="{{ \App\Models\Setting::get('deduction_retry_time', '02:00') }}" class="form-input">
             </div>
         </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
@@ -581,6 +570,33 @@ function previewLogo(event) {
         </div>
     </div>
 </form>
+
+{{-- Manual Deduction Triggers --}}
+<div class="page-card">
+    <h3 class="page-card-title">
+        <div style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);">
+            <svg style="width: 20px; height: 20px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        Manual Deduction Triggers
+    </h3>
+    <p style="font-size: 14px; color: #64748b; margin-bottom: 20px;">Manually trigger deduction commands to test without waiting for the cron schedule.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <form method="POST" action="{{ route('admin.settings.run-deductions') }}">
+            @csrf
+            <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 4px 14px rgba(249,115,22,0.35);" data-confirm='{"title":"Run Deductions Now?","text":"This will process weekly contribution deductions from all active user wallets.","btnText":"Run Deductions","btnClass":"confirm","iconClass":"warning"}'>
+                <svg style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                Run Deductions Now
+            </button>
+        </form>
+        <form method="POST" action="{{ route('admin.settings.retry-deductions') }}">
+            @csrf
+            <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 14px rgba(139,92,246,0.35);" data-confirm='{"title":"Retry Defaulted Deductions?","text":"This will retry deductions for accounts that defaulted on the last attempt.","btnText":"Retry Now","btnClass":"confirm-purple","iconClass":"warning"}'>
+                <svg style="width: 18px; height: 18px; vertical-align: middle; margin-right: 6px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                Retry Defaulted Now
+            </button>
+        </form>
+    </div>
+</div>
 
 {{-- Security Settings (Separate Form) --}}
 <form method="POST" action="{{ route('admin.settings.update') }}">

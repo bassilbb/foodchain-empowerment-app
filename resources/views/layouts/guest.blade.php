@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
+    <link rel="icon" type="image/x-icon" href="{{ site_favicon() ?? '/favicon.ico' }}">
+    <link rel="apple-touch-icon" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -59,7 +61,11 @@
         <div class="auth-card">
             <div class="auth-header">
                 <div class="auth-logo">
+                    @if(site_logo())
+                    <img src="{{ site_logo() }}" alt="{{ app_name() }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+                    @else
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    @endif
                 </div>
                 <h1 class="auth-title">{{ config('app.name', 'FCCEI') }}</h1>
                 <p class="auth-subtitle">{{ $pageSubtitle ?? 'Community Empowerment Initiative' }}</p>

@@ -207,6 +207,8 @@ class DashboardController extends Controller
             ]);
         }
 
+        $cronSummary = \App\Helpers\CronLogger::getSummary();
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'activeUsers',
@@ -236,7 +238,8 @@ class DashboardController extends Controller
             'usersByTier',
             'recentUsers',
             'recentPayments',
-            'monthlyRevenue'
+            'monthlyRevenue',
+            'cronSummary'
         ));
     }
 }

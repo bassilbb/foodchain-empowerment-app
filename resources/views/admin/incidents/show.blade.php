@@ -261,10 +261,11 @@
                 <h3 class="page-card-title" style="color: #dc2626;">Danger Zone</h3>
             </div>
             <div class="page-card-body">
-                <form action="{{ route('admin.incidents.destroy', $incident) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this incident?')">
+                <form action="{{ route('admin.incidents.destroy', $incident) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" style="width: 100%; padding: 0.5rem; background: #dc2626; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
+                    <button type="submit" style="width: 100%; padding: 0.5rem; background: #dc2626; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;"
+                        data-confirm='{"title":"Delete Incident?","text":"Are you sure you want to delete this incident?","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'>
                         Delete Incident
                     </button>
                 </form>

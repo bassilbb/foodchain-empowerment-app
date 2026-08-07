@@ -69,13 +69,15 @@
                 </form>
                 @endif
                 @if($supportPlan->status === 'matured')
-                <form action="{{ route('admin.food-support.withdraw', $supportPlan) }}" method="POST" style="display: inline;" onsubmit="return confirm('Process withdrawal? Distribution & voucher will be created.')">
-                    @csrf <button class="btn-action btn-withdraw">Process Withdrawal</button>
+                <form action="{{ route('admin.food-support.withdraw', $supportPlan) }}" method="POST" style="display: inline;">
+                    @csrf <button class="btn-action btn-withdraw"
+                        data-confirm='{"title":"Process Withdrawal?","text":"Process withdrawal? Distribution & voucher will be created.","btnText":"Process","btnClass":"confirm","iconClass":"warning"}'>Process Withdrawal</button>
                 </form>
                 @endif
                 @if(!in_array($supportPlan->status, ['matured', 'withdrawn', 'cancelled']))
-                <form action="{{ route('admin.food-support.cancel', $supportPlan) }}" method="POST" style="display: inline;" onsubmit="return confirm('Cancel this plan?')">
-                    @csrf <button class="btn-action btn-cancel">Cancel</button>
+                <form action="{{ route('admin.food-support.cancel', $supportPlan) }}" method="POST" style="display: inline;">
+                    @csrf <button class="btn-action btn-cancel"
+                        data-confirm='{"title":"Cancel Plan?","text":"Cancel this plan?","btnText":"Cancel","btnClass":"confirm-danger","iconClass":"danger"}'>Cancel</button>
                 </form>
                 @endif
             </div>

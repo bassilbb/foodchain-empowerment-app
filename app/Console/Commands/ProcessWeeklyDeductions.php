@@ -9,16 +9,18 @@ class ProcessWeeklyDeductions extends Command
 {
     protected $signature = 'accounts:process-weekly-deductions';
 
-    protected $description = 'Process weekly contribution deductions from wallets for all active accounts';
+    protected $description = 'Process weekly contribution deductions from user wallets';
 
-    public function handle(): int
+    public function handle()
     {
-        $this->info('Processing weekly deductions...');
+        $this->info('Starting weekly deduction processing...');
 
-        $result = app(WalletService::class)->processWeeklyDeductions();
-
-        $this->info("Processed {$result['processed']} deductions, {$result['defaulted']} defaults recorded.");
-
-        return Command::SUCCESS;
+        try {
+            app(WalletService::class)->processWeeklyDeductions();
+            \App\Helpers\CronLogger::logRun($this->signature);
+            $this->info('Weekly deductions processed successfully.');
+        } catch (\Exception $e) {
+            $this->error('Error: '.$e->getMessage());
+        }
     }
 }

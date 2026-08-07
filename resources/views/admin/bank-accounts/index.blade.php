@@ -70,10 +70,11 @@
                     onclick="openEditModal({{ $account->id }}, '{{ addslashes($account->bank_name) }}', '{{ addslashes($account->account_number) }}', '{{ addslashes($account->account_name) }}', '{{ $account->account_type ?? 'current' }}', '{{ addslashes($account->instructions ?? '') }}', {{ $account->is_active ? 'true' : 'false' }}, {{ $account->is_default ? 'true' : 'false' }})">
                     Edit
                 </button>
-                <form method="POST" action="{{ route('admin.bank-accounts.destroy', $account) }}" onsubmit="return confirm('Are you sure you want to delete this bank account?')" style="display: inline;">
+                <form method="POST" action="{{ route('admin.bank-accounts.destroy', $account) }}" style="display: inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
+                        data-confirm='{"title":"Delete Bank Account?","text":"Are you sure you want to delete this bank account?","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'
                         style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(239,68,68,0.3);"
                         onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform=''">
                         Delete

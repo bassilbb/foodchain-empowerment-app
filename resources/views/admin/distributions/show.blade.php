@@ -228,14 +228,15 @@
             </form>
             @endif
             @if(!in_array($distribution->status, ['delivered', 'completed', 'cancelled']))
-            <form method="POST" action="{{ route('admin.distributions.cancel', $distribution) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to cancel this distribution?')">
+            <form method="POST" action="{{ route('admin.distributions.cancel', $distribution) }}" style="display:inline;">
                 @csrf
                 <div style="display:flex;gap:0.75rem;align-items:flex-end;flex-wrap:wrap;">
                     <div>
                         <label style="display:block;font-size:0.75rem;font-weight:500;color:#64748b;margin-bottom:0.25rem;">Reason</label>
                         <input type="text" name="reason" style="padding:0.625rem 1rem;border:1px solid #fecaca;border-radius:8px;font-size:0.875rem;" placeholder="Cancellation reason" required>
                     </div>
-                    <button type="submit" class="btn btn-secondary" style="color:#dc2626;border-color:#fecaca;">
+                    <button type="submit" class="btn btn-secondary" style="color:#dc2626;border-color:#fecaca;"
+                        data-confirm='{"title":"Cancel Distribution?","text":"Are you sure you want to cancel this distribution?","btnText":"Cancel","btnClass":"confirm-danger","iconClass":"danger"}'>
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         Cancel
                     </button>

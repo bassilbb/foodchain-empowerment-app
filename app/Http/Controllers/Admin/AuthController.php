@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-
 class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('admin.auth.login');
     }
 
@@ -33,7 +36,7 @@ class AuthController extends Controller
             /** @var \App\Models\AdminUser $admin */
             $admin = Auth::guard('admin')->user();
 
-            if (!$admin->is_active) {
+            if (! $admin->is_active) {
                 Auth::guard('admin')->logout();
                 throw ValidationException::withMessages([
                     'email' => 'Your account has been deactivated.',

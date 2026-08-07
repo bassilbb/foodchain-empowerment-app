@@ -326,6 +326,8 @@
 
                 <div class="back-link">
                     <a href="/">← Back to Home</a>
+                    <span style="margin: 0 8px; color: #d1d5db;">|</span>
+                    <a href="{{ route('admin.login') }}" style="color: #10b981;">Admin Login</a>
                 </div>
             </div>
         </div>

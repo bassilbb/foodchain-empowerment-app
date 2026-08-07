@@ -16,6 +16,7 @@ class ProcessRetryDefaultedDeductions extends Command
         $this->info('Retrying defaulted deductions...');
 
         $result = app(WalletService::class)->retryDefaultedDeductions();
+        \App\Helpers\CronLogger::logRun($this->signature);
 
         $this->info("Processed {$result['processed']} retry deductions, {$result['still_defaulted']} still lacking funds.");
 

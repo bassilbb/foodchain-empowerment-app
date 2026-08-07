@@ -76,13 +76,18 @@ class ManualPaymentController extends Controller
 
         $adminId = Auth::guard('admin')->id();
 
-        DB::transaction(function () use ($manualPayment, $request, $adminId) {
-            if ($request->action === 'verify') {
-                $this->processVerifiedPayment($manualPayment, $adminId, $request->notes);
-            } else {
-                $manualPayment->reject($adminId, $request->notes);
-            }
-        });
+        try {
+            DB::transaction(function () use ($manualPayment, $request, $adminId) {
+                if ($request->action === 'verify') {
+                    $this->processVerifiedPayment($manualPayment, $adminId, $request->notes);
+                } else {
+                    $manualPayment->reject($adminId, $request->notes);
+                }
+            });
+        } catch (\DomainException $e) {
+            return redirect()->route('admin.manual-payments.show', $manualPayment)
+                ->with('error', $e->getMessage());
+        }
 
         $message = $request->action === 'verify'
             ? 'Payment verified successfully'
@@ -94,6 +99,10 @@ class ManualPaymentController extends Controller
 
     private function processVerifiedPayment(ManualPayment $manualPayment, int $adminId, ?string $notes = null): void
     {
+        if ($manualPayment->payment_id) {
+            throw new \DomainException('This payment has already been processed.');
+        }
+
         $manualPayment->verify($adminId, $notes);
 
         $payment = Payment::create([

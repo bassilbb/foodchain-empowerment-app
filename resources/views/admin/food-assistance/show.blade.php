@@ -86,9 +86,10 @@
                 <form action="{{ route('admin.food-assistance.complete', $assistancePlan) }}" method="POST" style="display: inline;">
                     @csrf <button class="btn-action btn-complete">Mark Completed</button>
                 </form>
-                <form action="{{ route('admin.food-assistance.cancel', $assistancePlan) }}" method="POST" style="display: inline;" onsubmit="return confirm('Cancel this plan?')">
+                <form action="{{ route('admin.food-assistance.cancel', $assistancePlan) }}" method="POST" style="display: inline;">
                     @csrf <input type="hidden" name="admin_notes" value="Cancelled by admin">
-                    <button class="btn-action btn-cancel">Cancel</button>
+                    <button class="btn-action btn-cancel"
+                        data-confirm='{"title":"Cancel Plan?","text":"Cancel this plan?","btnText":"Cancel","btnClass":"confirm-danger","iconClass":"danger"}'>Cancel</button>
                 </form>
                 @endif
             </div>

@@ -222,6 +222,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/membership/renew', [UserPaymentController::class, 'initiateRenewal'])->name('membership.renew.post');
 });
 
+// Serve logo/favicon files from uploads/ or storage/app/public/ (no symlink needed)
+Route::get('/serve-logo/{path}', function (string $path) {
+    $file = public_path('uploads/'.$path);
+    if (file_exists($file)) {
+        return response()->file($file);
+    }
+    $file = storage_path('app/public/'.$path);
+    if (file_exists($file)) {
+        return response()->file($file);
+    }
+    abort(404);
+})->where('path', '.*');
+
 // Admin routes - prefix with /admin
 Route::prefix('admin')->group(base_path('routes/admin.php'));
 

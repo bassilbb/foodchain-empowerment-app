@@ -32,11 +32,9 @@ use App\Http\Controllers\Admin\SupportController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Guest routes (not authenticated)
-Route::middleware('guest:admin')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'login'])->name('admin.login.post');
-});
+// Admin Login (no guest middleware — accessible to all)
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/login', [AuthController::class, 'login'])->name('admin.login.post');
 
 // Authenticated admin routes
 Route::middleware(['admin'])->group(function () {
@@ -159,6 +157,8 @@ Route::middleware(['admin'])->group(function () {
             Route::post('/logo/delete', [SettingController::class, 'deleteLogo'])->name('delete-logo');
             Route::post('/favicon', [SettingController::class, 'updateFavicon'])->name('update-favicon');
             Route::post('/favicon/delete', [SettingController::class, 'deleteFavicon'])->name('delete-favicon');
+            Route::post('/run-deductions', [SettingController::class, 'runDeductions'])->name('run-deductions');
+            Route::post('/retry-deductions', [SettingController::class, 'retryDeductions'])->name('retry-deductions');
         });
 
         // Page Content Management

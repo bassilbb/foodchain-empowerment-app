@@ -163,7 +163,7 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Membership <span class="text-emerald-500">Benefits</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Build your community and unlock higher levels of food security benefits with our structured membership grades.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Access increasing food security benefits by advancing through our structured membership levels.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
@@ -175,15 +175,15 @@
                             <p class="text-sm text-gray-500 mb-6">Initial Entry Level</p>
                             <ul class="space-y-3 mb-6">
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Purchase Instant Food Pack: ₦20,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Food Loan: Union of 10, 30% contribution, bi-weekly repayment, 3-month tenor</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-cyan-600 mt-1 mr-3"></i><span>Community Building Category: All</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Target: Women, Low-Income Households, Micro-Business Owners & Students</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-cyan-600 mt-1 mr-3"></i><span>Designed to provide essential food security benefits through our structured membership program.</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Target: Women, Low-Income Households, Micro-Business Owners & Students</span></li> -->
                             </ul>
                             <div class="mb-4"><button onclick="toggleBenefits('bronze')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
                             <div id="bronze-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Build Community of 10-40 Members <b>(Get Mini Free Food Pack Quarterly)</b></span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Build Community of 10-40 Members <b>(Get Mini Free Food Pack Quarterly)</b></span></li> -->
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li> -->
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Available (fees paid by member)</span></li>
                             </div>
                             <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
@@ -195,18 +195,18 @@
                                 <i class="fas fa-medal text-2xl text-gray-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Silver Benefits</h3>
-                            <p class="text-sm text-gray-500 mb-6">Community Builder</p>
+                            <p class="text-sm text-gray-500 mb-6">Standard Level</p>
                             <ul class="space-y-3 mb-6">
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-utensils text-cyan-600 mt-1 mr-3"></i><span>Purchase Instant Food Pack: ₦50,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Food Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Regular Food Eligibility</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-infinity text-green-500 mt-1 mr-3"></i><span>Target: All Categories</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-utensils text-cyan-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Provides enhanced food security benefits with greater access to support and opportunities as members progress within the program.</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-infinity text-green-500 mt-1 mr-3"></i><span>Target: All Categories</span></li> -->
                             </ul>
                             <div class="mb-4"><button onclick="toggleBenefits('silver')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
                             <div id="silver-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-cyan-600 mt-1 mr-3"></i><span>Build Community of 50-90 Members <b>(Get Average Free Food Pack Quarterly)</b></span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-cyan-600 mt-1 mr-3"></i><span>Build Community of 50-90 Members <b>(Get Average Free Food Pack Quarterly)</b></span></li> -->
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Fees Paid by Member</span></li>
                             </div>
                             <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
@@ -222,15 +222,15 @@
                             <p class="text-sm text-gray-500 mb-6">Advanced Impact</p>
                             <ul class="space-y-3 mb-6">
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-shopping-basket text-yellow-600 mt-1 mr-3"></i><span>Purchase Instant Food Pack: ₦100,000</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Food Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Priority Pickup Support</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-yellow-600 mt-1 mr-3"></i><span>Community Building Category: All</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-shopping-basket text-yellow-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Delivers premium food security benefits, offering increased support and exclusive opportunities for committed members.</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-yellow-600 mt-1 mr-3"></i><span>Community Building Category: All</span></li> -->
                             </ul>
                             <div class="mb-4"><button onclick="toggleBenefits('gold')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
                             <div id="gold-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-yellow-600 mt-1 mr-3"></i><span>Build Community of 100-499 Members <b>(Get Standard Free Food Pack Quarterly)</b></span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li>
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-yellow-600 mt-1 mr-3"></i><span>Build Community of 100-499 Members <b>(Get Standard Free Food Pack Quarterly)</b></span></li> -->
+                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Free</span></li>
                             </div>
                             <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
@@ -242,18 +242,18 @@
                                 <i class="fas fa-gem text-2xl text-emerald-300"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-2">Emerald Benefits</h3>
-                            <p class="text-emerald-300 text-sm mb-6">Community Leader</p>
+                            <p class="text-emerald-300 text-sm mb-6">Prestige Level</p>
                             <ul class="space-y-3 mb-6">
                                 <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-infinity text-emerald-400 mt-1 mr-3"></i><span>FREE Annual Subscription</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-truck-loading text-emerald-400 mt-1 mr-3"></i><span>Purchase Instant Food Pack: ₦200,000</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Food Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Community Building Category: All</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-infinity text-emerald-400 mt-1 mr-3"></i><span>Target: All Categories</span></li>
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-truck-loading text-emerald-400 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Our highest membership tier, providing comprehensive food security benefits, priority access to program opportunities, and exclusive member privileges.</span></li>
+                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-infinity text-emerald-400 mt-1 mr-3"></i><span>Target: All Categories</span></li> -->
                             </ul>
                             <div class="mb-4"><button onclick="toggleBenefits('emerald')" class="text-emerald-300 text-sm font-semibold hover:text-emerald-200 transition">+ Additional Benefits</button></div>
                             <div id="emerald-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-500">
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Build Community of 500-1000 Members <b>(Get Premium Free Food Pack Quarterly)</b></span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li>
+                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Build Community of 500-1000 Members <b>(Get Premium Free Food Pack Quarterly)</b></span></li> -->
+                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
                                 <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-truck-loading text-emerald-400 mt-1 mr-3"></i><span>Pickup & Delivery: Free</span></li>
                             </div>
                             <div class="py-3 text-center bg-emerald-800 rounded-lg font-bold">Ultimate Milestone</div>
@@ -400,7 +400,7 @@
                 <div class="bg-gray-50/50 rounded-[3.5rem] p-10 md:p-16 flex flex-col lg:flex-row gap-16 items-center border border-gray-100">
                     <div class="lg:w-1/2 space-y-8">
                         <h4 class="text-3xl font-bold text-gray-900 leading-tight">Revolutionizing Food Security</h4>
-                        <p class="text-gray-600 text-lg leading-relaxed">At FCCEI, we believe food security is the foundation of economic stability. Through our innovative revolving food loan model, we foster long-term financial independence.</p>
+                        <p class="text-gray-600 text-lg leading-relaxed">At FCCEI, we believe food security is the foundation of economic stability. Through our innovative community-driven approach, we empower individuals and families to achieve long-term financial independence and sustainable food security.</p>
                         <div class="space-y-4">
                             <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Direct support for female-led households.</span></div>
                             <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Educational grants for students.</span></div>
@@ -412,7 +412,7 @@
                             <img src="{{ asset('assets/landing/images/warehouse.png') }}" alt="FCCEI Operations" class="w-full h-[400px] object-cover">
                         </div>
                         <div class="absolute -bottom-6 -right-4 md:-right-10 bg-white p-8 rounded-3xl shadow-2xl border border-gray-50 max-w-xs animate-bounce-slow">
-                            <p class="text-gray-700 font-medium italic mb-4 leading-relaxed">"The revolving loan changed my business and fed my family when I had nothing."</p>
+                            <p class="text-gray-700 font-medium italic mb-4 leading-relaxed">"The support I received changed my business and helped me provide for my family when I had nothing."</p>
                             <p class="text-emerald-700 text-xs font-bold uppercase tracking-widest">— Beneficiary from Lagos</p>
                         </div>
                     </div>
@@ -480,7 +480,7 @@
                     <div class="swiper-pagination"></div>
                 </div>
                 <div class="mt-16 text-center">
-                    <h3 class="text-3xl font-bold mb-4 text-emerald-600">Become a Partner or Sponsor</h3>
+                    <!-- <h3 class="text-3xl font-bold mb-4 text-emerald-600">Become a Partner or Sponsor</h3> -->
                     <p class="text-gray-600 mb-6">Support our mission to eradicate hunger and empower communities.</p>
                     <button id="openSponsorModal" class="px-8 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition shadow-lg">Get Involved</button>
                 </div>
@@ -553,6 +553,10 @@
                                 <div><h4 class="font-bold text-gray-900 mb-1">Office Address / Collection Centre:</h4><p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY,<br>Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p></div>
                             </div>
                             <div class="flex items-start">
+                                <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-map-marker-alt text-emerald-600"></i></div>
+                                <div><h4 class="font-bold text-gray-900 mb-1">Food Store/ Warehouse:</h4><p class="text-gray-600">KM 54, Lagos - Ibadan Expressway, Mowe, Ogun State.</p></div>
+                            </div>
+                            <div class="flex items-start">
                                 <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-phone text-cyan-600"></i></div>
                                 <div><h4 class="font-bold text-gray-900 mb-1">Phone Number</h4><p class="text-gray-600">+234 816 801 8123, +234 807 070 1855</p></div>
                             </div>
@@ -598,13 +602,13 @@
             </div>
         </section>
 
-        <section class="py-20 bg-gradient-to-r from-emerald-600 to-cyan-600">
+        <!-- <section class="py-20 bg-gradient-to-r from-emerald-600 to-cyan-600">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-4xl font-bold text-white mb-6">{{ App\Models\PageContent::getContent('landing', 'cta_title', 'Ready to Make a Difference?') }}</h2>
                 <p class="text-xl text-white/90 max-w-2xl mx-auto mb-8">{{ App\Models\PageContent::getContent('landing', 'cta_content', 'Join thousands of members already benefiting from FoodChain community programs.') }}</p>
                 <a href="{{ route('register') }}" class="inline-block px-10 py-4 bg-white text-emerald-700 font-bold rounded-lg text-lg hover:bg-gray-100 transition shadow-xl">Get Started Today</a>
             </div>
-        </section>
+        </section> -->
     </main>
 
     <footer class="bg-gray-900 text-white">

@@ -67,9 +67,10 @@
                 <a href="{{ route('admin.savings-plans.edit', $plan) }}" class="btn-primary btn-sm" style="flex: 1; text-align: center;">
                     Edit Plan
                 </a>
-                <form action="{{ route('admin.savings-plans.destroy', $plan) }}" method="POST" style="flex: 1;" onsubmit="return confirm('Delete this plan? Existing accounts will not be affected.')">
+                <form action="{{ route('admin.savings-plans.destroy', $plan) }}" method="POST" style="flex: 1;">
                     @csrf @method('DELETE')
-                    <button type="submit" class="btn-danger btn-sm" style="width: 100%;">
+                    <button type="submit" class="btn-danger btn-sm" style="width: 100%;"
+                        data-confirm='{"title":"Delete Plan?","text":"Delete this plan? Existing accounts will not be affected.","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'>
                         Delete
                     </button>
                 </form>

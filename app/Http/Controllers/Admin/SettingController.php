@@ -112,15 +112,21 @@ class SettingController extends Controller
         try {
             $oldLogo = Setting::where('key', 'site_logo')->first();
             if ($oldLogo && $oldLogo->value) {
-                $oldPath = public_path('uploads/'.$oldLogo->value);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
+                foreach (['uploads/', 'storage/app/public/'] as $dir) {
+                    $p = $dir === 'uploads/' ? public_path($dir.$oldLogo->value) : storage_path($dir.$oldLogo->value);
+                    if (file_exists($p)) {
+                        unlink($p);
+                    }
                 }
             }
 
             $file = $request->file('logo');
             $filename = 'logo_'.time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('uploads/logos'), $filename);
+            $uploadDir = public_path('uploads/logos');
+            if (! file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            $file->move($uploadDir, $filename);
             $path = 'logos/'.$filename;
 
             Setting::updateOrCreate(
@@ -138,9 +144,11 @@ class SettingController extends Controller
     {
         $logo = Setting::where('key', 'site_logo')->first();
         if ($logo && $logo->value) {
-            $oldPath = public_path('uploads/'.$logo->value);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+            foreach (['uploads/', 'storage/app/public/'] as $dir) {
+                $p = $dir === 'uploads/' ? public_path($dir.$logo->value) : storage_path($dir.$logo->value);
+                if (file_exists($p)) {
+                    unlink($p);
+                }
             }
             $logo->delete();
         }
@@ -157,15 +165,21 @@ class SettingController extends Controller
         try {
             $oldFavicon = Setting::where('key', 'site_favicon')->first();
             if ($oldFavicon && $oldFavicon->value) {
-                $oldPath = public_path('uploads/'.$oldFavicon->value);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
+                foreach (['uploads/', 'storage/app/public/'] as $dir) {
+                    $p = $dir === 'uploads/' ? public_path($dir.$oldFavicon->value) : storage_path($dir.$oldFavicon->value);
+                    if (file_exists($p)) {
+                        unlink($p);
+                    }
                 }
             }
 
             $file = $request->file('favicon');
             $filename = 'favicon_'.time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('uploads/favicons'), $filename);
+            $uploadDir = public_path('uploads/favicons');
+            if (! file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            $file->move($uploadDir, $filename);
             $path = 'favicons/'.$filename;
 
             Setting::updateOrCreate(
@@ -183,14 +197,40 @@ class SettingController extends Controller
     {
         $favicon = Setting::where('key', 'site_favicon')->first();
         if ($favicon && $favicon->value) {
-            $oldPath = public_path('uploads/'.$favicon->value);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+            foreach (['uploads/', 'storage/app/public/'] as $dir) {
+                $p = $dir === 'uploads/' ? public_path($dir.$favicon->value) : storage_path($dir.$favicon->value);
+                if (file_exists($p)) {
+                    unlink($p);
+                }
             }
             $favicon->delete();
         }
 
         return back()->with('success', 'Favicon deleted successfully.');
+    }
+
+    public function runDeductions()
+    {
+        try {
+            Artisan::call('accounts:process-weekly-deductions');
+            $output = Artisan::output();
+
+            return back()->with('success', 'Deductions completed. Output: '.trim($output));
+        } catch (\Exception $e) {
+            return back()->with('error', 'Deduction command failed: '.$e->getMessage());
+        }
+    }
+
+    public function retryDeductions()
+    {
+        try {
+            Artisan::call('accounts:retry-defaulted-deductions');
+            $output = Artisan::output();
+
+            return back()->with('success', 'Retry completed. Output: '.trim($output));
+        } catch (\Exception $e) {
+            return back()->with('error', 'Retry command failed: '.$e->getMessage());
+        }
     }
 
     public function updateRolePermissions(Request $request)

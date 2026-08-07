@@ -466,6 +466,35 @@
                         <input type="hidden" name="savings_plan_option_id" id="savingsPlanOptionId" value="">
                         <input type="hidden" name="selected_tier_id" id="selectedTierId" value="{{ $tiers->first()->id ?? '' }}">
 
+                        @if(count($bankAccounts) > 0)
+                        @php $defaultAccount = $bankAccounts->firstWhere('is_default', true) ?? $bankAccounts->first(); @endphp
+                        <div class="form-group">
+                            <label>Bank Account Details</label>
+                            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Transfer your payment to the account below. Your account will be activated after verification.</p>
+                            <div style="background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 14px; padding: 16px;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                    <div>
+                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Bank</p>
+                                        <p style="font-weight: 600; color: #1e293b; margin: 2px 0 0;">{{ $defaultAccount->bank_name }}</p>
+                                    </div>
+                                    <div>
+                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Account Number</p>
+                                        <p style="font-size: 18px; font-weight: 800; color: #059669; margin: 2px 0 0; letter-spacing: 0.1em;">{{ $defaultAccount->account_number }}</p>
+                                    </div>
+                                    <div style="grid-column: 1 / -1;">
+                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Account Name</p>
+                                        <p style="font-weight: 600; color: #1e293b; margin: 2px 0 0;">{{ $defaultAccount->account_name }}</p>
+                                    </div>
+                                </div>
+                                @if($defaultAccount->instructions)
+                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #bbf7d0; background: #fffbeb; border-radius: 8px; padding: 0.75rem;">
+                                    <p style="font-size: 12px; color: #92400e; margin: 0;">{{ $defaultAccount->instructions }}</p>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <label>Choose Your Membership Plan</label>
                             <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Select your membership tier to unlock benefits and food packages.</p>

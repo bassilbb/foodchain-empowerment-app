@@ -170,7 +170,8 @@
             <form method="POST" action="{{ route('admin.membership-tiers.destroy', $membershipTier) }}" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" style="padding: 0.5rem 1rem; color: #dc2626; font-weight: 500; background: none; border: none; cursor: pointer;" onclick="return confirm('Are you sure?')">
+                <button type="submit" style="padding: 0.5rem 1rem; color: #dc2626; font-weight: 500; background: none; border: none; cursor: pointer;"
+                    data-confirm='{"title":"Delete Tier?","text":"Are you sure you want to delete this membership tier?","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'>
                     Delete Tier
                 </button>
             </form>

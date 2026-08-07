@@ -705,7 +705,7 @@
         .empty-text { color: #94a3b8; font-size: 0.875rem; }
 
         /* Mobile Hamburger */
-        .mobile-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; cursor: pointer; margin-right: 1rem; }
+        .mobile-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; cursor: pointer; margin-right: 1rem; position: relative; z-index: 110; }
         .mobile-toggle svg { width: 20px; height: 20px; color: #64748b; }
         .sidebar-backdrop { display: none; }
 
@@ -716,6 +716,7 @@
             .main-content { margin-left: 0; }
             .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
             .sidebar-backdrop.show { display: block; }
+            body.sidebar-open { overflow: hidden; }
             .top-header { padding: 1rem; }
             .page-content { padding: 1rem; }
         }
@@ -1020,27 +1021,35 @@
         }
     }
 
-    // Mobile sidebar toggle
-    const mobileToggle = document.getElementById('mobileSidebarToggle');
-    const sidebar = document.querySelector('.sidebar');
-    const backdrop = document.getElementById('sidebarBackdrop');
-    if (mobileToggle && sidebar) {
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-            if (backdrop) backdrop.classList.remove('show');
+    document.addEventListener('DOMContentLoaded', function() {
+        var mobileToggle = document.getElementById('mobileSidebarToggle');
+        var sidebar = document.querySelector('.sidebar');
+        var backdrop = document.getElementById('sidebarBackdrop');
+        if (mobileToggle && sidebar) {
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                if (backdrop) backdrop.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
+            }
+            mobileToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+                if (backdrop) backdrop.classList.toggle('show');
+                document.body.classList.toggle('sidebar-open');
+            });
+            if (backdrop) {
+                backdrop.addEventListener('click', closeSidebar);
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeSidebar();
+            });
+            sidebar.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) closeSidebar();
+                });
+            });
         }
-        mobileToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            sidebar.classList.toggle('open');
-            if (backdrop) backdrop.classList.toggle('show');
-        });
-        if (backdrop) {
-            backdrop.addEventListener('click', closeSidebar);
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSidebar();
-        });
-    }
+    });
 
     function toggleUserSection(id) {
         var items = document.getElementById(id + 'Items');

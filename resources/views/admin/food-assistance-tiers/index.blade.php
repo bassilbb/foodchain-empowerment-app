@@ -55,9 +55,10 @@
                     </td>
                     <td>
                         <a href="{{ route('admin.food-assistance-tiers.edit', $tier) }}" class="btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('admin.food-assistance-tiers.destroy', $tier) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete this tier?')">
+                        <form action="{{ route('admin.food-assistance-tiers.destroy', $tier) }}" method="POST" style="display: inline;">
                             @csrf @method('DELETE')
-                            <button class="btn-danger btn-sm">Delete</button>
+                            <button class="btn-danger btn-sm"
+                                data-confirm='{"title":"Delete Tier?","text":"Delete this tier?","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'>Delete</button>
                         </form>
                     </td>
                 </tr>

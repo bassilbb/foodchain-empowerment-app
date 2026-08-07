@@ -16,9 +16,9 @@ class CheckOverdueLoanRepayments extends Command
     public function handle(): int
     {
         $this->info('Checking for overdue loan repayments...');
-        
+
         $dryRun = $this->option('dry-run');
-        
+
         if ($dryRun) {
             $this->warn('Running in DRY-RUN mode - no changes will be made');
         }
@@ -34,7 +34,7 @@ class CheckOverdueLoanRepayments extends Command
         foreach ($activeLoans as $loan) {
             $results['loans_checked']++;
 
-            if (!$dryRun) {
+            if (! $dryRun) {
                 $loan->checkOverdue();
             }
 
@@ -44,15 +44,17 @@ class CheckOverdueLoanRepayments extends Command
 
             $results['overdue_installments_found'] += $overdueCount;
 
-            if (!$dryRun && $loan->status === 'defaulted') {
+            if (! $dryRun && $loan->status === 'defaulted') {
                 $results['loans_defaulted']++;
             }
         }
 
-        $this->info("Check complete!");
+        $this->info('Check complete!');
         $this->info("Loans checked: {$results['loans_checked']}");
         $this->info("Overdue installments: {$results['overdue_installments_found']}");
         $this->info("Loans defaulted: {$results['loans_defaulted']}");
+
+        \App\Helpers\CronLogger::logRun($this->signature);
 
         Log::info('Loan overdue check executed', [
             'dry_run' => $dryRun,

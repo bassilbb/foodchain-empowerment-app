@@ -22,6 +22,23 @@
             padding: 0;
         }
         
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #fff; border-radius: 16px; padding: 32px; max-width: 420px; width: 100%; box-shadow: 0 25px 50px rgba(0,0,0,0.25); animation: modalIn 0.2s ease-out; text-align: center; }
+        @keyframes modalIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; }
+        .modal-icon.warning { background: #fef3c7; color: #d97706; }
+        .modal-icon.danger { background: #fee2e2; color: #dc2626; }
+        .modal-title { font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+        .modal-text { font-size: 14px; color: #64748b; margin-bottom: 24px; line-height: 1.5; }
+        .modal-actions { display: flex; gap: 12px; justify-content: center; }
+        .modal-btn { padding: 10px 24px; border-radius: 10px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; transition: all 0.15s; }
+        .modal-btn:hover { transform: translateY(-1px); }
+        .modal-btn.cancel { background: #f1f5f9; color: #475569; }
+        .modal-btn.cancel:hover { background: #e2e8f0; }
+        .modal-btn.confirm { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; box-shadow: 0 4px 14px rgba(249,115,22,0.35); }
+        .modal-btn.confirm-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; box-shadow: 0 4px 14px rgba(239,68,68,0.35); }
+        .modal-btn.confirm-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff; box-shadow: 0 4px 14px rgba(139,92,246,0.35); }
         .app-wrapper {
             display: flex;
             min-height: 100vh;
@@ -253,7 +270,7 @@
         
         .header-btn svg { width: 20px; height: 20px; color: #64748b; }
 
-        .mobile-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; cursor: pointer; margin-right: 1rem; }
+        .mobile-toggle { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; cursor: pointer; margin-right: 1rem; position: relative; z-index: 110; }
         .mobile-toggle svg { width: 20px; height: 20px; color: #64748b; }
         .sidebar-backdrop { display: none; }
 
@@ -261,9 +278,11 @@
             .mobile-toggle { display: flex; }
             .sidebar { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
             .sidebar.open { transform: translateX(0); }
+            .sidebar.open ~ .main-content { margin-left: 0; }
             .main-content { margin-left: 0; }
             .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
             .sidebar-backdrop.show { display: block; }
+            body.sidebar-open { overflow: hidden; }
             .top-header { padding: 1rem; }
             .page-content { padding: 1rem; }
         }
@@ -1211,17 +1230,24 @@
             function closeSidebar() {
                 sidebar.classList.remove('open');
                 if (backdrop) backdrop.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
             }
             mobileToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
                 sidebar.classList.toggle('open');
                 if (backdrop) backdrop.classList.toggle('show');
+                document.body.classList.toggle('sidebar-open');
             });
             if (backdrop) {
                 backdrop.addEventListener('click', closeSidebar);
             }
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') closeSidebar();
+            });
+            sidebar.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) closeSidebar();
+                });
             });
         }
     });
@@ -1272,5 +1298,77 @@
     });
     @endif
     </script>
+
+<div id="confirmModal" class="modal-overlay">
+    <div class="modal-box">
+        <div id="modalIcon" class="modal-icon warning">
+            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+        </div>
+        <div class="modal-title" id="modalTitle">Are you sure?</div>
+        <div class="modal-text" id="modalText">This action cannot be undone.</div>
+        <div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeConfirmModal()">Cancel</button>
+            <button class="modal-btn confirm" id="modalConfirmBtn" onclick="executeConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let pendingConfirm = null;
+
+function openConfirmModal(config) {
+    var overlay = document.getElementById('confirmModal');
+    document.getElementById('modalTitle').textContent = config.title || 'Are you sure?';
+    document.getElementById('modalText').textContent = config.text || 'This action cannot be undone.';
+    
+    var iconEl = document.getElementById('modalIcon');
+    iconEl.className = 'modal-icon ' + (config.iconClass || 'warning');
+    iconEl.innerHTML = config.icon || '<svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>';
+    
+    var btn = document.getElementById('modalConfirmBtn');
+    btn.className = 'modal-btn ' + (config.btnClass || 'confirm');
+    btn.textContent = config.btnText || 'Confirm';
+    
+    pendingConfirm = config.onConfirm;
+    overlay.classList.add('active');
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirmModal').classList.remove('active');
+    pendingConfirm = null;
+}
+
+function executeConfirm() {
+    if (pendingConfirm) pendingConfirm();
+    closeConfirmModal();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-confirm]').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            var data = JSON.parse(el.getAttribute('data-confirm'));
+            openConfirmModal({
+                title: data.title || 'Are you sure?',
+                text: data.text || '',
+                iconClass: data.iconClass || 'warning',
+                icon: data.icon || undefined,
+                btnClass: data.btnClass || 'confirm',
+                btnText: data.btnText || 'Confirm',
+                onConfirm: function() {
+                    if (el.tagName === 'FORM') {
+                        el.submit();
+                    } else if (el.tagName === 'BUTTON' && el.type === 'submit') {
+                        el.closest('form').submit();
+                    } else {
+                        var form = el.closest('form');
+                        if (form) form.submit();
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
 </body>
 </html>

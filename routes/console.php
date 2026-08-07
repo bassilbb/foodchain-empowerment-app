@@ -21,6 +21,7 @@ app()->booted(function () {
     // Check and upgrade user tiers daily
     $schedule->call(function () {
         app(\App\Services\TierProgressionService::class)->checkAllUsersForUpgrade();
+        \App\Helpers\CronLogger::logRun('daily:tier-upgrade');
     })->daily();
 
     // Send membership expiry reminders (30 days before)
@@ -43,6 +44,7 @@ app()->booted(function () {
             app(\App\Services\NotificationService::class)
                 ->sendMembershipExpiryReminder($user, $daysRemaining);
         }
+        \App\Helpers\CronLogger::logRun('daily:expiry-reminders');
     })->daily();
 
     // Mark expired memberships as inactive

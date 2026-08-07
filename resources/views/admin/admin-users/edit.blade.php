@@ -130,10 +130,11 @@
                     </div>
 
                     @if($adminUser->id !== auth()->guard('admin')->id())
-                    <form method="POST" action="{{ route('admin.admin-users.destroy', $adminUser) }}" onsubmit="return confirm('Are you sure you want to delete this admin user?');">
+                    <form method="POST" action="{{ route('admin.admin-users.destroy', $adminUser) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn-danger">Delete User</button>
+                        <button type="submit" class="btn-danger"
+                            data-confirm='{"title":"Delete Admin User?","text":"Are you sure you want to delete this admin user?","btnText":"Delete","btnClass":"confirm-danger","iconClass":"danger"}'>Delete User</button>
                     </form>
                     @endif
                 </div>

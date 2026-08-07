@@ -71,6 +71,7 @@
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="{{ route('login') }}" class="px-5 py-2 text-primary font-medium hover:bg-primary hover:text-white border-2 border-primary rounded-lg transition-all duration-200">Login</a>
                     <a href="{{ route('register') }}" class="px-5 py-2 bg-primary text-white font-medium hover:bg-primary-dark rounded-lg transition-all duration-200">Get Started</a>
+                    <a href="{{ route('admin.login') }}" class="text-sm text-gray-400 hover:text-primary transition-colors duration-200" title="Admin Login">Admin</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -134,6 +135,7 @@
                 <div class="pt-4 mt-4 border-t border-gray-200 space-y-2">
                     <a href="{{ route('login') }}" class="block py-3 text-center text-primary font-medium border-2 border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200">Login</a>
                     <a href="{{ route('register') }}" class="block py-3 text-center bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200">Get Started</a>
+                    <a href="{{ route('admin.login') }}" class="block py-2 text-center text-xs text-gray-400 hover:text-primary transition-colors duration-200">Admin Login</a>
                 </div>
             </div>
         </nav>

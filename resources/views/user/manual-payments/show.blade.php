@@ -66,19 +66,38 @@
         </div>
 
         @if($manualPayment->proof_image_path)
+        @php
+            $proofData = null;
+            $proofMime = 'image/jpeg';
+            $diskPath = $manualPayment->proof_image_path;
+            try {
+                $fullPath = storage_path('app/public/' . $diskPath);
+                if (\Illuminate\Support\Facades\Storage::disk('public')->exists($diskPath)) {
+                    $proofData = \Illuminate\Support\Facades\Storage::disk('public')->get($diskPath);
+                    $proofMime = \Illuminate\Support\Facades\Storage::disk('public')->mimeType($diskPath);
+                } elseif (file_exists($fullPath)) {
+                    $proofData = file_get_contents($fullPath);
+                    $proofMime = mime_content_type($fullPath);
+                }
+            } catch (\Exception $e) {
+                $proofData = null;
+            }
+        @endphp
         <div class="page-card">
             <div class="page-card-header">
                 <h3 class="page-card-title">Proof of Payment</h3>
             </div>
             <div class="page-card-body">
+                @if($proofData)
                 <div style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-                    <img src="{{ Storage::url($manualPayment->proof_image_path) }}" alt="Proof of payment" style="width: 100%; height: auto;">
+                    <img src="data:{{ $proofMime }};base64,{{ base64_encode($proofData) }}" alt="Proof of payment" style="width: 100%; height: auto;">
                 </div>
-                <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
-                    <a href="{{ Storage::url($manualPayment->proof_image_path) }}" target="_blank" style="padding: 0.5rem 1rem; background: #f1f5f9; color: #64748b; border-radius: 8px; font-weight: 500; text-decoration: none;">
-                        View Full Size
-                    </a>
+                @else
+                <div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <p style="font-weight: 600; color: #92400e;">Image not available</p>
+                    <p style="font-size: 0.875rem; color: #a16207; margin-top: 0.25rem;">The proof image could not be found on the server.</p>
                 </div>
+                @endif
             </div>
         </div>
         @endif
