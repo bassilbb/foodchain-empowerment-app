@@ -108,3 +108,60 @@ if (! function_exists('tier_badge_color')) {
         };
     }
 }
+
+if (! function_exists('vite_built_asset_url')) {
+    /**
+     * Resolve the URL of a Vite-managed asset as a host-relative path
+     * (e.g. "/build/assets/app-abc123.css") so it renders correctly under
+     * any host/scheme (localhost, preview domains behind a reverse proxy,
+     * https mixed-content avoidance). Falls back to the framework Vite URL
+     * when the hot/dev server is running.
+     */
+    function vite_built_asset_url(string $path): ?string
+    {
+        if (is_file(public_path('hot'))) {
+            return \Illuminate\Support\Facades\Vite::asset($path);
+        }
+
+        $manifestPath = public_path('build/manifest.json');
+        if (! is_file($manifestPath)) {
+            return null;
+        }
+
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        $entry = $manifest[$path] ?? null;
+
+        return $entry ? '/build/'.$entry['file'] : null;
+    }
+}
+
+if (! function_exists('mp_pricing')) {
+    function mp_pricing(): \App\Services\Marketplace\MarketplacePricingService
+    {
+        return app(\App\Services\Marketplace\MarketplacePricingService::class);
+    }
+}
+
+if (! function_exists('mp_state')) {
+    /** Current storefront pricing state for the visitor. */
+    function mp_state(): string
+    {
+        return mp_pricing()->currentState();
+    }
+}
+
+if (! function_exists('mp_price')) {
+    /** Effective price of a product in the current (or given) storefront state. */
+    function mp_price($product, ?string $state = null): float
+    {
+        return mp_pricing()->priceFor($product, $state);
+    }
+}
+
+if (! function_exists('mp_compare')) {
+    /** Struck-through comparison price, if the state price is below list price. */
+    function mp_compare($product, ?string $state = null): ?float
+    {
+        return mp_pricing()->compareFor($product, $state);
+    }
+}

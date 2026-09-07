@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css'])
+    @include('partials.vite-css')
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -175,6 +175,21 @@
             box-shadow: 0 0 0 4px rgba(16,185,129,0.1); 
         }
         .form-group input::placeholder { color: #9ca3af; }
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background-color: #fff;
+            color: #374151;
+        }
+        .form-group select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16,185,129,0.1);
+        }
         
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         
@@ -309,10 +324,6 @@
     <div class="bg-effects">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
-        <div class="float-icon float-1">🍎</div>
-        <div class="float-icon float-2">🥦</div>
-        <div class="float-icon float-3">🍊</div>
-        <div class="float-icon float-4">🥕</div>
     </div>
 
     <div class="main-wrapper">
@@ -394,7 +405,6 @@
                         <div class="step active" id="step-ind-1"><div class="step-number">1</div></div>
                         <div class="step" id="step-ind-2"><div class="step-number">2</div></div>
                         <div class="step" id="step-ind-3"><div class="step-number">3</div></div>
-                        <div class="step" id="step-ind-4"><div class="step-number">4</div></div>
                     </div>
 
                     <!-- Step 1: Personal -->
@@ -423,19 +433,25 @@
                     <!-- Step 2: Location -->
                     <div id="step2" class="step-content">
                         <div class="form-group">
-                            <label for="address">Address *</label>
-                            <input type="text" name="address" id="address" value="{{ old('address') }}" required placeholder="Your address">
+                            <label for="address">Delivery Address *</label>
+                            <input type="text" name="address" id="address" value="{{ old('address') }}" required placeholder="Street address">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="city">City *</label>
-                                <input type="text" name="city" id="city" value="{{ old('city') }}" required placeholder="City">
+                                <input type="text" name="city" id="city" value="{{ old('city') }}" required placeholder="e.g. Ikeja">
                             </div>
                             <div class="form-group">
                                 <label for="state">State *</label>
-                                <input type="text" name="state" id="state" value="{{ old('state') }}" required placeholder="State">
+                                <select name="state" id="state" required class="form-input">
+                                    <option value="">Select your state</option>
+                                    @foreach($statesList as $st)
+                                        <option value="{{ $st }}" @selected(old('state') === $st)>{{ $st }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+                        <p style="font-size: 12px; color: #6b7280; margin: -6px 0 12px;">Prices you see in the marketplace adjust to your state automatically.</p>
                         <div class="btn-row">
                             <button type="button" onclick="prevStep(2)" class="btn btn-secondary">Back</button>
                             <button type="button" onclick="nextStep(2)" class="btn btn-primary">Continue</button>
@@ -454,164 +470,16 @@
                                 <input type="password" name="password_confirmation" id="password_confirmation" required placeholder="Confirm password">
                             </div>
                         </div>
-                        <div class="btn-row">
-                            <button type="button" onclick="prevStep(3)" class="btn btn-secondary">Back</button>
-                            <button type="button" onclick="nextStep(3)" class="btn btn-primary">Continue</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Membership Tier, Payment & Savings Plan -->
-                    <div id="step4" class="step-content">
-                        <input type="hidden" name="payment_type" id="paymentType" value="">
-                        <input type="hidden" name="savings_plan_option_id" id="savingsPlanOptionId" value="">
-                        <input type="hidden" name="selected_tier_id" id="selectedTierId" value="{{ $tiers->first()->id ?? '' }}">
-
-                        @if(count($bankAccounts) > 0)
-                        @php $defaultAccount = $bankAccounts->firstWhere('is_default', true) ?? $bankAccounts->first(); @endphp
-                        <div class="form-group">
-                            <label>Bank Account Details</label>
-                            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Transfer your payment to the account below. Your account will be activated after verification.</p>
-                            <div style="background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 14px; padding: 16px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                    <div>
-                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Bank</p>
-                                        <p style="font-weight: 600; color: #1e293b; margin: 2px 0 0;">{{ $defaultAccount->bank_name }}</p>
-                                    </div>
-                                    <div>
-                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Account Number</p>
-                                        <p style="font-size: 18px; font-weight: 800; color: #059669; margin: 2px 0 0; letter-spacing: 0.1em;">{{ $defaultAccount->account_number }}</p>
-                                    </div>
-                                    <div style="grid-column: 1 / -1;">
-                                        <p style="font-size: 11px; color: #6b7280; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Account Name</p>
-                                        <p style="font-weight: 600; color: #1e293b; margin: 2px 0 0;">{{ $defaultAccount->account_name }}</p>
-                                    </div>
-                                </div>
-                                @if($defaultAccount->instructions)
-                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #bbf7d0; background: #fffbeb; border-radius: 8px; padding: 0.75rem;">
-                                    <p style="font-size: 12px; color: #92400e; margin: 0;">{{ $defaultAccount->instructions }}</p>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        @endif
-
-                        <div class="form-group">
-                            <label>Choose Your Membership Plan</label>
-                            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Select your membership tier to unlock benefits and food packages.</p>
-                            <div class="plan-card-grid">
-                                @php
-                                    $tierColors = [
-                                        'Bronze' => ['bg' => 'linear-gradient(135deg, #f59e0b, #d97706)', 'glow' => '#f59e0b', 'icon' => '🥉'],
-                                        'Silver' => ['bg' => 'linear-gradient(135deg, #64748b, #475569)', 'glow' => '#64748b', 'icon' => '🥈'],
-                                        'Gold' => ['bg' => 'linear-gradient(135deg, #eab308, #ca8a04)', 'glow' => '#eab308', 'icon' => '🥇'],
-                                        'Emerald' => ['bg' => 'linear-gradient(135deg, #10b981, #059669)', 'glow' => '#10b981', 'icon' => '💎'],
-                                    ];
-                                @endphp
-                                @foreach($tiers as $tier)
-                                @php $c = $tierColors[$tier->name] ?? $tierColors['Bronze']; @endphp
-                                <div class="plan-card tier-card" data-tier-id="{{ $tier->id }}" data-tier-fee="{{ $tier->annual_fee }}" onclick="selectTier({{ $tier->id }}, {{ $tier->annual_fee }})" @if($loop->first) style="border-color: #10b981; background: #f0fdf4;" @endif>
-                                    <div class="plan-card-glow" style="background: radial-gradient(circle, {{ $c['glow'] }}10 0%, transparent 70%);"></div>
-                                    <div class="plan-card-icon" style="background: {{ $c['bg'] }};">
-                                        <span style="font-size: 20px;">{{ $c['icon'] }}</span>
-                                    </div>
-                                    <div class="plan-card-name">{{ $tier->name }}</div>
-                                    <div class="plan-card-target">₦{{ number_format($tier->annual_fee, 0) }}/year</div>
-                                    <div class="plan-card-check">
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Select Payment Type</label>
-                            <div class="payment-option" data-value="membership_only" onclick="selectPaymentType('membership_only')">
-                                <div class="payment-option-header">
-                                    <div>
-                                        <div class="payment-option-title">Membership Only</div>
-                                        <div class="payment-option-desc">Pay the annual membership fee and get started</div>
-                                    </div>
-                                    <div class="payment-option-price" id="membershipOnlyPrice">₦{{ number_format($tiers->first()->annual_fee ?? 5000, 0) }}</div>
-                                </div>
-                            </div>
-                            <div class="payment-option" data-value="with_savings_plan" onclick="selectPaymentType('with_savings_plan')">
-                                <div class="payment-option-header">
-                                    <div>
-                                        <div class="payment-option-title">With Savings Plan</div>
-                                        <div class="payment-option-desc">Pay annual fee + choose a savings plan for your food fund</div>
-                                    </div>
-                                    <div class="payment-option-price" id="savingsPlanPrice">₦{{ number_format($tiers->first()->annual_fee ?? 5000, 0) }}</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="savingsPlanSection" style="display: none;">
-                            <div class="form-group">
-                                <label>Choose Your Savings Plan <span style="font-weight: 400; color: #9ca3af;">(optional)</span></label>
-                                <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Select a savings plan to start contributing towards your food fund. You can also skip this and set one up later.</p>
-                                <div class="plan-card-grid">
-                                    @php
-                                        $colors = [
-                                            'Bronze' => ['bg' => 'linear-gradient(135deg, #f59e0b, #d97706)', 'glow' => '#f59e0b', 'light' => '#fef3c7'],
-                                            'Silver' => ['bg' => 'linear-gradient(135deg, #64748b, #475569)', 'glow' => '#64748b', 'light' => '#f1f5f9'],
-                                            'Gold' => ['bg' => 'linear-gradient(135deg, #eab308, #ca8a04)', 'glow' => '#eab308', 'light' => '#fefce8'],
-                                            'Emerald' => ['bg' => 'linear-gradient(135deg, #10b981, #059669)', 'glow' => '#10b981', 'light' => '#ecfdf5'],
-                                        ];
-                                    @endphp
-                                    @foreach($savingsPlans as $plan)
-                                    @php $c = $colors[$plan->name] ?? $colors['Emerald']; @endphp
-                                    <div class="plan-card" data-plan-id="{{ $plan->id }}" onclick="selectPlan({{ $plan->id }})" style="border-color: {{ $plan->activeOptions->count() > 0 ? '#e2e8f0' : '#fecaca' }};">
-                                        <div class="plan-card-glow" style="background: radial-gradient(circle, {{ $c['glow'] }}10 0%, transparent 70%);"></div>
-                                        <div class="plan-card-icon" style="background: {{ $c['bg'] }};">
-                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        </div>
-                                        <div class="plan-card-name">{{ $plan->name }}</div>
-                                        <div class="plan-card-target">Target: ₦{{ number_format($plan->target_amount, 2) }}</div>
-                                        @if($plan->activeOptions->count() === 0)
-                                        <div style="font-size: 0.7rem; color: #ef4444; margin-top: 4px;">No options available</div>
-                                        @endif
-                                        <div class="plan-card-check">
-                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div id="optionsSection" class="form-group" style="display: none;">
-                                <label>Choose Your Savings Duration</label>
-                                <div id="optionsList" class="options-list"></div>
-                            </div>
-
-                            <div id="planDetails" style="display: none; background: #f0fdf4; border: 2px solid #d1fae5; border-radius: 14px; padding: 16px; margin-bottom: 16px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
-                                    <div>
-                                        <div style="font-size: 12px; color: #6b7280;">Weekly Amount</div>
-                                        <div style="font-size: 18px; font-weight: 700; color: #059669;" id="planWeekly">₦0</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 12px; color: #6b7280;">Duration</div>
-                                        <div style="font-size: 18px; font-weight: 700; color: #1e293b;" id="planWeeks">0 weeks</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 12px; color: #6b7280;">Total Contribution</div>
-                                        <div style="font-size: 18px; font-weight: 700; color: #d97706;" id="planTotal">₦0</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="checkbox-group">
                             <input type="checkbox" id="terms" required>
                             <label for="terms">I agree to the <a href="javascript:void(0)" onclick="openTermsModal()" style="color: #10b981; text-decoration: underline; cursor: pointer;">Terms & Conditions</a></label>
                         </div>
                         <div class="btn-row">
-                            <button type="button" onclick="prevStep(4)" class="btn btn-secondary">Back</button>
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Submit & Pay <span id="submitAmount" style="font-weight: 400;">(₦5,000)</span></button>
+                            <button type="button" onclick="prevStep(3)" class="btn btn-secondary">Back</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Create Free Account</button>
                         </div>
+                        <p style="text-align: center; font-size: 12px; color: #10b981; font-weight: 600; margin-top: 12px;">No registration fee. Start shopping immediately.</p>
                     </div>
-                </form>
 
                 <div class="form-footer">
                     <p>Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
@@ -624,10 +492,13 @@
         </div>
     </div>
 
-    <script>
+        <script>
+        var TOTAL_STEPS = 3;
+
         function updateStepIndicator(step) {
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= TOTAL_STEPS; i++) {
                 const el = document.getElementById('step-ind-' + i);
+                if (!el) continue;
                 if (i < step) {
                     el.className = 'step completed';
                 } else if (i === step) {
@@ -640,9 +511,12 @@
 
         function validateStep(step) {
             const stepDiv = document.getElementById('step' + step);
-            const inputs = stepDiv.querySelectorAll('input[required]');
             let valid = true;
-            inputs.forEach(input => {
+            stepDiv.querySelectorAll('input[required]').forEach(input => {
+                if (input.type === 'checkbox') {
+                    if (!input.checked) { valid = false; }
+                    return;
+                }
                 if (!input.value.trim()) {
                     valid = false;
                     input.style.borderColor = '#ef4444';
@@ -650,6 +524,14 @@
                     input.style.borderColor = '#e5e7eb';
                 }
             });
+            const select = stepDiv.querySelector('select[required]');
+            if (select && !select.value) {
+                valid = false;
+                select.style.borderColor = '#ef4444';
+            }
+            if (!valid) {
+                showStepError('Please complete the highlighted fields to continue');
+            }
             return valid;
         }
 
@@ -668,144 +550,30 @@
             updateStepIndicator(current - 1);
         }
 
-        const plansData = @json($plansData);
-        const tiers = @json($tiers->keyBy->id->map(function($t) { return ['id' => $t->id, 'name' => $t->name, 'annual_fee' => (float) $t->annual_fee]; }));
-
-        let selectedPlanId = null;
-        let selectedOptionId = null;
-        let selectedTierFee = {{ $tiers->first()->annual_fee ?? 5000 }};
-
-        function selectTier(tierId, fee) {
-            document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.tier-card').forEach(c => c.style.borderColor = '#e2e8f0');
-            document.querySelectorAll('.tier-card').forEach(c => c.style.background = 'white');
-            const card = document.querySelector(`.tier-card[data-tier-id="${tierId}"]`);
-            if (card) {
-                card.classList.add('selected');
-                card.style.borderColor = '#10b981';
-                card.style.background = '#f0fdf4';
-            }
-            document.getElementById('selectedTierId').value = tierId;
-            selectedTierFee = fee;
-            updateSubmitAmount();
-        }
-
-        function selectPlan(planId) {
-            selectPaymentType('with_savings_plan');
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.querySelector(`.plan-card[data-plan-id="${planId}"]`).classList.add('selected');
-            selectedPlanId = planId;
-            selectedOptionId = null;
-            document.getElementById('savingsPlanOptionId').value = '';
-            document.getElementById('planDetails').style.display = 'none';
-            document.getElementById('submitBtn').disabled = false;
-
-            const plan = plansData[planId];
-            const list = document.getElementById('optionsList');
-            list.innerHTML = '';
-
-            if (plan && plan.options.length > 0) {
-                document.getElementById('optionsSection').style.display = 'block';
-                plan.options.forEach(opt => {
-                    const div = document.createElement('div');
-                    div.className = 'option-radio';
-                    div.onclick = () => selectOption(opt.id);
-                    div.innerHTML = `
-                        <input type="radio" name="option_radio" value="${opt.id}">
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; color: #1e293b;">${opt.weeks} Weeks</div>
-                            <div style="font-size: 0.85rem; color: #10b981; font-weight: 600;">₦${opt.amount.toLocaleString(undefined, {minimumFractionDigits: 2})} / week</div>
-                        </div>
-                    `;
-                    list.appendChild(div);
-                });
-            } else {
-                document.getElementById('optionsSection').style.display = 'none';
-            }
-            updateSubmitAmount();
-        }
-
-        function selectOption(optionId) {
-            document.querySelectorAll('.option-radio').forEach(r => r.classList.remove('selected'));
-            document.querySelectorAll('.option-radio input').forEach(r => { if (r.value == optionId) { r.checked = true; r.closest('.option-radio').classList.add('selected'); }});
-            selectedOptionId = optionId;
-            document.getElementById('savingsPlanOptionId').value = optionId;
-
-            const plan = plansData[selectedPlanId];
-            const opt = plan.options.find(o => o.id == optionId);
-            if (opt) {
-                const total = Math.round(opt.amount * opt.weeks);
-                document.getElementById('planWeekly').textContent = '₦' + opt.amount.toLocaleString(undefined, {minimumFractionDigits: 2});
-                document.getElementById('planWeeks').textContent = opt.weeks + ' weeks';
-                document.getElementById('planTotal').textContent = '₦' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
-                document.getElementById('planDetails').style.display = 'block';
-            }
-            updateSubmitAmount();
-        }
-
-        function selectPaymentType(type) {
-            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
-            document.querySelector(`.payment-option[data-value="${type}"]`).classList.add('selected');
-            document.getElementById('paymentType').value = type;
-
-            const section = document.getElementById('savingsPlanSection');
-            if (type === 'with_savings_plan') {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-                resetSavingsPlan();
-            }
-            updateSubmitAmount();
-        }
-
-        function resetSavingsPlan() {
-            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.option-radio').forEach(r => r.classList.remove('selected'));
-            document.getElementById('optionsSection').style.display = 'none';
-            document.getElementById('planDetails').style.display = 'none';
-            document.getElementById('savingsPlanOptionId').value = '';
-            selectedPlanId = null;
-            selectedOptionId = null;
-        }
-
-        function updateSubmitAmount() {
-            const fee = selectedTierFee || 5000;
-            document.getElementById('submitAmount').textContent = '(₦' + fee.toLocaleString() + ')';
-            document.getElementById('membershipOnlyPrice').textContent = '₦' + fee.toLocaleString();
-            document.getElementById('savingsPlanPrice').textContent = '₦' + fee.toLocaleString();
-        }
-
-        // Override validateStep for Step 4
-        const _origValidate = validateStep;
-        validateStep = function(step) {
-            if (step === 4) {
-                if (!document.getElementById('paymentType').value) {
-                    showStepError('Please select a payment type to continue');
-                    return false;
-                }
-                if (!document.getElementById('terms').checked) {
-                    showStepError('Please agree to the Terms & Conditions to continue');
-                    return false;
-                }
-                return true;
-            }
-            return _origValidate(step);
-        };
-
         function showStepError(msg) {
             const existing = document.getElementById('stepError');
             if (existing) existing.remove();
+            const active = document.querySelector('.step-content.active');
+            if (!active) return;
             const div = document.createElement('div');
             div.id = 'stepError';
             div.className = 'alert alert-error';
             div.textContent = msg;
-            document.getElementById('step4').insertBefore(div, document.getElementById('step4').firstChild);
+            active.insertBefore(div, active.firstChild);
             setTimeout(() => { if (div.parentNode) div.remove(); }, 4000);
         }
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateSubmitAmount();
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            const activeStep = parseInt(document.querySelector('.step-content.active').id.replace('step', ''), 10);
+            for (let i = 1; i <= activeStep; i++) {
+                if (!validateStep(i)) {
+                    e.preventDefault();
+                    document.getElementById('step' + activeStep).classList.remove('active');
+                    document.getElementById('step' + i).classList.add('active');
+                    updateStepIndicator(i);
+                    return;
+                }
+            }
         });
 
         // Terms Modal
@@ -824,11 +592,15 @@
             closeTermsModal();
         }
 
-        // Close modal on outside click
-        document.getElementById('termsModal').addEventListener('click', function(e) {
-            if (e.target === this) closeTermsModal();
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('termsModal');
+            if (modal) {
+                modal.addEventListener('click', function (e) {
+                    if (e.target === this) closeTermsModal();
+                });
+            }
         });
-    </script>
+    </script></script>
 
     <!-- Terms Modal -->
     <div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">

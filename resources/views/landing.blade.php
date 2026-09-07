@@ -78,10 +78,11 @@
                         <div class="max-w-2xl animate-slide-in">
                             @php $heroTitle = App\Models\PageContent::getContent('landing', 'hero_title', 'Zero Hunger Through Community'); @endphp
                             <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">{!! $heroTitle !!}</h1>
-                            <p class="text-xl text-white/90 mb-8">{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Join the food security network that empowers households with quality staple foods.') }}</p>
+                            <p class="text-xl text-white/90 mb-8">{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Shop quality groceries from trusted vendors with free registration — your account is active instantly and prices adjust to your state.') }}</p>
                             <div class="flex flex-wrap gap-4">
-                                <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">Join the Initiative</a>
-                                <a href="#about" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Learn More</a>
+                                <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">Create Free Account</a>
+                                <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-store mr-2"></i>Shop Groceries Now</a>
+                                <a href="#store" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Explore the Store</a>
                             </div>
                         </div>
                     </div>
@@ -89,10 +90,11 @@
                 <div class="hero-slide absolute inset-0 bg-slide-2 bg-cover bg-center flex items-center opacity-0">
                     <div class="container mx-auto px-4">
                         <div class="max-w-2xl">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Make Your <span class="text-amber-400">Weekly</span> Payment</h1>
-                            <p class="text-xl text-white/90 mb-8">and be eligible to access Food Assistance and Support.</p>
+                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Shop Groceries at Your <span class="text-amber-400">Local</span> Price</h1>
+                            <p class="text-xl text-white/90 mb-8">Pick your delivery state and every price updates instantly — order rice, beans, proteins and more from trusted vendors.</p>
                             <div class="flex flex-wrap gap-4">
-                                <a href="{{ route('register') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30">Start Building</a>
+                                <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-shopping-basket mr-2"></i>Start Shopping Now</a>
+                                <a href="{{ route('register') }}" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Join Free</a>
                             </div>
                         </div>
                     </div>
@@ -100,10 +102,11 @@
                 <div class="hero-slide absolute inset-0 bg-slide-3 bg-cover bg-center flex items-center opacity-0">
                     <div class="container mx-auto px-4">
                         <div class="max-w-2xl">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Sustainable <span class="text-emerald-400">Empowerment</span></h1>
-                            <p class="text-xl text-white/90 mb-8">From Bronze to Emerald, secure your household's Food Security.</p>
+                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Join the Community <span class="text-emerald-400">Free</span></h1>
+                            <p class="text-xl text-white/90 mb-8">Create your account in under a minute. No registration fee and no waiting — your account is active the moment you sign up.</p>
                             <div class="flex flex-wrap gap-4">
-                                <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">View Stages</a>
+                                <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">Join Free Today</a>
+                                <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Browse Groceries</a>
                             </div>
                         </div>
                     </div>
@@ -127,33 +130,86 @@
             </div>
         </section>
 
+        <section id="store" class="py-20 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 text-white overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-flex items-center px-4 py-1.5 bg-amber-400 text-emerald-950 text-xs font-bold uppercase tracking-wider rounded-full mb-6">
+                            <i class="fas fa-store mr-2"></i>FoodChain Marketplace
+                        </span>
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Shop Quality <span class="text-amber-400">Groceries</span> Online</h2>
+                        <p class="text-emerald-100 text-lg mb-8 max-w-xl">
+                            Browse hundreds of food staples and household essentials from trusted vendors — enjoy member prices, weekly deals, and doorstep or community-collection delivery.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                            <div class="flex items-start"><i class="fas fa-seedling text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Grains, proteins, seasonings &amp; more</span></div>
+                            <div class="flex items-start"><i class="fas fa-percent text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Flash sales, coupons &amp; member-only discounts</span></div>
+                            <div class="flex items-start"><i class="fas fa-wallet text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Pay securely with your wallet or card</span></div>
+                            <div class="flex items-start"><i class="fas fa-truck text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Home, pickup &amp; community delivery options</span></div>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-shopping-basket mr-2"></i>Browse the Store</a>
+                            <a href="{{ route('marketplace.home') }}" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Today's Deals</a>
+                        </div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-3xl p-8 border border-white/20">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-white">Popular Categories</h3>
+                            <a href="{{ route('marketplace.shop') }}" class="text-amber-300 text-sm font-semibold hover:text-amber-200">View all <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+                            @php
+                                $storeCats = \App\Models\Marketplace\Category::active()->parents()
+                                    ->withCount('products')->orderByDesc('products_count')
+                                    ->take(6)->get();
+                                $storeIcons = ['fa-seedling', 'fa-tint', 'fa-mortar-pestle', 'fa-drumstick-bite', 'fa-wine-bottle', 'fa-home'];
+                            @endphp
+                            @foreach ($storeCats as $catIdx => $cat)
+                                <a href="{{ route('marketplace.category', $cat->slug) }}" class="group flex items-center gap-3 bg-emerald-950/40 hover:bg-emerald-950/70 border border-white/10 rounded-xl px-3 py-3 transition-all">
+                                    <i class="fas {{ $storeIcons[$catIdx % count($storeIcons)] }} text-amber-400"></i>
+                                    <span class="text-sm text-emerald-50 font-medium group-hover:text-white">{{ $cat->name }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                        <div class="bg-emerald-950/40 border border-amber-400/30 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <div class="text-amber-300 font-bold mb-1"><i class="fas fa-bolt mr-1"></i>Earn while you shop</div>
+                                <p class="text-emerald-100 text-sm">Earn loyalty points on every order &amp; redeem them as wallet credit.</p>
+                            </div>
+                            <a href="{{ route('register') }}" class="px-5 py-2 bg-white text-emerald-900 font-bold rounded-lg hover:bg-gray-100 transition whitespace-nowrap">Start Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="how-it-works" class="py-20 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">How It <span class="text-emerald-500">Works</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Join our community-driven initiative designed to make essential food items accessible and affordable for everyone.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Sign up in under a minute and start shopping. No fees and no waiting — it is free to join.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300">
                         <div class="w-20 h-20 flex items-center justify-center mx-auto mb-6 rounded-full bg-emerald-50">
                             <i class="fas fa-user-plus text-3xl text-emerald-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">1. Register</h3>
-                        <p class="text-gray-600">Join the FCCEI community by creating your secure account on our platform.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">1. Create a Free Account</h3>
+                        <p class="text-gray-600">Register in under a minute. There is no registration fee and your account is active instantly.</p>
                     </div>
                     <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300">
                         <div class="w-20 h-20 flex items-center justify-center mx-auto mb-6 rounded-full bg-cyan-50">
-                            <i class="fas fa-seedling text-3xl text-cyan-600"></i>
+                            <i class="fas fa-store text-3xl text-cyan-600"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">2. Purchase a Starter Pack</h3>
-                        <p class="text-gray-600">Get your Instant Food package with premium staple food items.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">2. Shop at Your Local Price</h3>
+                        <p class="text-gray-600">Choose your delivery state and prices update instantly. Order staples from trusted vendors nationwide.</p>
                     </div>
                     <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300">
                         <div class="w-20 h-20 flex items-center justify-center mx-auto mb-6 rounded-full bg-amber-50">
-                            <i class="fas fa-users text-3xl text-amber-500"></i>
+                            <i class="fas fa-truck text-3xl text-amber-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">3. Build Your Community</h3>
-                        <p class="text-gray-600">Invite neighbors and friends to join the initiative using your unique referral link.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">3. Get It Delivered</h3>
+                        <p class="text-gray-600">Choose home, pickup or community delivery — and earn loyalty points on every order.</p>
                     </div>
                 </div>
             </div>
@@ -162,8 +218,8 @@
         <section id="products" class="py-20 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Membership <span class="text-emerald-500">Benefits</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Access increasing food security benefits by advancing through our structured membership levels.</p>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Program <span class="text-emerald-500">Levels</span></h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Registration is free for everyone — there is no ₦5,000 sign-up and no starter pack to buy. Advance through the optional community levels below to unlock increasing food benefits.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
@@ -174,7 +230,6 @@
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Bronze Benefits</h3>
                             <p class="text-sm text-gray-500 mb-6">Initial Entry Level</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-cyan-600 mt-1 mr-3"></i><span>Designed to provide essential food security benefits through our structured membership program.</span></li>
@@ -197,7 +252,6 @@
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Silver Benefits</h3>
                             <p class="text-sm text-gray-500 mb-6">Standard Level</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-utensils text-cyan-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Provides enhanced food security benefits with greater access to support and opportunities as members progress within the program.</span></li>
@@ -221,7 +275,6 @@
                             <h3 class="text-2xl font-bold text-gray-900 mb-2">Gold Benefits</h3>
                             <p class="text-sm text-gray-500 mb-6">Advanced Impact</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Renewable Annual Subscription: ₦5,000</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-shopping-basket text-yellow-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
                                 <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Delivers premium food security benefits, offering increased support and exclusive opportunities for committed members.</span></li>
@@ -507,17 +560,17 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Frequently Asked <span class="text-emerald-500">Questions</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Everything you need to know about joining the FCCEI community.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Everything you need to know about creating your free account, shopping, and the optional community program.</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-4">
                     @php
                     $faqs = [
                         ['q' => 'Is Foodchain Community Empowerment Initiative a ponzi scheme?', 'a' => 'No it is not a ponzi scheme. Foodchain Community Empowerment is an initiative from a reputable firm known as <b>Doorstep Farms Limited</b> designed to support low-income earners, micro-business owners and students of tertiary institutions.'],
-                        ['q' => 'How does it work if I want to join the Community?', 'a' => 'First annual subscription with instant food starter pack of ₦25,000. Then renewable annual subscription of ₦5,000.'],
+                        ['q' => 'How does it work if I want to join the Community?', 'a' => 'Create a free FoodChain account — registration takes under a minute and costs nothing. Once your account is active you can shop immediately. Joining the optional community food program unlocks additional assistance and support.'],
                         ['q' => 'Will I start getting food items regularly once I register?', 'a' => 'Yes, once you become a member and build your community, you will get food regularly.'],
-                        ['q' => 'How many people do I require to be eligible for regular food?', 'a' => '<strong>BRONZE:</strong> Subscribe and get a food starter pack instantly.<br><strong>SILVER:</strong> Build a community of 10 members.<br><strong>GOLD:</strong> Build a community of 100 members.<br><strong>EMERALD:</strong> Build a community of 1000 members.'],
+                        ['q' => 'How many people do I require to be eligible for regular food?', 'a' => '<strong>BRONZE:</strong> Create a free account and start shopping instantly.<br><strong>SILVER:</strong> Build a community of 10 members.<br><strong>GOLD:</strong> Build a community of 100 members.<br><strong>EMERALD:</strong> Build a community of 1000 members.'],
                         ['q' => 'If you build a community less than 10 members?', 'a' => 'If you build less than 10 members, you are entitled to food items within the discretion of your ADMIN. If you build no community at all, you are not entitled to free food items.'],
-                        ['q' => 'How many times will I pay for subscription or starter pack?', 'a' => 'Membership subscription is renewable annually. The food starter pack is a one-time payment.'],
+                        ['q' => 'Is registration really free? Will I ever be asked to pay?', 'a' => 'Registration is completely free. If you later choose an optional food-assistance subscription, it is renewable annually.'],
                         ['q' => 'How do I get my food if I live far from your office?', 'a' => 'Food items will be delivered to your doorstep. The cost of delivery is settled by the member.'],
                         ['q' => 'If I am not living in Nigeria, how do I benefit?', 'a' => 'You can become a member from any part of the world via our online link, but entitlements must be delivered to a verifiable address in Nigeria.'],
                         ['q' => 'What happens if I don\'t renew my subscription?', 'a' => 'Any year you don\'t renew, you lose community benefits. However, at the <strong>EMERALD</strong> stage, you become a community leader and are exempted from annual subscriptions.'],

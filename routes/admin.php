@@ -290,6 +290,91 @@ Route::middleware(['admin'])->group(function () {
                 return redirect()->route('admin.clearances.show', $clearance);
             })->name('reject.get');
         });
+
+        // Marketplace Management (super_admin + inventory_manager + operations)
+        Route::prefix('marketplace')->name('admin.marketplace.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'dashboard'])->name('dashboard');
+            Route::get('/reports', [\App\Http\Controllers\Admin\MarketplaceController::class, 'reports'])->name('reports');
+
+            // Products
+            Route::prefix('products')->name('products.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'products'])->name('index');
+                Route::get('/{product}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'productShow'])->name('show');
+                Route::get('/{product}/edit', [\App\Http\Controllers\Admin\MarketplaceController::class, 'productEdit'])->name('edit');
+                Route::put('/{product}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'productUpdate'])->name('update');
+                Route::post('/{product}/state-prices', [\App\Http\Controllers\Admin\MarketplaceController::class, 'productStatePricesUpdate'])->name('state-prices');
+                Route::post('/{product}/toggle', [\App\Http\Controllers\Admin\MarketplaceController::class, 'productToggle'])->name('toggle');
+            });
+
+            // Vendors
+            Route::prefix('vendors')->name('vendors.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'vendors'])->name('index');
+                Route::get('/{vendor}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'vendorShow'])->name('show');
+                Route::post('/{vendor}/status', [\App\Http\Controllers\Admin\MarketplaceController::class, 'vendorUpdateStatus'])->name('status');
+            });
+
+            // Orders
+            Route::prefix('orders')->name('orders.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'orders'])->name('index');
+                Route::get('/{order}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'orderShow'])->name('show');
+                Route::post('/{order}/status', [\App\Http\Controllers\Admin\MarketplaceController::class, 'orderUpdateStatus'])->name('status');
+            });
+
+            // Categories
+            Route::prefix('categories')->name('categories.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'categories'])->name('index');
+                Route::post('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'categoryStore'])->name('store');
+                Route::put('/{category}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'categoryUpdate'])->name('update');
+            });
+
+            // Brands
+            Route::prefix('brands')->name('brands.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'brands'])->name('index');
+                Route::post('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'brandStore'])->name('store');
+                Route::put('/{brand}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'brandUpdate'])->name('update');
+            });
+
+            // Coupons
+            Route::prefix('coupons')->name('coupons.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'coupons'])->name('index');
+                Route::post('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'couponStore'])->name('store');
+                Route::put('/{coupon}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'couponUpdate'])->name('update');
+            });
+
+            // Flash Sales
+            Route::prefix('flash-sales')->name('flash-sales.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSales'])->name('index');
+                Route::post('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSaleStore'])->name('store');
+                Route::get('/{flashSale}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSaleShow'])->name('show');
+                Route::post('/{flashSale}/toggle', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSaleToggle'])->name('toggle');
+                Route::post('/{flashSale}/items', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSaleAddItem'])->name('add-item');
+                Route::delete('/items/{item}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'flashSaleRemoveItem'])->name('remove-item');
+            });
+
+            // Reviews
+            Route::prefix('reviews')->name('reviews.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'reviews'])->name('index');
+                Route::post('/{review}/toggle', [\App\Http\Controllers\Admin\MarketplaceController::class, 'reviewToggle'])->name('toggle');
+            });
+
+            // Delivery Zones
+            Route::prefix('delivery-zones')->name('delivery-zones.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'deliveryZones'])->name('index');
+                Route::post('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'deliveryZoneStore'])->name('store');
+                Route::put('/{zone}', [\App\Http\Controllers\Admin\MarketplaceController::class, 'deliveryZoneUpdate'])->name('update');
+            });
+
+            // Bulk Orders
+            Route::prefix('bulk-orders')->name('bulk-orders.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'bulkOrders'])->name('index');
+                Route::post('/{bulkOrder}/status', [\App\Http\Controllers\Admin\MarketplaceController::class, 'bulkOrderUpdateStatus'])->name('status');
+            });
+
+            // Wallet Transactions
+            Route::prefix('wallet-transactions')->name('wallet-transactions.')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'walletTransactions'])->name('index');
+            });
+        });
     });
 });
 

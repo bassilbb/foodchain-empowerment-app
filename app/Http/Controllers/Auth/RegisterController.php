@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\BankAccount;
 use App\Models\MembershipTier;
-use App\Models\PickupLocation;
-use App\Models\SavingsPlan;
 use App\Models\User;
 use App\Services\ReferralService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,26 +22,11 @@ class RegisterController extends Controller
             $referrer = User::where('referral_code', $referralCode)->first();
         }
 
-        $tiers = MembershipTier::active()->ordered()->get();
-        $locations = PickupLocation::active()->get();
-        $savingsPlans = SavingsPlan::with('activeOptions')->active()->get();
-        $bankAccounts = BankAccount::getAllActive();
+        $statesList = \Illuminate\Support\Facades\Schema::hasTable('nigerian_states')
+            ? \App\Models\NigerianState::active()->ordered()->pluck('name')->all()
+            : [];
 
-        $plansData = $savingsPlans->mapWithKeys(function ($plan) {
-            return [$plan->id => [
-                'name' => $plan->name,
-                'target' => $plan->target_amount,
-                'options' => $plan->activeOptions->map(function ($option) {
-                    return [
-                        'id' => $option->id,
-                        'weeks' => $option->duration_weeks,
-                        'amount' => (float) $option->weekly_contribution,
-                    ];
-                }),
-            ]];
-        });
-
-        return view('auth.register', compact('referralCode', 'referrer', 'tiers', 'locations', 'savingsPlans', 'plansData', 'bankAccounts'));
+        return view('auth.register', compact('referralCode', 'referrer', 'statesList'));
     }
 
     public function register(Request $request)
@@ -58,16 +41,14 @@ class RegisterController extends Controller
             'city' => 'required|string|max:100',
             'state' => 'required|string|max:100',
             'referral_code' => 'nullable|exists:users,referral_code',
-            'payment_type' => 'required|in:membership_only,with_savings_plan',
-            'selected_tier_id' => 'nullable|exists:membership_tiers,id',
-            'savings_plan_option_id' => 'nullable|exists:savings_plan_options,id',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        $tier = MembershipTier::find($request->selected_tier_id) ?? MembershipTier::where('slug', 'bronze')->first();
+        $tier = MembershipTier::where('slug', 'bronze')->first()
+            ?? MembershipTier::active()->ordered()->first();
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -79,26 +60,18 @@ class RegisterController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'country' => 'Nigeria',
-            'current_tier_id' => $tier->id,
-            'is_active' => false,
+            'current_tier_id' => $tier?->id,
+            'is_active' => true,
         ]);
 
         if ($request->referral_code) {
             app(ReferralService::class)->trackReferral($user, $request->referral_code);
         }
 
-        $amount = $tier->annual_fee;
+        Auth::login($user);
+        session()->put('marketplace_state', $request->state);
 
-        session([
-            'pending_registration_user_id' => $user->id,
-            'pending_savings_plan_option_id' => $request->savings_plan_option_id,
-        ]);
-
-        return redirect()->route('payment.pending', [
-            'user_id' => $user->id,
-            'amount' => $amount,
-            'payment_type' => $request->payment_type,
-            'tier_id' => $tier->id,
-        ]);
+        return redirect()->route('marketplace.home')
+            ->with('success', 'Welcome to FoodChain Marketplace, '.$user->first_name.'! Your free account is ready.');
     }
 }

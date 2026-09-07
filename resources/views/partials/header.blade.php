@@ -65,6 +65,9 @@
                     </div>
 
                     <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium transition-colors duration-200">Contact</a>
+                    <a href="{{ route('marketplace.shop') }}" class="nav-link flex items-center text-white bg-primary hover:bg-primary-dark font-semibold transition-colors duration-200 px-5 py-2 rounded-lg">
+                        <i class="fas fa-store mr-2"></i>Shop
+                    </a>
                 </div>
 
                 <!-- Auth Buttons -->
@@ -84,6 +87,7 @@
             <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
                 <div class="pt-4 space-y-2">
                     <a href="{{ route('landing') }}" class="block py-3 px-2 text-gray-700 hover:bg-emerald-50 hover:text-primary font-medium rounded-lg transition-colors duration-150">Home</a>
+                    <a href="{{ route('marketplace.shop') }}" class="block py-3 px-2 text-white bg-primary hover:bg-primary-dark font-semibold rounded-lg transition-colors duration-150"><i class="fas fa-store mr-2"></i>Shop the Marketplace Store</a>
 
                     <!-- Mobile About Dropdown -->
                     <div class="relative">

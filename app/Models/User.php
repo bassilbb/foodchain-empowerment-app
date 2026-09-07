@@ -23,6 +23,7 @@ class User extends Authenticatable
         'current_tier_id',
         'direct_referrals_count',
         'wallet_balance',
+        'loyalty_points_balance',
         'membership_expires_at',
         'is_active',
         'address',
@@ -46,6 +47,7 @@ class User extends Authenticatable
         'last_login_at' => 'datetime',
         'is_active' => 'boolean',
         'wallet_balance' => 'decimal:2',
+        'loyalty_points_balance' => 'integer',
         'password' => 'hashed',
     ];
 
@@ -165,6 +167,42 @@ class User extends Authenticatable
     public function unionMembership()
     {
         return $this->hasOne(UnionMember::class)->where('is_active', true);
+    }
+
+    // Marketplace relationships
+    public function marketplaceVendor()
+    {
+        return $this->hasOne(\App\Models\Marketplace\Vendor::class, 'user_id');
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(\App\Models\Marketplace\CartItem::class, 'user_id');
+    }
+
+    public function marketplaceOrders()
+    {
+        return $this->hasMany(\App\Models\Marketplace\Order::class, 'user_id');
+    }
+
+    public function savedProducts()
+    {
+        return $this->hasMany(\App\Models\Marketplace\SavedProduct::class, 'user_id');
+    }
+
+    public function marketplaceWalletTransactions()
+    {
+        return $this->hasMany(\App\Models\Marketplace\WalletTransaction::class, 'user_id');
+    }
+
+    public function loyaltyPoints()
+    {
+        return $this->hasMany(\App\Models\Marketplace\LoyaltyPoint::class, 'user_id');
+    }
+
+    public function recentProductViews()
+    {
+        return $this->hasMany(\App\Models\Marketplace\RecentView::class, 'user_id');
     }
 
     // Accessors

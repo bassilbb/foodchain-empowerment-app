@@ -235,6 +235,9 @@ Route::get('/serve-logo/{path}', function (string $path) {
     abort(404);
 })->where('path', '.*');
 
+// Marketplace routes
+require __DIR__.'/marketplace.php';
+
 // Admin routes - prefix with /admin
 Route::prefix('admin')->group(base_path('routes/admin.php'));
 

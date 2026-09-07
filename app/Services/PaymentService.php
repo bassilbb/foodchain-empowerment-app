@@ -142,6 +142,7 @@ class PaymentService
                 'wallet_topup' => $this->processWalletTopup($payment),
                 'account_clearance' => $this->processAccountClearancePayment($payment),
                 'batch_account_clearance' => $this->processBatchAccountClearancePayment($payment),
+                'marketplace_order' => $this->processMarketplaceOrderPayment($payment),
                 default => null,
             };
         });
@@ -539,6 +540,26 @@ class PaymentService
         }
 
         app(NotificationService::class)->sendPaymentSuccessNotification($payment->user, $payment);
+    }
+
+    /**
+     * Process marketplace order payment
+     */
+    private function processMarketplaceOrderPayment(Payment $payment): void
+    {
+        $metadata = $payment->meta ?? [];
+        $orderId = $metadata['marketplace_order_id'] ?? null;
+
+        if (! $orderId) {
+            return;
+        }
+
+        $order = \App\Models\Marketplace\Order::find($orderId);
+        if (! $order) {
+            return;
+        }
+
+        app(\App\Services\Marketplace\OrderService::class)->confirmExternalPayment($order, 'paystack', $payment->reference);
     }
 
     /**

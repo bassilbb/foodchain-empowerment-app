@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             SettingsSeeder::class,
             ContributionPlanSeeder::class,
             SavingsPlanSeeder::class,
+            NigerianStateSeeder::class,
+            MarketplaceSeeder::class,
         ]);
 
         // Create default super admin

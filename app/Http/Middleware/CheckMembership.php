@@ -16,7 +16,11 @@ class CheckMembership
         $user = $request->user();
 
         if ($user && ! $user->is_active) {
-            if (! $request->routeIs('dashboard', 'payments.index', 'payments.renew', 'payments.initiate', 'profile.*', 'logout', 'manual-payments.*', 'support.*', 'distributions.*', 'quarterly-benefits.*', 'referrals.*', 'unions.*', 'user.incidents.*', 'notifications.*', 'user.food-assistance.*', 'user.food-support.*', 'user.accounts.*', 'switch-account')) {
+            // Public marketplace browsing stays available to inactive members;
+            // purchasing (cart/checkout/orders/wallet/bulk/vendor) remains gated.
+            $marketplaceBrowse = ['marketplace.home', 'marketplace.shop', 'marketplace.flash-sale', 'marketplace.search', 'marketplace.autocomplete', 'marketplace.vendors', 'marketplace.vendor', 'marketplace.brand', 'marketplace.category', 'marketplace.product', 'marketplace.browse'];
+
+            if (! $request->routeIs(array_merge($marketplaceBrowse, ['dashboard', 'payments.index', 'payments.renew', 'payments.initiate', 'profile.*', 'logout', 'manual-payments.*', 'support.*', 'distributions.*', 'quarterly-benefits.*', 'referrals.*', 'unions.*', 'user.incidents.*', 'notifications.*', 'user.food-assistance.*', 'user.food-support.*', 'user.accounts.*', 'switch-account']))) {
                 return redirect()->route('payment.pending', [
                     'user_id' => $user->id,
                     'amount' => 5000,

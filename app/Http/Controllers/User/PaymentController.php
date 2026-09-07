@@ -119,6 +119,16 @@ class PaymentController extends Controller
         if ($result['status'] === 'success') {
             $payment = $result['payment'];
 
+            if ($payment->type === 'marketplace_order') {
+                $orderId = $payment->meta['marketplace_order_id'] ?? null;
+                if ($orderId && \App\Models\Marketplace\Order::find($orderId)) {
+                    return redirect()->route('marketplace.orders.show', $orderId)
+                        ->with('success', 'Payment successful! Your order has been confirmed.');
+                }
+
+                return redirect()->route('marketplace.orders.index')->with('success', 'Payment successful!');
+            }
+
             $this->createAccountFromSavingsPlan($payment);
 
             if (session()->has('pending_registration_user_id')) {
@@ -254,7 +264,9 @@ class PaymentController extends Controller
         $signature = $request->header('x-paystack-signature');
         $payload = $request->getContent();
 
-        if (! $signature || $signature !== hash_hmac('sha512', $payload, config('paystack.secret_key') ?: config('services.paystack.secret'))) {
+        $secretKey = config('paystack.secret_key') ?: config('services.paystack.secret') ?: \App\Models\Setting::get('paystack_secret_key');
+
+        if (! $signature || ! $secretKey || $signature !== hash_hmac('sha512', $payload, $secretKey)) {
             return response('Invalid signature', 400);
         }
 
