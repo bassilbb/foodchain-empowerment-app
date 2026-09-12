@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodChain — Nigeria's State-Priced Food Marketplace · Pitch Deck</title>
+<style>
+  :root{
+    --emerald:#059669; --emerald-lt:#10b981; --teal:#0d9488; --deep:#022c22;
+    --ink:#0b1220; --muted:#5b6b7c; --line:#e4ebe6; --paper:#f7faf8;
+    --amber:#f59e0b; --gold:#fbbf24;
+    --shadow:0 18px 50px rgba(2,44,34,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Plus Jakarta Sans','Inter',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--paper);overflow:hidden;-webkit-font-smoothing:antialiased;
+  }
+  .deck{position:relative;height:100vh;width:100%}
+  .slide{
+    position:absolute;inset:0;display:none;flex-direction:column;
+    padding:5.4vh 6.2vw 7vh;overflow:hidden;animation:fade .5s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .slide.active{display:flex}
+  @keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .slide.dark{background:radial-gradient(1200px 640px at 78% -12%,#064e3b 0%,transparent 58%),linear-gradient(160deg,#022c22 0%,#04231b 55%,#012019 100%);color:#eafaf2}
+  .slide.dark .muted{color:#9fd8c2}
+  .slide.light{background:radial-gradient(1100px 560px at 85% -14%,#d9f7ea 0%,transparent 56%),radial-gradient(820px 520px at -8% 112%,#e6fbf3 0%,transparent 52%),var(--paper)}
+
+  /* ---------- HUD ---------- */
+  .progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--emerald-lt),var(--teal),var(--gold));z-index:90;transition:width .4s ease}
+  .brand{position:fixed;top:20px;left:24px;z-index:80;display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em}
+  .brand img{width:34px;height:34px;object-fit:contain;border-radius:9px;background:#fff;padding:3px;box-shadow:0 6px 16px rgba(2,44,34,.18)}
+  .brand span{font-size:15px}
+  .brand small{display:block;font-size:9.5px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;font-weight:700}
+  .hud{position:fixed;bottom:20px;right:24px;z-index:90;display:flex;align-items:center;gap:12px}
+  .counter{font-size:12px;font-weight:800;color:var(--muted);background:rgba(255,255,255,.92);border:1px solid var(--line);padding:7px 13px;border-radius:999px;box-shadow:0 8px 20px rgba(2,44,34,.08);backdrop-filter:blur(8px)}
+  .nav{display:flex;gap:8px}
+  .nav button{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--emerald);font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(2,44,34,.08);transition:.2s}
+  .nav button:hover{background:var(--emerald);color:#fff;transform:translateY(-2px)}
+  .dots{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:90;flex-wrap:wrap;max-width:60vw;justify-content:center}
+  .dots i{width:8px;height:8px;border-radius:999px;background:#bcd0c6;cursor:pointer;transition:.25s}
+  .dots i.on{width:24px;background:linear-gradient(90deg,var(--emerald),var(--teal))}
+
+  /* ---------- Shared type ---------- */
+  .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:#e7f8f0;color:#047857;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:1px solid #b7efd6}
+  .dark .tag{background:rgba(16,185,129,.16);color:#6ee7b7;border-color:rgba(110,231,183,.35)}
+  h1{font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.03em;font-weight:800;margin:14px 0 10px}
+  h2{font-size:clamp(24px,3.1vw,40px);line-height:1.06;letter-spacing:-.025em;font-weight:800;margin:12px 0 8px}
+  h3{font-size:19px;letter-spacing:-.01em;font-weight:800}
+  .lead{font-size:clamp(14px,1.28vw,18px);line-height:1.55;color:var(--muted);max-width:70ch}
+  .dark .lead{color:#b6e3d0}
+  .muted{color:var(--muted)}
+  .em{color:var(--emerald)} .dark .em{color:#34d399}
+  .amber{color:var(--amber)}
+
+  .head{display:flex;flex-direction:column;align-items:flex-start}
+  .body{flex:1;display:grid;gap:clamp(18px,2.4vw,40px);align-items:center;margin-top:clamp(14px,2.4vh,32px);min-height:0}
+  .cols-2{grid-template-columns:1.05fr .95fr}
+  .cols-2rev{grid-template-columns:.92fr 1.08fr}
+  .cols-3{grid-template-columns:repeat(3,1fr)}
+  .stack{display:flex;flex-direction:column;gap:14px}
+
+  /* ---------- Imagery ---------- */
+  .frame{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:#e8f3ee;border:1px solid rgba(255,255,255,.6)}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .frame.tall{aspect-ratio:4/3}
+  .frame.sq{aspect-ratio:1/1}
+  .frame.wide{aspect-ratio:16/9}
+  .frame .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(0deg,rgba(2,44,34,.86),transparent);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.02em}
+  .imggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .imgcard{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;box-shadow:0 12px 30px rgba(2,44,34,.13);border:3px solid #fff;background:#eef7f2}
+  .imgcard img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .imgcard:hover img{transform:scale(1.07)}
+  .imgcard b{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;background:linear-gradient(0deg,rgba(2,44,34,.82),transparent);color:#fff;font-size:12px;font-weight:800;text-align:center}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px;box-shadow:0 12px 30px rgba(2,44,34,.07)}
+  .dark .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);box-shadow:none}
+  .card .ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#047857;display:grid;place-items:center;font-size:20px;margin-bottom:12px}
+  .card p{font-size:13.5px;line-height:1.5;color:var(--muted);margin-top:6px}
+  .dark .card p{color:#a9d9c5}
+
+  ul.ticks{list-style:none;display:flex;flex-direction:column;gap:12px}
+  ul.ticks li{position:relative;padding-left:32px;font-size:14.5px;line-height:1.5;color:#233}
+  .dark ul.ticks li{color:#d6f3e6}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--emerald-lt),var(--teal))}
+  ul.ticks li::after{content:"";position:absolute;left:6px;top:8px;width:7px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+  ul.ticks b{color:var(--ink)} .dark ul.ticks b{color:#fff}
+
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px;text-align:center;box-shadow:0 10px 26px rgba(2,44,34,.06)}
+  .dark .metric{background:rgba(255,255,255,.07);border-color:rgba(110,231,183,.22)}
+  .metric b{display:block;font-size:clamp(22px,2.5vw,34px);font-weight:800;letter-spacing:-.03em;color:var(--emerald)}
+  .dark .metric b{color:#34d399}
+  .metric span{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .dark .metric span{color:#9fd8c2}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .step{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 14px;box-shadow:0 10px 26px rgba(2,44,34,.06)}
+  .step b.n{position:absolute;top:-12px;left:14px;width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;display:grid;place-items:center;font-size:13px;box-shadow:0 6px 14px rgba(5,150,105,.35)}
+  .step h4{font-size:13.5px;margin:10px 0 4px;font-weight:800}
+  .step p{font-size:11.5px;line-height:1.45;color:var(--muted)}
+
+  /* phone mock */
+  .phone{width:min(290px,26vw);aspect-ratio:9/19;border-radius:34px;background:#05130f;padding:9px;box-shadow:0 30px 60px rgba(2,44,34,.35);margin:0 auto;border:2px solid #123a2f}
+  .screen{width:100%;height:100%;border-radius:27px;overflow:hidden;background:#f7faf8;display:flex;flex-direction:column}
+  .screen .bar{padding:9px 12px 7px;background:linear-gradient(135deg,#059669,#0d9488);color:#fff;font-size:11px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+  .screen .sel{margin:8px;padding:8px 10px;border-radius:11px;background:#ecfdf5;border:1px solid #b7efd6;font-size:10.5px;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:#047857}
+  .screen .grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 8px;overflow:hidden}
+  .screen .p{border-radius:11px;overflow:hidden;background:#fff;border:1px solid #e4ebe6;display:flex;flex-direction:column}
+  .screen .p img{width:100%;height:46px;object-fit:cover}
+  .screen .p span{font-size:8.5px;padding:4px 5px 0;color:#334;font-weight:700;line-height:1.15}
+  .screen .p em{font-style:normal;font-size:8.5px;padding:1px 5px 5px;color:#059669;font-weight:800}
+
+  /* bars / results */
+  .barrow{display:flex;flex-direction:column;gap:11px}
+  .barlab{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:4px;color:#2b3a33}
+  .dark .barlab{color:#d6f3e6}
+  .track{height:9px;border-radius:999px;background:#e2ece6;overflow:hidden}
+  .dark .track{background:rgba(255,255,255,.14)}
+  .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--emerald-lt),var(--teal));width:0;transition:width 1s cubic-bezier(.2,.7,.3,1)}
+
+  /* timeline */
+  .timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-top:26px}
+  .timeline::before{content:"";position:absolute;top:9px;left:4%;right:4%;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--emerald-lt),var(--gold))}
+  .tl{position:relative}
+  .tl::before{content:"";position:absolute;top:-22px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;border:4px solid var(--emerald);box-shadow:0 0 0 4px rgba(16,185,129,.16)}
+  .tl h4{font-size:14px;font-weight:800;margin-bottom:4px}
+  .tl span{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+  .tl p{font-size:12px;line-height:1.45;color:var(--muted);margin-top:6px}
+
+  .quote{font-size:clamp(15px,1.5vw,20px);line-height:1.5;font-weight:600;color:#0b2a20}
+  .dark .quote{color:#eafaf2}
+
+  .flag{display:flex;height:8px;width:120px;border-radius:6px;overflow:hidden;margin-top:16px}
+  .flag i{flex:1} .flag .g{background:#0d9488} .flag .w{background:#f8fafc} .flag .gr{background:#16a34a}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,var(--emerald-lt),var(--teal));color:#fff;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 14px 30px rgba(5,150,105,.35)}
+
+  @media (max-width:900px){
+    .cols-2,.cols-2rev{grid-template-columns:1fr}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .timeline{grid-template-columns:1fr 1fr;gap:22px}
+    .phone{width:60vw}
+    .slide{padding:6vh 6vw 8vh}
+    .imggrid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media print{
+    body{overflow:visible;background:#fff}
+    .deck{height:auto}
+    .slide{position:relative;display:flex!important;page-break-after:always;height:100vh;box-shadow:none}
+    .progress,.hud,.dots,.brand{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+<div class="brand">
+  <img src="/assets/landing/images/FCCEILOGO.png" alt="FCCEI">
+  <div>FoodChain<small>by FCCEI</small></div>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1. COVER -->
+  <section class="slide dark active">
+    <div class="body cols-2" style="margin-top:0">
+      <div class="head">
+        <span class="tag">Nigeria · Food Commerce · 2026</span>
+        <h1>Every price<br>respects<br><span class="em">your state.</span></h1>
+        <p class="lead">FoodChain is a full-stack marketplace that connects Nigerian food vendors to buyers in all 37 states — with transparent, state-by-state pricing, verified sellers and door-step delivery.</p>
+        <div class="flag"><i class="g"></i><i class="w"></i><i class="gr"></i></div>
+        <a class="cta" href="https://8011-af353f47fe574d16.monkeycode-ai.live/shop" target="_blank">Open the live marketplace →</a>
+      </div>
+      <div class="frame tall">
+        <img src="/assets/landing/images/marketpics.png" alt="Nigerian food market">
+        <div class="cap">A market built for real vendors, real buyers and real local prices.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OPPORTUNITY -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">01 · The Opportunity</span>
+      <h2>Nigeria buys food every day.<br>It just has no <span class="em">digital home.</span></h2>
+      <p class="lead">Over 200 million people depend on open markets, kiosks and neighbourhood stores. Commerce is huge, but discovery, trust and pricing remain offline and informal.</p>
+    </div>
+    <div class="body cols-2rev">
+      <div class="stack">
+        <div class="card"><div class="ic">◆</div><h3>Fragmented supply</h3><p>Food is sold through millions of disconnected micro-vendors with no shared catalogue or reach beyond their street.</p></div>
+        <div class="card"><div class="ic">◆</div><h3>Price opacity</h3><p>The same bag of rice costs wildly different amounts in Lagos, Kano and Enugu — and nobody knows until they arrive.</p></div>
+        <div class="card"><div class="ic">◆</div><h3>Broken logistics</h3><p>Buyers travel to markets; vendors struggle to deliver. There is no reliable, transparent fulfilment layer.</p></div>
+      </div>
+      <div class="frame tall">
+        <img src="/assets/landing/images/morefood.png" alt="Fresh produce market">
+        <div class="cap">Informal, essential, and still almost entirely offline.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PROBLEM -->
+  <section class="slide dark">
+    <div class="head">
+      <span class="tag">02 · The Problem</span>
+      <h2>One country. <span class="em">Very different</span> price tags.</h2>
+      <p class="lead">Transport, storage and local demand mean the true cost of food changes as you cross a state line. Most platforms ignore this — and quietly lose money or overcharge buyers.</p>
+    </div>
+    <div class="body cols-2">
+      <div class="frame wide" style="aspect-ratio:16/10">
+        <img src="/assets/landing/images/Screenshot%202025-12-28%20182426TOTAL.png" alt="Cost and pricing data">
+        <div class="cap">Cost structures vary dramatically between states — pricing must follow.</div>
+      </div>
+      <div class="stack">
+        <ul class="ticks">
+          <li><b>Buyers</b> can't trust that the price they see is the price near them.</li>
+          <li><b>Vendors</b> lose sales because they can't price for each market they serve.</li>
+          <li><b>Platforms</b> that use one flat national price either bleed margin or price themselves out.</li>
+        </ul>
+        <div class="card"><h3 class="amber">The insight</h3><p>Price is local. A credible food marketplace must price every product, for every state, separately — and lock that price into the order the moment it is placed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SOLUTION -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">03 · The Solution</span>
+      <h2>One marketplace.<br>Priced for <span class="em">37 states.</span></h2>
+    </div>
+    <div class="body cols-2">
+      <div class="stack">
+        <ul class="ticks">
+          <li><b>State-aware storefront</b> — pick your state once and every price, cart total and checkout figure updates instantly.</li>
+          <li><b>Verified vendors</b> — every seller is onboarded and managed from a dedicated vendor dashboard.</li>
+          <li><b>Full commerce loop</b> — browse, cart, coupons, wallet, checkout and order tracking in one place.</li>
+          <li><b>Fair and free to join</b> — registration is instant and open; buying is gated only by login, never by membership fees.</li>
+        </ul>
+        <div class="metrics">
+          <div class="metric"><b>37</b><span>States</span></div>
+          <div class="metric"><b>53</b><span>Categories</span></div>
+          <div class="metric"><b>252</b><span>Products</span></div>
+          <div class="metric"><b>15</b><span>Vendors</span></div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="screen">
+          <div class="bar"><span>FoodChain</span><span>FCT Abuja ▾</span></div>
+          <div class="sel"><span>Delivering to: FCT Abuja</span><span>Change</span></div>
+          <div class="grid">
+            <div class="p"><img src="/assets/landing/images/rice.png" alt=""><span>Premium Rice</span><em>₦68,500</em></div>
+            <div class="p"><img src="/assets/landing/images/beans.png" alt=""><span>Honey Beans</span><em>₦52,000</em></div>
+            <div class="p"><img src="/assets/landing/images/palmoil.png" alt=""><span>Red Palm Oil</span><em>₦18,900</em></div>
+            <div class="p"><img src="/assets/landing/images/vegetable.png" alt=""><span>Fresh Vegetables</span><em>₦7,500</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HOW IT WORKS -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">04 · How It Works</span>
+      <h2>From browse to doorstep in five steps.</h2>
+      <p class="lead">A deliberately simple buyer journey — the complexity of 9,000+ state prices is handled quietly behind the scenes.</p>
+    </div>
+    <div class="body" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="steps">
+        <div class="step"><b class="n">1</b><h4>Browse</h4><p>Explore 53 categories and hundreds of products from verified vendors.</p></div>
+        <div class="step"><b class="n">2</b><h4>Pick state</h4><p>Choose your delivery state — prices snap to your local market.</p></div>
+        <div class="step"><b class="n">3</b><h4>Add to cart</h4><p>Cart, coupon and delivery totals are calculated for that state.</p></div>
+        <div class="step"><b class="n">4</b><h4>Pay</h4><p>Checkout via wallet or payment method; the price is snapshotted into the order.</p></div>
+        <div class="step"><b class="n">5</b><h4>Delivered</h4><p>Track the order from confirmation to delivery in your account.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. MARKETPLACE SHOWCASE -->
+  <section class="slide dark">
+    <div class="head">
+      <span class="tag">05 · The Marketplace</span>
+      <h2>Real food. <span class="em">Real vendors.</span> Real shelves.</h2>
+      <p class="lead">Staples, proteins, oils, grains and fresh produce — a catalogue built around what Nigerian households actually buy every week.</p>
+    </div>
+    <div class="body">
+      <div class="imggrid" style="grid-template-columns:repeat(7,1fr)">
+        <div class="imgcard"><img src="/assets/landing/images/rice.png" alt=""><b>Rice</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/beans.png" alt=""><b>Beans</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/garri.png" alt=""><b>Garri</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/spaghetti.png" alt=""><b>Pasta</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/palmoil.png" alt=""><b>Palm Oil</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/semovita.png" alt=""><b>Semovita</b></div>
+        <div class="imgcard"><img src="/assets/landing/images/vegetable.png" alt=""><b>Vegetables</b></div>
+      </div>
+      <div class="metrics" style="margin-top:6px">
+        <div class="metric"><b>252</b><span>Live products</span></div>
+        <div class="metric"><b>9,324</b><span>State prices</span></div>
+        <div class="metric"><b>53</b><span>Categories</span></div>
+        <div class="metric"><b>115</b><span>Orders processed</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PRICING ENGINE -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">06 · The Engine</span>
+      <h2>The state-pricing engine.</h2>
+      <p class="lead">Each product holds an explicit selling price for every one of Nigeria's 37 states. Buyers always see their true local price — and orders store that price forever.</p>
+    </div>
+    <div class="body cols-2">
+      <div class="frame tall">
+        <img src="/assets/landing/images/warehouse.png" alt="Warehouse and supply">
+        <div class="cap">Local supply, local costs, local prices.</div>
+      </div>
+      <div class="stack">
+        <ul class="ticks">
+          <li><b>Explicit price rows</b> — product × state = one authoritative price, editable by admins.</li>
+          <li><b>Live recalculation</b> — cards, product pages, cart and checkout all read the selected state.</li>
+          <li><b>Order snapshots</b> — the pricing state is frozen into every order, so history never changes.</li>
+          <li><b>37 canonical states</b> — a single source of truth, defaulting to FCT Abuja.</li>
+        </ul>
+        <div class="card"><h3>Why it matters</h3><p>This is the difference between a demo catalogue and a marketplace that can actually operate profitably across Nigeria.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. VENDORS -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">07 · Vendors</span>
+      <h2>Empowering the people who feed us.</h2>
+      <p class="lead">Vendors get a real digital storefront, product management, per-state pricing and order visibility — without any joining fee.</p>
+    </div>
+    <div class="body cols-2rev">
+      <div class="stack">
+        <div class="card"><div class="ic">◆</div><h3>Free onboarding</h3><p>Register, list products and start selling immediately — open to every active user.</p></div>
+        <div class="card"><div class="ic">◆</div><h3>Local pricing control</h3><p>Set the selling price for the states you actually serve, so you never sell at a loss.</p></div>
+        <div class="card"><div class="ic">◆</div><h3>Orders &amp; fulfilment</h3><p>See incoming orders, manage stock and serve customers from one dashboard.</p></div>
+      </div>
+      <div class="frame tall">
+        <img src="/assets/landing/images/empowerment.jpeg" alt="Vendor empowerment">
+        <div class="cap">Technology that grows small businesses instead of replacing them.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. LOGISTICS -->
+  <section class="slide dark">
+    <div class="head">
+      <span class="tag">08 · Fulfilment</span>
+      <h2>From warehouse to <span class="em">doorstep.</span></h2>
+      <p class="lead">Delivery zones, options and fees are configured per state, so fulfilment stays realistic and priced correctly.</p>
+    </div>
+    <div class="body cols-2">
+      <div class="frame wide" style="aspect-ratio:16/10">
+        <img src="/assets/landing/images/imagesdelivery.png" alt="Delivery logistics">
+        <div class="cap">Configurable delivery zones across all 37 states.</div>
+      </div>
+      <div class="stack">
+        <div class="metrics" style="grid-template-columns:repeat(2,1fr)">
+          <div class="metric"><b>37</b><span>Delivery states</span></div>
+          <div class="metric"><b>Live</b><span>Fee per zone</span></div>
+          <div class="metric"><b>Tracked</b><span>Order status</span></div>
+          <div class="metric"><b>Secure</b><span>Wallet &amp; payment</span></div>
+        </div>
+        <ul class="ticks">
+          <li>Delivery zones and fees managed per state from the admin console.</li>
+          <li>Order tracking from confirmation through to delivery.</li>
+          <li>Trust built in: verified buyers, vendors and admin oversight.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. TECHNOLOGY -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">09 · Technology</span>
+      <h2>Engineered to be boringly reliable.</h2>
+      <p class="lead">A proven Laravel foundation with clean role separation, a caching-friendly asset pipeline and automated end-to-end verification.</p>
+    </div>
+    <div class="body cols-3">
+      <div class="card"><div class="ic">◆</div><h3>Laravel + MySQL</h3><p>Mature MVC core, migrations and seeders, with well-defined services for pricing, cart and orders.</p></div>
+      <div class="card"><div class="ic">◆</div><h3>Three clear roles</h3><p>Customer, Vendor and Admin each get isolated dashboards and guarded routes — admin runs on its own guard.</p></div>
+      <div class="card"><div class="ic">◆</div><h3>Resilient assets</h3><p>Vite-compiled CSS/JS with root-relative URLs, safe behind the HTTPS preview proxy; placeholder imagery auto-yields to real uploads.</p></div>
+    </div>
+    <div class="body cols-2" style="flex:0;margin-top:0">
+      <div class="card"><h3>Verified end-to-end</h3><p>63 automated checks across all four personas — guest, customer, vendor and admin — covering every critical route and flow.</p></div>
+      <div class="card"><h3>Tested for the real thing</h3><p>Registration, state pricing, cart, checkout, coupon, wallet, vendor onboarding and the full admin console are all exercised before release.</p></div>
+    </div>
+  </section>
+
+  <!-- 11. QUALITY -->
+  <section class="slide dark">
+    <div class="head">
+      <span class="tag">10 · Quality &amp; Proof</span>
+      <h2>63 checks. <span class="em">63 passes.</span></h2>
+      <p class="lead">Every persona and critical flow is verified automatically, so we ship with evidence rather than optimism.</p>
+    </div>
+    <div class="body cols-2">
+      <div class="barrow">
+        <div><div class="barlab"><span>Guest &amp; landing</span><span>100%</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+        <div><div class="barlab"><span>Customer commerce flow</span><span>100%</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+        <div><div class="barlab"><span>Vendor dashboard</span><span>100%</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+        <div><div class="barlab"><span>Admin console</span><span>100%</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+        <div><div class="barlab"><span>State-pricing coverage</span><span>9,324 rows</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+        <div><div class="barlab"><span>Broken route names</span><span>0</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+      </div>
+      <div class="stack">
+        <div class="metrics" style="grid-template-columns:repeat(2,1fr)">
+          <div class="metric"><b>63/63</b><span>Checks passing</span></div>
+          <div class="metric"><b>0</b><span>Broken links</span></div>
+          <div class="metric"><b>4</b><span>Personas</span></div>
+          <div class="metric"><b>37</b><span>States priced</span></div>
+        </div>
+        <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(110,231,183,.22)">
+          <h3>Defects found &amp; fixed</h3>
+          <p>Empty-cart checkout 500, broken route names, wrong route parameters and mixed-content image URLs — all identified by the test sweep and resolved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. BUSINESS MODEL -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">11 · Business Model</span>
+      <h2>Revenue that scales with real trade.</h2>
+      <p class="lead">No membership barrier. FoodChain earns when value is actually delivered — keeping onboarding friction at zero for buyers and vendors.</p>
+    </div>
+    <div class="body cols-3">
+      <div class="card"><div class="ic">◆</div><h3>Transaction commission</h3><p>A small fee on completed marketplace orders — aligned directly with vendor success.</p></div>
+      <div class="card"><div class="ic">◆</div><h3>Delivery &amp; logistics</h3><p>Per-state, per-zone delivery fees configured by the admin console.</p></div>
+      <div class="card"><div class="ic">◆</div><h3>Promoted placement</h3><p>Featured products, flash sales and vendor visibility for sellers who want more reach.</p></div>
+    </div>
+  </section>
+
+  <!-- 13. ROADMAP -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">12 · Roadmap</span>
+      <h2>What's live — and what's next.</h2>
+    </div>
+    <div class="body" style="display:flex;align-items:center">
+      <div class="timeline" style="width:100%">
+        <div class="tl"><span>Now</span><h4>Marketplace + state pricing</h4><p>Live storefront, cart, checkout, wallet, vendor and admin consoles across 37 states.</p></div>
+        <div class="tl"><span>Next</span><h4>Payments &amp; logistics partners</h4><p>Integrate more payment rails and vetted third-party couriers for faster delivery.</p></div>
+        <div class="tl"><span>Then</span><h4>Scale supply</h4><p>Onboard more vendors per state and expand the catalogue into fresh and frozen foods.</p></div>
+        <div class="tl"><span>Later</span><h4>Intelligence &amp; reach</h4><p>Demand insights for vendors, bulk buying and mobile-first expansion.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. TEAM -->
+  <section class="slide light">
+    <div class="head">
+      <span class="tag">13 · The Team</span>
+      <h2>Built by people who know the market.</h2>
+      <p class="lead">A team combining grassroots food commerce experience with modern software delivery, under the FCCEI banner.</p>
+    </div>
+    <div class="body cols-3">
+      <div class="frame sq"><img src="/assets/landing/images/ceopics.png" alt="Leadership"><div class="cap">Leadership &amp; vision</div></div>
+      <div class="frame sq"><img src="/assets/landing/images/basspix.png" alt="Operations"><div class="cap">Operations &amp; partnerships</div></div>
+      <div class="frame sq"><img src="/assets/landing/images/frankojipics.png" alt="Product"><div class="cap">Product &amp; engineering</div></div>
+    </div>
+  </section>
+
+  <!-- 15. CLOSING -->
+  <section class="slide dark">
+    <div class="body cols-2" style="margin-top:0">
+      <div class="head">
+        <span class="tag">Join us</span>
+        <h1>Let's put <span class="em">every state</span><br>on the same<br>marketplace.</h1>
+        <p class="lead">FoodChain is live and verified. Explore the marketplace, test the flows, or reach out to partner with us.</p>
+        <div class="metrics" style="grid-template-columns:repeat(3,1fr);margin-top:8px">
+          <div class="metric"><b>37</b><span>States</span></div>
+          <div class="metric"><b>252</b><span>Products</span></div>
+          <div class="metric"><b>63/63</b><span>Tests passing</span></div>
+        </div>
+        <a class="cta" href="https://8011-af353f47fe574d16.monkeycode-ai.live/shop" target="_blank">Experience FoodChain →</a>
+        <p class="muted" style="margin-top:14px;font-size:12px">Demo logins available on request · Built with Laravel, MySQL &amp; Vite</p>
+      </div>
+      <div class="frame tall">
+        <img src="/assets/landing/images/foodchan.jpeg" alt="FoodChain">
+        <div class="cap">FoodChain by FCCEI — food commerce, fairly priced.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="hud">
+  <span class="counter" id="counter">1 / 15</span>
+  <div class="nav">
+    <button id="prev" aria-label="Previous">‹</button>
+    <button id="next" aria-label="Next">›</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const dots=document.getElementById('dots');
+  const bar=document.getElementById('bar');
+  const counter=document.getElementById('counter');
+  let i=0;
+  slides.forEach((_,n)=>{
+    const d=document.createElement('i');
+    d.addEventListener('click',()=>go(n));
+    dots.appendChild(d);
+  });
+  const dotEls=[...dots.children];
+  function go(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dotEls.forEach((d,k)=>d.classList.toggle('on',k===i));
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    counter.textContent=(i+1)+' / '+slides.length;
+    const active=slides[i];
+    active.querySelectorAll('.fill').forEach(f=>{f.style.width='0';requestAnimationFrame(()=>{setTimeout(()=>{f.style.width=(f.dataset.w||100)+'%';},60);});});
+  }
+  document.getElementById('next').addEventListener('click',()=>go(i+1));
+  document.getElementById('prev').addEventListener('click',()=>go(i-1));
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();go(i+1);}
+    if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(i-1);}
+    if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+  });
+  let x0=null;
+  document.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));x0=null;},{passive:true});
+  go(0);
+})();
+</script>
+</body>
+</html>

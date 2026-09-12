@@ -34,7 +34,7 @@
                         <div class="flex gap-3 border-b border-gray-50 pb-3">
                             <a href="{{ route('marketplace.product', $item->product->slug) }}" class="w-16 h-16 rounded-lg overflow-hidden bg-gray-50 shrink-0">
                                 @if ($item->product->image)
-                                    <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover">
+                                    <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                 @endif
                             </a>
                             <div class="flex-1">

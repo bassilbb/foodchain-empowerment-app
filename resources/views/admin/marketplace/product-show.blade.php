@@ -151,7 +151,7 @@
     <div style="display: flex; gap: 12px; flex-wrap: wrap; padding: 1rem;">
         @foreach($product->images as $image)
         <div style="position: relative;">
-            <img src="{{ $image->image_path }}" alt="" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover; border: 2px solid {{ $image->is_primary ? '#10b981' : '#e2e8f0' }};">
+            <img src="{{ $image->url }}" alt="" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';" style="width: 100px; height: 100px; border-radius: 10px; object-fit: cover; border: 2px solid {{ $image->is_primary ? '#10b981' : '#e2e8f0' }};">
             @if($image->is_primary)
             <span class="badge badge-success" style="position: absolute; top: -6px; left: -6px; font-size: 10px;">Primary</span>
             @endif

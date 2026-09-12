@@ -142,7 +142,7 @@
                     @if ($product)
                         @foreach ($product->images as $img)
                             <div class="relative">
-                                <img src="{{ $img->image_path }}" class="w-20 h-20 rounded-lg object-cover border {{ $img->is_primary ? 'border-emerald-500' : '' }}">
+                                <img src="{{ $img->url }}" class="w-20 h-20 rounded-lg object-cover border {{ $img->is_primary ? 'border-emerald-500' : '' }}" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                 @if ($img->is_primary)<span class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[8px] font-bold px-1 rounded">PRIMARY</span>@endif
                             </div>
                         @endforeach

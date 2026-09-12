@@ -107,7 +107,7 @@
                                 Acknowledged on {{ $escalation->acknowledged_at->format('M d, Y h:i A') }}
                             </small>
                         @else
-                            <form action="{{ route('admin.incidents.acknowledge', $escalation) }}" method="POST" style="display: inline;">
+                            <form action="{{ route('admin.incidents.escalation.acknowledge', $escalation) }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit" style="padding: 0.25rem 0.75rem; background: #f59e0b; color: white; border: none; border-radius: 6px; font-size: 0.875rem; cursor: pointer;">Acknowledge</button>
                             </form>

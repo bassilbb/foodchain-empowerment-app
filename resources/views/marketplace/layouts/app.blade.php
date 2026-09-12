@@ -43,7 +43,7 @@
 
     {{-- Top utility bar --}}
     @php $mpStates = mp_pricing()->states(); @endphp
-    <div class="bg-emerald-900 text-emerald-100 text-xs">
+    <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-900 text-emerald-100 text-xs">
         <div class="max-w-[1440px] mx-auto px-4 py-2 flex items-center justify-between gap-3">
             <div class="hidden md:flex items-center gap-5">
                 <p class="text-emerald-200/90">Free delivery on orders above ₦50,000 · Secure payments</p>
@@ -55,7 +55,7 @@
                     Deliver to
                 </label>
                 <select id="state-selector" onchange="if(this.value){window.location=this.value;}"
-                        class="bg-emerald-900 border border-emerald-700 rounded px-1.5 py-1 text-emerald-100 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-emerald-400 cursor-pointer">
+                        class="bg-emerald-950/40 border border-emerald-700/60 rounded-full px-2.5 py-1 text-emerald-100 text-[11px] font-medium focus:outline-none focus:ring-2 focus:ring-emerald-400/60 cursor-pointer">
                     <option value="{{ route('marketplace.shop') }}" disabled>Select state...</option>
                     @foreach ($mpStates as $st)
                         <option value="{{ route('marketplace.set-state', $st) }}" @selected(mp_state() === $st)>{{ $st }}</option>
@@ -83,7 +83,7 @@
     </div>
 
     {{-- Main store header --}}
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-white/90 backdrop-blur-xl border-b border-emerald-100/70 shadow-[0_8px_30px_rgba(4,120,87,0.05)] sticky top-0 z-50">
         <div class="max-w-[1440px] mx-auto px-4 py-3 flex items-center gap-4">
 
             {{-- Logo --}}
@@ -105,9 +105,9 @@
                         placeholder="Search rice, beans, tomato paste, seasonings..."
                         value="{{ $searchTerm ?? ($term ?? '') }}"
                         autocomplete="off"
-                        class="w-full rounded-lg py-2.5 pl-4 pr-28 text-sm text-gray-800 bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                        class="w-full rounded-full py-2.5 pl-5 pr-32 text-sm text-gray-800 bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/70 focus:border-emerald-500 focus:bg-white transition"
                     >
-                    <button type="submit" class="absolute right-1 top-1 bottom-1 px-5 bg-orange-500 hover:bg-orange-400 text-white rounded-md text-sm font-bold flex items-center gap-1.5 transition-colors">
+                    <button type="submit" class="absolute right-1 top-1 bottom-1 px-5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white rounded-full text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-orange-500/30">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         Search
                     </button>
@@ -133,7 +133,7 @@
                     </a>
                 @endauth
 
-                <a href="{{ route('marketplace.cart.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-emerald-50 group" title="Cart">
+                <a href="{{ route('marketplace.cart.index') }}" class="flex items-center gap-2.5 px-3.5 py-2 rounded-full ring-1 ring-transparent hover:ring-emerald-100 hover:bg-emerald-50/80 group transition-all" title="Cart">
                     <span class="relative">
                         <svg class="w-7 h-7 text-emerald-700 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.6a1 1 0 001 1.4H20"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
                         <span id="cart-count-badge" class="absolute -top-1.5 -right-2 bg-orange-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">{{ $cartCount ?? 0 }}</span>
@@ -144,7 +144,7 @@
                     </span>
                 </a>
 
-                <a href="{{ route('marketplace.vendor.dashboard') }}" class="hidden lg:block bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-lg px-3.5 py-2.5 ml-1">Sell on FoodChain</a>
+                <a href="{{ route('marketplace.vendor.dashboard') }}" class="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:-translate-y-0.5 text-white text-sm font-semibold rounded-full px-4 py-2.5 ml-1 shadow-lg shadow-emerald-600/25 transition-all">Sell on FoodChain</a>
             </div>
         </div>
 
@@ -195,7 +195,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-emerald-950 text-emerald-200 mt-10">
+    <footer class="bg-gradient-to-b from-emerald-950 to-emerald-900 text-emerald-200 mt-10 border-t border-emerald-800/60">
         <div class="max-w-[1440px] mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div>
                 <h3 class="text-white font-bold mb-3 flex items-center gap-2">
@@ -220,7 +220,6 @@
                     <li><a href="{{ route('marketplace.flash-sale') }}" class="hover:text-white">Flash Sales</a></li>
                     <li><a href="{{ route('marketplace.vendors') }}" class="hover:text-white">Our Vendors</a></li>
                     <li><a href="{{ route('marketplace.bulk.index') }}" class="hover:text-white">Community Bulk Purchase</a></li>
-                    <li><a href="{{ route('marketplace.vendors') }}" class="hover:text-white">Our Vendors</a></li>
                 </ul>
             </div>
             <div>
@@ -285,7 +284,7 @@
             }
             if ((data.products || []).length) {
                 html += '<div class="px-4 py-2 text-xs font-bold text-gray-400 uppercase">Products</div>';
-                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" class="w-8 h-8 rounded object-cover">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
+                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
             }
             if (!html) html = '<div class="px-4 py-4 text-sm text-gray-500">No results for "' + term + '"</div>';
             suggestionsBox.innerHTML = html;

@@ -17,7 +17,7 @@
                     <div class="bg-white rounded-xl shadow-sm p-4 flex gap-4" data-cart-row="{{ $item->product_id }}">
                         <a href="{{ route('marketplace.product', $item->product->slug) }}" class="w-24 h-24 rounded-lg overflow-hidden bg-gray-50 shrink-0">
                             @if ($item->product->image)
-                                <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover">
+                                <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-emerald-300 font-bold text-2xl">{{ strtoupper(substr($item->product->name, 0, 1)) }}</div>
                             @endif
@@ -52,7 +52,7 @@
                         <div class="bg-white rounded-xl shadow-sm p-4 flex gap-4 opacity-75">
                             <a href="{{ route('marketplace.product', $item->product->slug) }}" class="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 shrink-0">
                                 @if ($item->product->image)
-                                    <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover">
+                                    <img src="{{ $item->product->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                 @endif
                             </a>
                             <div class="flex-1">

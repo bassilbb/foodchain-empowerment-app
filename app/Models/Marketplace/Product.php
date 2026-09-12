@@ -171,14 +171,30 @@ class Product extends Model
         });
     }
 
+    public function getRealImagesAttribute()
+    {
+        return $this->images->filter(fn ($image) => ! $image->is_placeholder)->values();
+    }
+
+    public function hasRealImages(): bool
+    {
+        return $this->images->contains(fn ($image) => ! $image->is_placeholder);
+    }
+
     public function getPrimaryImageAttribute()
     {
+        $real = $this->real_images;
+
+        if ($real->isNotEmpty()) {
+            return $real->firstWhere('is_primary', true) ?? $real->first();
+        }
+
         return $this->images->firstWhere('is_primary', true) ?? $this->images->first();
     }
 
     public function getImageAttribute()
     {
-        return $this->primary_image?->image_path;
+        return $this->primary_image?->url;
     }
 
     public function getSellingPriceAttribute(): float

@@ -209,17 +209,25 @@ class VendorController extends Controller
             return;
         }
 
-        $hasPrimary = $product->images()->where('is_primary', true)->exists();
+        $hasRealPrimary = $product->images()->where('is_placeholder', false)->where('is_primary', true)->exists();
 
         foreach ($request->file('images') as $index => $image) {
             $path = $image->store('marketplace/products/'.$product->id, 'public');
 
+            $isPrimary = ! $hasRealPrimary && $index === 0;
+
             ProductImage::create([
                 'product_id' => $product->id,
                 'image_path' => $path,
-                'is_primary' => ! $hasPrimary && $index === 0,
+                'is_primary' => $isPrimary,
+                'is_placeholder' => false,
                 'sort_order' => $product->images()->count() + $index,
             ]);
+
+            if ($isPrimary) {
+                $hasRealPrimary = true;
+                $product->images()->where('is_placeholder', true)->update(['is_primary' => false]);
+            }
         }
     }
 

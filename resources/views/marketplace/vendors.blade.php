@@ -12,7 +12,7 @@
     @else
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($vendors as $vendor)
-                <a href="{{ route('marketplace.vendor', $vendor->id) }}" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all p-5 flex items-start gap-4">
+                <a href="{{ route('marketplace.vendor', $vendor) }}" class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all p-5 flex items-start gap-4">
                     <div class="w-16 h-16 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 text-2xl font-extrabold shrink-0">
                         {{ strtoupper(substr($vendor->name, 0, 1)) }}
                     </div>

@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         ]));
 
         if (! $data['success']) {
-            return redirect()->route('marketplace.cart')->with('error', $data['message']);
+            return redirect()->route('marketplace.cart.index')->with('error', $data['message']);
         }
 
         return view('marketplace.checkout', [

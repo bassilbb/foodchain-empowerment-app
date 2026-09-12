@@ -14,7 +14,7 @@
     <a href="{{ route('marketplace.product', $product->slug) }}" class="relative block bg-white" aria-label="{{ $product->name }}">
         <div class="relative w-full aspect-square bg-white overflow-hidden">
             @if ($image)
-                <img src="{{ $image }}" alt="{{ $product->name }}" loading="lazy"
+                <img src="{{ $image }}" alt="{{ $product->name }}" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
                      class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
             @else
                 <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100">

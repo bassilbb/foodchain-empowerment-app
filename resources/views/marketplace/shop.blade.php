@@ -102,7 +102,7 @@
                             <a href="{{ route('marketplace.product', $heroProd->slug) }}" class="flex items-center gap-2 group">
                                 <span class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0 overflow-hidden">
                                     @if ($heroProd->image)
-                                        <img src="{{ $heroProd->image }}" alt="" class="w-full h-full object-cover">
+                                        <img src="{{ $heroProd->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                     @else
                                         {{ strtoupper(substr($heroProd->name, 0, 1)) }}
                                     @endif
@@ -125,7 +125,7 @@
                                 <a href="{{ route('marketplace.product', $heroProd->slug) }}" class="flex items-center gap-2 pr-6">
                                     <span class="w-11 h-11 rounded-lg overflow-hidden shrink-0 ring-1 ring-white/25 bg-white/10 flex items-center justify-center font-bold text-emerald-100 text-xs">
                                         @if ($heroProd->image)
-                                            <img src="{{ $heroProd->image }}" alt="" class="w-full h-full object-cover">
+                                            <img src="{{ $heroProd->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                         @else
                                             {{ strtoupper(substr($heroProd->name, 0, 1)) }}
                                         @endif

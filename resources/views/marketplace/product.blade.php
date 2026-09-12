@@ -7,7 +7,7 @@
         <a href="{{ route('marketplace.category', $product->category->slug) }}" class="hover:text-emerald-700">{{ $product->category->name }}</a>
         @if ($product->brand)
             <span>/</span>
-            <a href="{{ route('marketplace.brand', $product->brand->id) }}" class="hover:text-emerald-700">{{ $product->brand->name }}</a>
+            <a href="{{ route('marketplace.brand', $product->brand) }}" class="hover:text-emerald-700">{{ $product->brand->name }}</a>
         @endif
         <span>/</span>
         <span class="text-gray-800 font-medium line-clamp-1">{{ $product->name }}</span>
@@ -16,17 +16,20 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         {{-- Image gallery --}}
         <div>
-            @if ($product->images->isNotEmpty())
+            @php
+                $galleryImages = $product->real_images->isNotEmpty() ? $product->real_images : $product->images;
+            @endphp
+            @if ($galleryImages->isNotEmpty())
                 <div class="bg-white rounded-2xl shadow-sm p-3 mb-3">
                     <div class="aspect-square bg-gray-50 rounded-xl overflow-hidden" id="main-image-wrap">
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}" id="main-image" class="w-full h-full object-cover">
+                        <img src="{{ $product->image }}" alt="{{ $product->name }}" id="main-image" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';" class="w-full h-full object-cover">
                     </div>
                 </div>
-                @if ($product->images->count() > 1)
+                @if ($galleryImages->count() > 1)
                     <div class="flex gap-2 overflow-x-auto">
-                        @foreach ($product->images as $image)
-                            <button type="button" onclick="setMainImage('{{ $image->image_path }}', this)" class="w-20 h-20 rounded-lg overflow-hidden border-2 {{ $image->is_primary ? 'border-emerald-600' : 'border-transparent' }} hover:border-emerald-400 shrink-0 bg-white">
-                                <img src="{{ $image->image_path }}" class="w-full h-full object-cover" alt="">
+                        @foreach ($galleryImages as $image)
+                            <button type="button" onclick="setMainImage('{{ $image->url }}', this)" class="w-20 h-20 rounded-lg overflow-hidden border-2 {{ $product->primary_image && $product->primary_image->id === $image->id ? 'border-emerald-600' : 'border-transparent' }} hover:border-emerald-400 shrink-0 bg-white">
+                                <img src="{{ $image->url }}" class="w-full h-full object-cover" alt="" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                             </button>
                         @endforeach
                     </div>
@@ -165,7 +168,7 @@
                             <p class="text-sm font-semibold text-gray-800">{{ $product->vendor->business_name ?: $product->vendor->name }}</p>
                             <p class="text-xs text-gray-500">Ships from {{ $product->vendor->city ?: 'Nigeria' }}</p>
                         </div>
-                        <a href="{{ route('marketplace.vendor', $product->vendor->id) }}" class="text-xs text-emerald-700 font-semibold hover:underline">Visit store →</a>
+                        <a href="{{ route('marketplace.vendor', $product->vendor) }}" class="text-xs text-emerald-700 font-semibold hover:underline">Visit store →</a>
                     </div>
                 @endif
             </div>

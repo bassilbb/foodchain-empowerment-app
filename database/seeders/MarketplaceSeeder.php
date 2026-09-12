@@ -48,13 +48,6 @@ class MarketplaceSeeder extends Seeder
     /** @var \Illuminate\Support\Collection<int,DeliveryZone> */
     private $zones;
 
-    private array $palette = [
-        'grains' => '#b45309', 'cooking-ingredients' => '#b91c1c', 'seasonings' => '#a16207',
-        'proteins' => '#9d174d', 'beverages' => '#0369a1', 'breakfast' => '#7c3aed',
-        'pasta' => '#d97706', 'snacks' => '#c2410c', 'baby-food' => '#db2777',
-        'household-essentials' => '#0f766e',
-    ];
-
     public function run(): void
     {
         $this->command?->info('Seeding marketplace...');
@@ -81,19 +74,9 @@ class MarketplaceSeeder extends Seeder
         return Str::slug($name).'-'.strtolower(Str::random(4));
     }
 
-    private function placeholder(string $label, string $category): string
+    private function placeholder(string $slug, string $label, string $category): string
     {
-        $bg = $this->palette[$category] ?? '#059669';
-        $text = htmlspecialchars(mb_strtoupper(mb_substr($label, 0, 1)), ENT_QUOTES);
-        $name = htmlspecialchars(Str::limit($label, 24), ENT_QUOTES);
-        $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">'
-            .'<rect width="100%" height="100%" fill="'.$bg.'"/>'
-            .'<circle cx="200" cy="200" r="140" fill="rgba(255,255,255,0.12)"/>'
-            .'<text x="50%" y="45%" font-family="Arial, sans-serif" font-size="150" font-weight="bold" fill="rgba(255,255,255,0.95)" text-anchor="middle" dominant-baseline="central">'.$text.'</text>'
-            .'<text x="50%" y="72%" font-family="Arial, sans-serif" font-size="22" fill="rgba(255,255,255,0.85)" text-anchor="middle">'.$name.'</text>'
-            .'</svg>';
-
-        return 'data:image/svg+xml;utf8,'.rawurlencode($svg);
+        return \App\Support\ProductPlaceholder::store($slug, $label, $category);
     }
 
     private function randomPastDate(int $daysAgo = 365): string
@@ -497,8 +480,9 @@ class MarketplaceSeeder extends Seeder
                 if (! $product->images()->exists()) {
                     ProductImage::create([
                         'product_id' => $product->id,
-                        'image_path' => $this->placeholder($name, $cat),
+                        'image_path' => $this->placeholder($product->slug, $name, $cat),
                         'is_primary' => true,
+                        'is_placeholder' => true,
                         'sort_order' => 0,
                     ]);
                 }
@@ -506,8 +490,9 @@ class MarketplaceSeeder extends Seeder
                 if ($featured && $product->images()->where('is_primary', false)->doesntExist()) {
                     ProductImage::create([
                         'product_id' => $product->id,
-                        'image_path' => $this->placeholder($name, $cat),
+                        'image_path' => $this->placeholder($product->slug.'-2', $name, $cat),
                         'is_primary' => false,
+                        'is_placeholder' => true,
                         'sort_order' => 1,
                     ]);
                 }

@@ -58,7 +58,7 @@
                     </td>
                     <td style="padding: 1rem 1.5rem; color: #64748b;">{{ $union->created_at->format('M d, Y') }}</td>
                     <td style="padding: 1rem 1.5rem; text-align: right;">
-                        <a href="{{ route('admin.unions.show', $union) }}" style="color: #10b981; font-weight: 500; text-decoration: none;">View</a>
+                        <a href="{{ route('unions.show', $union) }}" style="color: #10b981; font-weight: 500; text-decoration: none;">View</a>
                     </td>
                 </tr>
                 @empty

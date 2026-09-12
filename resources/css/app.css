@@ -111,3 +111,69 @@
         animation: none;
     }
 }
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: #a7f3d0;
+        color: #064e3b;
+    }
+
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #a7f3d0 transparent;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #a7f3d0;
+        border-radius: 9999px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #6ee7b7;
+        background-clip: content-box;
+    }
+
+    a,
+    button {
+        transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    button:active,
+    a:active {
+        transform: translateY(0);
+    }
+
+    input,
+    select,
+    textarea {
+        border-radius: 0.75rem;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+    }
+}
