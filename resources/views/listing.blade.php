@@ -298,74 +298,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white mt-16">
-  <div class="container mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- FCCEI Info -->
-      <div>
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
-            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-          </div>
-          <div class="flex flex-col">
-            <span class="text-3xl font-extrabold leading-none" style="color: #10B981;">FCCEI</span>
-            <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
-          </div>
-        </div>
-        <p class="text-gray-400 mb-6 -mt-2">
-          Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.
-        </p>
-        <div class="flex space-x-4">
-          <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-facebook-f text-[#10B981] group-hover:text-white"></i>
-          </a>
-          <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-tiktok text-[#10B981] group-hover:text-white"></i>
-          </a>
-          <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-instagram text-[#10B981] group-hover:text-white"></i>
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-[#10B981] group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-whatsapp text-[#10B981] group-hover:text-white"></i>
-          </a>
-        </div>
-      </div>
-      <!-- Quick Links -->
-      <div>
-        <h4 class="text-lg font-bold mb-6">Quick Links</h4>
-        <ul class="space-y-3">
-          <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
-          <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
-          <li><a href="#products" class="text-gray-400 hover:text-white transition">Products</a></li>
-          <li><a href="#blog" class="text-gray-400 hover:text-white transition">Blog</a></li>
-        </ul>
-      </div>
-      <!-- Legal -->
-      <div>
-        <h4 class="text-lg font-bold mb-6">Legal</h4>
-        <ul class="space-y-3">
-          <li><a href="/privacy" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
-          <li><a href="/terms" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-          <li><a href="/cookies" class="text-gray-400 hover:text-white transition">Cookie Policy</a></li>
-          <li><a href="/compliance" class="text-gray-400 hover:text-white transition">Compliance</a></li>
-        </ul>
-      </div>
-      <!-- Resources -->
-      <div>
-        <h4 class="text-lg font-bold mb-6">Resources</h4>
-        <ul class="space-y-3">
-          <li><a href="/help" class="text-gray-400 hover:text-white transition">Help Center</a></li>
-          <li><a href="/faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
-          <li><a href="/community" class="text-gray-400 hover:text-white transition">Community</a></li>
-          <li><a href="/affiliate" class="text-gray-400 hover:text-white transition">Affiliate Program</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-      <p>&copy; 2024 FCCEI. All rights reserved. | Designed By Bassiprog Digital Solution</p>
-    </div>
-  </div>
-</footer>
+@include('partials.site-footer')
 
 <!-- Chat Button -->
 <a href="https://wa.me/+2348168018123" target="_blank" class="fixed bottom-8 right-8 z-[60] group">

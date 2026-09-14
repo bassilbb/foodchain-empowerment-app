@@ -38,6 +38,23 @@ Route::view('/rider', 'rider')->name('rider');
 Route::view('/listing', 'listing')->name('listing');
 Route::view('/blog', 'blog')->name('blog');
 Route::view('/blog_details', 'blog_details')->name('blog_details');
+Route::view('/csr', 'csr')->name('csr');
+Route::view('/franchise', 'franchice')->name('franchise');
+Route::view('/franchice', 'franchice');
+
+// Informational / legal pages
+foreach ([
+    'privacy' => 'pages.privacy',
+    'terms' => 'pages.terms',
+    'cookies' => 'pages.cookies',
+    'compliance' => 'pages.compliance',
+    'help' => 'pages.help',
+    'faq' => 'pages.faq',
+    'community' => 'pages.community',
+    'affiliate' => 'pages.affiliate',
+] as $path => $name) {
+    Route::view('/'.$path, 'pages.info', ['page' => $path])->name($name);
+}
 
 // Landing Page Forms
 use App\Http\Controllers\LandingController;

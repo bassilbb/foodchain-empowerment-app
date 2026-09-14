@@ -25,10 +25,12 @@
                         </button>
                         <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100 opacity-0 invisible -translate-y-2 transition-all duration-200">
                             <a href="{{ route('team') }}" class="dropdown-item">Team</a>
+                            <a href="{{ route('csr') }}" class="dropdown-item">CSR</a>
+                            <a href="{{ route('franchise') }}" class="dropdown-item">Franchise</a>
                         </div>
                     </div>
 
-                    <a href="#products" class="nav-pill">Membership</a>
+                    <a href="{{ route('landing') }}#products" class="nav-pill">Membership</a>
                     <a href="{{ route('listing') }}" class="nav-pill">Listing</a>
 
                     <div class="relative dropdown-container">
@@ -53,7 +55,7 @@
                         </div>
                     </div>
 
-                    <a href="#contact" class="nav-pill">Contact</a>
+                    <a href="{{ route('landing') }}#contact" class="nav-pill">Contact</a>
                 </div>
 
                 <!-- Auth Buttons -->
@@ -85,10 +87,12 @@
                         </button>
                         <div id="mobile-about" class="hidden pl-4 mt-1 space-y-1 border-l-2 border-emerald-100">
                             <a href="{{ route('team') }}" class="mobile-sub">Team</a>
+                            <a href="{{ route('csr') }}" class="mobile-sub">CSR</a>
+                            <a href="{{ route('franchise') }}" class="mobile-sub">Franchise</a>
                         </div>
                     </div>
 
-                    <a href="#products" class="mobile-link">Membership</a>
+                    <a href="{{ route('landing') }}#products" class="mobile-link">Membership</a>
                     <a href="{{ route('listing') }}" class="mobile-link">Listing</a>
 
                     <div>
@@ -113,7 +117,7 @@
                         </div>
                     </div>
 
-                    <a href="#contact" class="mobile-link">Contact</a>
+                    <a href="{{ route('landing') }}#contact" class="mobile-link">Contact</a>
 
                     <div class="grid grid-cols-2 gap-2 pt-3 mt-2 border-t border-slate-100">
                         <a href="{{ route('login') }}" class="btn-ghost w-full justify-center">Login</a>

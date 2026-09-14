@@ -664,34 +664,7 @@
         </section> -->
     </main>
 
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-3xl font-extrabold leading-none text-emerald-400">FCCEI</span>
-                            <span class="text-[11px] font-bold uppercase tracking-widest text-cyan-400">Food Chain Community Empowerment Initiative</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 mb-6 -mt-2">Empowering communities to achieve food security and sustainable growth through collaborative local initiatives.</p>
-                    <div class="flex space-x-4">
-                        <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-emerald-500 bg-white/5 hover:bg-white/10"><i class="fab fa-facebook-f text-emerald-400"></i></a>
-                        <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-emerald-500 bg-white/5 hover:bg-white/10"><i class="fab fa-tiktok text-emerald-400"></i></a>
-                        <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-emerald-500 bg-white/5 hover:bg-white/10"><i class="fab fa-instagram text-emerald-400"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-emerald-500 bg-white/5 hover:bg-white/10"><i class="fab fa-whatsapp text-emerald-400"></i></a>
-                    </div>
-                </div>
-                <div><h4 class="text-lg font-bold mb-6">Quick Links</h4><ul class="space-y-3"><li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li><li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li><li><a href="#products" class="text-gray-400 hover:text-white transition-colors">Membership</a></li><li><a href="#blog" class="text-gray-400 hover:text-white transition-colors">Blog</a></li></ul></div>
-                <div><h4 class="text-lg font-bold mb-6">Legal</h4><ul class="space-y-3"><li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li><li><a href="/terms" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li><li><a href="/cookies" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a></li><li><a href="/compliance" class="text-gray-400 hover:text-white transition-colors">Compliance</a></li></ul></div>
-                <div><h4 class="text-lg font-bold mb-6">Resources</h4><ul class="space-y-3"><li><a href="/help" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li><li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li><li><a href="/community" class="text-gray-400 hover:text-white transition-colors">Community</a></li><li><a href="#" class="text-gray-400 hover:text-white transition-colors">Affiliate Program</a></li></ul></div>
-            </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400"><p>&copy; 2024 FCCEI. All rights reserved. | Designed By Bassiprog Digital Solution</p></div>
-        </div>
-    </footer>
+    @include('partials.site-footer')
 
     <a href="https://chat.whatsapp.com/C8V1raWRahMEknKjmZUOmj" target="_blank" class="fixed bottom-8 right-8 z-[60] group">
         <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow-xl">Chat with an Event Manager</span>

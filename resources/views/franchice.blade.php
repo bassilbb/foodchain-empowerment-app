@@ -131,74 +131,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-12">
-        <div class="container mx-auto px-4 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-20 h-20 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-extrabold" style="color: #059669;">FCCEI</h3>
-                            <p class="text-sm uppercase tracking-widest" style="color: #047857;">Food Chain Community
-                                Empowerment</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        Partner with FCCEI to expand sustainable food initiatives and empower communities across
-                        regions.
-                    </p>
-                    <div class="flex space-x-3">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 hover:border-emerald-600 transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 hover:border-emerald-600 transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 hover:border-emerald-600 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="hover:text-emerald-600 transition">Home</a></li>
-                        <li><a href="#about" class="hover:text-emerald-600 transition">About</a></li>
-                        <li><a href="#services" class="hover:text-emerald-600 transition">Services</a></li>
-                        <li><a href="#contact" class="hover:text-emerald-600 transition">Contact</a></li>
-                    </ul>
-                </div>
-                <!-- Legal -->
-                <div>
-                    <h4 class="font-bold mb-4">Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-emerald-600 transition">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-emerald-600 transition">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-emerald-600 transition">Cookies</a></li>
-                    </ul>
-                </div>
-                <!-- Resources -->
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-emerald-600 transition">Help Center</a></li>
-                        <li><a href="#" class="hover:text-emerald-600 transition">FAQs</a></li>
-                        <li><a href="#" class="hover:text-emerald-600 transition">Support</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-4 text-center text-gray-400 text-sm">
-                &copy; 2024 FCCEI. All rights reserved.
-            </div>
-        </div>
-    </footer>
+    @include('partials.site-footer')
 
     <!-- Script for mobile menu toggle -->
     <script>

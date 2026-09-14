@@ -322,7 +322,7 @@
                                 <i class="fas fa-history text-[#26C1C9] mr-2 text-sm"></i> Recent Updates
                             </h3>
                             <div class="space-y-5">
-                                <a href="#" class="group flex items-center gap-4">
+                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4">
                                     <div
                                         class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
                                         <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}"
@@ -336,7 +336,7 @@
                                             Jan 10, 2025</p>
                                     </div>
                                 </a>
-                                <a href="#" class="group flex items-center gap-4 border-t pt-5">
+                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4 border-t pt-5">
                                     <div
                                         class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
                                         <img src="{{ asset('assets/landing/images/blogsa.jpeg') }}"
@@ -350,7 +350,7 @@
                                             Jan 08, 2025</p>
                                     </div>
                                 </a>
-                                <a href="#" class="group flex items-center gap-4 border-t pt-5">
+                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4 border-t pt-5">
                                     <div
                                         class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
                                         <img src="{{ asset('assets/landing/images/about-uss.png') }}"
@@ -432,108 +432,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="flex items-center space-x-4">
-                        <div class="w-32 h-32 flex items-center justify-center overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-3xl font-extrabold leading-none" style="color: #26C1C9;">FCCEI</span>
-                            <span class="text-[11px] font-bold uppercase tracking-widest" style="color: #1D5FB5;">Food
-                                Chain Community Empowerment Initiative</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-400 mb-6 -mt-2">
-                        Empowering communities to achieve food security and sustainable growth through collaborative
-                        local initiatives.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="https://web.facebook.com/profile.php?id=61585986685899"
-                            class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group"
-                            style="background: rgba(255,255,255,0.05);">
-                            <i class="fab fa-facebook-f text-brandTeal group-hover:text-white"></i>
-                        </a>
-                        <!-- <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group" style="background: rgba(255,255,255,0.05);">
-            <i class="fab fa-twitter text-brandTeal group-hover:text-white"></i>
-          </a> -->
-
-                        <a href="https://www.tiktok.com/@foodchainempowerm?lang=en"
-                            class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group"
-                            style="background: rgba(255,255,255,0.05);">
-                            <i class="fab fa-tiktok text-brandTeal group-hover:text-white"></i>
-                        </a>
-
-                        <a href="https://www.instagram.com/foodchainempowerment/"
-                            class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group"
-                            style="background: rgba(255,255,255,0.05);">
-                            <i class="fab fa-instagram text-brandTeal group-hover:text-white"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-gray-700 hover:border-brandTeal group"
-                            style="background: rgba(255,255,255,0.05);">
-                            <i class="fab fa-whatsapp text-brandTeal group-hover:text-white"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Home</a></li>
-                        <li><a href="#about"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">About Us</a></li>
-                        <li><a href="#products"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Products</a></li>
-                        <li><a href="#blog"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Blog</a></li>
-                    </ul>
-                </div>
-                <!-- Legal -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Legal</h4>
-                    <ul class="space-y-3">
-                        <li><a href="/privacy"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Privacy
-                                Policy</a></li>
-                        <li><a href="/terms"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Terms of
-                                Service</a></li>
-                        <li><a href="/cookies"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Cookie Policy</a>
-                        </li>
-                        <li><a href="/compliance"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Compliance</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Resources -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Resources</h4>
-                    <ul class="space-y-3">
-                        <li><a href="/help"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Help Center</a>
-                        </li>
-                        <li><a href="/faq"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">FAQ</a></li>
-                        <li><a href="/community"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Community</a>
-                        </li>
-                        <li><a href="/affiliate"
-                                class="text-gray-400 hover:text-white transition-colors duration-200">Affiliate
-                                Program</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 FCCEI. All rights reserved. | Designed By Bassiprog Digital Solution</p>
-            </div>
-        </div>
-    </footer>
+    @include('partials.site-footer')
 
     <!-- Script for mobile menu toggle -->
     <script>

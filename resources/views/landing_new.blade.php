@@ -170,18 +170,7 @@
 </section>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-gray-400 py-12">
-    <div class="container mx-auto px-4">
-        <div class="text-center">
-            <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-            <div class="mt-4 space-x-6">
-                <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition">Terms of Service</a>
-                <a href="{{ route('support.create') }}" class="hover:text-white transition">Contact Support</a>
-            </div>
-        </div>
-    </div>
-</footer>
+@include('partials.site-footer')
 
 </body>
 </html>
