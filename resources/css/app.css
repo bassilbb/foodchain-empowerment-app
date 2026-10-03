@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * FCCEI design tokens (semantic layer).
+ * Every module should reference these instead of hardcoded hex values so the
+ * brand stays consistent across landing pages, auth, marketplace and admin.
+ * Palette follows the ui-ux-pro-max semantic model:
+ *   primary / secondary / cta / background / surface / text / border + states.
+ */
+:root {
+    /* Brand greens - food security / agriculture */
+    --fc-primary: #059669;        /* primary actions, links */
+    --fc-primary-light: #10b981;  /* gradients, hovers */
+    --fc-primary-dark: #047857;   /* pressed, emphasis */
+    --fc-primary-soft: #ecfdf5;   /* tinted surfaces */
+
+    /* Secondary teal - supporting accents */
+    --fc-secondary: #0d9488;
+    --fc-secondary-light: #14b8a6;
+    --fc-secondary-dark: #0f766e;
+
+    /* CTA - warm gold, used sparingly for conversion actions */
+    --fc-cta: #d97706;
+    --fc-cta-light: #f59e0b;
+    --fc-cta-dark: #b45309;
+
+    /* Neutrals */
+    --fc-bg: #f7faf8;
+    --fc-surface: #ffffff;
+    --fc-border: #e2e8f0;
+    --fc-text: #10231d;
+    --fc-text-muted: #61736d;
+
+    /* Semantic states */
+    --fc-success: #059669;
+    --fc-warning: #d97706;
+    --fc-danger: #dc2626;
+    --fc-info: #0d9488;
+}
+
+@layer base {
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
+        color: var(--fc-text);
+        background-color: var(--fc-bg);
+    }
+}
+
+@layer components {
+    /* Glass Effect */
+    .glass-effect {
+        backdrop-filter: blur(24px);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Card 3D - Base styling */
+    .card-3d {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px -2px rgba(0,0,0,0.06), 0 8px 24px -8px rgba(0,0,0,0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-3d:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px -12px rgba(0,0,0,0.15);
+    }
+    
+    /* Stat Card */
+    .stat-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px -2px rgba(0,0,0,0.06), 0 8px 24px -8px rgba(0,0,0,0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--fc-primary-light), var(--fc-secondary-light));
+    }
+
+    .stat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px -15px rgba(0,0,0,0.2);
+    }
+
+    /* Stat Card Accent Variant - teal / gold, keeps the food-brand palette */
+    .stat-card.accent::before {
+        background: linear-gradient(90deg, var(--fc-secondary-light), var(--fc-cta-light));
+    }
+
+    /* Stat Card Warning Variant */
+    .stat-card.warning::before {
+        background: linear-gradient(90deg, var(--fc-cta-light), var(--fc-danger));
+    }
+
+    /* Stat Card Info Variant */
+    .stat-card.info::before {
+        background: linear-gradient(90deg, var(--fc-secondary), var(--fc-primary-light));
+    }
+    
+    /* Sidebar Link */
+    .sidebar-link {
+        transition: all 0.2s ease;
+    }
+    
+    .sidebar-link:hover {
+        transform: translateX(6px);
+    }
+    
+    /* Header Blur */
+    .header-blur {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    /* Bell Blink Animation */
+    @keyframes bellRing {
+        0%, 100% { transform: rotate(0deg); }
+        10%, 30% { transform: rotate(-10deg); }
+        20%, 40% { transform: rotate(10deg); }
+        50% { transform: rotate(0deg); }
+    }
+    
+    @keyframes badgePulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+    }
+    
+    .bell-blink svg {
+        animation: bellRing 2s ease-in-out infinite;
+        color: #ef4444;
+    }
+    
+    .bell-blink .badge {
+        animation: badgePulse 1s ease-in-out infinite;
+    }
+    
+    .bell-blink:hover svg {
+        animation: none;
+    }
+
+    /* ---- Shared semantic utilities across all modules ---- */
+    .fc-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.68rem 1.15rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        color: #fff;
+        background-image: linear-gradient(110deg, var(--fc-primary-dark), var(--fc-primary), var(--fc-secondary));
+        box-shadow: 0 10px 22px -7px rgba(5, 150, 105, 0.55);
+    }
+
+    .fc-btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px -6px rgba(5, 150, 105, 0.6);
+    }
+
+    .fc-btn-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.68rem 1.15rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        color: #fff;
+        background-color: var(--fc-cta);
+        box-shadow: 0 10px 22px -7px rgba(217, 119, 6, 0.5);
+    }
+
+    .fc-btn-cta:hover {
+        background-color: var(--fc-cta-dark);
+    }
+
+    .fc-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.68rem 1.15rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        color: var(--fc-primary-dark);
+        background: var(--fc-surface);
+        border: 1.5px solid #a7f3d0;
+    }
+
+    .fc-btn-ghost:hover {
+        background: var(--fc-primary-soft);
+        border-color: #34d399;
+    }
+
+    .fc-section-kicker {
+        color: var(--fc-primary);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .fc-surface {
+        background: var(--fc-surface);
+        border: 1px solid var(--fc-border);
+        border-radius: 1rem;
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: #a7f3d0;
+        color: #064e3b;
+    }
+
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #a7f3d0 transparent;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #a7f3d0;
+        border-radius: 9999px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #6ee7b7;
+        background-clip: content-box;
+    }
+
+    a,
+    button {
+        transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    button:active,
+    a:active {
+        transform: translateY(0);
+    }
+
+    input,
+    select,
+    textarea {
+        border-radius: 0.75rem;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+    }
+}

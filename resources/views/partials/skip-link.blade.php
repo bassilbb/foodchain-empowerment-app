@@ -1,0 +1,3 @@
+{{-- Keyboard-accessible skip link. Insert immediately after <body>. --}}
+@php $skipTarget = $skipTarget ?? '#main-content'; @endphp
+<a href="{{ $skipTarget }}" class="skip-link sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-emerald-700 focus:text-white focus:px-5 focus:py-3 focus:rounded-xl focus:shadow-lg focus:font-bold" aria-label="Skip to main content">Skip to main content</a>

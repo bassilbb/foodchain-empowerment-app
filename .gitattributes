@@ -1,0 +1,14 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+public/images/products/** filter=lfs diff=lfs merge=lfs -text
+pitch-deck/** filter=lfs diff=lfs merge=lfs -text
+public/pitch-deck.pdf filter=lfs diff=lfs merge=lfs -text
+storage/public/assets/** filter=lfs diff=lfs merge=lfs -text

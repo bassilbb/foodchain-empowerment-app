@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        // Trust reverse-proxy headers (preview/load-balancer environments) so
+        // asset()/url() generate https URLs matching the externally-visible host.
+        $middleware->trustProxies(at: '*', headers: \Illuminate\Http\Request::HEADER_X_FORWARDED_FOR | \Illuminate\Http\Request::HEADER_X_FORWARDED_HOST | \Illuminate\Http\Request::HEADER_X_FORWARDED_PORT | \Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO);
+
+        //
+        // Register your custom middleware with a key (e.g., 'admin')
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'permission' => \App\Http\Middleware\CheckPermission::class,
+            'membership' => \App\Http\Middleware\CheckMembership::class,
+            'role' => \App\Http\Middleware\CheckRole::class,
+            'vendor' => \App\Http\Middleware\EnsureVendor::class,
+        ]);
+
+        // Baseline security headers on every response (CSP, anti-clickjacking,
+        // nosniff, referrer and permissions policy).
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+
+        $middleware->validateCsrfTokens(except: [
+            'payment/manual',
+            'paystack/webhook',
+            'flutterwave/webhook',
+            'mono/webhook',
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
