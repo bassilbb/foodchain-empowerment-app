@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->enum('status', ['open', 'in_progress', 'completed', 'cancelled'])->default('open');
             $table->date('target_date')->nullable();
-            $table->enum('delivery_type', ['community_collection', 'community_delivery_point', 'designated_location'])->default('community_collection');
+            $table->enum('delivery_type', ['community_collection', 'community_delivery_point', 'designated_location', 'community_delivery', 'pickup'])->default('community_collection');
             $table->string('delivery_location')->nullable();
             $table->decimal('discount_percentage', 5, 2)->default(0);
             $table->unsignedInteger('total_required_qty')->default(0);

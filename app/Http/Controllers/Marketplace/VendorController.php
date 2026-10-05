@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Marketplace;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Vendor\OrderController as VendorOrderController;
 use App\Models\Marketplace\Brand;
 use App\Models\Marketplace\Category;
 use App\Models\Marketplace\InventoryMovement;
@@ -312,6 +313,7 @@ class VendorController extends Controller
             'items' => $items,
             'grouped' => $grouped,
             'currentStatus' => $request->input('status'),
+            'allowedStatuses' => VendorOrderController::VENDOR_ALLOWED_STATUSES,
         ]);
     }
 
@@ -320,17 +322,17 @@ class VendorController extends Controller
         $vendor = $this->vendor();
         abort_unless($item->vendor_id === $vendor->id, 403);
 
-        $request->validate([
-            'status' => 'required|in:confirmed,processing,packed,shipped,delivered,cancelled',
+        $data = $request->validate([
+            'status' => ['required', 'string', \Illuminate\Validation\Rule::in(VendorOrderController::VENDOR_ALLOWED_STATUSES)],
         ]);
 
-        $item->update(['status' => $request->input('status')]);
+        $item->update(['status' => $data['status']]);
 
         $order = $item->order;
 
         $siblingStatuses = $order->items->where('id', '!=', $item->id)->pluck('status')->unique();
 
-        if ($request->input('status') === 'shipped' && $siblingStatuses->count() === 1 && $siblingStatuses->first() === 'shipped') {
+        if ($data['status'] === 'shipped' && $siblingStatuses->count() === 1 && $siblingStatuses->first() === 'shipped') {
             $order->updateStatus('shipped', 'All items shipped.');
         }
 

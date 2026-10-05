@@ -46,8 +46,9 @@
                                 <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">{{ ucfirst($item->status) }}</span>
                                 <form action="{{ route('marketplace.vendor.orders.status', $item) }}" method="POST" class="flex items-center gap-1">
                                     @csrf
+                                    @php $statusOptions = in_array($item->status, $allowedStatuses, true) ? $allowedStatuses : array_merge($allowedStatuses, [$item->status]); @endphp
                                     <select name="status" onchange="this.form.submit()" class="text-xs rounded border-gray-300">
-                                        @foreach (['confirmed', 'processing', 'packed', 'shipped', 'delivered', 'cancelled'] as $st)
+                                        @foreach ($statusOptions as $st)
                                             <option value="{{ $st }}" @selected($item->status === $st)>{{ ucfirst($st) }}</option>
                                         @endforeach
                                     </select>

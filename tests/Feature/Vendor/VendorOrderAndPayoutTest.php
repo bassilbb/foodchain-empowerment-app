@@ -9,6 +9,7 @@ use App\Models\Marketplace\Product;
 use App\Models\Marketplace\Vendor;
 use App\Models\Marketplace\VendorPayout;
 use App\Models\User;
+use App\Http\Controllers\Vendor\OrderController as VendorOrderController;
 use App\Services\Marketplace\VendorEarningsService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -183,6 +184,81 @@ class VendorOrderAndPayoutTest extends TestCase
         $this->actingAs($this->vendorUser)->post(route('vendor.orders.status', $sibling), ['status' => 'shipped']);
 
         $this->assertSame('shipped', $first->order->fresh()->status);
+    }
+
+    // ------------------------------------------------ delivery cascade
+
+    public function test_customer_confirming_delivery_marks_the_items_delivered(): void
+    {
+        $item = $this->orderItemFor($this->vendor, 'shipped', 10000);
+        $item->order->update(['status' => 'shipped']);
+
+        $this->actingAs($this->buyer)
+            ->post(route('account.orders.confirm-delivery', $item->order_id))
+            ->assertRedirect();
+
+        $this->assertSame('delivered', $item->order->fresh()->status);
+        $this->assertSame(
+            'delivered',
+            $item->fresh()->status,
+            'An order cannot be delivered while its items still read as shipped.'
+        );
+    }
+
+    public function test_delivering_an_order_unlocks_the_vendor_earnings(): void
+    {
+        $item = $this->orderItemFor($this->vendor, 'shipped', 20000);
+        $order = $item->order;
+        $order->update(['status' => 'shipped']);
+
+        $earnings = app(VendorEarningsService::class);
+        // max(0, ...) returns int 0 for a zero result, so compare loosely here.
+        $this->assertEquals(0, $earnings->summary($this->vendor)['available']);
+
+        $this->actingAs($this->buyer)->post(route('account.orders.confirm-delivery', $order->id));
+
+        $summary = $earnings->summary($this->vendor);
+
+        $this->assertSame(20000.0, $summary['gross_sales']);
+        $this->assertSame(18000.0, $summary['available'], 'A delivered order must become withdrawable.');
+    }
+
+    public function test_cancelling_an_order_removes_its_items_from_earnings(): void
+    {
+        $item = $this->orderItemFor($this->vendor, 'delivered', 20000);
+        $earnings = app(VendorEarningsService::class);
+
+        $this->assertSame(20000.0, $earnings->summary($this->vendor)['gross_sales']);
+
+        $item->order->updateStatus('cancelled', 'Cancelled by an administrator.');
+
+        $this->assertSame(0.0, $earnings->summary($this->vendor)['gross_sales']);
+        $this->assertSame('cancelled', $item->fresh()->status);
+    }
+
+    public function test_the_legacy_vendor_surface_also_refuses_to_mark_an_item_delivered(): void
+    {
+        $item = $this->orderItemFor($this->vendor, 'shipped');
+
+        // The duplicate /marketplace/vendor centre must not be a way around the
+        // canonical vendor status rules.
+        $this->actingAs($this->vendorUser)
+            ->post(route('marketplace.vendor.orders.status', $item), ['status' => 'delivered'])
+            ->assertSessionHasErrors('status');
+
+        $this->assertSame('shipped', $item->fresh()->status);
+        $this->assertEquals(0, app(VendorEarningsService::class)->summary($this->vendor)['available']);
+    }
+
+    public function test_the_legacy_vendor_orders_page_only_offers_allowed_statuses(): void
+    {
+        $this->orderItemFor($this->vendor, 'shipped');
+
+        $response = $this->actingAs($this->vendorUser)->get(route('marketplace.vendor.orders'));
+
+        $response->assertOk();
+        $response->assertViewHas('allowedStatuses', VendorOrderController::VENDOR_ALLOWED_STATUSES);
+        $response->assertDontSee('<option value="delivered"', false);
     }
 
     // ------------------------------------------------------ earnings math

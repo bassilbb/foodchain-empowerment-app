@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('payment_status')->default('unpaid');
             $table->decimal('wallet_amount', 14, 2)->default(0);
             $table->decimal('cash_amount', 14, 2)->default(0);
-            $table->enum('delivery_type', ['home_delivery', 'pickup', 'community_delivery'])->default('home_delivery');
+            $table->enum('delivery_type', ['home_delivery', 'express', 'same_day', 'pickup', 'community_delivery'])->default('home_delivery');
             $table->text('delivery_address')->nullable();
             $table->string('delivery_city')->nullable();
             $table->string('delivery_state')->nullable();

@@ -69,6 +69,21 @@ class Order extends Model
      */
     public const VOID_STATUSES = ['cancelled', 'refunded'];
 
+    /**
+     * Terminal order statuses and the item status they imply.
+     *
+     * Vendor earnings are derived from order items whose status is `delivered`
+     * (see VendorEarningsService::PAYABLE_ITEM_STATUSES), so an order that
+     * reaches `delivered` without cascading would never become payable.
+     * A refunded sale collapses to `cancelled` because `refunded` is not a
+     * status the vendor fulfilment queue understands.
+     */
+    public const ITEM_STATUS_CASCADE = [
+        'delivered' => 'delivered',
+        'cancelled' => 'cancelled',
+        'refunded' => 'cancelled',
+    ];
+
     public function scopeEarning($query)
     {
         return $query->whereNotIn('status', self::VOID_STATUSES);
@@ -135,6 +150,8 @@ class Order extends Model
             $this->update(['refunded_at' => now()]);
         }
 
+        $this->cascadeItemStatus($status);
+
         OrderStatusHistory::create([
             'order_id' => $this->id,
             'status' => $status,
@@ -142,6 +159,26 @@ class Order extends Model
             'changed_by_type' => $changedBy ? get_class($changedBy) : null,
             'changed_by_id' => $changedBy?->id,
         ]);
+    }
+
+    /**
+     * Mirror a terminal order status onto every item on the order.
+     *
+     * Items are the unit of vendor fulfilment and of vendor earnings, so they
+     * must not be left behind when the parent order moves on. Non-terminal
+     * statuses are ignored: those are progressed item by item.
+     */
+    protected function cascadeItemStatus(string $status): void
+    {
+        $itemStatus = self::ITEM_STATUS_CASCADE[$status] ?? null;
+
+        if ($itemStatus === null) {
+            return;
+        }
+
+        $this->items()
+            ->where('status', '!=', $itemStatus)
+            ->update(['status' => $itemStatus]);
     }
 
     public static function generateOrderNumber(): string

@@ -147,6 +147,52 @@ class CheckoutPaymentTest extends TestCase
         ]);
     }
 
+    // ------------------------------------------------- delivery types
+
+    /**
+     * @dataProvider premiumDeliveryTypes
+     */
+    public function test_premium_delivery_types_can_be_ordered(string $deliveryType): void
+    {
+        // express and same_day are priced and offered by the checkout form, so the
+        // orders column has to accept them or the whole insert is rejected.
+        $this->buyer->update(['wallet_balance' => 50000]);
+        $this->addToCart(1);
+
+        $this->placeOrder('cash', ['delivery_type' => $deliveryType]);
+
+        $order = Order::first();
+
+        $this->assertNotNull($order, "Order could not be placed with {$deliveryType} delivery.");
+        $this->assertSame($deliveryType, $order->delivery_type);
+    }
+
+    public static function premiumDeliveryTypes(): array
+    {
+        return [
+            'express' => ['express'],
+            'same day' => ['same_day'],
+        ];
+    }
+
+    public function test_the_orders_table_accepts_every_offered_delivery_type(): void
+    {
+        $offered = ['home_delivery', 'express', 'same_day', 'pickup', 'community_delivery'];
+
+        foreach ($offered as $deliveryType) {
+            $accepted = DB::table('marketplace_orders')->insertGetId([
+                'user_id' => $this->buyer->id,
+                'order_number' => 'FC-ENUM-'.strtoupper($deliveryType),
+                'status' => 'pending',
+                'total' => 100,
+                'payment_method' => 'cash',
+                'delivery_type' => $deliveryType,
+            ]);
+
+            $this->assertSame($deliveryType, DB::table('marketplace_orders')->where('id', $accepted)->value('delivery_type'));
+        }
+    }
+
     // ------------------------------------------------------- plain wallet
 
     public function test_wallet_order_pays_in_full_and_snapshots_the_state_price(): void
