@@ -430,12 +430,13 @@
             <h2 class="text-3xl font-bold mb-4 font-display">Stay Updated</h2>
             <p class="mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and
                 platform updates</p>
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Your email address"
-                    class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-                <button type="submit"
-                    class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-            </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                  @csrf
+                  <input type="email" name="email" aria-label="Email address" required placeholder="Your email address"
+                      class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
+                  <button type="submit"
+                      class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+              </form>
         </div>
     </section>
 

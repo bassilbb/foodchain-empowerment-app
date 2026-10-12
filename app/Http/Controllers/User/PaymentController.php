@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\BankAccount;
-use App\Models\Payment;
-use App\Models\User;
 use App\Services\PaymentService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -17,72 +13,6 @@ class PaymentController extends Controller
         $payments = auth()->user()->payments()->latest()->paginate(20);
 
         return view('user.payments.index', compact('payments'));
-    }
-
-    public function pending(Request $request)
-    {
-        $userId = $request->get('user_id');
-        $amount = $request->get('amount');
-        $paymentType = $request->get('payment_type');
-
-        $user = User::findOrFail($userId);
-        $bankAccounts = BankAccount::getAllActive();
-
-        $existingPending = Payment::where('user_id', $user->id)
-            ->where('status', 'pending')
-            ->first();
-
-        $paymentDescription = 'Membership Only';
-
-        return view('auth.payment-pending', compact('user', 'amount', 'paymentDescription', 'bankAccounts', 'paymentType', 'existingPending'));
-    }
-
-    public function submitManualPayment(Request $request)
-    {
-        $validated = $request->validate([
-            'amount' => 'required|numeric|min:100',
-            'bank_account_id' => 'required|exists:bank_accounts,id',
-            'sender_name' => 'required|string|max:255',
-            'transfer_date' => 'required|date',
-        ]);
-
-        $user = User::findOrFail($request->input('user_id'));
-        $bankAccount = BankAccount::findOrFail($request->input('bank_account_id'));
-
-        $type = 'membership';
-
-        $existingPending = Payment::where('user_id', $user->id)
-            ->where('status', 'pending')
-            ->where('type', $type)
-            ->first();
-
-        if ($existingPending) {
-            return redirect()->route('login')->with('info', 'Your payment is already pending. We will notify you once verified.');
-        }
-
-        $proofPath = null;
-        if ($request->hasFile('proof_image')) {
-            $proofPath = $request->file('proof_image')->store('manual-payments/proofs', 'public');
-        }
-
-        Payment::create([
-            'user_id' => $user->id,
-            'reference' => 'MANUAL-'.strtoupper(uniqid()),
-            'type' => $type,
-            'amount' => $request->input('amount'),
-            'status' => 'pending',
-            'payment_method' => 'bank_transfer',
-            'meta' => [
-                'bank_account_id' => $bankAccount->id,
-                'sender_name' => $request->input('sender_name'),
-                'transfer_date' => $request->input('transfer_date'),
-                'proof_image' => $proofPath,
-            ],
-        ]);
-
-        session()->forget('pending_registration_user_id');
-
-        return redirect()->route('login')->with('success', 'Payment submitted successfully! Your account will be activated after verification.');
     }
 
     public function handleCallback(Request $request)
@@ -109,14 +39,6 @@ class PaymentController extends Controller
                 }
 
                 return redirect()->route('marketplace.orders.index')->with('success', 'Payment successful!');
-            }
-
-            if (session()->has('pending_registration_user_id')) {
-                $userId = session('pending_registration_user_id');
-                Auth::loginUsingId($userId);
-                session()->forget('pending_registration_user_id');
-
-                return redirect()->route('dashboard')->with('success', 'Registration successful! Welcome to FoodChain Community.');
             }
 
             return redirect()->route('dashboard')->with('success', 'Payment successful!');
@@ -172,26 +94,6 @@ class PaymentController extends Controller
             $request->amount,
             $request->except(['type', 'amount'])
         );
-
-        if ($result['status'] === 'success') {
-            return redirect($result['authorization_url']);
-        }
-
-        return back()->with('error', $result['message']);
-    }
-
-    public function payWithCard(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'amount' => 'required|numeric|min:100',
-            'payment_type' => 'nullable|string',
-        ]);
-
-        $user = User::findOrFail($request->input('user_id'));
-
-        $service = app(PaymentService::class);
-        $result = $service->initializePayment($user, 'membership', $request->input('amount'));
 
         if ($result['status'] === 'success') {
             return redirect($result['authorization_url']);

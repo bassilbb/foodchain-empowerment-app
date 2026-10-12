@@ -31,8 +31,10 @@
                     </a>
                 </div>
                 <div class="mt-6 rounded-lg bg-white/5 px-4 py-3 text-xs text-emerald-300/80">
-                    <p class="font-semibold text-emerald-200 mb-1">Office Address / Collection Centre:</p>
+                    <p class="font-semibold text-emerald-200 mb-1">Office Address for Enquiry:</p>
                     <p class="leading-relaxed">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+                    <p class="mt-2"><span class="font-semibold text-emerald-200">Central Warehouse 1:</span> 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+                    <p class="mt-2"><span class="font-semibold text-emerald-200">Our Distribution Hubs in Lagos:</span> Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
                 </div>
             </div>
 

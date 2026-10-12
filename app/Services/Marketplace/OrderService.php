@@ -2,6 +2,7 @@
 
 namespace App\Services\Marketplace;
 
+use App\Exceptions\ItemUnavailableException;
 use App\Models\Marketplace\Order;
 use App\Models\Marketplace\OrderItem;
 use App\Models\Marketplace\Product;
@@ -46,6 +47,17 @@ class OrderService
 
         $weight = $cartItems->sum(fn ($item) => (float) $item->product->weight * $item->quantity);
 
+        // A cart can sit for days, so warn about lines that have become
+        // unbuyable before the shopper fills in the form.
+        $unavailableItems = $cartItems
+            ->filter(fn ($item) => ! $item->product
+                || ! $item->product->is_active
+                || ! $item->product->isApproved()
+                || $item->product->stock_quantity < $item->quantity)
+            ->map(fn ($item) => $item->product?->name ?? 'An item')
+            ->values()
+            ->all();
+
         $delivery = $this->deliveryService->calculate([
             'state' => $data['delivery_state'] ?? 'Lagos',
             'lga' => $data['delivery_lga'] ?? null,
@@ -61,6 +73,7 @@ class OrderService
         return [
             'success' => true,
             'cart_items' => $cartItems,
+            'unavailable_items' => $unavailableItems,
             'subtotal' => round($subtotal, 2),
             'coupon_id' => $couponId,
             'coupon_code' => $couponCode,
@@ -133,6 +146,22 @@ class OrderService
 
                 foreach ($checkout['cart_items'] as $item) {
                     $product = Product::where('id', $item->product_id)->lockForUpdate()->first();
+
+                    // The cart can sit for days, so re-validate every line under
+                    // a row lock at the moment of purchase. Without this the
+                    // decrement below would happily drive stock negative and
+                    // sell goods that no longer exist.
+                    if (! $product || ! $product->is_active || ! $product->isApproved()) {
+                        throw ItemUnavailableException::delisted($item->product?->name ?? 'An item');
+                    }
+
+                    if ($product->stock_quantity < $item->quantity) {
+                        throw ItemUnavailableException::insufficientStock(
+                            $product->name,
+                            $item->quantity,
+                            $product->stock_quantity
+                        );
+                    }
 
                     $unitPrice = app(MarketplacePricingService::class)->priceFor($product);
                     $lineTotal = $unitPrice * $item->quantity;
@@ -375,6 +404,11 @@ class OrderService
                 'message' => 'Unsupported payment method.',
                 'order' => $order,
             ];
+        } catch (ItemUnavailableException $e) {
+            // A stock/delisting loss is an expected outcome, not a fault: the
+            // transaction has already rolled back, so report it plainly and let
+            // the shopper adjust their cart.
+            return ['success' => false, 'message' => $e->getMessage()];
         } catch (\Throwable $e) {
             report($e);
 

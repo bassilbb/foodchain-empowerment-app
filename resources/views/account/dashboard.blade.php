@@ -63,23 +63,6 @@
 </div>
 @endif
 
-{{-- Membership status banner --}}
-@if (! auth()->user()->is_active)
-<div class="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-    <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-        </svg>
-    </span>
-    <div class="min-w-0 flex-1">
-        <p class="text-sm font-bold text-amber-900">Your membership is not active</p>
-        <p class="text-xs text-amber-700">Activate your membership to complete purchases in the marketplace.</p>
-    </div>
-    <a href="{{ route('payment.pending', ['user_id' => auth()->id(), 'amount' => 5000, 'payment_type' => 'membership']) }}"
-        class="rounded-xl bg-amber-500 px-4 py-2 text-xs font-bold text-white hover:bg-amber-600">Activate now</a>
-</div>
-@endif
-
 {{-- Summary cards --}}
 <div class="grid animate-slide-up grid-cols-2 gap-4 lg:grid-cols-4">
     <x-marketplace.stat-card label="Total Orders" :value="number_format($stats['total'])" icon="orders" tone="primary"

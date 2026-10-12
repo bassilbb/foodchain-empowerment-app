@@ -32,7 +32,7 @@
         <aside class="lg:col-span-1">
             <div class="bg-white rounded-[22px] border border-gray-100 shadow-[0_16px_35px_rgba(15,23,42,0.05)] p-4 sticky top-24">
                 <h3 class="font-bold text-gray-900 mb-3">Refine</h3>
-                <form method="GET">
+                <form method="GET" action="{{ route('marketplace.category', $category->slug) }}">
                     <div class="mb-4">
                         <label class="text-xs font-semibold text-gray-500 uppercase mb-2 block">Brand</label>
                         <select name="brand" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
@@ -73,7 +73,7 @@
         <div class="lg:col-span-3">
             <div class="flex items-center justify-between mb-4 bg-white rounded-[20px] border border-gray-100 shadow-[0_12px_28px_rgba(15,23,42,0.04)] p-3">
                 <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">{{ $products->total() }}</span> product(s)</p>
-                <form method="GET">
+                <form method="GET" action="{{ route('marketplace.category', $category->slug) }}">
                     @foreach (request()->except(['sort']) as $key => $value)
                         @if (is_array($value))
                             @foreach ($value as $v)<input type="hidden" name="{{ $key }}[]" value="{{ $v }}">@endforeach

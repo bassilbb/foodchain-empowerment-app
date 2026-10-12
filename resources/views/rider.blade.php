@@ -187,6 +187,7 @@
     <h2 class="text-xl font-bold mb-4 text-center text-emerald-600">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Dispatch Rider Registration') }}</h2>
     <form method="POST" action="{{ route('landing.rider') }}" class="flex flex-col space-y-4">
       @csrf
+      @include('partials.form-status')
       <!-- Full Name -->
       <div>
         <label class="block mb-1 font-semibold" for="drName">Full Name</label>

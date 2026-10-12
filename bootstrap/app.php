@@ -31,7 +31,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
 
         $middleware->validateCsrfTokens(except: [
-            'payment/manual',
             'paystack/webhook',
             'flutterwave/webhook',
             'mono/webhook',

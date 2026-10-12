@@ -317,64 +317,7 @@
             background: #e5e7eb; 
         }
         
-        /* Payment Options */
-        .payment-option { 
-            border: 1px solid #e5e7eb; 
-            border-radius: 14px; 
-            padding: 20px; 
-            margin-bottom: 14px; 
-            cursor: pointer; 
-            transition: all 0.2s; 
-        }
-        .payment-option:hover { 
-            border-color: #10b981; 
-            background: #f0fdf4; 
-        }
-        .payment-option.selected { 
-            border-color: #10b981; 
-            background: #ecfdf5; 
-            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-        }
-        .payment-option-header { display: flex; justify-content: space-between; align-items: center; }
-        .payment-option-title { font-weight: 600; color: #111827; font-size: 15px; }
-        .payment-option-price { font-weight: 700; color: #10b981; font-size: 20px; }
-        .payment-option-desc { font-size: 13px; color: #6b7280; margin-top: 4px; }
-        .best-badge { 
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
-            color: white; 
-            font-size: 11px; 
-            padding: 4px 10px; 
-            border-radius: 6px; 
-            font-weight: 600; 
-            margin-left: 10px; 
-            vertical-align: middle;
-        }
-        
-            .plan-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-            .plan-card { position: relative; background: white; border: 2px solid #e2e8f0; border-radius: 16px; padding: 1.25rem; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
-            .plan-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-            .plan-card.selected { border-color: #10b981; background: #f0fdf4; }
-            .plan-card.disabled { opacity: 0.5; cursor: not-allowed; }
-            .plan-card-glow { position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; pointer-events: none; }
-            .plan-card-icon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; margin: 0 auto 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-            .plan-card-icon svg { width: 20px; height: 20px; }
-            .plan-card-name { font-size: 1rem; font-weight: 700; color: #1e293b; }
-            .plan-card-target { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
-            .plan-card-check { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: #10b981; color: white; display: none; align-items: center; justify-content: center; }
-            .plan-card-check svg { width: 14px; height: 14px; }
-            .plan-card.selected .plan-card-check { display: flex; }
-            .options-list { display: flex; flex-direction: column; gap: 0.5rem; }
-            .option-radio { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: white; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
-            .option-radio:hover { border-color: #94a3b8; }
-            .option-radio.selected { border-color: #10b981; background: #f0fdf4; }
-            .option-radio input[type="radio"] { width: 18px; height: 18px; accent-color: #10b981; margin: 0; }
-
-            @media (max-width: 640px) {
-                .plan-card-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-                .plan-card { padding: 1rem; }
-            }
-
-            .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin: 20px 0; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin: 20px 0; }
         .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; accent-color: #10b981; margin-top: 2px; }
         .checkbox-group label { font-size: 13px; color: #6b7280; line-height: 1.5; }
         .checkbox-group a { color: #10b981; text-decoration: none; }
@@ -743,7 +686,7 @@
                 <p style="margin-bottom: 12px;">You must be at least 18 years old and provide accurate information during registration. You are responsible for maintaining the confidentiality of your account.</p>
 
                 <h3 style="font-weight: 600; color: #111827; margin-bottom: 12px; margin-top: 20px;">3. Payment & Fees</h3>
-                <p style="margin-bottom: 12px;">Membership fees are annual and non-refundable. Starter packs and additional purchases are final. All payments are processed securely through our payment partners.</p>
+                <p style="margin-bottom: 12px;">Registration is free and there is no membership fee to get started. Optional plans, purchases, and other services are final. All payments are processed securely through our payment partners.</p>
 
                 <h3 style="font-weight: 600; color: #111827; margin-bottom: 12px; margin-top: 20px;">4. Referral Program</h3>
                 <p style="margin-bottom: 12px;">You may earn rewards by referring new members. Rewards are subject to verification and can be withdrawn according to our reward policy. We reserve the right to modify referral terms at any time.</p>

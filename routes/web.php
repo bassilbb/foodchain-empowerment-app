@@ -97,11 +97,6 @@ Route::middleware('auth')->group(function () {
 // Payment Callback (public)
 Route::get('/payment/callback', [UserPaymentController::class, 'handleCallback'])->name('payment.callback');
 
-// Pending Payment (after registration)
-Route::get('/payment/pending', [UserPaymentController::class, 'pending'])->name('payment.pending');
-Route::post('/payment/manual', [UserPaymentController::class, 'submitManualPayment'])->name('payment.manual');
-Route::post('/payment/pay-with-card', [UserPaymentController::class, 'payWithCard'])->name('payment.pay-with-card');
-
 // Paystack Webhook (no CSRF protection - exempted in bootstrap/app.php)
 Route::post('/paystack/webhook', [UserPaymentController::class, 'handleWebhook'])->name('paystack.webhook');
 

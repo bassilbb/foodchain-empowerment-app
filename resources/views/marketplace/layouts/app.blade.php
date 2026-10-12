@@ -242,8 +242,10 @@
             </div>
         </div>
         <div class="border-t border-emerald-800/60 px-4 py-4 text-center text-xs text-emerald-300/80">
-            <p class="font-semibold text-emerald-200 mb-0.5">Office Address / Collection Centre:</p>
-            <p class="mb-2">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+            <p class="font-semibold text-emerald-200 mb-0.5">Office Address for Enquiry:</p>
+            <p class="mb-1">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+            <p class="mb-1">Central Warehouse 1: 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+            <p class="mb-2">Our Distribution Hubs in Lagos: Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
             <p>&copy; {{ date('Y') }} {{ app_name() }}. All rights reserved.</p>
         </div>
     </footer>
@@ -287,7 +289,7 @@
             }
             if ((data.products || []).length) {
                 html += '<div class="px-4 py-2 text-xs font-bold text-gray-400 uppercase">Products</div>';
-                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
+                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" alt="" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
             }
             if (!html) html = '<div class="px-4 py-4 text-sm text-gray-500">No results for "' + term + '"</div>';
             suggestionsBox.innerHTML = html;

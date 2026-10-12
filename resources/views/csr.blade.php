@@ -184,8 +184,10 @@
               <i class="fas fa-map-marker-alt text-white"></i>
             </div>
             <div>
-              <h5 class="font-semibold mb-1">Office Address / Collection Centre</h5>
+              <h5 class="font-semibold mb-1">Office Address for Enquiry</h5>
               <p class="text-gray-600 text-sm">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+              <p class="text-gray-600 text-sm mt-1">Central Warehouse 1: 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+              <p class="text-gray-600 text-sm mt-1">Our Distribution Hubs in Lagos: Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
             </div>
           </div>
           <div class="flex items-start">
@@ -229,7 +231,10 @@
       <!-- Contact Form -->
       <div class="bg-white p-8 rounded-xl shadow-lg">
         <h4 class="text-2xl font-semibold mb-6 text-gray-800">Send a Message</h4>
-        <form class="space-y-4" id="csrForm">
+        <form method="POST" action="{{ route('landing.contact') }}" class="space-y-4" id="csrForm">
+          @csrf
+          @include('partials.form-status')
+          <input type="hidden" name="subject" value="CSR page enquiry">
           <div>
             <label for="name" class="block mb-2 text-gray-700 font-medium">Full Name</label>
             <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]" placeholder="Your Name" />

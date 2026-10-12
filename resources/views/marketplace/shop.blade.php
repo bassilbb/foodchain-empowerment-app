@@ -358,7 +358,7 @@
                         in <span class="font-medium text-gray-800">{{ $brandNames[$selectedBrand] }}</span>
                     @endif
                 </p>
-                <form method="GET" class="flex items-center gap-2">
+                <form method="GET" action="{{ $baseUrl }}" class="flex items-center gap-2">
                     @foreach (request()->except(['sort', 'page']) as $key => $value)
                         @if (is_array($value))
                             @foreach ($value as $v)<input type="hidden" name="{{ $key }}[]" value="{{ $v }}">@endforeach

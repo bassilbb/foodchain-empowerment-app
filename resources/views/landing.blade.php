@@ -611,7 +611,23 @@
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-map-marker-alt text-emerald-600"></i></div>
-                                <div><h4 class="font-bold text-gray-900 mb-1">Office Address / Collection Centre:</h4><p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY,<br>Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p><p class="text-gray-600 mt-2"><strong>Coverage:</strong> We are currently operating in Lagos State and will expand to other states across Nigeria as we scale up.</p></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Office Address for Enquiry:</h4>
+                                    <p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY,<br>Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+                                    <p class="text-gray-600 mt-3"><strong>Central Warehouse 1:</strong><br>31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+                                    <p class="text-gray-600 mt-3"><strong>Our Distribution Hubs in Lagos:</strong></p>
+                                    <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                                        <li><strong>Oyingbo outlet:</strong> Beside Chisco Plaza, Oyingbo Market, Oyingbo, Lagos.</li>
+                                        <li><strong>Ebutte-ero outlet:</strong> Ejalonibu Plaza, Ebutte-ero Main Market, Lagos Island.</li>
+                                        <li><strong>Igando outlet:</strong> Behind BRT, beside Eko Five Hotel, Igando Plaza Market, Igando.</li>
+                                        <li><strong>Ikorodu 1 outlet:</strong> 22, Ayangburen Road, Ikorodu.</li>
+                                        <li><strong>Ikorodu 2 outlet:</strong> No. 37 Alhaji Street, Ladega, before LG Office, Ladega.</li>
+                                        <li><strong>Sango outlet:</strong> 29 Tarmac Rd, Sango Otta, Sango.</li>
+                                        <li><strong>Ejigbo outlet:</strong> Shop MKT/EJ/S-H 11,13,19, Oba Ojon Central Market, Power Line, Iyana Ejigbo.</li>
+                                        <li><strong>Ojuwoye outlet:</strong> 7, Olumorokun Street, Ojuwoye, Mushin.</li>
+                                        <li><strong>Post Office outlet:</strong> 11/12 Post Office Rd, Mushin.</li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-phone text-cyan-600"></i></div>

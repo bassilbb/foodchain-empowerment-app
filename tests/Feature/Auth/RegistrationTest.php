@@ -40,8 +40,6 @@ class RegistrationTest extends TestCase
             'address' => '123 Test Street',
             'city' => 'Lagos',
             'state' => 'Lagos',
-            'payment_type' => 'membership_only',
-            'selected_tier_id' => null,
         ], $overrides);
     }
 
@@ -54,14 +52,13 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_new_users_can_register_with_membership_only(): void
+    public function test_new_users_can_register_and_are_directed_to_login(): void
     {
         $tier = $this->createTier('Bronze', 'bronze', 5000, 20000, 1);
 
         $response = $this->post('/register', $this->registerPayload([
             'email' => 'test@example.com',
             'phone' => '+2348000000000',
-            'payment_type' => 'membership_only',
             'selected_tier_id' => $tier->id,
         ]));
 
@@ -70,44 +67,42 @@ class RegistrationTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'current_tier_id' => $tier->id,
+            'is_active' => true,
         ]);
 
-        $response->assertRedirectContains('payment/pending');
-        $response->assertSessionHas('pending_registration_user_id');
+        $response->assertRedirect(route('login'));
+        $response->assertSessionHas('success', 'Registration Successful! Please log in to your account.');
+        $response->assertSessionMissing('pending_registration_user_id');
     }
 
-    public function test_user_can_register_with_silver_tier(): void
+    public function test_user_can_register_and_is_active_immediately(): void
     {
         $this->createTier('Bronze', 'bronze', 5000, 20000, 1);
-        $silverTier = $this->createTier('Silver', 'silver', 5000, 50000, 2);
 
         $response = $this->post('/register', $this->registerPayload([
             'first_name' => 'Jane',
             'last_name' => 'Doe',
             'email' => 'jane@example.com',
             'phone' => '+2348000000001',
-            'payment_type' => 'membership_only',
-            'selected_tier_id' => $silverTier->id,
         ]));
 
         $this->assertDatabaseHas('users', [
             'email' => 'jane@example.com',
             'first_name' => 'Jane',
-            'current_tier_id' => $silverTier->id,
+            'is_active' => true,
         ]);
 
-        $response->assertRedirectContains('payment/pending');
-        $response->assertSessionHas('pending_registration_user_id');
+        $response->assertRedirect(route('login'));
+        $response->assertSessionMissing('pending_registration_user_id');
     }
 
-    public function test_user_can_register_membership_only(): void
+    public function test_registration_success_message_is_flashed_for_the_login_page(): void
     {
         $tier = $this->createTier('Bronze', 'bronze', 5000, 20000, 1);
 
         $response = $this->post('/register', $this->registerPayload([
             'email' => 'gold@example.com',
             'phone' => '+2348000000002',
-            'payment_type' => 'membership_only',
             'selected_tier_id' => $tier->id,
         ]));
 
@@ -116,21 +111,25 @@ class RegistrationTest extends TestCase
             'current_tier_id' => $tier->id,
         ]);
 
-        $response->assertRedirectContains('payment/pending');
+        $response->assertRedirect(route('login'));
+
+        $this->followingRedirects()
+            ->get(route('login'))
+            ->assertSee('Registration Successful!');
     }
 
-    public function test_registration_fails_with_invalid_payment_type(): void
+    public function test_registration_rejects_invalid_data(): void
     {
-        $tier = $this->createTier('Bronze', 'bronze', 5000, 20000, 1);
+        $this->createTier('Bronze', 'bronze', 5000, 20000, 1);
 
         $response = $this->post('/register', $this->registerPayload([
             'email' => 'bad@example.com',
             'phone' => '+2348000000099',
-            'payment_type' => 'with_starter_pack',
-            'selected_tier_id' => $tier->id,
+            'password' => 'short',
+            'password_confirmation' => 'short',
         ]));
 
-        $response->assertSessionHasErrors('payment_type');
+        $response->assertSessionHasErrors('password');
         $this->assertDatabaseMissing('users', ['email' => 'bad@example.com']);
     }
 }

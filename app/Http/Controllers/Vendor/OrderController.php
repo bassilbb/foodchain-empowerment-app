@@ -129,14 +129,19 @@ class OrderController extends Controller
 
         $item->update(['status' => $data['status']]);
 
-        // When every sibling item has shipped, roll the parent order up — the
-        // same rule the existing vendor controller applied.
+        // When nothing else on the order is still waiting, roll the parent
+        // order up. A single-item order has no siblings at all, and "nothing
+        // left un-shipped" is true for it too — otherwise such an order could
+        // never reach `shipped`, so the customer could never confirm delivery.
         $order = $item->order;
 
         if ($order && $data['status'] === 'shipped') {
-            $siblingStatuses = $order->items()->where('id', '!=', $item->id)->pluck('status')->unique();
+            $stillWaiting = $order->items()
+                ->where('id', '!=', $item->id)
+                ->where('status', '!=', 'shipped')
+                ->count();
 
-            if ($siblingStatuses->count() === 1 && $siblingStatuses->first() === 'shipped') {
+            if ($stillWaiting === 0) {
                 $order->updateStatus('shipped', 'All items shipped.');
             }
         }

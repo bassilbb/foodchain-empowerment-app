@@ -187,6 +187,7 @@
     <h4 class="text-2xl font-semibold mb-4" style="color: #059669;">{{ App\Models\PageContent::getContent('supplier', 'page_title', 'Register as a Supplier') }}</h4>
     <form method="POST" action="{{ route('landing.supplier') }}" class="space-y-4" id="supplierForm">
       @csrf
+      @include('partials.form-status')
       <div>
         <label for="name" class="block text-gray-700 mb-2">Name</label>
         <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Name" />
@@ -238,10 +239,11 @@
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
-    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-      <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-      <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-    </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+        @csrf
+        <input type="email" name="email" aria-label="Email address" required placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
+        <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+      </form>
   </div>
 </section>
 

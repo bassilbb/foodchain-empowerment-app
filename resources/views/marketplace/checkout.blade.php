@@ -13,6 +13,18 @@
         <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5 text-xs font-semibold">Safe & encrypted</span>
     </div>
 
+    @if (! empty($data['unavailable_items']))
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <p class="text-sm font-semibold text-amber-800">Some items can no longer be bought</p>
+            <p class="text-sm text-amber-700 mt-1">
+                {{ implode(', ', $data['unavailable_items']) }} {{ count($data['unavailable_items']) === 1 ? 'is' : 'are' }} sold out, delisted or
+                below the quantity in your cart.
+                <a href="{{ route('marketplace.cart.index') }}" class="font-semibold underline">Review your cart</a>
+                before paying.
+            </p>
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
             <ul class="text-sm text-red-700 space-y-1">
