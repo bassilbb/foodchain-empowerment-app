@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - {{ app_name() }}</title>
+    @include('partials.seo-meta', [
+        'seoTitle' => 'Login - '.app_name(),
+        'seoDesc' => 'Sign in to your FoodChain account to shop quality groceries at your local price across Nigeria.',
+        'seoType' => 'website',
+    ])
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <link rel="icon" type="image/x-icon" href="{{ site_favicon() ?? '/favicon.ico' }}">
     <link rel="apple-touch-icon" href="{{ site_favicon() ?? '/favicon.svg' }}">
@@ -13,10 +18,15 @@
     @include('partials.vite-css')
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection { background: #a7f3d0; color: #064e3b; }
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            background: radial-gradient(circle at 82% 8%, rgba(16,185,129,.22), transparent 30%), radial-gradient(circle at 12% 92%, rgba(14,165,233,.16), transparent 32%), #f5faf7;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "kern" 1, "liga" 1, "cv11" 1;
         }
         
         /* Background Effects */
@@ -32,10 +42,17 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(90px);
+            opacity: .5;
+            animation: orbFloat 14s ease-in-out infinite;
         }
-        .orb-1 { width: 400px; height: 400px; background: rgba(16, 185, 129, 0.25); top: -150px; right: -100px; }
-        .orb-2 { width: 500px; height: 500px; background: rgba(14, 165, 233, 0.15); bottom: -150px; left: -100px; }
+        .orb-1 { width: 440px; height: 440px; background: rgba(16, 185, 129, 0.30); top: -150px; right: -100px; }
+        .orb-2 { width: 520px; height: 520px; background: rgba(14, 165, 233, 0.18); bottom: -150px; left: -100px; animation-delay: 2.5s; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(45, 212, 191, 0.20); top: 45%; left: 42%; animation-delay: 5s; }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); }
+            50% { transform: translate3d(20px,-30px,0) scale(1.07); }
+        }
         .float-icon { position: absolute; font-size: 40px; opacity: 0.15; animation: float 8s ease-in-out infinite; }
         .float-1 { top: 15%; left: 8%; animation-delay: 0s; }
         .float-2 { top: 25%; right: 10%; animation-delay: 2s; }
@@ -67,23 +84,57 @@
             text-align: center;
         }
         .brand-logo {
-            width: 100px;
-            height: 100px;
+            position: relative;
+            width: 180px;
+            height: 114px;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 28px;
+            border-radius: 22px;
+            padding: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 32px;
-            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.35);
+            box-shadow: 0 26px 50px -12px rgba(16, 185, 129, 0.5), 0 14px 26px rgba(4, 47, 37, 0.2), inset 0 2px 0 rgba(255,255,255,.4), inset 0 -4px 10px rgba(4,120,87,.3);
+            transform: perspective(1100px) rotateX(9deg) rotateY(-15deg);
+            transform-style: preserve-3d;
+            transition: transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s cubic-bezier(.2,.8,.2,1);
+            animation: brandLogoFloat 7s ease-in-out infinite;
         }
-        .brand-logo svg { width: 48px; height: 48px; color: white; }
+        .brand-logo::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 28px;
+            background: radial-gradient(circle at 30% 25%, rgba(16,185,129,.32), transparent 62%);
+            filter: blur(14px);
+            transform: translateZ(-40px);
+            pointer-events: none;
+        }
+        .brand-logo:hover {
+            transform: perspective(1100px) rotateX(3deg) rotateY(-6deg);
+            box-shadow: 0 38px 66px -14px rgba(16,185,129,.58), 0 20px 36px rgba(4,47,37,.3), inset 0 2px 0 rgba(255,255,255,.5);
+        }
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            display: block;
+            filter: drop-shadow(0 6px 12px rgba(4,47,37,.16)) contrast(1.03);
+            transition: translate .45s cubic-bezier(.2,.8,.2,1);
+        }
+        .brand-logo:hover img { translate: 0 0 44px; }
+        @keyframes brandLogoFloat {
+            0%, 100% { translate: 0 0 0; }
+            50% { translate: 0 -6px 16px; }
+        }
+        .brand-logo svg { width: 48px; height: 48px; color: white; filter: drop-shadow(0 3px 6px rgba(0,0,0,.20)); }
         .brand-title {
             font-size: 52px;
             font-weight: 800;
             color: #111827;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+            background: linear-gradient(135deg, var(--fc-primary-light) 0%, var(--fc-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -93,6 +144,7 @@
         .feature-item {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 20px;
             display: flex;
@@ -100,7 +152,13 @@
             gap: 16px;
             margin-bottom: 16px;
             text-align: left;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255,255,255,.6);
+            transform: translateZ(0);
+            transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s cubic-bezier(.2,.8,.2,1);
+        }
+        .feature-item:hover {
+            transform: translate3d(8px, -4px, 10px);
+            box-shadow: 0 22px 44px rgba(4, 47, 37, 0.14), inset 0 1px 0 rgba(255,255,255,.6);
         }
         .feature-icon {
             width: 52px;
@@ -110,7 +168,9 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            transition: transform .3s cubic-bezier(.2,.8,.2,1);
         }
+        .feature-item:hover .feature-icon { transform: scale(1.12) rotate(-6deg); }
         .feature-icon svg { width: 24px; height: 24px; }
         .feature-title { font-weight: 600; color: #111827; font-size: 16px; }
         .feature-desc { font-size: 14px; color: #6b7280; }
@@ -128,12 +188,31 @@
         }
         .login-card { 
             background: white; 
-            border-radius: 28px; 
-            box-shadow: 0 25px 60px -20px rgba(0,0,0,0.15);
+            border-radius: 22px;
+            border: 1px solid rgba(16,185,129,.12);
+            box-shadow: 0 30px 70px -24px rgba(4,47,37,.28), 0 8px 24px rgba(4,47,37,.10), inset 0 1px 0 rgba(255,255,255,.9);
             padding: 48px;
             width: 100%;
             max-width: 440px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1200px) rotateY(-1.2deg);
+            animation: auth-card-in .7s cubic-bezier(.2,.8,.2,1) both;
+            transition: transform .25s ease-out, box-shadow .25s ease-out;
         }
+        .login-card.is-tilting { transition: transform .08s linear, box-shadow .08s linear; will-change: transform; }
+        .login-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(130deg, rgba(16,185,129,.05), rgba(16,185,129,.16) 34%, rgba(14,165,233,.10) 66%, rgba(255,255,255,0) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .login-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; background: linear-gradient(115deg, rgba(255,255,255,.42), transparent 28%, transparent 70%, rgba(16,185,129,.06)); z-index: 1; }
+        .login-card > * { position: relative; z-index: 2; }
+        @keyframes auth-card-in { from { opacity: 0; transform: perspective(1200px) translate3d(0, 24px, 0) rotateY(-5deg); } to { opacity: 1; transform: perspective(1200px) rotateY(-1.2deg); } }
         .login-header { text-align: center; margin-bottom: 36px; }
         .login-header h1 { font-size: 30px; font-weight: 700; color: #111827; margin-bottom: 8px; }
         .login-header p { color: #6b7280; font-size: 15px; }
@@ -176,7 +255,8 @@
         .btn-primary { 
             width: 100%; 
             padding: 16px; 
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%); 
+            background-size: 200% 200%;
             color: white; 
             border: none; 
             border-radius: 12px; 
@@ -184,11 +264,25 @@
             font-weight: 600; 
             cursor: pointer; 
             transition: all 0.2s; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.30), 0 0 0 1px rgba(16,185,129,.10) inset;
         }
         .btn-primary:hover { 
             transform: translateY(-2px); 
-            box-shadow: 0 15px 30px rgba(16,185,129,0.35); 
+            background-position: 100% 100%;
+            box-shadow: 0 16px 32px rgba(16,185,129,0.40), 0 0 24px rgba(16,185,129,.14) inset; 
         }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+            transform: skewX(-20deg);
+            animation: btnShine 3.2s ease-in-out infinite;
+        }
+        @keyframes btnShine { 0%, 55% { left: -120%; } 85%, 100% { left: 130%; } }
         
         .form-footer { text-align: center; margin-top: 28px; padding-top: 24px; border-top: 1px solid #f3f4f6; }
         .form-footer p { font-size: 14px; color: #6b7280; }
@@ -218,6 +312,7 @@
     <div class="bg-effects">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
         <div class="float-icon float-1">🍎</div>
         <div class="float-icon float-2">🥦</div>
         <div class="float-icon float-3">🍊</div>
@@ -229,13 +324,9 @@
         <div class="brand-panel">
             <div class="brand-content">
                 <div class="brand-logo">
-                    @if(site_logo())
-                    <img src="{{ site_logo() }}" alt="{{ app_name() }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 28px;">
-                    @else
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    @endif
+                    <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 </div>
-                <h1 class="brand-title">{{ app_name() }}</h1>
+                <p class="brand-title">{{ app_name() }}</p>
                 <p class="brand-subtitle">Join our community and get access to quality food packages</p>
                 
                 <div class="feature-item">
@@ -272,11 +363,6 @@
         <div class="form-panel">
         <div class="login-card">
             <div class="login-header">
-                <div class="form-logo">
-                    @if(site_logo())
-                    <img src="{{ site_logo() }}" alt="{{ app_name() }}" style="height: 48px; width: auto; margin-bottom: 16px;">
-                    @endif
-                </div>
                 <h1>Welcome Back</h1>
                 <p>Sign in to your {{ app_name() }} account</p>
             </div>
@@ -314,7 +400,7 @@
                             <input type="checkbox" name="remember">
                             Remember me
                         </label>
-                        <a href="#">Forgot password?</a>
+                        <a href="{{ route('password.request') }}">Forgot password?</a>
                     </div>
 
                     <button type="submit" class="btn-primary">Sign In</button>
@@ -332,5 +418,37 @@
             </div>
         </div>
     </div>
+
+    <script>
+        (function() {
+            var card = document.querySelector('.login-card');
+            if (!card || !window.matchMedia('(pointer: fine)').matches) return;
+
+            var enabled = true;
+            var maxTilt = 7;
+
+            card.addEventListener('mouseenter', function() { card.classList.add('is-tilting'); });
+            card.addEventListener('mouseleave', function() {
+                card.classList.remove('is-tilting');
+                card.style.transform = 'perspective(1200px) rotateY(-1.2deg)';
+            });
+
+            card.addEventListener('mousemove', function(e) {
+                if (!enabled) return;
+                var rect = card.getBoundingClientRect();
+                var px = (e.clientX - rect.left) / rect.width;
+                var py = (e.clientY - rect.top) / rect.height;
+                var rotateY = -1.2 + (px - 0.5) * maxTilt * 2;
+                var rotateX = (0.5 - py) * maxTilt * 2;
+                card.style.transform = 'perspective(1200px) rotateY(' + rotateY.toFixed(2) + 'deg) rotateX(' + rotateX.toFixed(2) + 'deg)';
+            });
+
+            card.addEventListener('mousedown', function() {
+                enabled = false;
+                card.style.transform = 'perspective(1200px) rotateY(-1.2deg) scale(0.99)';
+            });
+            window.addEventListener('mouseup', function() { enabled = true; });
+        })();
+    </script>
 </body>
 </html>
