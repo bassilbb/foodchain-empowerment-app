@@ -321,48 +321,57 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
+                        @php $aboutContent = trim((string) App\Models\PageContent::getContent('landing', 'about_content', 'FoodChain Community Empowerment is a technology-driven retail food distribution network. It is a food and grocery marketplace where people shop for household essentials. It is a marketplace with social impact designed to reduce cost, time and increase the quality of food and grocery shopping for households.')); @endphp
+                        @if($aboutContent !== '')
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed font-medium border-l-4 border-emerald-500 pl-4">{{ $aboutContent }}</p>
+                        @endif
                         <p class="text-gray-600 mb-6 leading-relaxed">
-                            <strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven food distribution network with social impact, designed to combat hunger and food insecurity among women, workforce in both public and private sectors, self-employed and low-income earners in Nigeria.
+                            Our core value propositions include: <strong>QUALITY</strong>, <strong>CONVENIENCE</strong> and <strong>AFFORDABILITY</strong>.
+                        </p>
+                        <p class="text-gray-600 mb-3 leading-relaxed">
+                            <strong>Quality:</strong> We make sure that all our products are clean, nutritious, well processed and approved by NAFDAC or other regulations in Nigeria.
+                        </p>
+                        <p class="text-gray-600 mb-3 leading-relaxed">
+                            <strong>Convenience:</strong> We have some food hubs distribution network within our coverage locations for PICKUP. We also partner with Logistics services to provide HOME or OFFICE delivery. This is to eliminate the stress of going to the market for busy working-class ladies and gentlemen, business women and students of tertiary institutions.
                         </p>
                         <p class="text-gray-600 mb-8 leading-relaxed">
-                            It is an initiative from Foodchain Enterprises Limited – a member of Doorstep Farms Limited <b>incorporated on 12th, February 2015, RC: 1241873, </b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and social unrest.
+                            <strong>Affordability:</strong> We make sure that our prices are highly competitive and better than what you can get in open markets and supermarkets, making food and grocery more affordable for members of the community within the Cities where we operate. We eliminate middlemen inflation and lower retail food and grocery Prices.
                         </p>
                         <button id="openModalBtn" class="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition duration-300 shadow-lg shadow-emerald-600/30">
                             Read More
                         </button>
                         <div class="grid grid-cols-2 gap-6 mt-8">
-                            <div><div class="text-3xl font-bold mb-2 text-emerald-500">Zero</div><div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Hunger Mission</div></div>
-                            <div><div class="text-3xl font-bold mb-2 text-cyan-600">Free</div><div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Staple Food Items</div></div>
+                            <div><div class="text-3xl font-bold mb-2 text-emerald-500">Local</div><div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">State-Based Prices</div></div>
+                            <div><div class="text-3xl font-bold mb-2 text-cyan-600">Free</div><div class="text-sm font-semibold text-gray-600 uppercase tracking-wide">To Join and Shop</div></div>
                         </div>
                     </div>
                     <div class="relative">
                         <img src="{{ asset('assets/landing/images/about.jpg') }}" alt="FCCEI Food Staples" class="rounded-2xl shadow-xl w-full h-[400px] object-cover" loading="lazy" />
                         <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-lg w-72 border-t-4 border-emerald-500">
-                            <div class="text-3xl font-bold mb-2 text-emerald-600">SDG 2</div>
-                            <div class="text-gray-600 text-sm italic">End hunger, achieve food security and improved nutrition.</div>
+                            <div class="text-3xl font-bold mb-2 text-emerald-600">Marketplace</div>
+                            <div class="text-gray-600 text-sm italic">Verified vendors, quality groceries and fair state-based prices.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div id="aboutModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-            <div class="bg-white max-w-6xl w-full p-6 rounded-lg shadow-lg relative flex flex-col lg:flex-row max-h-full overflow-y-auto">
-                <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-3xl z-50">&times;</button>
-                <div class="flex-1 p-4 overflow-y-auto">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
-                    <p class="mb-4 leading-relaxed"><strong>FoodChain Community Empowerment Initiative</strong> is a technology-driven food distribution network with social impact, designed to combat hunger and food insecurity among women, workforce in both public and private sectors, self-employed and low-income earners in Nigeria. </p>
-                    <p class="mb-4 leading-relaxed">It is an initiative from Foodchain Enterprises Limited – a member of Doorstep Farms Limited <b>incorporated on 12th, February 2015, RC: 1241873, </b> to address the social challenges of hunger and starvation caused by economic crisis, inflation, unemployment, insecurity, poor standard of living, social conflicts, social instability, policy changes and social unrest.</p>
-                    <p class="mb-4 leading-relaxed">Our core values hover around securing food for members of the community and make them affordable and accessible for members of the community. Our records show that greater number of the members of the community are satisfied with the exceptional and delightful experience. The food distribution network makes use of counter funding to purchase food items through our local suppliers and members access their staple food when due, at a very affordable rate, removing the bottle neck of food inflation caused by the market distribution and retail forces. This is to help the community members purchase staple food at more affordable prices and save more money for their families and other needs. </p>
-                    <p class="mb-4 leading-relaxed">We offer logistics to deliver food items to members at any place in Nigeria and we also operate micro-outlets as collection centres for pick-up within Lagos. The company pursue both financial stability and measurable social impact, which means that our commercial operations are been conducted in a manner that actively reduce food inflation, economic crisis, improves market access for members and enhances food security in Nigeria.</p>
-                    <p class="mb-4 leading-relaxed">The company’s objective is to establish a high-efficient retail distribution network, securing market share in high-density, low-income urban areas and making food affordable for the urban poor. We deploy micro-warehouses and informal retail partnerships to eliminate middleman inflation and lower retail food prices.</p>
-                    <p class="mb-4 leading-relaxed">Our unique value proposition is to establish a community of common-wealth among women, corporate employees, self-employed and low-income households in rural, peri-urban, and urban underserved areas in Nigeria where each member of the community has access to Food support based on their needs.</p>
-                    <p class="mb-4 leading-relaxed">Our benefits package is designed to encourage members to build resilience and create social impact which ensures continuous access to food support and assistance.</p>
-                </div>
-                <div class="flex-1 p-4 flex items-center justify-center">
-                    <div class="w-full h-full relative">
-                        <img src="{{ asset('assets/landing/images/about.jpg') }}" alt="Community Food" class="absolute inset-0 w-full h-full object-cover rounded-lg shadow-md" />
-                        <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-lg w-72 border-t-4 border-emerald-500">
+        <div id="aboutModal" class="fixed inset-0 z-40 hidden" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+            <div class="absolute inset-0 bg-black bg-opacity-60" data-about-backdrop></div>
+            <div class="relative z-10 mx-auto max-w-6xl w-full px-4 pb-4" style="margin-top: 5.5rem;">
+                <div class="bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-y-auto" style="max-height: calc(100vh - 7rem);">
+                    <button type="button" id="closeModalBtn" aria-label="Close details dialog" class="absolute top-3 right-3 z-50 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 text-2xl leading-none">&times;</button>
+                    <div class="flex-1 p-6 md:p-8">
+                        <h2 id="aboutModalTitle" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-display pr-10">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
+                        <p class="mb-4 leading-relaxed">FoodChain Community Empowerment is a technology-driven retail food distribution network. It is a food and grocery marketplace where people shop for household essentials. It is a marketplace with social impact designed to reduce cost, time and increase the quality of food and grocery shopping for households.</p>
+                        <p class="mb-4 leading-relaxed">Our core value propositions include: <strong>QUALITY</strong>, <strong>CONVENIENCE</strong> and <strong>AFFORDABILITY</strong>.</p>
+                        <p class="mb-4 leading-relaxed"><strong>Quality:</strong> We make sure that all our products are clean, nutritious, well processed and approved by NAFDAC or other regulations in Nigeria.</p>
+                        <p class="mb-4 leading-relaxed"><strong>Convenience:</strong> We have some food hubs distribution network within our coverage locations for PICKUP. We also partner with Logistics services to provide HOME or OFFICE delivery. This is to eliminate the stress of going to the market for busy working-class ladies and gentlemen, business women and students of tertiary institutions.</p>
+                        <p class="mb-4 leading-relaxed"><strong>Affordability:</strong> We make sure that our prices are highly competitive and better than what you can get in open markets and supermarkets, making food and grocery more affordable for members of the community within the Cities where we operate. We eliminate middlemen inflation and lower retail food and grocery Prices.</p>
+                    </div>
+                    <div class="relative md:w-[45%] md:min-w-[320px] shrink-0">
+                        <img src="{{ asset('assets/landing/images/about.jpg') }}" alt="FoodChain Marketplace groceries" class="w-full h-56 md:h-full object-cover rounded-b-2xl md:rounded-none md:rounded-r-2xl" loading="lazy" />
+                        <div class="absolute bottom-4 right-4 bg-white p-5 rounded-2xl shadow-lg w-64 border-t-4 border-emerald-500">
                             <div class="text-lg font-bold mb-2 text-emerald-600">Who is This For?</div>
                             <div class="text-gray-600 text-sm italic">Women, Low-income earners, Micro-business owners and Students of tertiary institutions.</div>
                         </div>
@@ -700,17 +709,13 @@
             });
         });
 
-        document.getElementById('openModalBtn').addEventListener('click', () => {
-            document.getElementById('aboutModal').classList.remove('hidden');
-            document.getElementById('aboutModal').classList.add('flex');
-        });
-        document.getElementById('closeModalBtn').addEventListener('click', () => {
-            document.getElementById('aboutModal').classList.add('hidden');
-            document.getElementById('aboutModal').classList.remove('flex');
-        });
-        document.getElementById('aboutModal').addEventListener('click', function(e) {
-            if (e.target === this) { this.classList.add('hidden'); this.classList.remove('flex'); }
-        });
+        const aboutModal = document.getElementById('aboutModal');
+        const openAbout = () => { aboutModal.classList.remove('hidden'); aboutModal.classList.add('block'); document.body.style.overflow = 'hidden'; };
+        const closeAbout = () => { aboutModal.classList.add('hidden'); aboutModal.classList.remove('block'); document.body.style.overflow = ''; };
+        document.getElementById('openModalBtn').addEventListener('click', openAbout);
+        document.getElementById('closeModalBtn').addEventListener('click', closeAbout);
+        aboutModal.addEventListener('click', function(e) { if (e.target === this || e.target.hasAttribute('data-about-backdrop')) closeAbout(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !aboutModal.classList.contains('hidden')) closeAbout(); });
 
         document.getElementById('openSponsorModal').addEventListener('click', () => {
             document.getElementById('sponsorModal').classList.remove('hidden');

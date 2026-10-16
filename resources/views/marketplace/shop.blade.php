@@ -67,14 +67,50 @@
             .hero-slide { display: none; }
             .hero-slide.active { display: block; animation: hero-fade .5s ease; }
             @keyframes hero-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+            .mhero-art { position: absolute; top: 0; right: 0; width: 42%; height: 100%; pointer-events: none; }
+            .mhero-art::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 45%, rgba(255,255,255,.22), transparent 62%); }
+            .mhero-chip { position: absolute; display: flex; align-items: center; gap: .5rem; padding: .4rem .6rem; border-radius: .8rem; background: rgba(255,255,255,.94); box-shadow: 0 14px 30px rgba(4,47,37,.28); }
+            .mhero-chip img { width: 2.25rem; height: 2.25rem; border-radius: .55rem; object-fit: cover; background: #fff; }
+            .mhero-chip span { font-size: .62rem; font-weight: 700; color: #065f46; line-height: 1.1; }
+            .mhero-chip small { display: block; font-size: .55rem; font-weight: 600; color: #0f766e; }
+            .mhero-chip-1 { top: 12%; left: 6%; animation: mhero-float 5.5s ease-in-out infinite; }
+            .mhero-chip-2 { top: 44%; left: 34%; animation: mhero-float 6.5s ease-in-out .5s infinite; }
+            .mhero-chip-3 { bottom: 10%; left: 10%; animation: mhero-float 7.5s ease-in-out 1s infinite; }
+            .mhero-chip-4 { top: 22%; right: 4%; animation: mhero-float 6s ease-in-out .25s infinite; }
+            @keyframes mhero-float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                25% { transform: translateY(-10px) rotate(-3deg); }
+                50% { transform: translateY(4px) rotate(2deg); }
+                75% { transform: translateY(-6px) rotate(-1.5deg); }
+            }
+            .mhero-basket { position: absolute; bottom: 8%; right: 8%; width: 5.5rem; height: 5.5rem; border-radius: 50%; background: rgba(255,255,255,.16); border: 1px dashed rgba(255,255,255,.45); animation: mhero-spin 16s linear infinite; }
+            .mhero-basket::after { content: ''; position: absolute; top: 50%; left: 50%; width: 2.6rem; height: 2.6rem; margin: -1.3rem 0 0 -1.3rem; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.35), transparent 70%); }
+            @keyframes mhero-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+            .mtrend-thumb { display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; animation: mtrend-float 4s ease-in-out infinite; transform-origin: center; }
+            .mtrend-row:nth-child(1) .mtrend-thumb { animation-duration: 3.4s; animation-delay: 0s; }
+            .mtrend-row:nth-child(2) .mtrend-thumb { animation-duration: 4.2s; animation-delay: .35s; }
+            .mtrend-row:nth-child(3) .mtrend-thumb { animation-duration: 3.8s; animation-delay: .7s; }
+            .mtrend-row:nth-child(4) .mtrend-thumb { animation-duration: 4.6s; animation-delay: .2s; }
+            .mtrend-row:nth-child(5) .mtrend-thumb { animation-duration: 3.6s; animation-delay: .9s; }
+            .mtrend-row:nth-child(6) .mtrend-thumb { animation-duration: 4.4s; animation-delay: .55s; }
+            .mtrend-row:hover .mtrend-thumb { animation-play-state: paused; transform: scale(1.12); border-color: #6ee7b7; }
+            @keyframes mtrend-float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                20% { transform: translateY(-3px) rotate(-4deg); }
+                50% { transform: translateY(1px) rotate(2deg); }
+                80% { transform: translateY(-2px) rotate(-2deg); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .mhero-chip, .mhero-basket, .mtrend-thumb { animation: none; }
+            }
         </style>
 
         <section class="mb-4">
             <div class="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-3">
                 <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-emerald-900 via-emerald-700 to-emerald-600 text-white flex">
-                    <div class="relative z-10 px-5 py-4 md:px-7 md:py-5 flex flex-col justify-center flex-1">
+                    <div class="relative z-10 px-5 py-4 md:px-7 md:py-5 flex flex-col justify-center flex-1 md:max-w-[56%]">
                         @foreach ([
-                            ['kicker' => 'Nationwide grocery delivery', 'title' => 'Buy at your local price, anywhere in Nigeria', 'sub' => 'Switch your delivery state and every price updates instantly.'],
+                            ['kicker' => 'Grocery delivery to your location', 'title' => 'Buy at your local price', 'sub' => 'Switch your delivery state and every price updates instantly.'],
                             ['kicker' => 'Fresh from trusted vendors', 'title' => 'Quality staples, delivered to your doorstep', 'sub' => 'Rice, beans, yams, spices and more from verified FoodChain vendors.'],
                             ['kicker' => 'Big savings every day', 'title' => 'Flash deals and member-low prices', 'sub' => 'Watch your cart total drop as deals roll in. Free delivery on orders above ₦50,000.'],
                         ] as $i => $slide)
@@ -90,6 +126,17 @@
                         @endforeach
                         <div class="flex gap-1.5 mt-2.5" data-hero-dots></div>
                     </div>
+                    @if ($heroProds->isNotEmpty())
+                        <div class="mhero-art hidden md:block" aria-hidden="true">
+                            @foreach ($heroProds->take(4) as $idx => $artProd)
+                                <span class="mhero-chip mhero-chip-{{ $idx + 1 }}">
+                                    <img src="{{ $artProd->image ?: '/images/product-placeholder.svg' }}" alt="" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
+                                    <span>{{ \Illuminate\Support\Str::limit($artProd->name, 14) }}<small>₦{{ number_format(mp_price($artProd), 0) }}</small></span>
+                                </span>
+                            @endforeach
+                            <span class="mhero-basket"></span>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="bg-white rounded-xl border border-gray-200 p-3 flex flex-col">
@@ -99,8 +146,8 @@
                     </div>
                     <div class="space-y-1.5 flex-1">
                         @foreach ($heroProds->take(6) as $heroProd)
-                            <a href="{{ route('marketplace.product', $heroProd->slug) }}" class="flex items-center gap-2 group">
-                                <span class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 font-bold text-xs flex items-center justify-center shrink-0 overflow-hidden">
+                            <a href="{{ route('marketplace.product', $heroProd->slug) }}" class="flex items-center gap-2 group mtrend-row">
+                                <span class="mtrend-thumb w-9 h-9 rounded-lg bg-emerald-50 ring-1 ring-emerald-100 text-emerald-600 font-bold text-xs transition-transform">
                                     @if ($heroProd->image)
                                         <img src="{{ $heroProd->image }}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">
                                     @else
@@ -311,7 +358,7 @@
                         in <span class="font-medium text-gray-800">{{ $brandNames[$selectedBrand] }}</span>
                     @endif
                 </p>
-                <form method="GET" class="flex items-center gap-2">
+                <form method="GET" action="{{ $baseUrl }}" class="flex items-center gap-2">
                     @foreach (request()->except(['sort', 'page']) as $key => $value)
                         @if (is_array($value))
                             @foreach ($value as $v)<input type="hidden" name="{{ $key }}[]" value="{{ $v }}">@endforeach

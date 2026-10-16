@@ -22,7 +22,8 @@
             justify-content: center;
             padding: 1rem;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         
         .bg-effects {
@@ -47,6 +48,7 @@
             z-index: 10;
             width: 100%;
             max-width: 28rem;
+            margin: auto;
         }
         
         .logo-section {
