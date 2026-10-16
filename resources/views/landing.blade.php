@@ -55,6 +55,8 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+        /* Kill the horizontal scrollbar on desktop. overflow-x: clip (not hidden) avoids creating a scroll container, so the sticky header keeps working. */
+        html, body { overflow-x: clip; }
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #059669; transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }

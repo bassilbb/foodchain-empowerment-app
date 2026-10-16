@@ -10,7 +10,7 @@
                     </span>
                     <span class="hidden sm:flex flex-col leading-tight">
                         <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">FCCEI</span>
-                        <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Food Chain Community Empowerment</span>
+                        <span class="brand-tagline text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Food Chain Community Empowerment</span>
                     </span>
                 </a>
 
@@ -127,8 +127,12 @@
             </div>
         </nav>
     </div>
+</header>
 
     <style>
+        /* Hide the long brand tagline below 1536px so the header row always fits the desktop container */
+        .brand-tagline { display: block; }
+        @media (max-width: 1535px) { .brand-tagline { display: none; } }
         .nav-pill { display: inline-flex; align-items: center; padding: 0.55rem 0.9rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #475569; transition: all 0.2s ease; white-space: nowrap; }
         .nav-pill:hover { color: #047857; background: #ffffff; box-shadow: 0 2px 10px rgba(4,120,87,0.08); }
         .dropdown-item { display: block; padding: 0.55rem 0.85rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 500; color: #475569; transition: all 0.15s ease; }
