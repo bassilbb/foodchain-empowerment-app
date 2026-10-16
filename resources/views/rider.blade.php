@@ -12,7 +12,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ App\Models\PageContent::getContent('rider', 'page_title', 'Become a Dispatch Rider') }}</title>
-  <meta name="description" content="{{ App\Models\PageContent::getContent('rider', 'page_subtitle', 'Join our delivery network.') }}" />
+  @include('partials.seo-meta', [
+      'seoTitle' => App\Models\PageContent::getContent('rider', 'page_title', 'Become a Dispatch Rider'),
+      'seoDesc' => 'Join the FoodChain delivery network as a verified dispatch rider and earn from timely grocery deliveries across Nigeria.',
+      'schema' => [
+          [
+              '@context' => 'https://schema.org',
+              '@type' => 'WebPage',
+              'name' => App\Models\PageContent::getContent('rider', 'page_title', 'Become a Dispatch Rider'),
+              'url' => url('/rider'),
+              'description' => 'Join the FoodChain delivery network as a verified dispatch rider.',
+          ],
+      ],
+  ])
   <meta name="keywords" content="FCCEI, dispatch rider, delivery, logistics, food chain" />
   <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
   <!-- Font Awesome 6 -->
@@ -20,49 +32,8 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
   <!-- Tailwind Config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
-            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
-            accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
-          },
-          fontFamily: {
-            'sans': ['Inter', 'system-ui', 'sans-serif'],
-            'display': ['Poppins', 'system-ui', 'sans-serif']
-          },
-          backgroundImage: {
-            'slide-1': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/buildi.jpeg") }}')",
-            'slide-2': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/empowerment.jpeg") }}')",
-            'slide-3': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/foodchan.jpeg") }}')"
-          },
-          animation: {
-            'slide-in': 'slideIn 0.5s ease-out forwards',
-            'fade-in': 'fadeIn 0.8s ease-out forwards',
-            'float': 'float 3s ease-in-out infinite'
-          },
-          keyframes: {
-            slideIn: {
-              '0%': { transform: 'translateY(20px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' }
-            },
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' }
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' }
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
     /* Additional custom styles */
@@ -71,6 +42,7 @@
   </style>
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
+    @include('partials.skip-link')
 
 <!-- Header Navigation -->
 <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -156,7 +128,7 @@
 </header>
 
 <!-- Main Content -->
-<main class="flex-1">
+<main class="flex-1" id="main-content">
 <!-- Dispatch Rider Page -->
 <!-- <section class="py-12 max-w-7xl mx-auto px-4">
   <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
@@ -175,21 +147,21 @@
 </section> -->
 
 <!-- Background Image Section -->
-<!-- <section class="w-full h-64 md:h-96 bg-cover bg-center" style="background-image: url('images/deliveryimgnw.png');">
+<!-- <section class="w-full h-64 md:h-96 bg-cover bg-center" style="background-image: url('images/deliveryimgnw.webp');">
 </section> -->
 
 <section
   class="w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[560px] bg-cover bg-center"
-  style="background-image: url('{{ asset("assets/landing/images/deliveryimgnw.png") }}');">
+  style="background-image: url('{{ asset("assets/landing/images/deliveryimgnw.webp") }}');">
 </section>
 
 <!-- Original Content Section -->
 <section class="py-12 max-w-7xl mx-auto px-4">
   <!-- Initiative Name with Logo Color -->
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">Foodchain Empowerment Initiative</h2>
+  <p class="text-3xl font-bold mb-8 text-center" style="color: #059669;">Foodchain Empowerment Initiative</p>
 
   <!-- Existing Heading with Logo Color -->
-  <h2 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h2>
+  <h1 class="text-3xl font-bold mb-8 text-center" style="color: #059669;">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Join as a Dispatch Rider') }}</h1>
 
   <p class="max-w-3xl mx-auto mb-8 text-center text-gray-700">
     {{ App\Models\PageContent::getContent('rider', 'page_subtitle', 'Become a vital part of our delivery network!') }}
@@ -215,6 +187,7 @@
     <h2 class="text-xl font-bold mb-4 text-center text-emerald-600">{{ App\Models\PageContent::getContent('rider', 'page_title', 'Dispatch Rider Registration') }}</h2>
     <form method="POST" action="{{ route('landing.rider') }}" class="flex flex-col space-y-4">
       @csrf
+      @include('partials.form-status')
       <!-- Full Name -->
       <div>
         <label class="block mb-1 font-semibold" for="drName">Full Name</label>

@@ -14,7 +14,7 @@
     @include('partials.vite-css')
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at 80% 10%, rgba(16,185,129,.18), transparent 28%), linear-gradient(135deg, #f7fbf8 0%, #e8f5ee 100%); min-height: 100vh; overflow-x: hidden; }
         .bg-effects { position: fixed; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 0; }
         .orb { position: absolute; border-radius: 50%; filter: blur(100px); }
         .orb-1 { width: 400px; height: 400px; background: rgba(16, 185, 129, 0.25); top: -150px; right: -100px; }
@@ -25,24 +25,25 @@
         .float-3 { bottom: 20%; left: 15%; animation-delay: 4s; }
         .float-4 { bottom: 30%; right: 8%; animation-delay: 6s; }
         @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(5deg); } }
-        .main-wrapper { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .auth-card { background: white; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.08); width: 100%; max-width: 440px; padding: 40px; position: relative; overflow: hidden; }
+        .main-wrapper { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 20px; perspective: 1600px; }
+        .auth-card { background: rgba(255,255,255,.94); border: 1px solid rgba(255,255,255,.85); border-radius: 24px; box-shadow: 0 35px 90px rgba(4,47,37,.18), 0 8px 0 rgba(5,150,105,.05); width: 100%; max-width: 440px; padding: 40px; position: relative; overflow: hidden; transform: rotateX(1deg); }
+        .auth-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .42; background-image: linear-gradient(rgba(16,185,129,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,.05) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(to bottom, rgba(0,0,0,.24), transparent 42%); }
         .auth-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #059669, #10B981); }
-        .auth-header { text-align: center; margin-bottom: 32px; }
+        .auth-header { text-align: center; margin-bottom: 32px; position: relative; z-index: 1; }
         .auth-logo { width: 64px; height: 64px; margin: 0 auto 16px; background: linear-gradient(135deg, #059669, #10B981); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25); }
         .auth-logo svg { width: 32px; height: 32px; color: white; }
         .auth-title { font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
         .auth-subtitle { font-size: 14px; color: #64748b; }
-        .form-group { margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; position: relative; z-index: 1; }
         .form-label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
         .form-input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 14px; transition: all 0.2s; background: #f8fafc; outline: none; font-family: 'Inter', sans-serif; }
         .form-input:focus { border-color: #10B981; background: white; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); }
         .form-input.error { border-color: #ef4444; }
         .error-text { font-size: 12px; color: #ef4444; margin-top: 4px; }
-        .btn-primary { width: 100%; padding: 14px; background: linear-gradient(135deg, #059669, #10B981); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3); font-family: 'Inter', sans-serif; }
+        .btn-primary { width: 100%; padding: 14px; background: linear-gradient(110deg, #047857, #10B981, #0f766e); background-size: 220% 100%; color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 12px 24px rgba(5, 150, 105, 0.28); font-family: 'Inter', sans-serif; position: relative; z-index: 1; }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(5, 150, 105, 0.4); }
         .btn-primary:active { transform: translateY(0); }
-        .auth-footer { text-align: center; margin-top: 24px; font-size: 14px; color: #64748b; }
+        .auth-footer { text-align: center; margin-top: 24px; font-size: 14px; color: #64748b; position: relative; z-index: 1; }
         .auth-footer a { color: #059669; font-weight: 600; text-decoration: none; }
         .auth-footer a:hover { text-decoration: underline; }
         .status-msg { padding: 12px 16px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; color: #166534; font-size: 14px; margin-bottom: 20px; }

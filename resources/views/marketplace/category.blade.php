@@ -11,17 +11,18 @@
         <span class="text-gray-800 font-medium">{{ $category->name }}</span>
     </div>
 
-    <div class="bg-gradient-to-r from-emerald-800 to-emerald-600 rounded-2xl p-6 mb-6 flex items-center justify-between">
+    <div class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 rounded-[28px] p-6 md:p-8 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-[0_20px_50px_rgba(6,95,70,0.22)]">
         <div>
-            <h1 class="text-white text-2xl font-extrabold">{{ $category->icon ?? '' }} {{ $category->name }}</h1>
+            <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-100">Marketplace category</p>
+            <h1 class="text-white text-2xl md:text-3xl font-extrabold mt-2">{{ $category->icon ?? '' }} {{ $category->name }}</h1>
             @if ($category->description)
-                <p class="text-emerald-100 text-sm mt-1">{{ $category->description }}</p>
+                <p class="text-emerald-100 text-sm mt-2 max-w-2xl">{{ $category->description }}</p>
             @endif
         </div>
         @if ($category->children->isNotEmpty())
-            <div class="hidden md:flex items-center gap-2 flex-wrap justify-end max-w-md">
+            <div class="hidden md:flex items-center gap-2 flex-wrap justify-end max-w-lg">
                 @foreach ($category->children as $child)
-                    <a href="{{ route('marketplace.category', $child->slug) }}" class="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-full px-3 py-1.5">{{ $child->name }}</a>
+                    <a href="{{ route('marketplace.category', $child->slug) }}" class="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-full px-3 py-1.5 border border-white/15">{{ $child->name }}</a>
                 @endforeach
             </div>
         @endif
@@ -29,9 +30,9 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <aside class="lg:col-span-1">
-            <div class="bg-white rounded-xl shadow-sm p-4 sticky top-24">
+            <div class="bg-white rounded-[22px] border border-gray-100 shadow-[0_16px_35px_rgba(15,23,42,0.05)] p-4 sticky top-24">
                 <h3 class="font-bold text-gray-900 mb-3">Refine</h3>
-                <form method="GET">
+                <form method="GET" action="{{ route('marketplace.category', $category->slug) }}">
                     <div class="mb-4">
                         <label class="text-xs font-semibold text-gray-500 uppercase mb-2 block">Brand</label>
                         <select name="brand" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
@@ -64,15 +65,15 @@
                             In Stock Only
                         </label>
                     </div>
-                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg py-2.5">Apply</button>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl py-2.5 shadow-lg shadow-emerald-600/20">Apply</button>
                 </form>
             </div>
         </aside>
 
         <div class="lg:col-span-3">
-            <div class="flex items-center justify-between mb-4 bg-white rounded-xl shadow-sm p-3">
-                <p class="text-sm text-gray-600">{{ $products->total() }} product(s)</p>
-                <form method="GET">
+            <div class="flex items-center justify-between mb-4 bg-white rounded-[20px] border border-gray-100 shadow-[0_12px_28px_rgba(15,23,42,0.04)] p-3">
+                <p class="text-sm text-gray-600"><span class="font-bold text-gray-900">{{ $products->total() }}</span> product(s)</p>
+                <form method="GET" action="{{ route('marketplace.category', $category->slug) }}">
                     @foreach (request()->except(['sort']) as $key => $value)
                         @if (is_array($value))
                             @foreach ($value as $v)<input type="hidden" name="{{ $key }}[]" value="{{ $v }}">@endforeach
@@ -92,7 +93,7 @@
             </div>
 
             @if ($products->isEmpty())
-                <div class="bg-white rounded-xl shadow-sm p-12 text-center">
+                <div class="bg-white rounded-[22px] border border-gray-100 shadow-[0_12px_28px_rgba(15,23,42,0.04)] p-12 text-center">
                     <div class="text-5xl mb-4">📦</div>
                     <h3 class="text-lg font-bold text-gray-800 mb-1">No products in this category yet</h3>
                     <p class="text-sm text-gray-500">Check back soon or browse other categories.</p>

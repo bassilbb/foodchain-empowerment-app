@@ -30,6 +30,12 @@
                         <i class="fab fa-whatsapp text-emerald-300"></i>
                     </a>
                 </div>
+                <div class="mt-6 rounded-lg bg-white/5 px-4 py-3 text-xs text-emerald-300/80">
+                    <p class="font-semibold text-emerald-200 mb-1">Office Address for Enquiry:</p>
+                    <p class="leading-relaxed">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+                    <p class="mt-2"><span class="font-semibold text-emerald-200">Central Warehouse 1:</span> 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+                    <p class="mt-2"><span class="font-semibold text-emerald-200">Our Distribution Hubs in Lagos:</span> Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
+                </div>
             </div>
 
             {{-- Quick Links --}}
@@ -40,7 +46,6 @@
                     <li><a href="{{ route('marketplace.home') }}" class="hover:text-white transition-colors">Marketplace</a></li>
                     <li><a href="{{ route('gallery') }}" class="hover:text-white transition-colors">Gallery</a></li>
                     <li><a href="{{ route('team') }}" class="hover:text-white transition-colors">Our Team</a></li>
-                    <li><a href="{{ route('listing') }}" class="hover:text-white transition-colors">Listing</a></li>
                     <li><a href="{{ route('blog') }}" class="hover:text-white transition-colors">Blog</a></li>
                 </ul>
             </div>

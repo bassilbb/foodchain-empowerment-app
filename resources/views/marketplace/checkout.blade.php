@@ -1,11 +1,29 @@
 @extends('marketplace.layouts.app')
 
 @section('content')
-    <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
-        <a href="{{ route('marketplace.cart.index') }}" class="hover:text-emerald-700">Cart</a>
-        <span>/</span>
-        <span class="text-gray-800 font-medium">Checkout</span>
+    <div class="mb-6 flex items-center justify-between gap-3 flex-wrap">
+        <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-600">Checkout</p>
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+                <a href="{{ route('marketplace.cart.index') }}" class="hover:text-emerald-700">Cart</a>
+                <span>/</span>
+                <span class="text-gray-800 font-medium">Secure payment</span>
+            </div>
+        </div>
+        <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5 text-xs font-semibold">Safe & encrypted</span>
     </div>
+
+    @if (! empty($data['unavailable_items']))
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <p class="text-sm font-semibold text-amber-800">Some items can no longer be bought</p>
+            <p class="text-sm text-amber-700 mt-1">
+                {{ implode(', ', $data['unavailable_items']) }} {{ count($data['unavailable_items']) === 1 ? 'is' : 'are' }} sold out, delisted or
+                below the quantity in your cart.
+                <a href="{{ route('marketplace.cart.index') }}" class="font-semibold underline">Review your cart</a>
+                before paying.
+            </p>
+        </div>
+    @endif
 
     @if ($errors->any())
         <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
@@ -22,7 +40,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2 space-y-6">
                 {{-- Delivery --}}
-                <div class="bg-white rounded-2xl shadow-sm p-6">
+                <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-6">
                     <h3 class="font-bold text-gray-900 mb-4">1. Delivery Details</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -72,7 +90,7 @@
                 </div>
 
                 {{-- Payment --}}
-                <div class="bg-white rounded-2xl shadow-sm p-6">
+                <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-6">
                     <h3 class="font-bold text-gray-900 mb-4">2. Payment Method</h3>
                     <div class="space-y-3">
                         @foreach ($paymentMethods as $key => $label)
@@ -96,7 +114,7 @@
 
             {{-- Summary --}}
             <div>
-                <div class="bg-white rounded-2xl shadow-sm p-6 sticky top-24">
+                <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-6 sticky top-24">
                     <h3 class="font-bold text-gray-900 mb-4">Order Summary</h3>
 
                     <div class="space-y-2 max-h-64 overflow-y-auto mb-4">
@@ -139,7 +157,7 @@
                         <textarea name="note" rows="2" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">{{ old('note') }}</textarea>
                     </div>
 
-                    <button type="submit" id="place-order-btn" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg py-3 transition-colors">Place Order</button>
+                    <button type="submit" id="place-order-btn" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl py-3.5 shadow-lg shadow-emerald-600/20 transition-colors">Place Order</button>
                     <p class="text-xs text-gray-400 text-center mt-2">By placing this order you agree to our terms and delivery policy.</p>
                 </div>
             </div>

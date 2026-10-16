@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BlogController;
 // use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
@@ -36,8 +37,8 @@ Route::view('/sponsor', 'sponsor')->name('sponsor');
 Route::view('/supplier', 'supplier')->name('supplier');
 Route::view('/rider', 'rider')->name('rider');
 Route::view('/listing', 'listing')->name('listing');
-Route::view('/blog', 'blog')->name('blog');
-Route::view('/blog_details', 'blog_details')->name('blog_details');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog_details/{slug?}', [BlogController::class, 'show'])->name('blog_details');
 Route::view('/csr', 'csr')->name('csr');
 Route::view('/franchise', 'franchice')->name('franchise');
 Route::view('/franchice', 'franchice');
@@ -62,6 +63,8 @@ use App\Http\Controllers\LandingController;
 Route::post('/sponsor', [LandingController::class, 'sponsor'])->name('landing.sponsor');
 Route::post('/supplier', [LandingController::class, 'supplier'])->name('landing.supplier');
 Route::post('/rider', [LandingController::class, 'rider'])->name('landing.rider');
+Route::post('/contact', [LandingController::class, 'contact'])->name('landing.contact');
+Route::post('/newsletter', [LandingController::class, 'newsletter'])->name('landing.newsletter');
 
 // Guest Routes (Not authenticated)
 Route::middleware('guest')->group(function () {

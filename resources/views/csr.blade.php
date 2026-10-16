@@ -4,28 +4,28 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FCCEI CSR Initiatives</title>
-<meta name="description" content="Discover FCCEI's Corporate Social Responsibility initiatives focused on community development, food security, and sustainable growth." />
+@include('partials.seo-meta', [
+    'seoTitle' => 'FCCEI CSR Initiatives',
+    'seoDesc' => 'Discover FCCEI\'s Corporate Social Responsibility initiatives focused on community development, food security, and sustainable growth across Nigeria.',
+    'schema' => [
+        [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => 'FCCEI CSR Initiatives',
+            'url' => url('/csr'),
+            'description' => 'Discover FCCEI\'s Corporate Social Responsibility initiatives focused on community development and food security.',
+        ],
+    ],
+])
 
 <!-- Tailwind CSS & Font Awesome -->
-<script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
 
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
-        secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
-        accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
-      }
-    }
-  }
-}
-</script>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
+@include('partials.skip-link', ['skipTarget' => '#about'])
 
 <!-- HEADER -->
 <header class="sticky top-0 bg-white shadow z-50">
@@ -34,7 +34,7 @@ tailwind.config = {
     <div class="flex items-center space-x-3">
       <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-16 h-16 object-contain" />
       <div>
-        <h1 class="text-3xl font-bold text-[#10B981]">FCCEI</h1>
+        <p class="text-3xl font-bold text-[#10B981] m-0">FCCEI</p>
         <p class="text-sm uppercase tracking-widest text-[#047857]">Corporate Social Responsibility</p>
       </div>
     </div>
@@ -66,9 +66,9 @@ tailwind.config = {
 <!-- HERO: About CSR -->
 <section class="relative bg-[#F0F9FA] py-20" id="about">
   <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-800">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-800">
       Our <span class="text-[#10B981]">CSR Commitment</span>
-    </h2>
+    </h1>
     <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto md:mx-0">
       At FCCEI, we believe in giving back to the community by championing initiatives that foster sustainable development, food security, and social well-being. Our CSR efforts aim to create lasting positive change across Nigeria.
     </p>
@@ -136,7 +136,7 @@ tailwind.config = {
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
         <p class="mb-4 italic">"FCCEI's CSR initiatives have uplifted our community and brought hope to many families."</p>
         <div class="flex items-center space-x-4">
-          <img src="{{ asset('assets/landing/images/testimonial1.jpg') }}" alt="Impact Testimonial" class="w-12 h-12 rounded-full object-cover" />
+          <img src="{{ asset('assets/landing/images/uerss.jpg') }}" alt="Impact Testimonial - Mrs. Amina" class="w-12 h-12 rounded-full object-cover" loading="lazy" />
           <div>
             <p class="font-semibold mb-1">Mrs. Amina, Community Leader</p>
             <p class="text-sm text-gray-500">Kano, Nigeria</p>
@@ -146,7 +146,7 @@ tailwind.config = {
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
         <p class="mb-4 italic">"Our partnership with FCCEI has changed lives and created sustainable change."</p>
         <div class="flex items-center space-x-4">
-          <img src="{{ asset('assets/landing/images/testimonial2.jpg') }}" alt="Impact Testimonial" class="w-12 h-12 rounded-full object-cover" />
+          <img src="{{ asset('assets/landing/images/user.jpg') }}" alt="Impact Testimonial - Mr. Chinedu" class="w-12 h-12 rounded-full object-cover" loading="lazy" />
           <div>
             <p class="font-semibold mb-1">Mr. Chinedu, NGO Partner</p>
             <p class="text-sm text-gray-500">Abuja, Nigeria</p>
@@ -184,8 +184,10 @@ tailwind.config = {
               <i class="fas fa-map-marker-alt text-white"></i>
             </div>
             <div>
-              <h5 class="font-semibold mb-1">Head Office</h5>
-              <p class="text-gray-600 text-sm">KM 54, Lagos - Ibadan Expressway, Mowe, Ogun State</p>
+              <h5 class="font-semibold mb-1">Office Address for Enquiry</h5>
+              <p class="text-gray-600 text-sm">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+              <p class="text-gray-600 text-sm mt-1">Central Warehouse 1: 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+              <p class="text-gray-600 text-sm mt-1">Our Distribution Hubs in Lagos: Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
             </div>
           </div>
           <div class="flex items-start">
@@ -229,7 +231,10 @@ tailwind.config = {
       <!-- Contact Form -->
       <div class="bg-white p-8 rounded-xl shadow-lg">
         <h4 class="text-2xl font-semibold mb-6 text-gray-800">Send a Message</h4>
-        <form class="space-y-4" id="csrForm">
+        <form method="POST" action="{{ route('landing.contact') }}" class="space-y-4" id="csrForm">
+          @csrf
+          @include('partials.form-status')
+          <input type="hidden" name="subject" value="CSR page enquiry">
           <div>
             <label for="name" class="block mb-2 text-gray-700 font-medium">Full Name</label>
             <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]" placeholder="Your Name" />

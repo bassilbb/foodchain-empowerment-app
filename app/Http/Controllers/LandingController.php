@@ -69,4 +69,56 @@ class LandingController extends Controller
 
         return back()->with('success', 'Registration submitted! We will contact you shortly.');
     }
+
+    /**
+     * Public "Send us a Message" form on the landing page.
+     */
+    public function contact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:5000',
+        ]);
+
+        Mail::raw(
+            "Contact Message\n\nName: {$validated['name']}\nEmail: {$validated['email']}\nSubject: {$validated['subject']}\n\n{$validated['message']}",
+            function ($message) use ($validated) {
+                $message->to(config('mail.from.address'))
+                    ->replyTo($validated['email'], $validated['name'])
+                    ->subject('New website message: '.$validated['subject']);
+            }
+        );
+
+        return back()
+            ->with('success', 'Thank you for your message! We have received it and will get back to you soon.')
+            ->with('status_section', 'contact');
+    }
+
+    /**
+     * Landing page newsletter subscription form.
+     */
+    public function newsletter(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email|max:255',
+        ], [
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'Please enter a valid email address.',
+        ]);
+
+        Mail::raw(
+            "Newsletter subscription\n\nEmail: {$validated['email']}",
+            function ($message) use ($validated) {
+                $message->to(config('mail.from.address'))
+                    ->replyTo($validated['email'])
+                    ->subject('New newsletter subscriber');
+            }
+        );
+
+        return back()
+            ->with('success', 'You are subscribed! Watch your inbox for marketplace updates.')
+            ->with('status_section', 'newsletter');
+    }
 }

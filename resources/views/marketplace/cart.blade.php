@@ -1,14 +1,20 @@
 @extends('marketplace.layouts.app')
 
 @section('content')
-    <h1 class="text-2xl font-extrabold text-gray-900 mb-6">Shopping Cart</h1>
+    <div class="mb-6 flex items-center justify-between gap-3 flex-wrap">
+        <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-600">Basket</p>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900">Shopping Cart</h1>
+        </div>
+        <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5 text-xs font-semibold">{{ $cartItems->count() }} items</span>
+    </div>
 
     @if ($cartItems->isEmpty())
-        <div class="bg-white rounded-2xl shadow-sm p-16 text-center">
+        <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-16 text-center">
             <div class="text-6xl mb-4">🛒</div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Your cart is empty</h3>
             <p class="text-sm text-gray-500 mb-6">Add some delicious food items to get started.</p>
-            <a href="{{ route('marketplace.shop') }}" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg px-8 py-3 transition-colors">Start Shopping</a>
+            <a href="{{ route('marketplace.shop') }}" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl px-8 py-3 shadow-lg shadow-emerald-600/20 transition-colors">Start Shopping</a>
         </div>
     @else
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -71,7 +77,7 @@
 
             {{-- Summary --}}
             <div>
-                <div class="bg-white rounded-xl shadow-sm p-6 sticky top-24">
+                <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-6 sticky top-24">
                     <h3 class="font-bold text-gray-900 mb-4">Order Summary</h3>
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between text-gray-600"><span>Subtotal <span class="text-[10px] text-emerald-600 font-semibold uppercase tracking-wide">· {{ mp_state() }}</span></span><span id="subtotal-display">₦{{ number_format($subtotal, 2) }}</span></div>
@@ -80,11 +86,11 @@
                     </div>
                     <div class="border-t border-gray-100 mt-4 pt-4 flex justify-between items-center">
                         <span class="font-bold text-gray-900">Total</span>
-                        <span class="font-extrabold text-emerald-700" id="grand-total-display">₦{{ number_format($subtotal, 2) }}</span>
+                        <span class="font-extrabold text-emerald-700 text-lg" id="grand-total-display">₦{{ number_format($subtotal, 2) }}</span>
                     </div>
-                    <a href="{{ route('marketplace.checkout.index') }}" class="block mt-4 text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg py-3 transition-colors">Proceed to Checkout</a>
+                    <a href="{{ route('marketplace.checkout.index') }}" class="block mt-4 text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl py-3.5 shadow-lg shadow-emerald-600/20 transition-colors">Proceed to Checkout</a>
                     <a href="{{ route('marketplace.shop') }}" class="block mt-2 text-center text-sm text-emerald-700 hover:underline">Continue shopping</a>
-                    <div class="mt-4 bg-emerald-50 rounded-lg p-3 text-xs text-emerald-800">
+                    <div class="mt-4 bg-emerald-50 rounded-xl border border-emerald-200 p-3 text-xs text-emerald-800">
                         💰 <strong>Wallet balance:</strong>
                         @auth
                             ₦{{ number_format(auth()->user()->wallet_balance, 2) }}

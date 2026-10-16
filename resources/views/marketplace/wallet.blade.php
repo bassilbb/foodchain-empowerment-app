@@ -61,7 +61,7 @@
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <h3 class="font-bold text-gray-900 mb-3">Top Up Wallet</h3>
                 <p class="text-xs text-gray-500 mb-3">Top up your wallet from the member dashboard.</p>
-                <a href="{{ route('user.accounts.wallet') }}" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg py-2.5 transition-colors">Go to Wallet Top-up</a>
+                <a href="{{ route('manual-payments.create', ['type' => 'wallet_topup']) }}" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg py-2.5 transition-colors">Go to Wallet Top-up</a>
             </div>
         </div>
     </div>

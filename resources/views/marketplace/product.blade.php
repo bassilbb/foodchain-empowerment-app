@@ -13,6 +13,12 @@
         <span class="text-gray-800 font-medium line-clamp-1">{{ $product->name }}</span>
     </div>
 
+    <div class="mb-6 flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500">
+        <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1.5">Verified product</span>
+        <span class="bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-1.5">Fast dispatch</span>
+        <span class="bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-3 py-1.5">Secure payment</span>
+    </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         {{-- Image gallery --}}
         <div>
@@ -82,15 +88,15 @@
                     @endif
                 </div>
 
-                <div class="mt-4 flex items-end gap-3">
+                <div class="mt-5 flex items-end gap-3 flex-wrap">
                     @php
                         $statePrice = mp_price($product);
                         $comparePrice = mp_compare($product);
                         $discPct = $comparePrice ? (int) round((((float) $product->price - $statePrice) / (float) $product->price) * 100) : null;
                     @endphp
                     <div>
-                        <p class="text-[11px] text-gray-400 font-medium mb-0.5">Price in {{ mp_state() }}</p>
-                        <p class="text-3xl font-extrabold text-emerald-700 leading-none">₦{{ number_format($statePrice, 2) }}</p>
+                        <p class="text-[11px] text-gray-400 font-medium mb-0.5 uppercase tracking-[0.12em]">Price in {{ mp_state() }}</p>
+                        <p class="text-3xl md:text-4xl font-extrabold text-emerald-700 leading-none">₦{{ number_format($statePrice, 2) }}</p>
                     </div>
                     @if ($comparePrice)
                         <div>
@@ -103,7 +109,7 @@
                 </div>
 
                 @if ($product->member_selling_price)
-                    <div class="mt-2 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2 text-xs text-emerald-800">
+                    <div class="mt-3 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs text-emerald-800">
                         <span>FoodChain members (optional) pay <strong>₦{{ number_format($product->member_selling_price, 2) }}</strong> on this item. Buying here is free for every registered customer.</span>
                     </div>
                 @endif
@@ -158,7 +164,7 @@
                         @endif
                     </p>
                 @else
-                    <a href="{{ route('login') }}" class="mt-5 block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg py-3 transition-colors">Login to Add to Cart</a>
+                    <a href="{{ route('login') }}" class="mt-5 block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl py-3.5 shadow-lg shadow-emerald-600/20 transition-colors">Login to Add to Cart</a>
                 @endauth
 
                 @if ($product->vendor)
@@ -210,7 +216,7 @@
             <ul class="space-y-3 text-sm text-gray-600">
                 <li class="flex gap-2"><span>🛡️</span><span>Verified quality products from trusted vendors</span></li>
                 <li class="flex gap-2"><span>💳</span><span>Pay with wallet, card, transfer or cash on delivery</span></li>
-                <li class="flex gap-2"><span>🚚</span><span>Nationwide delivery with express options</span></li>
+                <li class="flex gap-2"><span>🚚</span><span>Delivery to your location with express options</span></li>
                 <li class="flex gap-2"><span>👑</span><span>Exclusive member prices and loyalty points</span></li>
                 <li class="flex gap-2"><span>↩️</span><span>Easy returns on delivered orders</span></li>
             </ul>
@@ -303,7 +309,8 @@
         // Delivery estimate
         document.getElementById('delivery-state').addEventListener('change', async (e) => {
             const state = e.target.value;
-            document.getElementById('delivery-estimate').textContent = 'Calculating...';
+            const el = document.getElementById('delivery-estimate');
+            el.textContent = 'Calculating...';
             try {
                 const res = await fetch('{{ route("marketplace.checkout.estimate") }}', {
                     method: 'POST',
@@ -312,9 +319,17 @@
                 });
                 const data = await res.json();
                 if (data.delivery_fee !== undefined) {
-                    document.getElementById('delivery-estimate').innerHTML = `Standard delivery: <strong>₦${Number(data.delivery_fee).toLocaleString()}</strong> · ${data.estimated_days} day(s)`;
+                    el.innerHTML = `Standard delivery: <strong>₦${Number(data.delivery_fee).toLocaleString()}</strong> · ${data.estimated_days} day(s)`;
+                    return;
                 }
-            } catch (err) {}
+                if (res.status === 401 || res.status === 419) {
+                    el.innerHTML = 'Sign in to view delivery fees for this state.';
+                    return;
+                }
+                el.textContent = 'Delivery estimate unavailable for this state.';
+            } catch (err) {
+                el.textContent = 'Delivery estimate unavailable for this state.';
+            }
         });
     </script>
     @endpush

@@ -5,14 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FCCEI Franchise</title>
+    @include('partials.seo-meta', [
+        'seoTitle' => 'Join the FCCEI Franchise Network',
+        'seoDesc' => 'Partner with FoodChain Community Empowerment Initiative as a franchise owner and bring affordable food security delivery to underserved communities across Nigeria.',
+        'schema' => [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => 'Join the FCCEI Franchise Network',
+                'url' => url('/franchise'),
+                'description' => 'Partner with FCCEI as a franchise owner to bring affordable food security delivery to communities across Nigeria.',
+            ],
+        ],
+    ])
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
+    @include('partials.skip-link', ['skipTarget' => '#home'])
 
     <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -57,7 +71,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="py-12 bg-gray-50 text-center">
+    <section class="py-12 bg-gray-50 text-center" id="home">
         <div class="max-w-4xl mx-auto px-4">
             <h1 class="text-4xl font-bold mb-4 text-gray-900">Join the FCCEI Franchise Network</h1>
             <p class="text-gray-600 mb-6">Empowering communities through sustainable food initiatives. Be part of our

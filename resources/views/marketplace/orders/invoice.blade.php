@@ -95,8 +95,26 @@
             @if ($order->coupon_discount > 0)
                 <div><span>Coupon ({{ $order->coupon_code }})</span><span>-₦{{ number_format($order->coupon_discount, 2) }}</span></div>
             @endif
+            @if ($order->discount_amount > 0)
+                <div><span>Discount</span><span>-₦{{ number_format($order->discount_amount, 2) }}</span></div>
+            @endif
             <div><span>Delivery</span><span>₦{{ number_format($order->shipping_fee, 2) }}</span></div>
             <div class="grand"><span>Total</span><span>₦{{ number_format($order->total, 2) }}</span></div>
+
+            @if ($order->wallet_amount > 0)
+                <div style="font-size:12px; color:#6b7280;"><span>Paid from wallet</span><span>₦{{ number_format($order->wallet_amount, 2) }}</span></div>
+            @endif
+            @if ($order->cash_amount > 0)
+                <div style="font-size:12px; color:#b45309;"><span>Payable in cash</span><span>₦{{ number_format($order->cash_amount, 2) }}</span></div>
+            @endif
+            @if ($order->refund_amount > 0)
+                <div style="font-size:12px; color:#6b7280;"><span>Refunded</span><span>₦{{ number_format($order->refund_amount, 2) }}</span></div>
+            @endif
+
+            <div style="font-size:11px; color:#6b7280; border-top:1px solid #e5e7eb; margin-top:6px; padding-top:6px;">
+                <span>Payment method</span>
+                <span>{{ \App\Models\Marketplace\Order::PAYMENT_METHODS[$order->payment_method] ?? $order->payment_method }}</span>
+            </div>
         </div>
 
         <div class="footer">

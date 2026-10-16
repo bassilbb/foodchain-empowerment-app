@@ -12,12 +12,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ App\Models\PageContent::getContent('blog', 'page_title', 'Our Blog') }}</title>
+    @include('partials.seo-meta', [
+        'seoTitle' => App\Models\PageContent::getContent('blog', 'page_title', 'Our Blog'),
+        'seoDesc' => App\Models\PageContent::getContent('blog', 'page_subtitle', 'Insights, tips, and success stories from the FoodChain marketplace community.'),
+        'schema' => [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'Blog',
+                'name' => App\Models\PageContent::getContent('blog', 'page_title', 'Our Blog'),
+                'url' => url('/blog'),
+                'description' => App\Models\PageContent::getContent('blog', 'page_subtitle', 'Insights from the FoodChain marketplace community.'),
+            ],
+        ],
+    ])
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
+    @include('partials.skip-link')
 
     <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -60,7 +74,7 @@
                     </div>
 
                     <a href="{{ route('landing') }}#products"
-                        class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Membership</a>
+                        class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Marketplace</a>
                     <!-- Blog dropdown -->
                     <div class="relative group">
                         <a href="{{ route('landing') }}#blog"
@@ -139,7 +153,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Products</a>
+                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Marketplace</a>
                 <!-- Blog dropdown -->
                 <div class="relative group">
                     <a href="{{ route('landing') }}#blog"
@@ -193,100 +207,81 @@
     </header>
      {{-- @include('partials.header') --}}
 
-    <main class="py-12 bg-gray-50">
+    <main class="py-12 bg-gray-50" id="main-content">
         <div class="container mx-auto px-4">
 
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Latest <span
-                        class="text-[#10B981]">Blog</span> Posts</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Insights, tips, and success stories from our community</p>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4 font-display">{{ $pageTitle ?: 'Latest Blog Posts' }}</h1>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    {{ $pageSubtitle ?: 'Insights, tips, and success stories from our marketplace community' }}
+                </p>
             </div>
+
+            @if(isset($categories) && $categories->isNotEmpty())
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <a href="{{ route('blog') }}"
+                    class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border transition-all {{ ! $activeCategory ? 'bg-[#10B981] text-white border-[#10B981]' : 'border-gray-300 text-gray-600 hover:border-[#10B981] hover:text-[#047857]' }}">
+                    All
+                </a>
+                @foreach($categories as $category)
+                <a href="{{ route('blog', ['category' => $category]) }}"
+                    class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border transition-all {{ $activeCategory === $category ? 'bg-[#10B981] text-white border-[#10B981]' : 'border-gray-300 text-gray-600 hover:border-[#10B981] hover:text-[#047857]' }}">
+                    {{ $category }}
+                </a>
+                @endforeach
+            </div>
+            @endif
 
             <div class="flex flex-col lg:flex-row gap-12">
 
                 <div class="lg:w-3/4">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        @forelse($posts as $post)
                         <article
                             class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <img src="{{ asset('assets/landing/images/blogsa.jpeg') }}" alt="Maximizing Your Referral Earnings"
-                                class="w-full h-48 object-cover" loading="lazy" />
-                            <div class="p-6">
-                                <div class="text-sm text-[#10B981] font-bold mb-2 uppercase tracking-widest mb-2">
-                                    COMMUNITY BUILDING</div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3">Build a Strong Food-Secure Community
-                                    in 2024</h3>
-                                <p class="text-gray-600 mb-4">Discover practical ways to grow a supportive community
-                                    where members collaborate, empower one another, and ensure continuous access to
-                                    essential food resources.</p>
-                                <a href="{{ route('blog_details') }}" class="text-[#047857] font-bold hover:underline">Read More
-                                    →</a>
-                            </div>
-                        </article>
-
-                        <article
-                            class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}" alt="Success Story" class="w-full h-48 object-cover"
-                                loading="lazy" />
-                            <div class="p-6">
-                                <div class="text-sm text-[#10B981] font-bold mb-2 uppercase tracking-widest mb-2">
-                                    SUCCESS STORIES</div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3">From Struggle to Stability: A
-                                    Community Transformation Story</h3>
-                                <p class="text-gray-600 mb-4">
-                                    Discover how active participation and shared support within our community helped
-                                    transform lives, improve livelihoods, and create sustainable food access.
-                                </p>
-                                <a href="{{ route('blog_details') }}" class="text-[#047857] font-bold hover:underline">Read More
-                                    →</a>
-                            </div>
-                        </article>
-
-                        <article
-                            class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <img src="{{ asset('assets/landing/images/about-uss.png') }}" alt="Education" class="w-full h-48 object-cover"
-                                loading="lazy" />
-                            <div class="p-6">
-                                <div class="text-sm text-[#10B981] font-bold mb-2 uppercase tracking-widest">EDUCATION
+                            @if($post->image_url)
+                                <img src="{{ $post->image_url }}" alt="{{ $post->image_alt ?: $post->title }}"
+                                    class="w-full h-48 object-cover" loading="lazy" decoding="async" />
+                            @else
+                                <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400 text-sm uppercase tracking-widest">
+                                    No image
                                 </div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-3">Understanding Community Empowerment &
-                                    Sustainable Growth</h3>
-                                <p class="text-gray-600 mb-4">
-                                    Learn how education, collaboration, and shared resources help individuals and
-                                    communities build lasting impact and food security.
-                                </p>
-                                <a href="{{ route('blog_details') }}" class="text-[#047857] font-bold hover:underline">Read More
-                                    →</a>
-                            </div>
-                        </article>
-
-                        <article
-                            class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
-                            <img src="{{ asset('assets/landing/images/blogf.jpeg') }}" alt="Education" class="w-full h-48 object-cover"
-                                loading="lazy" />
+                            @endif
                             <div class="p-6">
-                                <div class="text-sm text-[#10B981] font-bold mb-2 uppercase tracking-widest">Community
-                                    Learning</div>
-                                <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-[#047857] transition">
-                                    Building Strong & Sustainable Communities
-                                </h2>
-                                <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                                    Discover how shared knowledge, collaboration, and inclusive participation empower
-                                    individuals to grow, thrive, and create lasting impact.
+                                @if($post->category)
+                                <div class="text-sm text-[#10B981] font-bold mb-2 uppercase tracking-widest">
+                                    {{ $post->category }}</div>
+                                @endif
+                                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $post->title }}</h3>
+                                @if($post->excerpt)
+                                <p class="text-gray-600 mb-4">{{ $post->excerpt }}</p>
+                                @endif
+                                @if($post->published_at)
+                                <p class="text-xs text-gray-400 mb-3">
+                                    {{ $post->published_at->format('j F Y') }}
+                                    @if($post->author) &middot; {{ $post->author->name }} @endif
                                 </p>
-
-                                <a href="{{ route('blog_details') }}" class="text-[#047857] font-bold hover:underline">Read More
+                                @endif
+                                <a href="{{ route('blog_details', $post->slug) }}"
+                                    class="text-[#047857] font-bold hover:underline">Read More
                                     →</a>
                             </div>
                         </article>
+                        @empty
+                        <div class="col-span-full text-center py-16 text-gray-500">
+                            <p class="font-semibold text-gray-700 mb-2">No blog posts published yet.</p>
+                            <p class="text-sm">Published posts will appear here.</p>
+                        </div>
+                        @endforelse
                     </div>
 
+                    @if($posts->hasPages())
                     <div class="flex justify-center mb-12">
-                        <a href="#"
-                            class="px-8 py-3 border-2 border-[#10B981] text-[#10B981] font-bold rounded-lg hover:bg-[#10B981] hover:text-white transition-all">
-                            Load More Posts
-                        </a>
+                        {{ $posts->onEachSide(1)->links() }}
                     </div>
+                    @endif
                 </div>
+
 
                 <aside class="lg:w-1/4 space-y-8">
 
@@ -295,42 +290,29 @@
                             <i class="fas fa-bolt text-[#10B981] mr-2"></i> Recent Updates
                         </h3>
                         <div class="space-y-6">
-                            <a href="{{ route('blog_details') }}" class="group flex items-center gap-3">
-                                <img src="{{ asset('assets/landing/images/about-uss.png') }}" class="w-12 h-12 rounded-lg object-cover">
-                                <div>
+                            @forelse($posts->take(4) as $recent)
+                            <a href="{{ route('blog_details', $recent->slug) }}" class="group flex items-center gap-3">
+                                @if($recent->image_url)
+                                <img src="{{ $recent->image_url }}" alt="{{ $recent->image_alt ?: $recent->title }}"
+                                    class="w-12 h-12 rounded-lg object-cover" loading="lazy" decoding="async">
+                                @else
+                                <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400">
+                                    <i class="fas fa-image text-xs"></i>
+                                </div>
+                                @endif
+                                <div class="min-w-0">
                                     <h4
                                         class="text-xs font-bold text-gray-800 group-hover:text-[#047857] transition leading-tight">
-                                        Emerald Stage Rewards 2024</h4>
-                                    <p class="text-[10px] text-gray-400 mt-1 uppercase">2 days ago</p>
+                                        {{ $recent->title }}</h4>
+                                    @if($recent->published_at)
+                                    <p class="text-[10px] text-gray-400 mt-1 uppercase">
+                                        {{ $recent->published_at->diffForHumans(short: true) }}</p>
+                                    @endif
                                 </div>
                             </a>
-                            <a href="{{ route('blog_details') }}" class="group flex items-center gap-3">
-                                <img src="{{ asset('assets/landing/images/about-uss.png') }}" class="w-12 h-12 rounded-lg object-cover">
-                                <div>
-                                    <h4
-                                        class="text-xs font-bold text-gray-800 group-hover:text-[#047857] transition leading-tight">
-                                        New Food Pack Logistics</h4>
-                                    <p class="text-[10px] text-gray-400 mt-1 uppercase">5 days ago</p>
-                                </div>
-                            </a>
-                            <a href="{{ route('blog_details') }}" class="group flex items-center gap-3">
-                                <img src="{{ asset('assets/landing/images/about-uss.png') }}" class="w-12 h-12 rounded-lg object-cover">
-                                <div>
-                                    <h4
-                                        class="text-xs font-bold text-gray-800 group-hover:text-[#047857] transition leading-tight">
-                                        New Food Pack Logistics</h4>
-                                    <p class="text-[10px] text-gray-400 mt-1 uppercase">5 days ago</p>
-                                </div>
-                            </a>
-                            <a href="{{ route('blog_details') }}" class="group flex items-center gap-3">
-                                <img src="{{ asset('assets/landing/images/about-uss.png') }}" class="w-12 h-12 rounded-lg object-cover">
-                                <div>
-                                    <h4
-                                        class="text-xs font-bold text-gray-800 group-hover:text-[#047857] transition leading-tight">
-                                        New Food Pack Logistics</h4>
-                                    <p class="text-[10px] text-gray-400 mt-1 uppercase">5 days ago</p>
-                                </div>
-                            </a>
+                            @empty
+                            <p class="text-sm text-gray-400">No updates yet.</p>
+                            @endforelse
                         </div>
                     </div>
 
@@ -344,8 +326,8 @@
                                     class="w-4 h-4 bg-[#047857] rounded flex-shrink-0 flex items-center justify-center mt-1">
                                     <i class="fas fa-check text-[8px] text-white"></i>
                                 </div>
-                                <span class="text-white text-xs leading-tight">Active in <strong
-                                        class="text-yellow-200">36 States</strong> of Nigeria.</span>
+                                <span class="text-white text-xs leading-tight">Serving <strong
+                                        class="text-yellow-200">your state</strong> with local pricing.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <div
@@ -353,13 +335,13 @@
                                     <i class="fas fa-check text-[8px] text-white"></i>
                                 </div>
                                 <span class="text-white text-xs leading-tight">Over <strong
-                                        class="text-yellow-200">50K+</strong> households empowered.</span>
+                                        class="text-yellow-200">50K+</strong> households shopping on the marketplace.</span>
                             </li>
                         </ul>
-                        <button
-                            class="w-full mt-6 py-3 bg-[#047857] text-white text-xs font-bold rounded-lg hover:bg-opacity-90 transition shadow-md">
-                            JOIN THE NETWORK
-                        </button>
+                        <a href="{{ route('marketplace.shop') }}"
+                            class="block w-full mt-6 py-3 bg-[#047857] text-white text-xs font-bold rounded-lg hover:bg-opacity-90 transition shadow-md text-center">
+                            SHOP THE MARKETPLACE
+                        </a>
                     </div>
                 </aside>
 
@@ -380,12 +362,13 @@
             <h2 class="text-3xl font-bold mb-4 font-display">Stay Updated</h2>
             <p class="mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and
                 platform updates</p>
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Your email address"
-                    class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-                <button type="submit"
-                    class="px-8 py-3 bg-white text-[#059669] font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-            </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                  @csrf
+                  <input type="email" name="email" aria-label="Email address" required placeholder="Your email address"
+                      class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
+                  <button type="submit"
+                      class="px-8 py-3 bg-white text-[#059669] font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+              </form>
         </div>
     </section>
 

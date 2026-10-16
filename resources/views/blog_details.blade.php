@@ -4,15 +4,48 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Post</title>
+    <title>{{ $post?->title ?? 'Blog Post' }}</title>
+    @include('partials.seo-meta', [
+        'seoTitle' => $post?->title ?? 'Blog Post',
+        'seoDesc' => \Illuminate\Support\Str::limit($post?->excerpt ?? '', 158),
+        'seoType' => 'article',
+        'seoImage' => $post?->image_url ? url($post->image_url) : asset('assets/landing/images/about-uss.webp'),
+        'seoAuthor' => $post?->author?->name ?? 'FCCEI',
+        'seoPublished' => $post?->published_at?->toISOString(),
+        'seoModified' => $post?->updated_at?->toISOString(),
+        'seoSection' => $post?->category ?: 'Community',
+        'schema' => [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'BlogPosting',
+                'headline' => $post?->title ?? 'Blog Post',
+                'description' => \Illuminate\Support\Str::limit($post?->excerpt ?? '', 158),
+                'image' => $post ? url($post->image_url) : asset('assets/landing/images/about-uss.webp'),
+                'datePublished' => $post?->published_at?->toISOString(),
+                'dateModified' => $post?->updated_at?->toISOString(),
+                'author' => ['@type' => 'Person', 'name' => $post?->author?->name ?? 'FCCEI'],
+                'publisher' => ['@type' => 'Organization', 'name' => config('app.name', 'FCCEI'), 'logo' => asset('assets/landing/images/FCCEILOGO.png')],
+                'mainEntityOfPage' => url()->current(),
+            ],
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => [
+                    ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Our Blog', 'item' => url('/blog')],
+                    ['@type' => 'ListItem', 'position' => 3, 'name' => $post?->title ?? '', 'item' => url()->current()],
+                ],
+            ],
+        ],
+    ])
     <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    @include('partials.vite-css')
+    <!-- Font Awesome for icons (CDN stylesheet; the old kit.fontawesome.com script is dead and CORS-blocked) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
+    @include('partials.skip-link')
 
     <!-- Navigation Header -->
     <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -226,7 +259,7 @@
     </div> -->
 
     <!-- Blog Image -->
-    <!-- <img src="images/about-uss.png" alt="Blog Image" class="w-full h-96 object-cover rounded-lg mb-6" /> -->
+    <!-- <img src="images/about-uss.webp" alt="Blog Image" class="w-full h-96 object-cover rounded-lg mb-6" /> -->
 
     <!-- Blog Content -->
     <!-- <div class="prose max-w-none">
@@ -236,28 +269,39 @@
     <!-- </div>
   </section> -->
 
-    <section class="py-12 bg-gray-50">
+    <section class="py-12 bg-gray-50" id="main-content">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="flex flex-col lg:flex-row gap-12">
 
                 <div class="lg:w-2/3">
                     <article class="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100">
-                        <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}" alt="Main Strategy"
+                        @if($post->image_url)
+                        <img src="{{ $post->image_url }}" alt="{{ $post->image_alt ?: $post->title }}"
                             class="w-full h-[450px] object-cover rounded-2xl mb-8 shadow-md">
-
+                        @endif
 
                         <div class="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
                             <div class="flex items-center gap-4">
-                                <img src="{{ asset('assets/landing/images/uerss.jpg') }}" alt="Author"
-                                    class="w-12 h-12 rounded-full border-2 border-[#26C1C9] object-cover">
+                                @if($post->author)
+                                <div class="w-12 h-12 rounded-full border-2 border-[#26C1C9] bg-[#26C1C9]/10 flex items-center justify-center text-[#26C1C9] font-black text-lg">
+                                    {{ strtoupper(mb_substr($post->author->name, 0, 1)) }}
+                                </div>
+                                @else
+                                <img src="{{ asset('assets/landing/images/uerss.jpg') }}" alt="FCCEI"
+                                    class="w-12 h-12 rounded-full border-2 border-[#26C1C9] object-cover" loading="lazy" decoding="async">
+                                @endif
                                 <div>
                                     <p class="text-sm text-gray-400 uppercase tracking-tighter font-bold">Published By
                                     </p>
-                                    <p class="text-lg font-bold text-gray-900 leading-none">David Johnson</p>
+                                    <p class="text-lg font-bold text-gray-900 leading-none">
+                                        {{ $post->author?->name ?? 'FCCEI Team' }}</p>
                                 </div>
                             </div>
                             <div class="hidden sm:block text-right">
-                                <p class="text-sm text-gray-400 font-medium">Jan 10, 2026</p>
+                                @if($post->published_at)
+                                <time datetime="{{ $post->published_at->toDateString() }}"
+                                    class="text-sm text-gray-400 font-medium">{{ $post->published_at->format('M j, Y') }}</time>
+                                @endif
                                 <div class="flex gap-2 mt-1">
                                     <a href="#" class="text-gray-400 hover:text-[#1D5FB5]"><i
                                             class="fab fa-facebook-f text-xs"></i></a>
@@ -268,48 +312,33 @@
                         </div>
 
                         <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                            @if($post->category)
                             <div class="flex items-center gap-3 mb-6">
                                 <span
-                                    class="px-3 py-1 bg-[#26C1C9]/10 text-[#26C1C9] text-xs font-bold rounded-full uppercase tracking-widest">Growth
-                                    Strategy</span>
-                                <span class="text-gray-400 text-sm">January 15, 2026</span>
+                                    class="px-3 py-1 bg-[#26C1C9]/10 text-[#26C1C9] text-xs font-bold rounded-full uppercase tracking-widest">{{ $post->category }}</span>
+                                @if($post->published_at)
+                                <span class="text-gray-400 text-sm">{{ $post->published_at->format('F j, Y') }}</span>
+                                @endif
                             </div>
+                            @endif
 
                             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
-                                Build a Strong Food-Secured Community in 2026
+                                {{ $post->title }}
                             </h1>
 
-                            <p class="text-lg text-gray-600 mb-6 font-medium">
-                                <!-- At FCCEI, success is built on community. By sharing the gift of food security, you aren't just earning commissions; you are stabilizing households across the nation. -->
-                                At FCCEI, success is built on community. By strengthening food security, you are not
-                                just supporting individuals you are helping stabilize households and uplift communities
-                                across the nation.
-                            </p>
+                            @if($post->excerpt)
+                            <p class="text-lg text-gray-600 mb-6 font-medium">{{ $post->excerpt }}</p>
+                            @endif
 
-                            <h2 class="text-2xl font-bold text-[#1D5FB5] mt-10 mb-4">The Power of Building a Community
-                            </h2>
-                            <p class="mb-6">
-                                When you bring a new member into the Bronze stage, you trigger a cycle of empowerment.
-                                Focus on sharing the physical reality of the food packs nothing speaks louder than a bag
-                                of high quality rice or a carton of oil delivered to a doorstep.
-                            </p>
-
-                            <div class="my-10 p-8 bg-gray-900 rounded-2xl text-white relative overflow-hidden">
-                                <div class="relative z-10">
-                                    <h3 class="text-xl font-bold mb-2 text-[#26C1C9]">Pro Tip for 2026</h3>
-                                    <p class="opacity-90 italic">"Use your WhatsApp Status to post unboxing videos of
-                                        your monthly food packs. Social proof is your strongest recruitment tool."</p>
-                                </div>
-                                <i class="fas fa-quote-right absolute right-4 bottom-4 text-white/10 text-6xl"></i>
+                            @if($post->body)
+                            <div class="text-gray-700">
+                                @foreach(preg_split('/\R\R+/', trim($post->body)) as $paragraph)
+                                    @if(trim($paragraph) !== '')
+                                    <p class="mb-6">{{ trim($paragraph) }}</p>
+                                    @endif
+                                @endforeach
                             </div>
-
-                            <h2 class="text-2xl font-bold text-[#1D5FB5] mt-10 mb-4">Scaling to the Emerald Stage</h2>
-                            <p>
-                                <!-- Moving through the tiers requires leadership. Once you have your first 10 referrals, transition from a "recruiter" to a "mentor." Help your downline achieve what you have, and the system will reward you with secondary and tertiary commissions. -->
-                                Growth at FCCEI is driven by leadership. As your community expands, you evolve from a
-                                participant to a mentor guiding others, sharing knowledge, and helping them thrive.
-                                Together, we build a strong, self-sustaining network of empowered individuals
-                            </p>
+                            @endif
                         </div>
                     </article>
                 </div>
@@ -322,48 +351,28 @@
                                 <i class="fas fa-history text-[#26C1C9] mr-2 text-sm"></i> Recent Updates
                             </h3>
                             <div class="space-y-5">
-                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4">
+                                @forelse($related ?? collect() as $item)
+                                <a href="{{ route('blog_details', $item->slug) }}" class="group flex items-center gap-4">
                                     <div
                                         class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-                                        <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}"
-                                            class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                                        @if($item->image_url)
+                                        <img src="{{ $item->image_url }}" alt="{{ $item->image_alt ?: $item->title }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition duration-300" loading="lazy" decoding="async">
+                                        @endif
                                     </div>
                                     <div>
                                         <h4
                                             class="text-sm font-bold text-gray-800 group-hover:text-[#1D5FB5] transition line-clamp-2">
-                                            Success Story: Transitioning to Emerald</h4>
+                                            {{ $item->title }}</h4>
+                                        @if($item->published_at)
                                         <p class="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">
-                                            Jan 10, 2025</p>
+                                            {{ $item->published_at->format('M d, Y') }}</p>
+                                        @endif
                                     </div>
                                 </a>
-                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4 border-t pt-5">
-                                    <div
-                                        class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-                                        <img src="{{ asset('assets/landing/images/blogsa.jpeg') }}"
-                                            class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-sm font-bold text-gray-800 group-hover:text-[#1D5FB5] transition line-clamp-2">
-                                            Direct Sourcing: How We Keep Prices Low</h4>
-                                        <p class="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">
-                                            Jan 08, 2025</p>
-                                    </div>
-                                </a>
-                                <a href="{{ route('blog_details') }}" class="group flex items-center gap-4 border-t pt-5">
-                                    <div
-                                        class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-                                        <img src="{{ asset('assets/landing/images/about-uss.png') }}"
-                                            class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-sm font-bold text-gray-800 group-hover:text-[#1D5FB5] transition line-clamp-2">
-                                            Building Strong & Sustainable Communities</h4>
-                                        <p class="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">
-                                            Jan 08, 2026</p>
-                                    </div>
-                                </a>
+                                @empty
+                                <p class="text-sm text-gray-400">No other posts yet.</p>
+                                @endforelse
                             </div>
                         </div>
 
@@ -382,32 +391,31 @@
                                         class="mt-1 w-5 h-5 bg-[#1D5FB5] rounded-md flex items-center justify-center shadow-inner">
                                         <i class="fas fa-check text-[8px] text-white"></i>
                                     </div>
-                                    <span class="text-white text-sm font-medium">We empower over <strong
-                                            class="text-yellow-200">50,000 households</strong> across 36 states.</span>
+                                    <span class="text-white text-sm font-medium">Over <strong
+                                            class="text-yellow-200">50,000 households</strong> shopping across our coverage locations.</span>
                                 </li>
                                 <li class="flex items-start gap-4">
                                     <div
                                         class="mt-1 w-5 h-5 bg-[#1D5FB5] rounded-md flex items-center justify-center shadow-inner">
                                         <i class="fas fa-check text-[8px] text-white"></i>
                                     </div>
-                                    <span class="text-white text-sm font-medium">Members save <strong
-                                            class="text-yellow-200">35% on average</strong> on monthly food
-                                        costs.</span>
+                                    <span class="text-white text-sm font-medium">Shoppers save <strong
+                                            class="text-yellow-200">35% on average</strong> with deals &amp; bulk buys.</span>
                                 </li>
                                 <li class="flex items-start gap-4">
                                     <div
                                         class="mt-1 w-5 h-5 bg-[#1D5FB5] rounded-md flex items-center justify-center shadow-inner">
                                         <i class="fas fa-check text-[8px] text-white"></i>
                                     </div>
-                                    <span class="text-white text-sm font-medium">Our logistics partners deliver to
-                                        <strong class="text-yellow-200">774 LGAs</strong> in Nigeria.</span>
+                                    <span class="text-white text-sm font-medium">Logistics partners deliver to
+                                        <strong class="text-yellow-200">your selected location</strong> for convenient pickup or delivery.</span>
                                 </li>
                             </ul>
 
-                            <button
-                                class="w-full mt-8 py-4 bg-white text-[#1D5FB5] font-black rounded-xl hover:bg-gray-100 transition-all uppercase text-xs tracking-widest shadow-lg">
-                                Get Started Now
-                            </button>
+                            <a href="{{ route('marketplace.shop') }}"
+                                class="block w-full mt-8 py-4 bg-white text-[#1D5FB5] font-black rounded-xl hover:bg-gray-100 transition-all uppercase text-xs tracking-widest shadow-lg text-center">
+                                Shop the Marketplace
+                            </a>
                         </div>
 
                     </div>
@@ -422,12 +430,13 @@
             <h2 class="text-3xl font-bold mb-4 font-display">Stay Updated</h2>
             <p class="mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and
                 platform updates</p>
-            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input type="email" placeholder="Your email address"
-                    class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-                <button type="submit"
-                    class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-            </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                  @csrf
+                  <input type="email" name="email" aria-label="Email address" required placeholder="Your email address"
+                      class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
+                  <button type="submit"
+                      class="px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+              </form>
         </div>
     </section>
 

@@ -5,6 +5,11 @@
     <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
     </html>
 @else
+@php
+    $heroImageOne = asset('assets/landing/images/buildi.jpeg');
+    $heroImageTwo = asset('assets/landing/images/empowerment.jpeg');
+    $heroImageThree = asset('assets/landing/images/foodchan.jpeg');
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,51 +17,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ App\Models\PageContent::getContent('landing', 'hero_title', 'FCCEI Platform') }}</title>
-    <meta name="description" content="{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Join the food security network that empowers households with quality staple foods.') }}">
+    @include('partials.seo-meta', [
+        'seoTitle' => App\Models\PageContent::getContent('landing', 'hero_title', 'FCCEI Platform'),
+        'seoDesc' => App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Join the food security network that empowers households with quality staple foods.'),
+        'seoType' => 'website',
+        'schema' => [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'Organization',
+                'name' => config('app.name', 'FoodChain Community Empowerment Initiative'),
+                'url' => url('/'),
+                'logo' => asset('assets/landing/images/FCCEILOGO.png'),
+                'description' => 'A community-driven marketplace empowering low-income households across Nigeria with affordable staple foods and free membership.',
+            ],
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebSite',
+                'name' => config('app.name', 'FoodChain Community Empowerment Initiative'),
+                'url' => url('/'),
+            ],
+        ],
+    ])
     <meta name="keywords" content="FCCEI, food chain, community empowerment, food security, Nigeria">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
-                        secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
-                        accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'display': ['Poppins', 'system-ui', 'sans-serif']
-                    },
-                    backgroundImage: {
-                        'slide-1': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/buildi.jpeg") }}')",
-                        'slide-2': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/empowerment.jpeg") }}')",
-                        'slide-3': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/foodchan.jpeg") }}')"
-                    },
-                    animation: {
-                        'slide-in': 'slideIn 0.5s ease-out forwards',
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                        'float': 'float 3s ease-in-out infinite',
-                        'bounce-slow': 'bounceSlow 5s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        slideIn: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        bounceSlow: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
-        /* Kill the horizontal scrollbar on desktop. overflow-x: clip (not hidden) avoids creating a scroll container, so the sticky header keeps working. */
-        html, body { overflow-x: clip; }
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+        :root { --ink: #10231d; --muted: #61736d; --green: #087f5b; --mint: #e8f5ee; --gold: #f2a41d; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--ink); font-family: 'DM Sans', sans-serif; background: #f7faf8; }
+        h1, h2, h3, h4, .font-display { font-family: 'Manrope', sans-serif; letter-spacing: -0.02em; }
+        section { scroll-margin-top: 6rem; }
+        .landing-shell { position: relative; overflow-x: hidden; overflow-y: visible; }
+        .landing-shell::before { content: ''; position: absolute; inset: 0 0 auto; height: 520px; pointer-events: none; background: radial-gradient(circle at 82% 12%, rgba(16,185,129,.14), transparent 32%), radial-gradient(circle at 18% 0%, rgba(245,158,11,.10), transparent 28%); }
+        .hero-copy { text-shadow: 0 2px 24px rgba(0,0,0,.18); animation: hero-copy-in .7s cubic-bezier(.2,.8,.2,1) both; }
+        @keyframes hero-copy-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-panel { background: rgba(6, 78, 59, .72); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(14px); }
+        .section-kicker { color: var(--green); font-size: .72rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+        .soft-panel { border: 1px solid rgba(16, 185, 129, .10); box-shadow: 0 18px 45px rgba(15, 23, 42, .06); }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+        .stat-number { font-family: 'Manrope', sans-serif; letter-spacing: -.04em; }
+        .landing-slide-1 { background-image: linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)), url('{{ $heroImageOne }}'); }
+        .landing-slide-2 { background-image: linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)), url('{{ $heroImageTwo }}'); }
+        .landing-slide-3 { background-image: linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)), url('{{ $heroImageThree }}'); }
+        .hero-slide { background-size: cover; background-position: center; transition: opacity .8s ease-in-out; }
+        .slider-dot.active { background-color: #ffffff !important; width: 2rem !important; }
         .nav-link { position: relative; }
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #059669; transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
@@ -69,31 +77,35 @@
         .gradient-text { background: linear-gradient(90deg, #059669 0%, #10B981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     </style>
 </head>
-<body class="min-h-screen bg-gray-50 font-sans">
+<body class="min-h-screen font-sans landing-shell">
+    @include('partials.skip-link')
     @include('partials.header')
 
-    <main>
-        <section id="home" class="relative overflow-hidden h-[600px] bg-black">
-            <div id="hero-slider" class="relative h-full">
-                <div class="hero-slide absolute inset-0 bg-slide-1 bg-cover bg-center flex items-center opacity-100 z-10">
-                    <div class="container mx-auto px-4">
-                        <div class="max-w-2xl animate-slide-in">
-                            @php $heroTitle = App\Models\PageContent::getContent('landing', 'hero_title', 'Zero Hunger Through Community'); @endphp
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">{!! $heroTitle !!}</h1>
-                            <p class="text-xl text-white/90 mb-8">{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Shop quality groceries from trusted vendors with free registration — your account is active instantly and prices adjust to your state.') }}</p>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">Create Free Account</a>
-                                <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-store mr-2"></i>Shop Groceries Now</a>
-                                <a href="#store" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Explore the Store</a>
+    <main id="main-content">
+        <section id="home" class="relative overflow-hidden min-h-[620px] md:min-h-[700px] bg-black shadow-[0_24px_70px_rgba(4,47,37,0.18)]">
+            <div id="hero-slider" class="absolute inset-0">
+                @php $heroImage = App\Models\PageContent::getContent('landing', 'hero_image'); @endphp
+                <div class="hero-slide landing-slide-1 absolute inset-0 bg-cover bg-center flex items-center opacity-100 z-10" @if($heroImage) style="background-image: url('{{ public_storage_url($heroImage) }}');" @endif>
+                    <div class="container mx-auto px-4 py-20 md:py-24">
+                        <div class="max-w-3xl animate-slide-in hero-copy">
+                            @php $heroTitle = App\Models\PageContent::getContent('landing', 'hero_title', 'Join the FoodChain Marketplace'); @endphp
+                            <p class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-emerald-200 mb-4">Food security, trusted marketplace</p>
+                            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.02] text-white mb-6 font-display">{{ $heroTitle }}</h1>
+                            <p class="text-base md:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">{{ App\Models\PageContent::getContent('landing', 'hero_subtitle', 'Shop quality groceries from trusted vendors with free registration, instant account access and prices that adjust to your state.') }}</p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="{{ route('marketplace.shop') }}" class="px-6 py-3.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-400 transition shadow-lg shadow-amber-500/30"><i class="fas fa-store mr-2"></i>Shop groceries</a>
+                                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-white text-emerald-800 font-bold rounded-xl hover:bg-emerald-50 transition shadow-lg shadow-black/10">Create free account</a>
+                                <a href="#how-it-works" class="px-6 py-3.5 border border-white/50 text-white font-bold rounded-xl hover:bg-white/10 transition">See how it works</a>
                             </div>
+                            <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-emerald-100"><span><i class="fas fa-check-circle text-emerald-300 mr-2"></i>Free to join</span><span><i class="fas fa-check-circle text-emerald-300 mr-2"></i>Secure payments</span><span><i class="fas fa-check-circle text-emerald-300 mr-2"></i>Access across locations</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="hero-slide absolute inset-0 bg-slide-2 bg-cover bg-center flex items-center opacity-0">
-                    <div class="container mx-auto px-4">
+                <div class="hero-slide landing-slide-2 absolute inset-0 bg-cover bg-center flex items-center opacity-0">
+                    <div class="container mx-auto px-4 py-20 md:py-24">
                         <div class="max-w-2xl">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Shop Groceries at Your <span class="text-amber-400">Local</span> Price</h1>
-                            <p class="text-xl text-white/90 mb-8">Pick your delivery state and every price updates instantly — order rice, beans, proteins and more from trusted vendors.</p>
+                            <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Shop Groceries at Your <span class="text-amber-400">Local</span> Price</h2>
+                            <p class="text-xl text-white/90 mb-8">Pick your delivery state and every price updates instantly. Order rice, beans, proteins and more from trusted vendors.</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-shopping-basket mr-2"></i>Start Shopping Now</a>
                                 <a href="{{ route('register') }}" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Join Free</a>
@@ -101,11 +113,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-slide absolute inset-0 bg-slide-3 bg-cover bg-center flex items-center opacity-0">
-                    <div class="container mx-auto px-4">
+                <div class="hero-slide landing-slide-3 absolute inset-0 bg-cover bg-center flex items-center opacity-0">
+                    <div class="container mx-auto px-4 py-20 md:py-24">
                         <div class="max-w-2xl">
-                            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Join the Community <span class="text-emerald-400">Free</span></h1>
-                            <p class="text-xl text-white/90 mb-8">Create your account in under a minute. No registration fee and no waiting — your account is active the moment you sign up.</p>
+                            <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 font-display">Join the FoodChain <span class="text-emerald-400">Free</span></h2>
+                            <p class="text-xl text-white/90 mb-8">Create your account in under a minute. No registration fee and no waiting. Your account is active the moment you sign up.</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('register') }}" class="px-8 py-3 bg-emerald-500 text-white font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30">Join Free Today</a>
                                 <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition">Browse Groceries</a>
@@ -114,20 +126,20 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-                <button onclick="showSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-0"></button>
-                <button onclick="showSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-1"></button>
-                <button onclick="showSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-2"></button>
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20" role="group" aria-label="Hero carousel slides">
+                <button type="button" onclick="showSlide(0)" aria-label="Go to slide 1" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-0"></button>
+                <button type="button" onclick="showSlide(1)" aria-label="Go to slide 2" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-1"></button>
+                <button type="button" onclick="showSlide(2)" aria-label="Go to slide 3" class="slider-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-200" id="dot-2"></button>
             </div>
         </section>
 
         <section class="py-5 bg-gray-900 text-white">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="text-center"><div class="text-5xl font-bold mb-2 gradient-text">50K+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_members', 'Active Members') }}</div></div>
-                    <div class="text-center"><div class="text-5xl font-bold mb-2 gradient-text">₦10M+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_distributions', 'Food Distributions') }}</div></div>
-                    <div class="text-center"><div class="text-5xl font-bold mb-2 gradient-text">20+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_communities', 'Communities Reached') }}</div></div>
-                    <div class="text-center"><div class="text-5xl font-bold mb-2 gradient-text">24/7</div><div class="text-gray-300">Support</div></div>
+                    <div class="text-center"><div class="text-4xl md:text-5xl font-bold mb-2 gradient-text stat-number">50K+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_members', 'Active Members') }}</div></div>
+                    <div class="text-center"><div class="text-4xl md:text-5xl font-bold mb-2 gradient-text stat-number">₦10M+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_distributions', 'Food Distributions') }}</div></div>
+                    <div class="text-center"><div class="text-4xl md:text-5xl font-bold mb-2 gradient-text stat-number">20+</div><div class="text-gray-300">{{ App\Models\PageContent::getContent('landing', 'stats_communities', 'Communities Reached') }}</div></div>
+                    <div class="text-center"><div class="text-4xl md:text-5xl font-bold mb-2 gradient-text stat-number">24/7</div><div class="text-gray-300">Support</div></div>
                 </div>
             </div>
         </section>
@@ -141,13 +153,13 @@
                         </span>
                         <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Shop Quality <span class="text-amber-400">Groceries</span> Online</h2>
                         <p class="text-emerald-100 text-lg mb-8 max-w-xl">
-                            Browse hundreds of food staples and household essentials from trusted vendors — enjoy member prices, weekly deals, and doorstep or community-collection delivery.
+                            Browse hundreds of food staples and household essentials from trusted vendors and enjoy member prices, weekly deals and home or office delivery.
                         </p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                             <div class="flex items-start"><i class="fas fa-seedling text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Grains, proteins, seasonings &amp; more</span></div>
                             <div class="flex items-start"><i class="fas fa-percent text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Flash sales, coupons &amp; member-only discounts</span></div>
                             <div class="flex items-start"><i class="fas fa-wallet text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Pay securely with your wallet or card</span></div>
-                            <div class="flex items-start"><i class="fas fa-truck text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Home, pickup &amp; community delivery options</span></div>
+                            <div class="flex items-start"><i class="fas fa-truck text-amber-400 mt-1 mr-3"></i><span class="text-emerald-50 text-sm">Home, pickup &amp; delivery options</span></div>
                         </div>
                         <div class="flex flex-wrap gap-4">
                             <a href="{{ route('marketplace.shop') }}" class="px-8 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition shadow-lg shadow-amber-500/30"><i class="fas fa-shopping-basket mr-2"></i>Browse the Store</a>
@@ -161,17 +173,28 @@
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
                             @php
-                                $storeCats = \App\Models\Marketplace\Category::active()->parents()
-                                    ->withCount('products')->orderByDesc('products_count')
-                                    ->take(6)->get();
+                                $storeCats = collect();
+                                if (\Illuminate\Support\Facades\Schema::hasTable('marketplace_categories')) {
+                                    $storeCats = \App\Models\Marketplace\Category::active()->parents()
+                                        ->withCount('products')->orderByDesc('products_count')->take(6)->get();
+                                }
                                 $storeIcons = ['fa-seedling', 'fa-tint', 'fa-mortar-pestle', 'fa-drumstick-bite', 'fa-wine-bottle', 'fa-home'];
                             @endphp
-                            @foreach ($storeCats as $catIdx => $cat)
-                                <a href="{{ route('marketplace.category', $cat->slug) }}" class="group flex items-center gap-3 bg-emerald-950/40 hover:bg-emerald-950/70 border border-white/10 rounded-xl px-3 py-3 transition-all">
-                                    <i class="fas {{ $storeIcons[$catIdx % count($storeIcons)] }} text-amber-400"></i>
-                                    <span class="text-sm text-emerald-50 font-medium group-hover:text-white">{{ $cat->name }}</span>
-                                </a>
-                            @endforeach
+                            @if ($storeCats->isNotEmpty())
+                                @foreach ($storeCats as $catIdx => $cat)
+                                    <a href="{{ route('marketplace.category', $cat->slug) }}" class="group flex items-center gap-3 bg-emerald-950/40 hover:bg-emerald-950/70 border border-white/10 rounded-xl px-3 py-3 transition-all">
+                                        <i class="fas {{ $storeIcons[$catIdx % count($storeIcons)] }} text-amber-400"></i>
+                                        <span class="text-sm text-emerald-50 font-medium group-hover:text-white">{{ $cat->name }}</span>
+                                    </a>
+                                @endforeach
+                            @else
+                                @foreach (['Staples', 'Proteins', 'Cereals', 'Seasonings', 'Household', 'Drinks'] as $idx => $label)
+                                    <div class="flex items-center gap-3 bg-emerald-950/40 border border-white/10 rounded-xl px-3 py-3">
+                                        <i class="fas {{ $storeIcons[$idx % count($storeIcons)] }} text-amber-400"></i>
+                                        <span class="text-sm text-emerald-50 font-medium">{{ $label }}</span>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="bg-emerald-950/40 border border-amber-400/30 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4">
                             <div>
@@ -189,7 +212,7 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">How It <span class="text-emerald-500">Works</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Sign up in under a minute and start shopping. No fees and no waiting — it is free to join.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Sign up in under a minute and start shopping. No fees and no waiting. It is free to join.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300">
@@ -204,14 +227,14 @@
                             <i class="fas fa-store text-3xl text-cyan-600"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-4">2. Shop at Your Local Price</h3>
-                        <p class="text-gray-600">Choose your delivery state and prices update instantly. Order staples from trusted vendors nationwide.</p>
+                        <p class="text-gray-600">Choose your delivery state and prices update instantly. Order staples from trusted vendors in your selected location.</p>
                     </div>
                     <div class="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300">
                         <div class="w-20 h-20 flex items-center justify-center mx-auto mb-6 rounded-full bg-amber-50">
                             <i class="fas fa-truck text-3xl text-amber-500"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-4">3. Get It Delivered</h3>
-                        <p class="text-gray-600">Choose home, pickup or community delivery — and earn loyalty points on every order.</p>
+                        <p class="text-gray-600">Choose home, pickup or delivery and earn loyalty points on every order.</p>
                     </div>
                 </div>
             </div>
@@ -220,98 +243,69 @@
         <section id="products" class="py-20 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Program <span class="text-emerald-500">Levels</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Registration is free for everyone — there is no ₦5,000 sign-up and no starter pack to buy. Advance through the optional community levels below to unlock increasing food benefits.</p>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Explore the <span class="text-emerald-500">Marketplace</span></h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">One marketplace for everything you need. Shop groceries at your local price, unlock flash deals, enjoy fast pickup or delivery, and sell to households across different locations.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
                         <div class="p-8">
-                            <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
-                                <i class="fas fa-seedling text-2xl text-orange-600"></i>
+                            <div class="w-16 h-16 bg-emerald-50 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-basket-shopping text-2xl text-emerald-600"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Bronze Benefits</h3>
-                            <p class="text-sm text-gray-500 mb-6">Initial Entry Level</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Shop at Local Prices</h3>
+                            <p class="text-sm text-gray-500 mb-6">Fresh groceries, your state</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-cyan-600 mt-1 mr-3"></i><span>Designed to provide essential food security benefits through our structured membership program.</span></li>
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Target: Women, Low-Income Households, Micro-Business Owners & Students</span></li> -->
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-location-dot text-emerald-500 mt-1 mr-3"></i><span>Prices update instantly based on your delivery state.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-store text-emerald-500 mt-1 mr-3"></i><span>Staples and essentials from trusted vendors across different locations.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-wallet text-cyan-600 mt-1 mr-3"></i><span>Pay securely with wallet balance or at checkout.</span></li>
                             </ul>
-                            <div class="mb-4"><button onclick="toggleBenefits('bronze')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
-                            <div id="bronze-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Build Community of 10-40 Members <b>(Get Mini Free Food Pack Quarterly)</b></span></li> -->
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution, bi-weekly repayment</span></li> -->
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Available (fees paid by member)</span></li>
-                            </div>
-                            <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
+                            <a href="{{ route('marketplace.shop') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Browse the Store</a>
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
                         <div class="p-8">
-                            <div class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-                                <i class="fas fa-medal text-2xl text-gray-400"></i>
+                            <div class="w-16 h-16 bg-amber-50 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-bolt text-2xl text-amber-500"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Silver Benefits</h3>
-                            <p class="text-sm text-gray-500 mb-6">Standard Level</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Flash Deals &amp; Loyalty</h3>
+                            <p class="text-sm text-gray-500 mb-6">Save more every week</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-utensils text-cyan-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Provides enhanced food security benefits with greater access to support and opportunities as members progress within the program.</span></li>
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-infinity text-green-500 mt-1 mr-3"></i><span>Target: All Categories</span></li> -->
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-percent text-amber-500 mt-1 mr-3"></i><span>Weekly flash sales with deep discounts on essentials.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-coins text-amber-500 mt-1 mr-3"></i><span>Earn loyalty points on every order you place.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-gift text-cyan-600 mt-1 mr-3"></i><span>Redeem points for wallet credit on future purchases.</span></li>
                             </ul>
-                            <div class="mb-4"><button onclick="toggleBenefits('silver')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
-                            <div id="silver-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-cyan-600 mt-1 mr-3"></i><span>Build Community of 50-90 Members <b>(Get Average Free Food Pack Quarterly)</b></span></li> -->
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Fees Paid by Member</span></li>
-                            </div>
-                            <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
+                            <a href="{{ route('marketplace.flash-sale') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">See Today's Deals</a>
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 relative">
                         <div class="absolute top-0 right-0 bg-amber-400 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase">Popular</div>
                         <div class="p-8">
-                            <div class="w-16 h-16 bg-yellow-50 rounded-lg flex items-center justify-center mb-6">
-                                <i class="fas fa-crown text-2xl text-yellow-500"></i>
+                            <div class="w-16 h-16 bg-cyan-50 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-truck-fast text-2xl text-cyan-600"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Gold Benefits</h3>
-                            <p class="text-sm text-gray-500 mb-6">Advanced Impact</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Pickup &amp; Fast Delivery</h3>
+                            <p class="text-sm text-gray-500 mb-6">Collect or get it delivered</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-shopping-basket text-yellow-600 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-check text-green-500 mt-1 mr-3"></i><span>Delivers premium food security benefits, offering increased support and exclusive opportunities for committed members.</span></li>
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-people-carry text-yellow-600 mt-1 mr-3"></i><span>Community Building Category: All</span></li> -->
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-store text-cyan-600 mt-1 mr-3"></i><span>Collect from our food hubs and collection centres in our coverage locations.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck text-cyan-600 mt-1 mr-3"></i><span>Reliable home or office delivery through our logistics partner network.</span></li>
+                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-clock text-emerald-500 mt-1 mr-3"></i><span>Skip the market trip and shop online to get your essentials without the stress.</span></li>
                             </ul>
-                            <div class="mb-4"><button onclick="toggleBenefits('gold')" class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 transition">+ Additional Benefits</button></div>
-                            <div id="gold-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-200">
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users text-yellow-600 mt-1 mr-3"></i><span>Build Community of 100-499 Members <b>(Get Standard Free Food Pack Quarterly)</b></span></li> -->
-                                <!-- <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-users-cog text-green-500 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
-                                <li class="flex items-start text-gray-600 text-sm"><i class="fas fa-truck-loading text-green-500 mt-1 mr-3"></i><span>Pickup & Delivery: Free</span></li>
-                            </div>
-                            <a href="{{ route('register') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Join Now</a>
+                            <a href="{{ route('marketplace.shop') }}" class="block w-full py-3 border-2 border-emerald-600 text-emerald-600 text-center font-bold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">Browse the Store</a>
                         </div>
                     </div>
                     <div class="product-card bg-emerald-900 rounded-2xl shadow-xl overflow-hidden text-white">
                         <div class="p-8">
                             <div class="w-16 h-16 bg-emerald-700 rounded-lg flex items-center justify-center mb-6">
-                                <i class="fas fa-gem text-2xl text-emerald-300"></i>
+                                <i class="fas fa-store text-2xl text-emerald-300"></i>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2">Emerald Benefits</h3>
-                            <p class="text-emerald-300 text-sm mb-6">Prestige Level</p>
+                            <h3 class="text-2xl font-bold mb-2">Sell Your Products</h3>
+                            <p class="text-emerald-300 text-sm mb-6">Become a vendor</p>
                             <ul class="space-y-3 mb-6">
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-infinity text-emerald-400 mt-1 mr-3"></i><span>FREE Annual Subscription</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-truck-loading text-emerald-400 mt-1 mr-3"></i><span>Membership Category: Open to All</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Target Beneficiaries: Women, Low-Income Households, Micro-Business Owners, Students, and the Working Class (Private and Public Sectors).</span></li>
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Our highest membership tier, providing comprehensive food security benefits, priority access to program opportunities, and exclusive member privileges.</span></li>
-                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-infinity text-emerald-400 mt-1 mr-3"></i><span>Target: All Categories</span></li> -->
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-shop text-emerald-400 mt-1 mr-3"></i><span>Open your vendor storefront and list products for free.</span></li>
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-chart-line text-emerald-400 mt-1 mr-3"></i><span>Reach thousands of households across your selected delivery locations.</span></li>
+                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-envelope-open-text text-emerald-400 mt-1 mr-3"></i><span>Manage inventory, orders and earnings in one place.</span></li>
                             </ul>
-                            <div class="mb-4"><button onclick="toggleBenefits('emerald')" class="text-emerald-300 text-sm font-semibold hover:text-emerald-200 transition">+ Additional Benefits</button></div>
-                            <div id="emerald-additional" class="hidden space-y-3 mb-6 pl-2 border-l-2 border-emerald-500">
-                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Build Community of 500-1000 Members <b>(Get Premium Free Food Pack Quarterly)</b></span></li> -->
-                                <!-- <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-users-cog text-emerald-400 mt-1 mr-3"></i><span>Pastries & Confectionaries Loan: Union of 10, 30% contribution</span></li> -->
-                                <li class="flex items-start text-emerald-50 text-sm"><i class="fas fa-truck-loading text-emerald-400 mt-1 mr-3"></i><span>Pickup & Delivery: Free</span></li>
-                            </div>
-                            <div class="py-3 text-center bg-emerald-800 rounded-lg font-bold">Ultimate Milestone</div>
+                            <a href="{{ route('marketplace.vendors') }}" class="block w-full py-3 bg-amber-400 text-emerald-950 text-center font-bold rounded-lg hover:bg-amber-300 transition-all">Start Selling</a>
                         </div>
                     </div>
                 </div>
@@ -323,7 +317,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
                         <h2 class="text-4xl font-bold text-gray-900 mb-6 font-display">{{ App\Models\PageContent::getContent('landing', 'about_title', 'About FCCEI') }}</h2>
-                        @php $aboutContent = trim((string) App\Models\PageContent::getContent('landing', 'about_content', 'FoodChain Community Empowerment is a technology-driven retail food distribution network. It is a food and grocery marketplace where people shop for household essentials. It is a marketplace with social impact designed to reduce cost, time and increase the quality of food and grocery shopping for households.')); @endphp
+                        @php $aboutContent = trim((string) App\Models\PageContent::getContent('landing', 'about_content', '')); @endphp
                         @if($aboutContent !== '')
                         <p class="text-lg text-gray-700 mb-6 leading-relaxed font-medium border-l-4 border-emerald-500 pl-4">{{ $aboutContent }}</p>
                         @endif
@@ -387,30 +381,30 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
                     <div class="p-8 rounded-2xl bg-white shadow-md border-l-8 border-emerald-500">
                         <h3 class="text-2xl font-bold mb-4 text-emerald-600">Vision Statement</h3>
-                        <p class="text-gray-700 leading-relaxed">To create a community-driven, sustainable food support system that provides continuous access to essential food resources for families.</p>
+                        <p class="text-gray-700 leading-relaxed">To be Nigeria&rsquo;s trusted community-driven food ecosystem, where the FoodChain Marketplace is the everyday store every household turns to for affordable, quality staple food, and where local vendors grow without middlemen.</p>
                     </div>
                     <div class="p-8 rounded-2xl bg-white shadow-md border-l-8 border-cyan-600">
                         <h3 class="text-2xl font-bold mb-4 text-cyan-600">Mission Statement</h3>
-                        <p class="text-gray-700 leading-relaxed">To build a common-wealth community where members contribute according to their abilities and receive according to their needs, fostering food security shared growth and dignity in humanity.</p>
+                        <p class="text-gray-700 leading-relaxed">To run an open online food store that connects verified local vendors directly with households, with fair state-based pricing, secure wallet and card payments, and reliable delivery to your selected location, so that food security, shared growth and dignity in humanity are within everyone&rsquo;s reach.</p>
                     </div>
                 </div>
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4">Core Values: <span class="text-amber-500">SECURE FOOD</span></h2>
-                    <p class="text-gray-600">Our values are embedded in the concept of SECURE FOOD, representing our commitment to hunger eradication.</p>
+                    <p class="text-gray-600 max-w-3xl mx-auto">Our values are embedded in the concept of SECURE FOOD, and they are put to work every day in the FoodChain Marketplace, the store where verified local vendors sell directly to households at fair, state-based prices.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
                     @php
                     $values = [
-                        ['letter' => 'S', 'title' => 'Sustainability', 'color' => 'emerald', 'desc' => 'Consistent and reliable support that strengthens families facing food insecurity.'],
-                        ['letter' => 'E', 'title' => 'Empowerment', 'color' => 'cyan', 'desc' => 'Empowering individuals to take control of their food stability through collaboration.'],
-                        ['letter' => 'C', 'title' => 'Credibility', 'color' => 'amber', 'desc' => 'Transparency, integrity, and trustworthiness in our operations and member relations.'],
-                        ['letter' => 'U', 'title' => 'Unlimited Access', 'color' => 'emerald', 'desc' => 'Continuous access to essential food items for all members regardless of status.'],
-                        ['letter' => 'R', 'title' => 'Respect for All', 'color' => 'cyan', 'desc' => 'Treating every member with dignity and valuing their unique circumstances.'],
-                        ['letter' => 'E', 'title' => 'Equity', 'color' => 'amber', 'desc' => 'Promoting fairness to ensure food support reaches those who need it most.'],
-                        ['letter' => 'F', 'title' => 'Food Security', 'color' => 'amber', 'desc' => 'Ensuring access to sufficient, safe and nutritious food for good health.'],
-                        ['letter' => 'O', 'title' => 'Opportunity', 'color' => 'amber', 'desc' => 'Creating avenues for economic and social upliftment through community participation.'],
-                        ['letter' => 'O', 'title' => 'Optimum Nutrition', 'color' => 'amber', 'desc' => 'Distributing quality food items that contribute to healthy living.'],
-                        ['letter' => 'D', 'title' => 'Delightful Experience', 'color' => 'amber', 'desc' => 'Delivering a seamless, positive, and supportive experience to every member.'],
+                        ['letter' => 'S', 'title' => 'Sustainability', 'color' => 'emerald', 'desc' => 'A marketplace that keeps local vendors trading and households fed over the long term, not one-off handouts.'],
+                        ['letter' => 'E', 'title' => 'Empowerment', 'color' => 'cyan', 'desc' => 'Vendors set their own prices and reach customers beyond their stall; shoppers take control of what they pay.'],
+                        ['letter' => 'C', 'title' => 'Credibility', 'color' => 'amber', 'desc' => 'Every vendor is verified before listing, and every product shows a real price for the buyer\u{2019}s state.'],
+                        ['letter' => 'U', 'title' => 'Unlimited Access', 'color' => 'emerald', 'desc' => 'An open storefront anyone can shop \u{2014} staples, groceries and household food items, delivered across selected locations.'],
+                        ['letter' => 'R', 'title' => 'Respect for All', 'color' => 'cyan', 'desc' => 'A fair, dignified shopping experience for every customer and every vendor on the platform.'],
+                        ['letter' => 'E', 'title' => 'Equity', 'color' => 'amber', 'desc' => 'Cutting out middleman inflation so food support and fair prices reach those who need them most.'],
+                        ['letter' => 'F', 'title' => 'Food Security', 'color' => 'amber', 'desc' => 'Sufficient, safe and quality food within reach \u{2014} the reason the marketplace exists.'],
+                        ['letter' => 'O', 'title' => 'Opportunity', 'color' => 'amber', 'desc' => 'Income and visibility for small food businesses trading online for the first time.'],
+                        ['letter' => 'O', 'title' => 'Optimum Nutrition', 'color' => 'amber', 'desc' => 'A curated range of quality food items that support healthy living.'],
+                        ['letter' => 'D', 'title' => 'Delightful Experience', 'color' => 'amber', 'desc' => 'Secure wallet and card payments, and delivery that arrives when promised.'],
                     ];
                     @endphp
                     @foreach($values as $v)
@@ -423,7 +417,7 @@
                 </div>
                 <div class="bg-white p-10 rounded-3xl shadow-lg border border-gray-100 text-center max-w-4xl mx-auto">
                     <h3 class="text-2xl font-bold mb-6 text-cyan-600">Policy Statement</h3>
-                    <p class="text-gray-600 italic leading-relaxed">FCCEI is committed to promoting food security through a structured, transparent, and community-driven model. Our policies ensure that all members participate responsibly, uphold program integrity, and benefit equitably from food distribution.</p>
+                    <p class="text-gray-600 italic leading-relaxed">FCCEI is committed to promoting food security through a structured, transparent, and community-driven model. In the FoodChain Marketplace, that commitment is enforced by policy: only verified vendors may list and sell; every product carries a published price for the buyer&rsquo;s state, so pricing is transparent and comparable; orders are settled through secure wallet and card payments; delivery is available in our coverage locations or collected at a micro-outlet; and every member participates responsibly and benefits equitably from the store.</p>
                 </div>
             </div>
         </section>
@@ -435,49 +429,51 @@
                         <div class="inline-block mb-6">
                             <span class="text-emerald-700 font-bold uppercase tracking-widest text-sm border-b-2 border-emerald-700 pb-1">Our Track Record</span>
                         </div>
-                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-8">Empowering Communities,<br/><span class="text-gray-400">One Household at a Time.</span></h2>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-8">From a Community Programme<br/><span class="text-gray-400">to a Community Food Store.</span></h2>
+                        <p class="text-gray-600 text-lg leading-relaxed">We spent years supporting households directly with food assistance and food loans. That work taught us what shoppers actually struggle with: inflated prices, inconsistent quality, and no reliable way to compare what a staple should cost. The FoodChain Marketplace is the answer: the same community, now buying and selling on an open store where prices are transparent, vendors are verified, and delivery reaches your selected location.</p>
                     </div>
                     <div class="relative flex-shrink-0">
                         <div class="w-72 h-72 md:w-[380px] md:h-[380px] rounded-full border-[15px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden">
-                            <img src="{{ asset('assets/landing/images/impactwoman.png') }}" alt="Impact Focus" class="w-full h-full object-cover">
+                            <img src="{{ asset('assets/landing/images/impactwoman.webp') }}" alt="Impact Focus" class="w-full h-full object-cover" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-gray-50 text-center hover:shadow-lg transition-all duration-300">
                         <div class="text-3xl md:text-4xl font-black text-emerald-700 counter" data-target="15000">0</div>
-                        <p class="text-gray-600 font-semibold text-sm">Meals Provided</p>
+                        <p class="text-gray-600 font-semibold text-sm">Meals Provided &amp; Ordered</p>
                     </div>
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-gray-50 text-center hover:shadow-lg transition-all duration-300">
                         <div class="text-3xl md:text-4xl font-black text-emerald-700 counter" data-target="500">0</div>
-                        <p class="text-gray-600 font-semibold text-sm">Women Empowered</p>
+                        <p class="text-gray-600 font-semibold text-sm">Women Shoppers &amp; Vendors Empowered</p>
                     </div>
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-gray-50 text-center hover:shadow-lg transition-all duration-300">
-                        <div class="text-3xl md:text-4xl font-black text-emerald-700 counter" data-target="25">0</div>
-                        <p class="text-gray-600 font-semibold text-sm">Tertiary Institutions</p>
+                        <div class="text-3xl md:text-4xl font-black text-emerald-700 counter" data-target="36">0</div>
+                        <p class="text-gray-600 font-semibold text-sm">States With Live Pricing &amp; Delivery</p>
                     </div>
                     <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-gray-50 text-center hover:shadow-lg transition-all duration-300">
                         <div class="text-3xl md:text-4xl font-black text-emerald-700 counter" data-target="98">0</div>
-                        <p class="text-gray-600 font-semibold text-sm">Loan Repayment Rate</p>
+                        <p class="text-gray-600 font-semibold text-sm">Verified Vendors Onboarded (%)</p>
                     </div>
                 </div>
                 <div class="bg-gray-50/50 rounded-[3.5rem] p-10 md:p-16 flex flex-col lg:flex-row gap-16 items-center border border-gray-100">
                     <div class="lg:w-1/2 space-y-8">
                         <h4 class="text-3xl font-bold text-gray-900 leading-tight">Revolutionizing Food Security</h4>
-                        <p class="text-gray-600 text-lg leading-relaxed">At FCCEI, we believe food security is the foundation of economic stability. Through our innovative community-driven approach, we empower individuals and families to achieve long-term financial independence and sustainable food security.</p>
+                        <p class="text-gray-600 text-lg leading-relaxed">At FCCEI, we believe food security is the foundation of economic stability. Food inflation happens in the space between the farm and the shopper, and that is exactly where the FoodChain Marketplace intervenes. By putting verified local vendors and households on one open store, we remove the middleman markup, so the savings go to the family and the income goes to the vendor.</p>
                         <div class="space-y-4">
-                            <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Direct support for female-led households.</span></div>
-                            <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Educational grants for students.</span></div>
+                            <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Real prices for every state, so shoppers can compare before they buy.</span></div>
+                            <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">A storefront for verified vendors to grow past their own locality.</span></div>
+                            <div class="flex items-center gap-4"><div class="bg-emerald-600 text-white p-1.5 rounded-full shadow-md"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><span class="text-gray-800 font-semibold">Secure wallet and card payments, with home, pickup and delivery.</span></div>
                         </div>
                         <a href="#contact" class="inline-block bg-emerald-700 text-white px-10 py-4 rounded-2xl font-bold hover:bg-emerald-800 transition shadow-xl">Partner With Us</a>
                     </div>
                     <div class="lg:w-1/2 relative">
                         <div class="rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
-                            <img src="{{ asset('assets/landing/images/warehouse.png') }}" alt="FCCEI Operations" class="w-full h-[400px] object-cover">
+                            <img src="{{ asset('assets/landing/images/warehouse.webp') }}" alt="FCCEI Operations" class="w-full h-[400px] object-cover" loading="lazy" decoding="async">
                         </div>
                         <div class="absolute -bottom-6 -right-4 md:-right-10 bg-white p-8 rounded-3xl shadow-2xl border border-gray-50 max-w-xs animate-bounce-slow">
                             <p class="text-gray-700 font-medium italic mb-4 leading-relaxed">"The support I received changed my business and helped me provide for my family when I had nothing."</p>
-                            <p class="text-emerald-700 text-xs font-bold uppercase tracking-widest">— Beneficiary from Lagos</p>
+                            <p class="text-emerald-700 text-xs font-bold uppercase tracking-widest">Beneficiary from Lagos</p>
                         </div>
                     </div>
                 </div>
@@ -488,33 +484,33 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Latest <span class="text-emerald-500">Blog</span> Posts</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Insights, tips, and success stories from our community</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Insights, tips, and success stories from our marketplace community</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                        <img src="{{ asset('assets/landing/images/blogsa.jpeg') }}" alt="Community Building" class="w-full h-48 object-cover" loading="lazy" />
+                        <img src="{{ asset('assets/landing/images/blogsa.jpeg') }}" alt="Quality Groceries" class="w-full h-48 object-cover" loading="lazy" decoding="async" />
                         <div class="p-6">
-                            <div class="text-sm text-emerald-600 font-medium mb-2">COMMUNITY BUILDING</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Build a Strong Food-Secure Community in 2026</h3>
-                            <p class="text-gray-600 mb-4">Discover practical ways to grow a supportive community where members collaborate and ensure continuous access to essential food resources.</p>
+                            <div class="text-sm text-emerald-600 font-medium mb-2">QUALITY &amp; SAFETY</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">How We Keep Your Groceries Quality, Safe and Approved</h3>
+                            <p class="text-gray-600 mb-4">From clean, well-processed staples to NAFDAC-approved products, discover how we hold every item on the marketplace to a high quality standard.</p>
                             <div class="flex items-center justify-between"><span class="text-sm text-gray-500">Jan 5, 2026</span><a href="{{ route('blog') }}" class="text-emerald-600 font-medium hover:text-emerald-700">Read More →</a></div>
                         </div>
                     </article>
                     <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                        <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}" alt="Success Stories" class="w-full h-48 object-cover" loading="lazy" />
+                        <img src="{{ asset('assets/landing/images/blogpost.jpeg') }}" alt="Local Vendor Stories" class="w-full h-48 object-cover" loading="lazy" decoding="async" />
                         <div class="p-6">
-                            <div class="text-sm text-cyan-600 font-medium mb-2">SUCCESS STORIES</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">From Struggle to Stability: A Community Transformation Story</h3>
-                            <p class="text-gray-600 mb-4">Discover how active participation and shared support within our community helped transform lives, improve livelihoods, and create sustainable food access.</p>
+                            <div class="text-sm text-cyan-600 font-medium mb-2">VENDOR SPOTLIGHT</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">From Local Stall to a Growing Marketplace Store</h3>
+                            <p class="text-gray-600 mb-4">Discover how grassroots food businesses grew their reach using the marketplace, landing orders from customers in new locations every single week.</p>
                             <div class="flex items-center justify-between"><span class="text-sm text-gray-500">Jan 5, 2026</span><a href="{{ route('blog') }}" class="text-emerald-600 font-medium hover:text-emerald-700">Read More →</a></div>
                         </div>
                     </article>
                     <article class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg">
-                        <img src="{{ asset('assets/landing/images/bloggpo.png') }}" alt="Education" class="w-full h-48 object-cover" loading="lazy" />
+                        <img src="{{ asset('assets/landing/images/bloggpo.webp') }}" alt="Shopping Tips" class="w-full h-48 object-cover" loading="lazy" decoding="async" />
                         <div class="p-6">
-                            <div class="text-sm text-amber-600 font-medium mb-2">EDUCATION</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3">Understanding Community Empowerment & Sustainable Growth</h3>
-                            <p class="text-gray-600 mb-4">Learn how education, collaboration, and shared resources help individuals and communities build lasting impact and food security.</p>
+                            <div class="text-sm text-amber-600 font-medium mb-2">SHOPPING TIPS</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Getting Better Grocery Value With Loyalty Points</h3>
+                            <p class="text-gray-600 mb-4">Learn how to build points on everyday orders, spot flash deals, and redeem rewards to lower the real cost of your monthly food shop.</p>
                             <div class="flex items-center justify-between"><span class="text-sm text-gray-500">Jan 5, 2026</span><a href="{{ route('blog') }}" class="text-emerald-600 font-medium hover:text-emerald-700">Read More →</a></div>
                         </div>
                     </article>
@@ -535,7 +531,7 @@
                     <div class="swiper-wrapper">
                         @foreach(['partnermain.jpeg', 'imagesse.png', 'imagelands.jpg', 'imagesland.png', 'imagesleds.png', 'imageslogo.png'] as $partner)
                         <div class="swiper-slide relative flex justify-center items-center p-4 bg-white rounded-lg shadow hover:scale-105 transition-transform duration-300">
-                            <img src="{{ asset('assets/landing/images/' . $partner) }}" alt="Partner Logo" class="max-h-20 object-contain mx-auto">
+                            <img src="{{ asset('assets/landing/images/' . $partner) }}" alt="Partner Logo" class="max-h-20 object-contain mx-auto" loading="lazy" decoding="async">
                         </div>
                         @endforeach
                     </div>
@@ -551,15 +547,17 @@
 
                 <div id="sponsorModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
                     <div class="bg-white rounded-lg max-w-2xl w-full p-6 relative shadow-lg">
-                        <button id="closeSponsorModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        <button id="closeSponsorModal" type="button" aria-label="Close sponsor form" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                         </button>
                         <h4 class="text-2xl font-semibold mb-4 text-emerald-600">Join as a Sponsor</h4>
-                        <form action="#submit" method="POST" class="space-y-4">
-                            <div><label class="block text-gray-700 mb-2">Name</label><input type="text" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Name"></div>
-                            <div><label class="block text-gray-700 mb-2">Organization</label><input type="text" name="organization" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Organization"></div>
-                            <div><label class="block text-gray-700 mb-2">Email</label><input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="you@example.com"></div>
-                            <div><label class="block text-gray-700 mb-2">Message</label><textarea name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Tell us about your sponsorship interest"></textarea></div>
+                        @include('partials.form-status')
+                        <form action="{{ route('landing.sponsor') }}" method="POST" class="space-y-4">
+                            @csrf
+                            <div><label for="sponsor-name" class="block text-gray-700 mb-2">Name</label><input id="sponsor-name" type="text" name="name" required autocomplete="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Name"></div>
+                            <div><label for="sponsor-organization" class="block text-gray-700 mb-2">Organization</label><input id="sponsor-organization" type="text" name="organization" required autocomplete="organization" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Your Organization"></div>
+                            <div><label for="sponsor-email" class="block text-gray-700 mb-2">Email</label><input id="sponsor-email" type="email" name="email" required autocomplete="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="you@example.com"></div>
+                            <div><label for="sponsor-message" class="block text-gray-700 mb-2">Message</label><textarea id="sponsor-message" name="message" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Tell us about your sponsorship interest"></textarea></div>
                             <button type="submit" class="w-full px-4 py-2 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition">Send Inquiry</button>
                         </form>
                     </div>
@@ -571,20 +569,19 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Frequently Asked <span class="text-emerald-500">Questions</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Everything you need to know about creating your free account, shopping, and the optional community program.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Quick answers about accounts, pricing, ordering, payment and delivery on the FoodChain marketplace.</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-4">
                     @php
                     $faqs = [
-                        ['q' => 'Is Foodchain Community Empowerment Initiative a ponzi scheme?', 'a' => 'No it is not a ponzi scheme. Foodchain Community Empowerment is an initiative from a reputable firm known as <b>Doorstep Farms Limited</b> designed to support low-income earners, micro-business owners and students of tertiary institutions.'],
-                        ['q' => 'How does it work if I want to join the Community?', 'a' => 'Create a free FoodChain account — registration takes under a minute and costs nothing. Once your account is active you can shop immediately. Joining the optional community food program unlocks additional assistance and support.'],
-                        ['q' => 'Will I start getting food items regularly once I register?', 'a' => 'Yes, once you become a member and build your community, you will get food regularly.'],
-                        ['q' => 'How many people do I require to be eligible for regular food?', 'a' => '<strong>BRONZE:</strong> Create a free account and start shopping instantly.<br><strong>SILVER:</strong> Build a community of 10 members.<br><strong>GOLD:</strong> Build a community of 100 members.<br><strong>EMERALD:</strong> Build a community of 1000 members.'],
-                        ['q' => 'If you build a community less than 10 members?', 'a' => 'If you build less than 10 members, you are entitled to food items within the discretion of your ADMIN. If you build no community at all, you are not entitled to free food items.'],
-                        ['q' => 'Is registration really free? Will I ever be asked to pay?', 'a' => 'Registration is completely free. If you later choose an optional food-assistance subscription, it is renewable annually.'],
-                        ['q' => 'How do I get my food if I live far from your office?', 'a' => 'Food items will be delivered to your doorstep. The cost of delivery is settled by the member.'],
-                        ['q' => 'If I am not living in Nigeria, how do I benefit?', 'a' => 'You can become a member from any part of the world via our online link, but entitlements must be delivered to a verifiable address in Nigeria.'],
-                        ['q' => 'What happens if I don\'t renew my subscription?', 'a' => 'Any year you don\'t renew, you lose community benefits. However, at the <strong>EMERALD</strong> stage, you become a community leader and are exempted from annual subscriptions.'],
+                        ['q' => 'Do I need to pay a membership fee?', 'a' => 'No. Registration is free and instant. Any registered, active user can browse and buy from the marketplace.'],
+                        ['q' => 'Why do prices change by state?', 'a' => 'The true cost of food differs across Nigeria because of transport, storage and local demand. We show the price for the state you select, and that price is locked into your order.'],
+                        ['q' => 'How do I choose my state?', 'a' => 'Use the state selector on the marketplace. Every product, cart total and checkout figure updates to reflect your local price.'],
+                        ['q' => 'How do I place an order?', 'a' => 'Add items to your cart, review your delivery details, and complete checkout using a supported payment method or your wallet.'],
+                        ['q' => 'What payment options do I have?', 'a' => 'You can pay on delivery or pay before delivery. Before delivery, choose a supported payment method (card, transfer or wallet) securely at checkout.'],
+                        ['q' => 'How do loyalty points and flash sales work?', 'a' => 'Every payment, whether made before or on delivery, earns you a loyalty point. Loyalty points qualify you for flash sale purchases at special member-low prices.'],
+                        ['q' => 'How much does delivery cost?', 'a' => 'Delivery costs are based on the state you select and are shown before you complete your order, so there are no surprises.'],
+                        ['q' => 'How do I become a vendor or rider?', 'a' => 'Visit the Become a Supplier or Become a Rider pages, or register an account and follow the vendor or rider onboarding steps.'],
                     ];
                     @endphp
                     @foreach($faqs as $i => $faq)
@@ -606,7 +603,7 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-gray-900 mb-4 font-display">Get In <span class="text-emerald-500">Touch</span></h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Have questions? We're here to help you get started</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Questions about the marketplace, selling on the store, or getting started? We&rsquo;re here to help.</p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div>
@@ -614,11 +611,23 @@
                         <div class="space-y-6">
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-map-marker-alt text-emerald-600"></i></div>
-                                <div><h4 class="font-bold text-gray-900 mb-1">Office Address / Collection Centre:</h4><p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY,<br>Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p></div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-map-marker-alt text-emerald-600"></i></div>
-                                <div><h4 class="font-bold text-gray-900 mb-1">Food Store/ Warehouse:</h4><p class="text-gray-600">KM 54, Lagos - Ibadan Expressway, Mowe, Ogun State.</p></div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Office Address for Enquiry:</h4>
+                                    <p class="text-gray-600">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY,<br>Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+                                    <p class="text-gray-600 mt-3"><strong>Central Warehouse 1:</strong><br>31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+                                    <p class="text-gray-600 mt-3"><strong>Our Distribution Hubs in Lagos:</strong></p>
+                                    <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                                        <li><strong>Oyingbo outlet:</strong> Beside Chisco Plaza, Oyingbo Market, Oyingbo, Lagos.</li>
+                                        <li><strong>Ebutte-ero outlet:</strong> Ejalonibu Plaza, Ebutte-ero Main Market, Lagos Island.</li>
+                                        <li><strong>Igando outlet:</strong> Behind BRT, beside Eko Five Hotel, Igando Plaza Market, Igando.</li>
+                                        <li><strong>Ikorodu 1 outlet:</strong> 22, Ayangburen Road, Ikorodu.</li>
+                                        <li><strong>Ikorodu 2 outlet:</strong> No. 37 Alhaji Street, Ladega, before LG Office, Ladega.</li>
+                                        <li><strong>Sango outlet:</strong> 29 Tarmac Rd, Sango Otta, Sango.</li>
+                                        <li><strong>Ejigbo outlet:</strong> Shop MKT/EJ/S-H 11,13,19, Oba Ojon Central Market, Power Line, Iyana Ejigbo.</li>
+                                        <li><strong>Ojuwoye outlet:</strong> 7, Olumorokun Street, Ojuwoye, Mushin.</li>
+                                        <li><strong>Post Office outlet:</strong> 11/12 Post Office Rd, Mushin.</li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="flex items-start">
                                 <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center mr-4"><i class="fas fa-phone text-cyan-600"></i></div>
@@ -632,22 +641,23 @@
                         <div class="mt-12">
                             <h4 class="font-bold text-gray-900 mb-4">Follow Us</h4>
                             <div class="flex space-x-4">
-                                <a href="https://web.facebook.com/profile.php?id=61585986685899" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-twitter"></i></a>
-                                <a href="https://www.instagram.com/foodchainempowerment/" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-instagram"></i></a>
-                                <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-tiktok"></i></a>
+                                <a href="https://web.facebook.com/profile.php?id=61585986685899" aria-label="FoodChain Empowerment on Facebook" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                                <a href="https://www.instagram.com/foodchainempowerment/" aria-label="FoodChain Empowerment on Instagram" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                <a href="https://www.tiktok.com/@foodchainempowerm?lang=en" aria-label="FoodChain Empowerment on TikTok" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-200"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-2xl p-8">
                         <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-                        <form id="contact-form" class="space-y-6">
+                        @include('partials.form-status')
+                        <form action="{{ route('landing.contact') }}" method="POST" class="space-y-6">
+                            @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div><label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label><input type="text" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
-                                <div><label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label><input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
+                                <div><label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label><input id="contact-name" type="text" name="name" autocomplete="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
+                                <div><label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label><input id="contact-email" type="email" name="email" autocomplete="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
                             </div>
-                            <div><label class="block text-sm font-medium text-gray-700 mb-2">Subject</label><input type="text" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
-                            <div><label class="block text-sm font-medium text-gray-700 mb-2">Message</label><textarea name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></textarea></div>
+                            <div><label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label><input id="contact-subject" type="text" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></div>
+                            <div><label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">Message</label><textarea id="contact-message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent" required></textarea></div>
                             <button type="submit" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition-all duration-200 shadow-lg">Send Message</button>
                         </form>
                     </div>
@@ -655,12 +665,17 @@
             </div>
         </section>
 
-        <section class="py-16 bg-gradient-to-r from-emerald-600 to-emerald-800">
+        <section class="pt-16 pb-24 -mb-16 bg-gradient-to-r from-emerald-600 to-emerald-800">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
                 <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
-                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+                @include('partials.form-status')
+                <form action="{{ route('landing.newsletter') }}" method="POST" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                    @csrf
+                    <div class="flex-1 text-left">
+                        <label for="newsletter-email" class="sr-only">Email address</label>
+                        <input id="newsletter-email" type="email" name="email" required autocomplete="email" placeholder="Your email address" class="w-full px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+                    </div>
                     <button type="submit" class="px-8 py-3 bg-white text-emerald-700 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
                 </form>
             </div>
@@ -690,10 +705,16 @@
         let currentSlide = 0;
 
         function showSlide(index) {
-            heroSlides.forEach(slide => { slide.style.opacity = '0'; slide.style.zIndex = '1'; });
+            heroSlides.forEach((slide, i) => {
+                const isActive = i === index;
+                slide.style.opacity = isActive ? '1' : '0';
+                slide.style.zIndex = isActive ? '10' : '1';
+                // Inactive slides must not paint over the active one nor capture clicks.
+                slide.style.visibility = isActive ? 'visible' : 'hidden';
+                slide.style.pointerEvents = isActive ? 'auto' : 'none';
+                slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+            });
             dots.forEach(dot => dot.classList.remove('active'));
-            heroSlides[index].style.opacity = '1';
-            heroSlides[index].style.zIndex = '10';
             dots[index].classList.add('active');
             currentSlide = index;
         }
@@ -729,11 +750,6 @@
         });
         window.addEventListener('click', (e) => { if (e.target === document.getElementById('sponsorModal')) { document.getElementById('sponsorModal').classList.add('hidden'); document.getElementById('sponsorModal').classList.remove('flex'); } });
 
-        function toggleBenefits(tier) {
-            const el = document.getElementById(tier + '-additional');
-            el.classList.toggle('hidden');
-        }
-
         document.querySelectorAll('.faq-toggle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const content = btn.nextElementSibling;
@@ -747,12 +763,6 @@
                     icon.classList.add('rotate-180');
                 }
             });
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
         });
 
         new Swiper('.mySwiper', {

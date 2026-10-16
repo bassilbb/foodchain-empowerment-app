@@ -50,6 +50,17 @@ class MarketplacePricingService
     }
 
     /**
+     * Active, ordered list of state names and ISO-2 codes used by the selector
+     * (codes keep the switch URL clean - no encoded spaces).
+     */
+    public function stateOptions(): array
+    {
+        return NigerianState::active()->ordered()->get(['name', 'code'])
+            ->map(fn ($s) => ['name' => $s->name, 'code' => strtolower($s->code)])
+            ->all();
+    }
+
+    /**
      * State that governs storefront prices for the current visitor.
      */
     public function currentState(): string

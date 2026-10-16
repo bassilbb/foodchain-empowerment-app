@@ -42,11 +42,11 @@
     @endif
 
     {{-- Top utility bar --}}
-    @php $mpStates = mp_pricing()->states(); @endphp
+    @php $mpStates = mp_pricing()->stateOptions(); @endphp
     <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-900 text-emerald-100 text-xs">
         <div class="max-w-[1440px] mx-auto px-4 py-2 flex items-center justify-between gap-3">
             <div class="hidden md:flex items-center gap-5">
-                <p class="text-emerald-200/90">Free delivery on orders above ₦50,000 · Secure payments</p>
+                <p class="text-emerald-200/90">Payment on delivery or before delivery earns you a loyalty point that qualifies you for flash sale purchases</p>
             </div>
 
             <div class="flex items-center gap-3 text-[11px]">
@@ -56,9 +56,9 @@
                 </label>
                 <select id="state-selector" onchange="if(this.value){window.location=this.value;}"
                         class="bg-emerald-950/40 border border-emerald-700/60 rounded-full px-2.5 py-1 text-emerald-100 text-[11px] font-medium focus:outline-none focus:ring-2 focus:ring-emerald-400/60 cursor-pointer">
-                    <option value="{{ route('marketplace.shop') }}" disabled>Select state...</option>
+                    <option value="{{ route('marketplace.set-state', 'default') }}" disabled>Select state...</option>
                     @foreach ($mpStates as $st)
-                        <option value="{{ route('marketplace.set-state', $st) }}" @selected(mp_state() === $st)>{{ $st }}</option>
+                        <option value="{{ route('marketplace.set-state', $st['code'] ?: $st['name']) }}" @selected(mp_state() === $st['name'])>{{ $st['name'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -88,7 +88,7 @@
 
             {{-- Logo --}}
             <a href="{{ route('marketplace.home') }}" class="flex items-center gap-2 shrink-0">
-                <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-extrabold text-lg shadow">FC</span>
+                <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-10 h-10 rounded-xl object-contain bg-white ring-1 ring-emerald-100 shadow">
                 <span class="hidden lg:block leading-tight">
                     <span class="block text-emerald-800 font-extrabold text-lg tracking-tight">FoodChain</span>
                     <span class="block text-[11px] text-emerald-500 font-semibold uppercase tracking-widest">Marketplace</span>
@@ -169,7 +169,7 @@
                     @endforeach
                     <li><a href="{{ route('marketplace.flash-sale') }}" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white font-semibold text-orange-400 transition-colors">Flash Deals</a></li>
                     <li><a href="{{ route('marketplace.vendors') }}" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white transition-colors">Vendors</a></li>
-                    <li><a href="{{ route('marketplace.bulk.index') }}" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white transition-colors">Community Bulk</a></li>
+                    <li><a href="{{ route('marketplace.loyalty.index') }}" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white transition-colors">Loyalty</a></li>
                 </ul>
             </div>
         </nav>
@@ -199,7 +199,7 @@
         <div class="max-w-[1440px] mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
             <div>
                 <h3 class="text-white font-bold mb-3 flex items-center gap-2">
-                    <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-extrabold text-sm">FC</span>
+                    <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-8 h-8 rounded-lg object-contain bg-emerald-950 ring-1 ring-emerald-700/40">
                     FoodChain Marketplace
                 </h3>
                 <p class="text-emerald-300/80 leading-relaxed">Quality Nigerian groceries and household essentials delivered to your doorstep. Empowering communities through affordable food.</p>
@@ -219,7 +219,7 @@
                 <ul class="space-y-2">
                     <li><a href="{{ route('marketplace.flash-sale') }}" class="hover:text-white">Flash Sales</a></li>
                     <li><a href="{{ route('marketplace.vendors') }}" class="hover:text-white">Our Vendors</a></li>
-                    <li><a href="{{ route('marketplace.bulk.index') }}" class="hover:text-white">Community Bulk Purchase</a></li>
+                    <li><a href="{{ route('marketplace.loyalty.index') }}" class="hover:text-white">Loyalty Points</a></li>
                 </ul>
             </div>
             <div>
@@ -237,15 +237,20 @@
                 </ul>
                 <div class="mt-4 rounded-lg bg-emerald-900/60 px-3 py-2.5 text-xs text-emerald-300/90">
                     <p class="font-semibold text-emerald-200 mb-0.5">We Accept</p>
-                    <p>FoodChain Wallet · Paystack · Flutterwave · Bank Transfer · Cash on Delivery</p>
+                    <p>FoodChain Wallet · Paystack · Flutterwave · Mono · Bank Transfer · Cash on Delivery</p>
                 </div>
             </div>
         </div>
-        <div class="border-t border-emerald-800/60">
-            <p class="text-center text-xs text-emerald-400/70 py-4">&copy; {{ date('Y') }} {{ app_name() }}. All rights reserved.</p>
+        <div class="border-t border-emerald-800/60 px-4 py-4 text-center text-xs text-emerald-300/80">
+            <p class="font-semibold text-emerald-200 mb-0.5">Office Address for Enquiry:</p>
+            <p class="mb-1">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+            <p class="mb-1">Central Warehouse 1: 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+            <p class="mb-2">Our Distribution Hubs in Lagos: Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
+            <p>&copy; {{ date('Y') }} {{ app_name() }}. All rights reserved.</p>
         </div>
     </footer>
 
+    @yield('scripts')
     @stack('scripts')
     <script>
         // Flash auto-dismiss
@@ -284,7 +289,7 @@
             }
             if ((data.products || []).length) {
                 html += '<div class="px-4 py-2 text-xs font-bold text-gray-400 uppercase">Products</div>';
-                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
+                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" alt="" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
             }
             if (!html) html = '<div class="px-4 py-4 text-sm text-gray-500">No results for "' + term + '"</div>';
             suggestionsBox.innerHTML = html;

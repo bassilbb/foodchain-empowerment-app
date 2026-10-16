@@ -165,3 +165,17 @@ if (! function_exists('mp_compare')) {
         return mp_pricing()->compareFor($product, $state);
     }
 }
+
+if (! function_exists('public_storage_url')) {
+    /** Root-relative URL for a file on the public disk (safe for proxies/HTTPS). */
+    function public_storage_url(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+
+        $url = \Illuminate\Support\Facades\Storage::disk('public')->url($path);
+
+        return parse_url($url, PHP_URL_PATH) ?: $url;
+    }
+}

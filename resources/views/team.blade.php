@@ -12,7 +12,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</title>
-  <meta name="description" content="{{ App\Models\PageContent::getContent('team', 'page_subtitle', 'Meet the dedicated people behind FoodChain.') }}" />
+  @include('partials.seo-meta', [
+      'seoTitle' => App\Models\PageContent::getContent('team', 'page_title', 'Our Team'),
+      'seoDesc' => 'Meet the leadership driving food security and community empowerment at FoodChain Community Empowerment Initiative — from the CEO and COO to directors across sustainable impact.',
+      'schema' => [
+          [
+              '@context' => 'https://schema.org',
+              '@type' => 'WebPage',
+              'name' => App\Models\PageContent::getContent('team', 'page_title', 'Our Team'),
+              'url' => url('/team'),
+              'description' => 'Meet the leaders driving food security and community empowerment at FCCEI.',
+          ],
+      ],
+  ])
   <meta name="keywords" content="FCCEI, team, food chain, community, empowerment" />
   <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
   <!-- Font Awesome 6 -->
@@ -20,49 +32,8 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
   <!-- Tailwind Config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
-            secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
-            accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
-          },
-          fontFamily: {
-            'sans': ['Inter', 'system-ui', 'sans-serif'],
-            'display': ['Poppins', 'system-ui', 'sans-serif']
-          },
-          backgroundImage: {
-            'slide-1': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/buildi.jpeg") }}')",
-            'slide-2': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/empowerment.jpeg") }}')",
-            'slide-3': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/foodchan.jpeg") }}')"
-          },
-          animation: {
-            'slide-in': 'slideIn 0.5s ease-out forwards',
-            'fade-in': 'fadeIn 0.8s ease-out forwards',
-            'float': 'float 3s ease-in-out infinite'
-          },
-          keyframes: {
-            slideIn: {
-              '0%': { transform: 'translateY(20px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' }
-            },
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' }
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' }
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
     /* Additional custom styles */
@@ -71,6 +42,7 @@
   </style>
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
+    @include('partials.skip-link')
 
 <!-- Header Navigation -->
 <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -156,7 +128,7 @@
 </header>
 
 <!-- Main Content -->
-<main class="flex-1">
+<main class="flex-1" id="main-content">
 
 <!-- Sponsor Section -->
 <!-- <section class="py-12 max-w-7xl mx-auto px-4">
@@ -173,7 +145,7 @@
   <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"> -->
     <!-- Example Board Member -->
     <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/frankojipics.png" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/frankojipics.webp" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Frank Ogochukwu Orji</h3>
       <p class="text-gray-600">CEO & Founder.</p>
       <p class="text-gray-600">Frank Ogochukwu Orji is the visionary Founder and Chief Executive Officer of Food Chain Community Empowerment Initiative, a dynamic social enterprise committed to delivering innovative solutions that transform lives of women from Low-income households, Low-income earners, small business owners and students of tertiary institutions.
@@ -189,7 +161,7 @@
     </div> -->
     <!-- Repeat for other board members -->
     <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/basspix.png" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/basspix.webp" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Bassey Eno</h3>
       <p class="text-gray-600">Chief Operating Officer.</p>
       <p class="text-gray-600">Bassey Eno is the Chief Operating Officer of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's daily operations and ensures seamless coordination across all departments. He plays a key role in translating strategic goals into effective operational execution while maintaining efficiency, accountability, and organizational cohesion.
@@ -200,7 +172,7 @@
 
     </div> -->
     <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/kingsleypics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/kingsleypics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Kingsley Johnson</h3>
       <p class="text-gray-600">Director, Investment, Intervention and Sustainability.</p>
       <p class="text-gray-600">Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women's empowerment, household resilience, and sustainable social interventions.
@@ -217,7 +189,7 @@
   <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"> -->
     <!-- Example Board Member -->
     <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/Adenle.jpeg" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/Adenle.jpeg" alt="Board Member 1" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Adenle Olatunbosun Damola</h3>
       <p class="text-gray-600">Non-Executive Director.</p>
       <p class="text-gray-600">Adenle Olatunbosun Damola is a seasoned finance and business strategy professional with over a decade of experience spanning financial services, health insurance, investment management, treasury operations, and business development.
@@ -233,7 +205,7 @@
     </div> -->
     <!-- Repeat for other board members -->
     <!-- <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/samuchepics.png" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/samuchepics.webp" alt="Board Member 2" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Uchendu Samuel</h3>
       <p class="text-gray-600">Director, Technology infrastructure and Corporate Technical support</p>
       <p class="text-gray-600">Uchendu Samuel serves as the Chief Technology Officer (CTO) of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this role, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.
@@ -244,7 +216,7 @@
 
     </div>
     <div class="bg-white p-4 rounded-lg shadow flex flex-col items-center text-center">
-      <img src="images/patrickpics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" />
+      <img src="images/patrickpics.jpeg" alt="Board Member 3" class="w-32 h-32 object-cover rounded-full mb-4 border-4 border-gray-300" loading="lazy" decoding="async" />
       <h3 class="text-xl font-semibold mb-2">Patrick Ubi</h3>
       <p class="text-gray-600">Expert in digital engagement and strengthening brand visibility.</p>
       <p class="text-gray-600">Patrick Ubi  is an experienced Social Media Manager responsible for managing  cooperative's online presence across all social media platforms. With over six years of expertise, he creates engaging content, manages community interactions, and drives digital engagement to strengthen communication and visibility within and beyond the community  while building and nurturing communities across platforms, ensuring every post serves a purpose.</p>
@@ -255,14 +227,14 @@
 <section id="team" class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</h2>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</h1>
             <p class="text-gray-600 max-w-2xl mx-auto">The passionate leaders driving food security and community empowerment.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/frankojipicsxe.png') }}" alt="Frank Orji" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/frankojipicsxe.webp') }}" alt="Frank Orji" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Frank Ogochukwu Orji</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">CEO & Founder</p>
@@ -271,7 +243,7 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/basspixxs.png') }}" alt="Bassey Eno" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/basspixxs.webp') }}" alt="Bassey Eno" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Bassey Eno</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Chief Operating Officer</p>
@@ -280,7 +252,7 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/kingsleypics.jpeg') }}" alt="Kingsley Johnson" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/kingsleypics.jpeg') }}" alt="Kingsley Johnson" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Kingsley Johnson</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Investment, Intervention and Sustainability</p>
@@ -289,7 +261,7 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/Adenle.jpeg') }}" alt="Adenle Damola" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/Adenle.jpeg') }}" alt="Adenle Damola" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Adenle Olatunbosun Damola</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Non-Executive Director</p>
@@ -298,7 +270,7 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/sampics.png') }}" alt="Uchendu Samuel" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/sampics.webp') }}" alt="Uchendu Samuel" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Uchendu Samuel</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Technology infrastructure and Corporate Technical support</p>
@@ -307,7 +279,7 @@
 
             <!-- <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
                 <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/patrickpics.jpeg') }}" alt="Patrick Ubi" class="w-full h-full object-cover object-top" />
+                    <img src="{{ asset('assets/landing/images/patrickpics.jpeg') }}" alt="Patrick Ubi" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-1">Patrick Ubi</h3>
                 <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Head, Digital Media and communication Strategy</p>
@@ -317,21 +289,6 @@
     </div>
 </section>
 
-<!-- <div id="bioModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
-    <div class="bg-white w-full max-w-5xl rounded-[2rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row h-auto max-h-[90vh]">
-        <button onclick="closeTeamModal()" class="absolute top-5 right-5 z-20 bg-white/90 p-2 rounded-full shadow-lg text-gray-500 hover:text-emerald-700 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <div class="w-full md:w-2/5 bg-gray-100 border-r border-gray-50">
-            <img id="m-img" src="" alt="Profile" class="w-full h-full object-cover object-top min-h-[300px] md:min-h-full">
-        </div>
-        <div class="w-full md:w-3/5 p-8 md:p-14 overflow-y-auto bg-white">
-            <h3 id="m-name" class="text-3xl font-bold text-gray-900 mb-2"></h3>
-            <p id="m-role" class="text-emerald-700 font-bold text-xs uppercase tracking-widest mb-8 border-b border-gray-100 pb-4"></p>
-            <div id="m-bio" class="text-gray-600 space-y-5 text-base leading-relaxed"></div>
-        </div>
-    </div>
-</div> -->
 <div id="bioModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
     <div class="bg-white w-full max-w-5xl rounded-[2rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row h-auto max-h-[90vh]">
 
@@ -342,7 +299,8 @@
         </button>
 
         <div class="w-full md:w-2/5 bg-gray-100 border-r border-gray-50 overflow-hidden">
-            <img id="m-img" src="" alt="Profile"
+            <img id="m-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23e5e7eb'/%3E%3Ccircle cx='200' cy='190' r='70' fill='%23b6c2cd'/%3E%3Cpath d='M60 500c0-80 63-130 140-130s140 50 140 130z' fill='%23b6c2cd'/%3E%3C/svg%3E"
+                 alt="Profile"
                  class="w-full h-full object-cover object-top min-h-[400px] md:min-h-full transition-transform duration-500">
         </div>
 
@@ -377,7 +335,7 @@
     frank: {
         name: "Frank Ogochukwu Orji",
         role: "CEO & Founder",
-        img: "{{ asset('assets/landing/images/frankojipicsxe.png') }}",
+        img: "{{ asset('assets/landing/images/frankojipicsxe.webp') }}",
         bio: `<p>Frank Ogochukwu Orji is the visionary Founder and Chief Executive Officer of Food Chain Community Empowerment Initiative, a dynamic social enterprise committed to delivering innovative solutions that transform lives of women from Low-income households, Low-income earners, small business owners and students of tertiary institutions. </p>
               <p>With over 15 years of Business and leadership experience, Frank has built a reputation for strategic foresight, operational excellence, and an unwavering commitment to social impacts. Under his leadership, FCCEI has and will continue to achieve its strategic goals of Zero hunger, sustainability and food security for low-income households in Nigeria.</p>
               <p>A passionate advocate for sustainability, innovation and community impact, Frank fosters a culture of collaboration and continuous improvement, empowering teams to exceed expectations and deliver measurable results. Beyond corporate success, Frank actively contributes to industry associations and community initiatives, reinforcing a belief that business growth and social responsibility go hand in hand.</p>
@@ -389,7 +347,7 @@
     bassey: {
         name: "Bassey Eno",
         role: "Chief Operating Officer",
-        img: "{{ asset('assets/landing/images/basspixxs.png') }}",
+        img: "{{ asset('assets/landing/images/basspixxs.webp') }}",
         bio: `<p>Bassey Eno is the Chief Operating Officer (COO) of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's day-to-day operations and ensures seamless coordination across all departments. He plays a pivotal role in translating FCCEI's strategic vision into effective operational execution while maintaining high standards of efficiency, accountability, and organizational cohesion.</p>
               <p>With over 10 years of experience in operations management and organizational strategy, Bassey brings a strong blend of leadership, business insight, and technical expertise to his role. He holds a Bachelor of Science degree from the National Open University of Nigeria, along with diplomas in IT Management and Software Systems and Executive Strategy and Management, and is a Cisco Certified Network Associate (CCNA – Networks). He is currently pursuing a Master of Business Administration (MBA) at the Atlanta College of Liberal Arts and Sciences, further strengthening his strategic, managerial, and organizational leadership capabilities.</p>
               <p>Throughout his career, Bassey has successfully designed and implemented systems and processes that enhance productivity, optimize resources, and foster collaboration across teams. His leadership approach is results-driven and anchored in continuous improvement, ensuring that organizational goals are met with precision and consistency.</p>
@@ -421,7 +379,7 @@
     samuel: {
         name: "Uchendu Samuel",
         role: "Director, Technology infrastructure and Corporate Technical support",
-        img: "{{ asset('assets/landing/images/sampics.png') }}",
+        img: "{{ asset('assets/landing/images/sampics.webp') }}",
         bio: `<p>Uchendu Samuel serves as the Director, Technology infrastructure and Corporate Technical support of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this capacity, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.</p>
               <p>With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu brings a strong academic and professional foundation to his role. He holds a Bachelor of Science degree in Computer Science and is professionally trained as a Network Administrator, with advanced expertise as a Cisco Certified Network Associate (CCNA – Networks). He is also a trained SAP SD (Sales and Distribution) personnel, equipping him with deep insight into enterprise systems, process optimization, and data-driven operations.</p>
               <p>Uchendu delivers robust technical leadership across all digital platforms, including the organization's website, member management systems, payment and financial solutions, analytics tools, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and long-term reliability.</p>
@@ -469,10 +427,11 @@ function closeTeamModal() {
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
-    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-      <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
-      <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-    </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+        @csrf
+        <input type="email" name="email" aria-label="Email address" required placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white" />
+        <button type="submit" class="px-8 py-3 bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+      </form>
   </div>
 </section>
 

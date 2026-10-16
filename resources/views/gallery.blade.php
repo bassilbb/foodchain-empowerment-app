@@ -12,7 +12,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ App\Models\PageContent::getContent('gallery', 'page_title', 'Our Gallery') }}</title>
-    <meta name="description" content="{{ App\Models\PageContent::getContent('gallery', 'page_subtitle', 'Moments from our community programs and events.') }}">
+    @include('partials.seo-meta', [
+        'seoTitle' => App\Models\PageContent::getContent('gallery', 'page_title', 'Our Gallery'),
+        'seoDesc' => 'Browse available staple food stock such as rice, beans, semovita, vegetable oil, palm oil, eggs, pasta and garri at community-friendly prices for FoodChain members across Nigeria.',
+        'schema' => [
+            [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => App\Models\PageContent::getContent('gallery', 'page_title', 'Our Gallery'),
+                'url' => url('/gallery'),
+                'description' => 'Browse available staple food stock at community-friendly prices for FoodChain members.',
+            ],
+        ],
+    ])
     <meta name="keywords" content="FCCEI, gallery, food chain, community, events">
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -20,49 +32,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { DEFAULT: "#059669", light: "#10B981", dark: "#047857" },
-                        secondary: { DEFAULT: "#0D9488", light: "#14B8A6", dark: "#0F766E" },
-                        accent: { DEFAULT: "#D97706", light: "#F59E0B", dark: "#B45309" }
-                    },
-                    fontFamily: {
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'display': ['Poppins', 'system-ui', 'sans-serif']
-                    },
-                    backgroundImage: {
-                        'slide-1': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/buildi.jpeg") }}')",
-                        'slide-2': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/empowerment.jpeg") }}')",
-                        'slide-3': "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ asset("assets/landing/images/foodchan.jpeg") }}')"
-                    },
-                    animation: {
-                        'slide-in': 'slideIn 0.5s ease-out forwards',
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                        'float': 'float 3s ease-in-out infinite'
-                    },
-                    keyframes: {
-                        slideIn: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
@@ -128,6 +99,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
+    @include('partials.skip-link')
     <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-white shadow-sm">
         <nav class="container mx-auto px-4 py-4">
@@ -275,10 +247,10 @@
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-12 flex-grow">
+    <main class="container mx-auto px-4 py-12 flex-grow" id="main-content">
         <div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-6">
             <div>
-                <h2 class="text-4xl font-black text-gray-900">Available Stock</h2>
+                <h1 class="text-4xl font-black text-gray-900">Available Stock</h1>
                 <p class="text-gray-500 mt-2">Quality essential food items for our community members.</p>
             </div>
             <div class="hidden md:block">
@@ -291,7 +263,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/rices.png') }}" class="w-full h-48 object-cover" alt="Rice">
+                <img src="{{ asset('assets/landing/images/rices.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Rice">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Premium Local Rice</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • 50kg</p>
@@ -299,7 +271,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/Beanscover.jpg') }}" class="w-full h-48 object-cover" alt="Beans">
+                <img src="{{ asset('assets/landing/images/Beanscover.jpg') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Beans">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Honey Beans (Oloyin)</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Paint</p>
@@ -307,7 +279,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/vegetable.png') }}" class="w-full h-48 object-cover" alt="Oil">
+                <img src="{{ asset('assets/landing/images/vegetable.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Oil">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Vegetable Oil</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • 5 Liters</p>
@@ -315,7 +287,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=500&q=80" class="w-full h-48 object-cover" alt="Eggs">
+                <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=500&q=80" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Eggs">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Farm Fresh Eggs</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Protein • Crate</p>
@@ -323,7 +295,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/semovita.png') }}" class="w-full h-48 object-cover" alt="Semo">
+                <img src="{{ asset('assets/landing/images/semovita.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Semo">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Semovita</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Flour • 10kg</p>
@@ -331,7 +303,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden shadow-md">
-                <img src="{{ asset('assets/landing/images/plam.png') }}" class="w-full h-48 object-cover" alt="Palm Oil" />
+                <img src="{{ asset('assets/landing/images/plam.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Palm Oil" />
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Fresh Palm Oil</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • Liters</p>
@@ -339,7 +311,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/spaghetti.png') }}" class="w-full h-48 object-cover" alt="Pasta">
+                <img src="{{ asset('assets/landing/images/spaghetti.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Pasta">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Spaghetti</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Pasta • Carton</p>
@@ -347,7 +319,7 @@
             </div>
 
             <div class="product-card bg-white rounded-3xl overflow-hidden">
-                <img src="{{ asset('assets/landing/images/garrirbg.png') }}" class="w-full h-48 object-cover" alt="Garri">
+                <img src="{{ asset('assets/landing/images/garrirbg.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Garri">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg"> Garri</h3>
                     <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Bag</p>
@@ -363,10 +335,11 @@
                 <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
                 <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
 
-                <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
-                    <button type="submit" class="px-8 py-3 bg-white text-[#059669] font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
-                </form>
+<form method="POST" action="{{ route('landing.newsletter') }}" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                      @csrf
+                      <input type="email" name="email" aria-label="Email address" required placeholder="Your email address" class="flex-1 px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white">
+                      <button type="submit" class="px-8 py-3 bg-white text-[#059669] font-bold rounded-lg hover:bg-gray-100 transition-all duration-200">Subscribe</button>
+                  </form>
             </div>
         </section>
     </main>

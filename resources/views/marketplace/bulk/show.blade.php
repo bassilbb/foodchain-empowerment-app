@@ -67,7 +67,7 @@
                                         <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg px-4 py-2.5 transition-colors">Contribute via Wallet</button>
                                     </form>
                                 @elseif ($bulkOrder->isOpen())
-                                    <p class="text-xs text-red-500">Insufficient wallet balance to contribute. <a href="{{ route('user.accounts.wallet') }}" class="underline">Top up wallet</a></p>
+                                    <p class="text-xs text-red-500">Insufficient wallet balance to contribute. <a href="{{ route('manual-payments.create', ['type' => 'wallet_topup']) }}" class="underline">Top up wallet</a></p>
                                 @endif
                             </div>
                         @endforeach

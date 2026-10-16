@@ -60,12 +60,15 @@
         'faq' => [
             'title' => 'Frequently Asked Questions',
             'tag' => 'Support',
-            'intro' => 'Quick answers about accounts, pricing, ordering and delivery on the FoodChain marketplace.',
+            'intro' => 'Quick answers about accounts, pricing, ordering, payment and delivery on the FoodChain marketplace.',
             'sections' => [
                 ['Do I need to pay a membership fee?', 'No. Registration is free and instant. Any registered, active user can browse and buy from the marketplace.'],
                 ['Why do prices change by state?', 'The true cost of food differs across Nigeria because of transport, storage and local demand. We show the price for the state you select, and that price is locked into your order.'],
                 ['How do I choose my state?', 'Use the state selector on the marketplace. Every product, cart total and checkout figure updates to reflect your local price.'],
                 ['How do I place an order?', 'Add items to your cart, review your delivery details, and complete checkout using a supported payment method or your wallet.'],
+                ['What payment options do I have?', 'You can pay on delivery or pay before delivery. Before delivery, choose a supported payment method (card, transfer or wallet) securely at checkout.'],
+                ['How do loyalty points and flash sales work?', 'Every payment, whether made before or on delivery, earns you a loyalty point. Loyalty points qualify you for flash sale purchases at special member-low prices.'],
+                ['How much does delivery cost?', 'Delivery costs are based on the state you select and are shown before you complete your order, so there are no surprises.'],
                 ['How do I become a vendor or rider?', 'Visit the Become a Supplier or Become a Rider pages, or register an account and follow the vendor or rider onboarding steps.'],
             ],
         ],
@@ -74,7 +77,7 @@
             'tag' => 'Programmes',
             'intro' => 'FCCEI exists to strengthen households and local food businesses. Our community programmes are the heart of that mission.',
             'sections' => [
-                ['Food Security Programmes', 'We connect members to affordable staple foods, community bulk purchasing and periodic food support initiatives across our network of states.'],
+                ['Food Security Programmes', 'We connect members to affordable staple foods, quality-checked groceries, flash-deal savings and periodic food support initiatives across our coverage locations.'],
                 ['Empowering Local Vendors', 'We help small vendors and producers reach more customers with a free digital storefront, fair state-based pricing and order management tools.'],
                 ['Get Involved', 'Whether you want to volunteer, partner, sponsor a programme or support a community, there are many ways to take part. Reach out through our contact channels to learn more.'],
             ],
@@ -85,7 +88,7 @@
             'intro' => 'Earn rewards for introducing people to a marketplace that makes everyday food more affordable across Nigeria.',
             'sections' => [
                 ['How It Works', 'Share your unique referral link with your network. When people you refer join and start buying, you earn a reward on qualifying activity.'],
-                ['Who Can Join', 'Affiliates can be individuals, community groups or businesses. You do not need special technical skills — just a genuine interest in helping people access affordable food.'],
+                ['Who Can Join', 'Affiliates can be individuals, community groups or businesses. You do not need special technical skills, just a genuine interest in helping people access affordable food.'],
                 ['Getting Started', 'Create an account and express your interest through our contact form or support channel. Our partnerships team will guide you through onboarding and share your referral tools.'],
             ],
         ],
@@ -99,9 +102,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $content['title'] }} · FCCEI</title>
-    <meta name="description" content="{{ $content['intro'] }}">
+    @include('partials.seo-meta', [
+        'seoTitle' => $content['title'].' · FCCEI',
+        'seoDesc' => $content['intro'],
+        'schema' => array_merge(
+            [[
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => $content['title'].' · FCCEI',
+                'url' => url()->current(),
+                'description' => $content['intro'],
+            ]],
+            $page === 'faq' ? [[
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => collect($content['sections'])->map(fn ($qa) => [
+                    '@type' => 'Question',
+                    'name' => $qa[0],
+                    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $qa[1]],
+                ])->all(),
+            ]] : [],
+        ),
+    ])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @include('partials.vite-css')
     <link rel="icon" type="image/svg+xml" href="{{ site_favicon() ?? '/favicon.svg' }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
@@ -110,6 +134,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-700 flex flex-col">
+    @include('partials.skip-link')
     {{-- Simple unified header --}}
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-sm">
         <nav class="container mx-auto px-4">
@@ -144,7 +169,7 @@
     </section>
 
     {{-- Content --}}
-    <main class="flex-1">
+    <main class="flex-1" id="main-content">
         <div class="container mx-auto px-4 py-12 md:py-16">
             <div class="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10">
                 {{-- Side nav --}}
