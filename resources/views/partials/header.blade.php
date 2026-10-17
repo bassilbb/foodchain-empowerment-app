@@ -1,6 +1,6 @@
-  <header class="sticky top-0 z-50">
+    <header class="landing-header sticky top-0 z-50">
     <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600"></div>
-    <div class="bg-white/85 backdrop-blur-xl border-b border-slate-100 shadow-[0_8px_30px_rgba(4,120,87,0.06)]">
+    <div class="bg-white/90 backdrop-blur-xl border-b border-emerald-100/70 shadow-[0_12px_34px_rgba(4,120,87,0.08)]">
         <nav class="container mx-auto px-4">
             <div class="flex justify-between items-center py-3 gap-4">
                 <!-- Logo -->
@@ -15,7 +15,7 @@
                 </a>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden xl:flex items-center gap-1 bg-slate-50/90 ring-1 ring-slate-200/70 rounded-full p-1">
+                <div class="hidden lg:flex items-center gap-1 bg-slate-50/90 ring-1 ring-slate-200/70 rounded-full p-1">
                     <a href="{{ route('landing') }}" class="nav-pill">Home</a>
 
                     <div class="relative dropdown-container">
@@ -23,22 +23,21 @@
                             About
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
-                        <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100 opacity-0 invisible -translate-y-2 transition-all duration-200">
+                        <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
                             <a href="{{ route('team') }}" class="dropdown-item">Team</a>
                             <a href="{{ route('csr') }}" class="dropdown-item">CSR</a>
                             <a href="{{ route('franchise') }}" class="dropdown-item">Franchise</a>
                         </div>
                     </div>
 
-                    <a href="{{ route('landing') }}#products" class="nav-pill">Membership</a>
-                    <a href="{{ route('listing') }}" class="nav-pill">Listing</a>
+                    <a href="{{ route('landing') }}#products" class="nav-pill">Marketplace</a>
 
                     <div class="relative dropdown-container">
                         <button class="nav-pill dropdown-toggle" data-dropdown="desktop-blog">
                             Blog
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
-                        <div id="desktop-blog" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100 opacity-0 invisible -translate-y-2 transition-all duration-200">
+                        <div id="desktop-blog" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
                             <a href="{{ route('gallery') }}" class="dropdown-item">Gallery</a>
                         </div>
                     </div>
@@ -48,7 +47,7 @@
                             Partner
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
-                        <div id="desktop-partner" class="dropdown-menu absolute right-0 mt-3 w-64 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100 opacity-0 invisible -translate-y-2 transition-all duration-200">
+                        <div id="desktop-partner" class="dropdown-menu absolute right-0 mt-3 w-64 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
                             <a href="{{ route('sponsor') }}" class="dropdown-item">Become Our Sponsor</a>
                             <a href="{{ route('supplier') }}" class="dropdown-item">Become Supplier</a>
                             <a href="{{ route('rider') }}" class="dropdown-item">Become Our Logistics Channel</a>
@@ -59,7 +58,7 @@
                 </div>
 
                 <!-- Auth Buttons -->
-                <div class="hidden lg:flex items-center gap-2">
+                <div class="hidden xl:flex items-center gap-2">
                     <a href="{{ route('marketplace.shop') }}" class="btn-primary !py-2.5 !px-5">
                         <i class="fas fa-store"></i>Shop
                     </a>
@@ -92,8 +91,7 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('landing') }}#products" class="mobile-link">Membership</a>
-                    <a href="{{ route('listing') }}" class="mobile-link">Listing</a>
+                    <a href="{{ route('landing') }}#products" class="mobile-link">Marketplace</a>
 
                     <div>
                         <button onclick="toggleMobileDropdown('mobile-blog', event)" class="mobile-link w-full justify-between">
@@ -127,92 +125,98 @@
             </div>
         </nav>
     </div>
-</header>
+    </header>
 
     <style>
+        .nav-pill { display: inline-flex; align-items: center; padding: 0.62rem 0.95rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: #475569; transition: color .18s ease, background-color .18s ease, box-shadow .18s ease, transform .18s ease; white-space: nowrap; }
+        .nav-pill:hover { color: #047857; background: #ffffff; box-shadow: 0 5px 16px rgba(4,120,87,0.10); transform: translateY(-1px); }
         /* Hide the long brand tagline below 1536px so the header row always fits the desktop container */
         .brand-tagline { display: block; }
         @media (max-width: 1535px) { .brand-tagline { display: none; } }
-        .nav-pill { display: inline-flex; align-items: center; padding: 0.55rem 0.9rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #475569; transition: all 0.2s ease; white-space: nowrap; }
-        .nav-pill:hover { color: #047857; background: #ffffff; box-shadow: 0 2px 10px rgba(4,120,87,0.08); }
-        .dropdown-item { display: block; padding: 0.55rem 0.85rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 500; color: #475569; transition: all 0.15s ease; }
+        .landing-header { position: sticky; top: 0; z-index: 9999; overflow: visible !important; }
+        .landing-header > div, .landing-header nav, .landing-header .dropdown-container, .landing-header .dropdown-toggle { overflow: visible !important; }
+        .dropdown-container { position: relative; z-index: 10000 !important; }
+        .dropdown-toggle { cursor: pointer; }
+        .dropdown-menu { display: none; z-index: 10001 !important; }
+        .dropdown-menu.is-open { display: block !important; z-index: 10001 !important; }
+        .dropdown-toggle:focus-visible, .dropdown-item:focus-visible, .mobile-link:focus-visible, .mobile-sub:focus-visible { outline: 3px solid rgba(16,185,129,.35); outline-offset: 2px; }
+        .dropdown-item { display: block; padding: 0.65rem 0.85rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 600; color: #475569; transition: all 0.15s ease; cursor: pointer; position: relative; z-index: 1; }
         .dropdown-item:hover { background: #ecfdf5; color: #047857; }
         .mobile-link { display: flex; align-items: center; padding: 0.8rem 0.9rem; border-radius: 0.9rem; font-size: 0.95rem; font-weight: 600; color: #334155; transition: all 0.15s ease; }
         .mobile-link:hover { background: #ecfdf5; color: #047857; }
         .mobile-sub { display: block; padding: 0.5rem 0.75rem; border-radius: 0.6rem; font-size: 0.875rem; font-weight: 500; color: #64748b; transition: all 0.15s ease; }
         .mobile-sub:hover { color: #047857; }
-        .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.15rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #ffffff; background-image: linear-gradient(to right, #059669, #0d9488); box-shadow: 0 8px 20px -6px rgba(5,150,105,0.55); transition: all 0.2s ease; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.68rem 1.15rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: #ffffff; background-image: linear-gradient(110deg, #047857, #059669, #0d9488); box-shadow: 0 10px 22px -7px rgba(5,150,105,0.60); transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 24px -6px rgba(5,150,105,0.65); }
-        .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.15rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; color: #047857; background: #ffffff; border: 1.5px solid #a7f3d0; transition: all 0.2s ease; }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.68rem 1.15rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: #047857; background: #ffffff; border: 1.5px solid #a7f3d0; transition: transform .18s ease, background-color .18s ease, border-color .18s ease; }
         .btn-ghost:hover { background: #ecfdf5; border-color: #34d399; }
     </style>
 
     <script>
-        // Desktop Dropdown Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-            let activeDropdown = null;
+        (() => {
+            const initNavigation = () => {
+                let activeDropdown = null;
+                const hideDropdown = (dropdown) => {
+                    if (!dropdown) return;
+                    dropdown.classList.remove('is-open');
+                    const toggle = dropdown.closest('.dropdown-container')?.querySelector('.dropdown-toggle');
+                    toggle?.setAttribute('aria-expanded', 'false');
+                    toggle?.querySelector('svg')?.classList.remove('rotate-180');
+                };
 
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const dropdownId = this.getAttribute('data-dropdown');
-                    const dropdown = document.getElementById(dropdownId);
-                    const svg = this.querySelector('svg');
+                document.querySelectorAll('.dropdown-toggle').forEach(toggle => toggle.setAttribute('aria-expanded', 'false'));
 
-                    if (activeDropdown && activeDropdown !== dropdown) {
-                        activeDropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                        activeDropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                        const prevSvg = activeDropdown.previousElementSibling.querySelector('svg');
-                        if (prevSvg) prevSvg.classList.remove('rotate-180');
-                    }
-
-                    if (dropdown.classList.contains('opacity-0')) {
-                        dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
-                        dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
-                        svg.classList.add('rotate-180');
-                        activeDropdown = dropdown;
+                document.addEventListener('click', event => {
+                    const toggle = event.target.closest('.dropdown-toggle');
+                    if (!toggle) return;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const dropdown = document.getElementById(toggle.dataset.dropdown);
+                    if (!dropdown) return;
+                    if (activeDropdown && activeDropdown !== dropdown) hideDropdown(activeDropdown);
+                    const isOpen = dropdown.classList.contains('is-open');
+                    if (isOpen) {
+                        hideDropdown(dropdown);
+                        activeDropdown = null;
                     } else {
-                        dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                        svg.classList.remove('rotate-180');
+                        dropdown.classList.add('is-open');
+                        toggle.setAttribute('aria-expanded', 'true');
+                        toggle.querySelector('svg')?.classList.add('rotate-180');
+                        activeDropdown = dropdown;
+                    }
+                });
+
+                document.addEventListener('click', event => {
+                    if (!event.target.closest('.dropdown-container')) {
+                        hideDropdown(activeDropdown);
                         activeDropdown = null;
                     }
                 });
-            });
 
-            document.addEventListener('click', function() {
-                if (activeDropdown) {
-                    activeDropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                    activeDropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                    const toggle = activeDropdown.previousElementSibling;
-                    const svg = toggle.querySelector('svg');
-                    if (svg) svg.classList.remove('rotate-180');
-                    activeDropdown = null;
-                }
-            });
-        });
+                const mobileButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                mobileButton?.addEventListener('click', event => {
+                    event.stopPropagation();
+                    mobileMenu?.classList.toggle('hidden');
+                });
 
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+                document.addEventListener('click', event => {
+                    if (mobileButton && mobileMenu && !mobileButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            };
 
-        // Mobile Dropdown Toggle
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNavigation);
+            else initNavigation();
+        })();
+
         function toggleMobileDropdown(id, event) {
-            event.stopPropagation();
+            event?.preventDefault();
+            event?.stopPropagation();
             const dropdown = document.getElementById(id);
             const icon = document.getElementById(id + '-icon');
-            dropdown.classList.toggle('hidden');
-            if (icon) icon.classList.toggle('rotate-180');
+            dropdown?.classList.toggle('hidden');
+            icon?.classList.toggle('rotate-180');
         }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
     </script>
