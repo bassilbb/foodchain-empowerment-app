@@ -1197,7 +1197,7 @@
 
                 @if($admin->isSuperAdmin())
                 @php
-                    $contentRoutes = ['admin.page-contents.*'];
+                    $contentRoutes = ['admin.page-contents.*', 'admin.posts.*'];
                     $isContentActive = request()->routeIs(implode('|', $contentRoutes));
                 @endphp
                 <div class="nav-section">
@@ -1209,6 +1209,10 @@
                     <a href="{{ route('admin.page-contents.index') }}" class="nav-link {{ request()->routeIs('admin.page-contents.*') ? 'active' : '' }}">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         Pages
+                    </a>
+                    <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                        Blog Posts
                     </a>
                     </div>
                 </div>

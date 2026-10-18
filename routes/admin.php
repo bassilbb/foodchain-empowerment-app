@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\MembershipTierController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SavingsPlanController;
 use App\Http\Controllers\Admin\SettingController;
@@ -168,6 +169,16 @@ Route::middleware(['admin'])->group(function () {
             Route::put('/{page}', [PageContentController::class, 'update'])->name('update');
             Route::put('/{page}/toggle', [PageContentController::class, 'toggle'])->name('toggle');
             Route::post('/seed', [PageContentController::class, 'seed'])->name('seed');
+        });
+
+        // Blog Posts
+        Route::prefix('posts')->name('admin.posts.')->group(function () {
+            Route::get('/', [PostController::class, 'index'])->name('index');
+            Route::get('/create', [PostController::class, 'create'])->name('create');
+            Route::post('/', [PostController::class, 'store'])->name('store');
+            Route::get('/{post}/edit', [PostController::class, 'edit'])->name('edit');
+            Route::put('/{post}', [PostController::class, 'update'])->name('update');
+            Route::delete('/{post}', [PostController::class, 'destroy'])->name('destroy');
         });
 
         // Reports
