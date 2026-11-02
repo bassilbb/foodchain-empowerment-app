@@ -84,6 +84,9 @@
                         <div class="flex justify-between text-emerald-600"><span>Coupon ({{ $order->coupon_code }})</span><span>-₦{{ number_format($order->coupon_discount, 2) }}</span></div>
                     @endif
                     <div class="flex justify-between text-gray-600"><span>Delivery</span><span>₦{{ number_format($order->shipping_fee, 2) }}</span></div>
+                    @if (($order->service_charge ?? 0) > 0)
+                        <div class="flex justify-between text-gray-600"><span>Service Charge ({{ number_format(($order->service_charge_rate ?? 0) * 100, 0) }}%)</span><span>₦{{ number_format($order->service_charge, 2) }}</span></div>
+                    @endif
                     @if ($order->wallet_amount > 0)
                         <div class="flex justify-between text-blue-600"><span>Paid via Wallet</span><span>₦{{ number_format($order->wallet_amount, 2) }}</span></div>
                     @endif
@@ -103,6 +106,40 @@
                     @endif
                 </div>
             </div>
+
+            {{-- Bank transfer payment --}}
+            @if ($order->payment_method === 'bank_transfer' && $order->payment_status !== 'paid')
+                @php
+                    $defaultBankAccount = $bankAccounts->firstWhere('is_default', true) ?? $bankAccounts->first();
+                @endphp
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="font-bold text-gray-900 mb-4">Bank Transfer Payment</h3>
+                    @if ($bankAccounts->isEmpty())
+                        <p class="text-sm text-gray-500">No bank account is configured for transfers. Please contact support.</p>
+                    @else
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <p><strong class="text-gray-800">Bank:</strong> {{ $defaultBankAccount->bank_name }}</p>
+                            <p><strong class="text-gray-800">Account Name:</strong> {{ $defaultBankAccount->account_name }}</p>
+                            <p><strong class="text-gray-800">Account Number:</strong> <span class="font-mono font-bold text-gray-900">{{ $defaultBankAccount->account_number }}</span></p>
+                            <p><strong class="text-gray-800">Amount to Transfer:</strong> <span class="font-bold text-emerald-700">₦{{ number_format($order->total, 2) }}</span></p>
+                            <p><strong class="text-gray-800">Payment Reference:</strong> <span class="font-mono">{{ $order->order_number }}</span></p>
+                            @if ($defaultBankAccount->instructions)
+                                <p class="text-xs text-gray-500 mt-2">{{ $defaultBankAccount->instructions }}</p>
+                            @endif
+                        </div>
+
+                        @if ($bankTransferPayment && $bankTransferPayment->isPending())
+                            <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
+                                Your transfer has been submitted (ref: {{ $bankTransferPayment->reference }}) and is awaiting verification.
+                            </div>
+                        @else
+                            <button type="button" onclick="document.getElementById('bank-transfer-modal').classList.remove('hidden')" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg py-3 text-sm transition-colors">
+                                I have completed the payment
+                            </button>
+                        @endif
+                    @endif
+                </div>
+            @endif
 
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <h3 class="font-bold text-gray-900 mb-3">Delivery Details</h3>
@@ -195,6 +232,60 @@
             </form>
         </div>
     </div>
+
+    {{-- Bank transfer modal --}}
+    @if ($order->payment_method === 'bank_transfer' && $order->payment_status !== 'paid' && ! $bankAccounts->isEmpty())
+        @php $defaultBankAccount = $bankAccounts->firstWhere('is_default', true) ?? $bankAccounts->first(); @endphp
+        <div id="bank-transfer-modal" class="{{ $showBankTransferModal ? '' : 'hidden' }} fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl p-6 max-w-lg w-full">
+                <h3 class="font-bold text-gray-900 mb-3">Confirm Bank Transfer</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Transfer <strong>₦{{ number_format($order->total, 2) }}</strong> to
+                    <strong>{{ $defaultBankAccount->bank_name }}</strong>
+                    ({{ $defaultBankAccount->account_number }}), then submit the details below.
+                </p>
+                <form action="{{ route('marketplace.orders.bank-transfer', $order) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @if ($bankAccounts->count() > 1)
+                        <div class="mb-3">
+                            <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Bank Account</label>
+                            <select name="bank_account_id" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                                @foreach ($bankAccounts as $account)
+                                    <option value="{{ $account->id }}" @selected($account->id === $defaultBankAccount->id)>{{ $account->bank_name }} - {{ $account->account_number }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <input type="hidden" name="bank_account_id" value="{{ $defaultBankAccount->id }}">
+                    @endif
+                    <div class="mb-3">
+                        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Sender Name</label>
+                        <input type="text" name="sender_name" value="{{ old('sender_name', auth()->user()->name) }}" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Sender Account Number (optional)</label>
+                        <input type="text" name="sender_account_number" value="{{ old('sender_account_number') }}" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Sender Bank (optional)</label>
+                        <input type="text" name="sender_bank_name" value="{{ old('sender_bank_name') }}" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Transfer Date</label>
+                        <input type="date" name="transfer_date" value="{{ old('transfer_date', now()->toDateString()) }}" class="w-full text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-xs font-semibold text-gray-500 uppercase block mb-1">Proof of Payment (optional)</label>
+                        <input type="file" name="proof_image" accept="image/*" class="w-full text-sm">
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="document.getElementById('bank-transfer-modal').classList.add('hidden')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg py-2.5 text-sm">Cancel</button>
+                        <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg py-2.5 text-sm">I have completed the payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
 
     @push('scripts')
     <script>

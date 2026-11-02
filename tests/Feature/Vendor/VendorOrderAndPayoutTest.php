@@ -236,29 +236,54 @@ class VendorOrderAndPayoutTest extends TestCase
         $this->assertSame('cancelled', $item->fresh()->status);
     }
 
-    public function test_the_legacy_vendor_surface_also_refuses_to_mark_an_item_delivered(): void
+    public function test_a_vendor_cannot_mark_an_item_delivered(): void
     {
         $item = $this->orderItemFor($this->vendor, 'shipped');
 
-        // The duplicate /marketplace/vendor centre must not be a way around the
-        // canonical vendor status rules.
+        // Delivered is what releases earnings, so only an administrator may set it.
         $this->actingAs($this->vendorUser)
-            ->post(route('marketplace.vendor.orders.status', $item), ['status' => 'delivered'])
+            ->post(route('vendor.orders.status', $item), ['status' => 'delivered'])
             ->assertSessionHasErrors('status');
 
         $this->assertSame('shipped', $item->fresh()->status);
         $this->assertEquals(0, app(VendorEarningsService::class)->summary($this->vendor)['available']);
     }
 
-    public function test_the_legacy_vendor_orders_page_only_offers_allowed_statuses(): void
+    public function test_the_orders_page_only_offers_allowed_statuses(): void
     {
         $this->orderItemFor($this->vendor, 'shipped');
 
-        $response = $this->actingAs($this->vendorUser)->get(route('marketplace.vendor.orders'));
+        $response = $this->actingAs($this->vendorUser)->get(route('vendor.orders.index'));
 
         $response->assertOk();
         $response->assertViewHas('allowedStatuses', VendorOrderController::VENDOR_ALLOWED_STATUSES);
         $response->assertDontSee('<option value="delivered"', false);
+    }
+
+    /**
+     * /marketplace/vendor used to be a full duplicate centre. It is now a set of
+     * redirects onto the canonical Vendor Centre, so old links still resolve.
+     */
+    public function test_the_legacy_vendor_urls_redirect_to_the_vendor_centre(): void
+    {
+        $redirects = [
+            route('marketplace.vendor.dashboard') => route('vendor.dashboard'),
+            route('marketplace.vendor.products') => route('vendor.products.index'),
+            route('marketplace.vendor.products.create') => route('vendor.products.create'),
+            route('marketplace.vendor.inventory') => route('vendor.inventory'),
+            route('marketplace.vendor.orders') => route('vendor.orders.index'),
+            route('marketplace.vendor.packing-slips') => route('vendor.orders.packing-slips'),
+            route('marketplace.vendor.reports') => route('vendor.reports'),
+        ];
+
+        foreach ($redirects as $from => $to) {
+            $this->actingAs($this->vendorUser)->get($from)->assertRedirect($to);
+        }
+
+        // The legacy write endpoints are gone, not merely redirected.
+        $this->assertFalse(\Illuminate\Support\Facades\Route::has('marketplace.vendor.orders.status'));
+        $this->assertFalse(\Illuminate\Support\Facades\Route::has('marketplace.vendor.products.store'));
+        $this->assertFalse(\Illuminate\Support\Facades\Route::has('marketplace.vendor.products.delete'));
     }
 
     // ------------------------------------------------------ earnings math

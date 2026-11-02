@@ -30,7 +30,10 @@ class LoginController extends Controller
             $user = Auth::user();
             $user->updateLastLogin();
 
-            // Vendors go straight to the Vendor Centre.
+            // Vendors go straight to the Vendor Centre. `intended` is bypassed on
+            // purpose: the session usually still holds the last page the user was
+            // bounced from (often the customer dashboard), which would drop a
+            // vendor into the member area instead of their store.
             if ($user->marketplaceVendor && $user->marketplaceVendor->isApproved()) {
                 return redirect()->route('vendor.dashboard');
             }

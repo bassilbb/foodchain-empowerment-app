@@ -330,7 +330,7 @@
     </main>
 
      <!-- Newsletter -->
-        <section class="py-16 bg-gradient-to-r from-[#059669] to-[#0D9488]">
+        <section class="pt-16 pb-24 -mb-16 bg-gradient-to-r from-emerald-600 to-emerald-800">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
                 <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>

@@ -128,6 +128,12 @@ class ManualPaymentController extends Controller
             app(\App\Services\Marketplace\MarketplaceWalletService::class)
                 ->logTransaction($user, null, (float) $payment->amount, 'credit', 'Wallet top-up: SUCCESSFUL-'.$manualPayment->reference);
             app(NotificationService::class)->sendPaymentSuccessNotification($user, $payment);
+        } elseif ($manualPayment->type === 'marketplace_order') {
+            $order = $manualPayment->marketplaceOrder;
+            if ($order) {
+                app(\App\Services\Marketplace\OrderService::class)
+                    ->confirmExternalPayment($order, 'bank_transfer', $payment->reference);
+            }
         } else {
             app(PaymentService::class)->verifyPayment($payment->reference);
         }

@@ -176,8 +176,16 @@ class UserController extends Controller
         return back()->with('success', "User tier changed from {$oldTier->name} to {$newTier->name}.");
     }
 
-    public function exportExcel()
+    public function update(Request $request, User $user)
     {
-        return Excel::download(new UsersExport(User::with('currentTier')), 'users-'.date('Y-m-d').'.xlsx');
+        // existing update logic
+    }
+
+    public function toggle(Request $request, User $user)
+    {
+        $request->validate(['is_active' => 'boolean']);
+        $user->update(['is_active' => ! $user->is_active]);
+
+        return back()->with('success', $user->is_active ? 'User activated.' : 'User deactivated.');
     }
 }

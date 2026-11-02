@@ -92,6 +92,12 @@
                     <span><strong>Shipping</strong></span>
                     <span>₦{{ number_format($order->shipping_fee, 2) }}</span>
                 </div>
+                @if (($order->service_charge ?? 0) > 0)
+                    <div class="detail-row">
+                        <span><strong>Service Charge ({{ number_format(($order->service_charge_rate ?? 0) * 100, 0) }}%)</strong></span>
+                        <span>₦{{ number_format($order->service_charge, 2) }}</span>
+                    </div>
+                @endif
                 <div class="detail-row" style="border-top: 2px solid #e5e7eb; font-size: 16px;">
                     <span><strong>Total</strong></span>
                     <span><strong>₦{{ number_format($order->total, 2) }}</strong></span>

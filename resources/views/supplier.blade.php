@@ -61,8 +61,42 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
         <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
-        <!-- About dropdown -->
-        <div class="relative group">
+            <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Food Chain Community Empowerment</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-2">
+          <a href="{{ route('landing') }}" class="nav-pill text-slate-700">Home</a>
+          <!-- About dropdown -->
+          <div class="relative dropdown-container">
+            <button class="nav-pill dropdown-toggle text-slate-700" data-dropdown="desktop-about">
+              About
+              <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
+              <a href="{{ route('team') }}" class="dropdown-item">Team</a>
+              <a href="{{ route('csr') }}" class="dropdown-item">CSR</a>
+              <a href="{{ route('franchise') }}" class="dropdown-item">Franchise</a>
+            </div>
+          </div>
+          <!-- Marketplace -->
+          <a href="{{ route('landing') }}#products" class="nav-pill text-slate-700">Marketplace</a>
+          <!-- Blog dropdown -->
+          <div class="relative dropdown-container">
+            <button class="nav-pill dropdown-toggle text-slate-700" data-dropdown="desktop-blog">
+              Blog
+              <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="desktop-blog" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
+              <a href="{{ route('gallery') }}" class="dropdown-item">Gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
           <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -235,7 +269,7 @@
 </main>
 
 <!-- Newsletter -->
-<section class="py-16 bg-gradient-to-r from-emerald-600 to-teal-600">
+<section class="pt-16 pb-24 -mb-16 bg-gradient-to-r from-emerald-600 to-emerald-800">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>

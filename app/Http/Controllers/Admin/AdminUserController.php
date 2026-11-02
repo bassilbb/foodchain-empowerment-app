@@ -102,4 +102,23 @@ class AdminUserController extends Controller
         return redirect()->route('admin.admin-users.index')
             ->with('success', 'Admin user deleted successfully.');
     }
+
+    public function toggle(AdminUser $adminUser)
+    {
+        // Only super admins can toggle other admin users
+        $currentAdmin = Auth::guard('admin')->user();
+        if (!$currentAdmin->isSuperAdmin()) {
+            return back()->with('error', 'Only super administrators can activate or deactivate admin accounts.');
+        }
+
+        // Prevent deactivating yourself
+        if ($adminUser->id === $currentAdmin->id) {
+            return back()->with('error', 'You cannot deactivate your own account.');
+        }
+
+        $adminUser->update(['is_active' => ! $adminUser->is_active]);
+
+        return redirect()->route('admin.admin-users.index')
+            ->with('success', $adminUser->is_active ? 'Admin user activated.' : 'Admin user deactivated.');
+    }
 }

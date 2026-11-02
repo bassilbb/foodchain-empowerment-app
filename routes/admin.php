@@ -43,13 +43,30 @@ Route::middleware(['admin'])->group(function () {
     // Dashboard (all roles)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    // User Management (all roles)
+    // Admin User Management (super_admin only)
+    Route::prefix('admin-users')->name('admin.admin-users.')->group(function () {
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::get('/create', [AdminUserController::class, 'create'])->name('create');
+        Route::post('/', [AdminUserController::class, 'store'])->name('store');
+        Route::get('/{adminUser}', [AdminUserController::class, 'show'])->name('show');
+        Route::get('/{adminUser}/edit', [AdminUserController::class, 'edit'])->name('edit');
+        Route::put('/{adminUser}', [AdminUserController::class, 'update'])->name('update');
+        Route::delete('/{adminUser}', [AdminUserController::class, 'destroy'])->name('destroy');
+        Route::post('/{adminUser}/toggle', [AdminUserController::class, 'toggle'])->name('toggle');
+        Route::get('/{adminUser}/referrals', [AdminUserController::class, 'show'])->name('referrals');
+        Route::post('/{adminUser}/activate', [AdminUserController::class, 'update'])->name('activate');
+        Route::post('/{adminUser}/deactivate', [AdminUserController::class, 'update'])->name('deactivate');
+        Route::get('/export/excel', [AdminUserController::class, 'index'])->name('export.excel');
+    });
+
+    // User Management (all roles) - regular platform users
     Route::prefix('users')->name('admin.users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/{user}', [UserController::class, 'show'])->name('show');
         Route::get('/{user}/referrals', [UserController::class, 'referrals'])->name('referrals');
         Route::post('/{user}/activate', [UserController::class, 'activate'])->name('activate');
         Route::post('/{user}/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
+        Route::post('/{user}/toggle', [UserController::class, 'toggle'])->name('toggle');
         Route::post('/{user}/upgrade-tier', [UserController::class, 'upgradeTier'])->name('upgrade-tier');
         Route::post('/{user}/update-tier', [UserController::class, 'updateTier'])->name('update-tier');
         Route::get('/export/excel', [UserController::class, 'exportExcel'])->name('export.excel');
@@ -186,9 +203,6 @@ Route::middleware(['admin'])->group(function () {
             Route::get('/vendors', [MarketplaceReportController::class, 'vendors'])->name('vendors');
             Route::get('/payouts', [MarketplaceReportController::class, 'payouts'])->name('payouts');
         });
-
-        // Admin User Management
-        Route::resource('admin-users', AdminUserController::class, ['as' => 'admin']);
 
         // Membership Tiers Management
         // Declared before the resource so "pricing" is not swallowed by {membership_tier}.

@@ -45,24 +45,43 @@
     @include('partials.skip-link')
 
 <!-- Header Navigation -->
-<header class="sticky top-0 z-50 bg-white shadow-sm">
-  <nav class="container mx-auto px-4 py-4">
-    <div class="flex justify-between items-center">
-      <!-- Logo & Title -->
-      <div class="flex items-center space-x-2">
-        <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
-          <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
+<header class="landing-header sticky top-0 z-50">
+  <div class="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600"></div>
+  <div class="bg-white/90 backdrop-blur-xl border-b border-emerald-100/70 shadow-[0_12px_34px_rgba(4,120,87,0.08)]">
+    <nav class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-3 gap-4">
+        <!-- Logo -->
+        <a href="{{ route('landing') }}" class="group flex items-center gap-3 shrink-0">
+          <span class="w-14 h-14 rounded-2xl bg-white ring-1 ring-emerald-100 shadow-sm shadow-emerald-600/10 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:-translate-y-0.5">
+            <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full p-1">
+          </span>
+          <span class="hidden sm:flex flex-col leading-tight">
+            <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">FCCEI</span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Food Chain Community Empowerment</span>
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-1 bg-slate-50/90 ring-1 ring-slate-200/70 rounded-full p-1">
+          <a href="{{ route('landing') }}" class="nav-pill">Home</a>
+          <!-- About dropdown -->
+          <div class="relative dropdown-container">
+            <button class="nav-pill dropdown-toggle" data-dropdown="desktop-about">
+              About
+              <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
+              <a href="{{ route('team') }}" class="dropdown-item">Team</a>
+              <a href="{{ route('csr') }}" class="dropdown-item">CSR</a>
+              <a href="{{ route('franchise') }}" class="dropdown-item">Franchise</a>
+            </div>
+          </div>
+          <!-- ... other nav items would continue -->
         </div>
       </div>
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
-        <!-- About dropdown -->
-        <div class="relative group">
+    </nav>
+  </div>
+</header>
           <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
             About
             <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

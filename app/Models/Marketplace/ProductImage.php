@@ -35,6 +35,6 @@ class ProductImage extends Model
             return '/'.ltrim($path, '/');
         }
 
-        return '/storage/'.ltrim($path, '/');
+        return '/serve-logo/'.ltrim($path, '/');
     }
 }

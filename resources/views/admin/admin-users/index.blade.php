@@ -62,6 +62,15 @@
                     @if(auth()->guard('admin')->user()->isSuperAdmin())
                     <td>
                         <a href="{{ route('admin.admin-users.edit', $admin) }}" class="btn-primary btn-sm">Edit</a>
+                        @if($admin->id !== auth()->guard('admin')->user()->id)
+                        <form method="POST" action="{{ route('admin.admin-users.toggle', $admin) }}" class="d-inline">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-sm btn-{{ $admin->is_active ? 'danger' : 'success' }}" title="{{ $admin->is_active ? 'Deactivate account' : 'Activate account' }}" onclick="return confirm('{{ $admin->is_active ? 'Are you sure you want to deactivate this admin account?' : 'Are you sure you want to activate this admin account?' }}')">
+                                {{ $admin->is_active ? 'Deactivate' : 'Activate' }}
+                            </button>
+                        </form>
+                        @endif
                     </td>
                     @endif
                 </tr>

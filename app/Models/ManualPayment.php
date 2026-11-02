@@ -12,6 +12,7 @@ class ManualPayment extends Model
     protected $fillable = [
         'user_id',
         'payment_id',
+        'marketplace_order_id',
         'bank_account_id',
         'type',
         'amount',
@@ -46,6 +47,11 @@ class ManualPayment extends Model
     public function bankAccount()
     {
         return $this->belongsTo(BankAccount::class, 'bank_account_id');
+    }
+
+    public function marketplaceOrder()
+    {
+        return $this->belongsTo(\App\Models\Marketplace\Order::class, 'marketplace_order_id');
     }
 
     public function verifier()

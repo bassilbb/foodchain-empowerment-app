@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SettingsSeeder::class,
             NigerianStateSeeder::class,
             MarketplaceSeeder::class,
+            FumiStoreSeeder::class,
             BlogPostSeeder::class,
         ]);
 

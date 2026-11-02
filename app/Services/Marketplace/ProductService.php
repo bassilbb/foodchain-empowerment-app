@@ -21,7 +21,9 @@ class ProductService
             ->latest()
             ->first();
 
-        $flashSaleProducts = $flashSale?->items->map(fn ($item) => $item->product)->filter(fn ($p) => $p && $p->is_active)->take(12);
+        $flashSaleProducts = $flashSale?->items->map(fn ($item) => $item->product)
+            ->filter(fn ($p) => $p && $p->is_active && $p->vendor?->status === 'approved')
+            ->take(12);
 
         $featured = Product::active()->inStock()->featured()->with('category', 'images')->latest()->take(12)->get();
         $newArrivals = Product::active()->inStock()->with('category', 'images')->latest()->take(12)->get();

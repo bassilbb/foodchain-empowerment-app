@@ -1,0 +1,1212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="vQWFchgoOVa9N21Piva3nwpDeoCEyCmU0FxnHsbz">
+    <title>Fumi Store - FoodChain Community Empowerment Initiative</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/build/assets/app-iNpLkrtj.css">
+    </head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+
+    
+    
+    
+        <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-900 text-emerald-100 text-xs">
+        <div class="max-w-[1440px] mx-auto px-4 py-2 flex items-center justify-between gap-3">
+            <div class="hidden md:flex items-center gap-5">
+                <p class="text-emerald-200/90">Payment on delivery or before delivery earns you a loyalty point that qualifies you for flash sale purchases</p>
+            </div>
+
+            <div class="flex items-center gap-3 text-[11px]">
+                <label for="state-selector" class="hidden sm:flex items-center gap-1.5 text-emerald-300">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                    Deliver to
+                </label>
+                <select id="state-selector" onchange="if(this.value){window.location=this.value;}"
+                        class="bg-emerald-950/40 border border-emerald-700/60 rounded-full px-2.5 py-1 text-emerald-100 text-[11px] font-medium focus:outline-none focus:ring-2 focus:ring-emerald-400/60 cursor-pointer">
+                    <option value="http://127.0.0.1:8000/shop/state/default" disabled>Select state...</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/fc" selected>FCT Abuja</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/la" >Lagos</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ab" >Abia</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ad" >Adamawa</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ak" >Akwa Ibom</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/an" >Anambra</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ba" >Bauchi</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/by" >Bayelsa</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/be" >Benue</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/bo" >Borno</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/cr" >Cross River</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/de" >Delta</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/eb" >Ebonyi</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ed" >Edo</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ek" >Ekiti</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/en" >Enugu</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/go" >Gombe</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/im" >Imo</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ji" >Jigawa</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/kd" >Kaduna</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/kn" >Kano</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/kt" >Katsina</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/kb" >Kebbi</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ko" >Kogi</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/kw" >Kwara</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/na" >Nasarawa</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ni" >Niger</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/og" >Ogun</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/on" >Ondo</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/os" >Osun</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/oy" >Oyo</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/pl" >Plateau</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ri" >Rivers</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/so" >Sokoto</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/ta" >Taraba</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/yo" >Yobe</option>
+                                            <option value="http://127.0.0.1:8000/shop/state/za" >Zamfara</option>
+                                    </select>
+            </div>
+
+            <div class="flex items-center gap-4 ml-auto">
+                                    <a href="http://127.0.0.1:8000/login" class="hover:text-white">Sign in</a>
+                    <span class="text-emerald-700">|</span>
+                    <a href="http://127.0.0.1:8000/register" class="hover:text-white font-medium">Join FoodChain</a>
+                            </div>
+        </div>
+    </div>
+
+    
+    <header class="bg-white/90 backdrop-blur-xl border-b border-emerald-100/70 shadow-[0_8px_30px_rgba(4,120,87,0.05)] sticky top-0 z-50">
+        <div class="max-w-[1440px] mx-auto px-4 py-3 flex items-center gap-4">
+
+            
+            <a href="http://127.0.0.1:8000/shop" class="flex items-center gap-2 shrink-0">
+                <img src="http://127.0.0.1:8000/assets/landing/images/FCCEILOGO.png" alt="FCCEI Logo" class="w-10 h-10 rounded-xl object-contain bg-white ring-1 ring-emerald-100 shadow">
+                <span class="hidden lg:block leading-tight">
+                    <span class="block text-emerald-800 font-extrabold text-lg tracking-tight">FoodChain</span>
+                    <span class="block text-[11px] text-emerald-500 font-semibold uppercase tracking-widest">Marketplace</span>
+                </span>
+            </a>
+
+            
+            <div class="flex-1">
+                <form action="http://127.0.0.1:8000/shop/search" method="GET" class="relative max-w-3xl mx-auto" id="search-form">
+                    <input
+                        type="text"
+                        name="q"
+                        id="search-input"
+                        placeholder="Search rice, beans, tomato paste, seasonings..."
+                        value=""
+                        autocomplete="off"
+                        class="w-full rounded-full py-2.5 pl-5 pr-32 text-sm text-gray-800 bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/70 focus:border-emerald-500 focus:bg-white transition"
+                    >
+                    <button type="submit" class="absolute right-1 top-1 bottom-1 px-5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white rounded-full text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-orange-500/30">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        Search
+                    </button>
+                    <div id="search-suggestions" class="hidden absolute top-full mt-2 left-0 right-0 bg-white rounded-xl shadow-2xl overflow-hidden z-50"></div>
+                </form>
+            </div>
+
+            
+            <div class="flex items-center gap-1.5 shrink-0">
+                                    <a href="http://127.0.0.1:8000/login" class="hidden sm:flex flex-col items-center px-3 py-1.5 rounded-lg hover:bg-gray-50 group">
+                        <svg class="w-6 h-6 text-gray-600 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <span class="text-[10px] text-gray-500 group-hover:text-emerald-600 font-medium">Sign in / Join</span>
+                    </a>
+                
+                <a href="http://127.0.0.1:8000/marketplace/cart" class="flex items-center gap-2.5 px-3.5 py-2 rounded-full ring-1 ring-transparent hover:ring-emerald-100 hover:bg-emerald-50/80 group transition-all" title="Cart">
+                    <span class="relative">
+                        <svg class="w-7 h-7 text-emerald-700 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.6a1 1 0 001 1.4H20"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+                        <span id="cart-count-badge" class="absolute -top-1.5 -right-2 bg-orange-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">0</span>
+                    </span>
+                    <span class="hidden md:block text-left leading-tight">
+                        <span class="block text-[10px] text-gray-500">Basket</span>
+                        <span class="block text-sm font-bold text-emerald-800">Cart</span>
+                    </span>
+                </a>
+
+                <a href="http://127.0.0.1:8000/vendor" class="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:-translate-y-0.5 text-white text-sm font-semibold rounded-full px-4 py-2.5 ml-1 shadow-lg shadow-emerald-600/25 transition-all">Sell on FoodChain</a>
+            </div>
+        </div>
+
+        
+        <nav class="hidden lg:block bg-emerald-900">
+            <div class="max-w-[1440px] mx-auto px-4">
+                <ul class="flex items-center gap-1 text-[13px] text-emerald-100 whitespace-nowrap overflow-x-auto">
+                    <li>
+                        <a href="http://127.0.0.1:8000/shop/all" class="inline-flex items-center gap-1.5 px-3 py-2.5 font-semibold text-white bg-emerald-800/70 hover:bg-emerald-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                            All Categories
+                        </a>
+                    </li>
+                                                            <li><a href="http://127.0.0.1:8000/shop/flash-sale" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white font-semibold text-orange-400 transition-colors">Flash Deals</a></li>
+                    <li><a href="http://127.0.0.1:8000/shop/vendors" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white transition-colors">Vendors</a></li>
+                    <li><a href="http://127.0.0.1:8000/marketplace/loyalty" class="px-3 py-2.5 hover:bg-emerald-700 hover:text-white transition-colors">Loyalty</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        
+        <div class="lg:hidden bg-emerald-900 overflow-x-auto">
+            <ul class="flex items-center text-[13px] text-emerald-100 whitespace-nowrap px-3">
+                                <li><a href="http://127.0.0.1:8000/shop/all" class="inline-block px-3 py-2.5 font-semibold text-white">All</a></li>
+                                <li><a href="http://127.0.0.1:8000/shop/flash-sale" class="inline-block px-3 py-2.5 font-semibold text-orange-400">Deals</a></li>
+            </ul>
+        </div>
+    </header>
+
+    
+    <main class="flex-1">
+        <div class="max-w-[1440px] mx-auto px-4 py-5">
+                <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
+        <a href="http://127.0.0.1:8000/shop/vendors" class="hover:text-emerald-700">Vendors</a>
+        <span>/</span>
+        <span class="text-gray-800 font-medium">Fumi Store</span>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mb-6 flex items-center gap-4">
+        <div class="w-20 h-20 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700 text-3xl font-extrabold">
+            F
+        </div>
+        <div class="flex-1">
+            <h1 class="text-2xl font-extrabold text-gray-900">Fumi Store</h1>
+            <p class="text-sm text-gray-500 mt-1">Lagos · 187 products</p>
+                    </div>
+    </div>
+
+            <p class="text-sm text-gray-600 mb-6 leading-relaxed">Fumi Store registered vendor.</p>
+    
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ajinomoto-11g10g" class="relative block bg-white" aria-label="Ajinomoto 11g/10g">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-545ec68e916bcafe65f3.jpg" alt="Ajinomoto 11g/10g" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ajinomoto-11g10g" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ajinomoto 11g/10g
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ajinomoto-30g" class="relative block bg-white" aria-label="Ajinomoto 30g">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-545ec68e916bcafe65f3.jpg" alt="Ajinomoto 30g" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ajinomoto-30g" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ajinomoto 30g
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/alubadiya-shrimp-cube-25-packs-x-80pcs" class="relative block bg-white" aria-label="Alubadiya Shrimp Cube 25 packs x 80Pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-9c61c787fe425a8fc5c1.jpg" alt="Alubadiya Shrimp Cube 25 packs x 80Pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/alubadiya-shrimp-cube-25-packs-x-80pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Alubadiya Shrimp Cube 25 packs x 80Pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-100g-x-60-p" class="relative block bg-white" aria-label="Ama Wonda Curry 100g x 60 p">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-f4059aa642a39b0362df.jpg" alt="Ama Wonda Curry 100g x 60 p" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-100g-x-60-p" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Curry 100g x 60 p
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-5g-x-40-roll-x-400-pcs" class="relative block bg-white" aria-label="Ama Wonda Curry 5g x 40 roll x 400 Pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-28c74bc155fbf1147425.jpg" alt="Ama Wonda Curry 5g x 40 roll x 400 Pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-5g-x-40-roll-x-400-pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Curry 5g x 40 roll x 400 Pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-powder-250g" class="relative block bg-white" aria-label="Ama Wonda Curry Powder 250g">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-14f1c04c354772bc02f9.jpg" alt="Ama Wonda Curry Powder 250g" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-curry-powder-250g" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Curry Powder 250g
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-ginger-garlic-100g-x-60-pcs" class="relative block bg-white" aria-label="Ama Wonda Ginger &amp; Garlic 100g x 60 pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-5b1be8e6fc1db6b88188.jpg" alt="Ama Wonda Ginger &amp; Garlic 100g x 60 pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-ginger-garlic-100g-x-60-pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Ginger &amp; Garlic 100g x 60 pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/addme-chicken-16g-x-40" class="relative block bg-white" aria-label="Addme Chicken 16g x 40">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-7c15282b47ea348c9a79.jpg" alt="Addme Chicken 16g x 40" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/addme-chicken-16g-x-40" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Addme Chicken 16g x 40
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-jollof-rice-100g-x-60pcs" class="relative block bg-white" aria-label="Ama Wonda Jollof Rice 100g x 60pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-8c45fd7c082ed5105b9e.jpg" alt="Ama Wonda Jollof Rice 100g x 60pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-jollof-rice-100g-x-60pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Jollof Rice 100g x 60pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-thyme-5g-x-40-roll-x-400-pcs" class="relative block bg-white" aria-label="Ama Wonda Thyme 5g x 40 roll x 400 Pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-8dc96f3e88102a0bdca2.jpeg" alt="Ama Wonda Thyme 5g x 40 roll x 400 Pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-thyme-5g-x-40-roll-x-400-pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Thyme 5g x 40 roll x 400 Pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ama-wonda-thyme-leave-250g" class="relative block bg-white" aria-label="Ama Wonda Thyme Leave 250g">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-74702aa006c7ca9619d1.jpg" alt="Ama Wonda Thyme Leave 250g" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ama-wonda-thyme-leave-250g" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ama Wonda Thyme Leave 250g
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-chicken-12-x-144" class="relative block bg-white" aria-label="Ami Chicken 12 x 144">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-c6f07ed6eec56ef89533.jpg" alt="Ami Chicken 12 x 144" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-chicken-12-x-144" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Chicken 12 x 144
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-chicken-24x50" class="relative block bg-white" aria-label="Ami Chicken 24x50">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-3a726702764f694370bb.jpg" alt="Ami Chicken 24x50" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-chicken-24x50" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Chicken 24x50
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-chicken-sachet-100-pcs-x-12-pack" class="relative block bg-white" aria-label="AMI Chicken Sachet 100 Pcs x 12 pack">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-e9e2a1ab404d458d4067.png" alt="AMI Chicken Sachet 100 Pcs x 12 pack" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-chicken-sachet-100-pcs-x-12-pack" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            AMI Chicken Sachet 100 Pcs x 12 pack
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-tomato-50-x-24" class="relative block bg-white" aria-label="Ami Tomato 50 x 24">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-855a05b40ab3b7093b11.jpeg" alt="Ami Tomato 50 x 24" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-tomato-50-x-24" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Tomato 50 x 24
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-tomato-5g-cube-12-packs-x-144-pcs" class="relative block bg-white" aria-label="Ami Tomato 5g Cube 12 packs x 144 Pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-53f99a8e8d679e70e736.jpg" alt="Ami Tomato 5g Cube 12 packs x 144 Pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-tomato-5g-cube-12-packs-x-144-pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Tomato 5g Cube 12 packs x 144 Pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-tomato-5g-x-25-x-48" class="relative block bg-white" aria-label="Ami Tomato 5g x 25 x 48">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-ca3753000f52cdfb098e.jpg" alt="Ami Tomato 5g x 25 x 48" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-tomato-5g-x-25-x-48" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Tomato 5g x 25 x 48
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/ami-tomato-cube-5g-x-12-packs" class="relative block bg-white" aria-label="Ami Tomato Cube 5g x 12 packs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-95cc88020483e2e45332.jpg" alt="Ami Tomato Cube 5g x 12 packs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/ami-tomato-cube-5g-x-12-packs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Ami Tomato Cube 5g x 12 packs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/aramo" class="relative block bg-white" aria-label="Aramo">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-62409d73922044f145f4.jpg" alt="Aramo" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/aramo" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Aramo
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12-x-290z" class="relative block bg-white" aria-label="Bama Mayonnaise 12 x 290z">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-4bc749d2e186086be725.jpg" alt="Bama Mayonnaise 12 x 290z" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12-x-290z" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Bama Mayonnaise 12 x 290z
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12-x-8" class="relative block bg-white" aria-label="Bama Mayonnaise 12 x 8">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-e955ede56cf2768920ff.jpg" alt="Bama Mayonnaise 12 x 8" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12-x-8" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Bama Mayonnaise 12 x 8
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12x14pcs16pcs" class="relative block bg-white" aria-label="Bama Mayonnaise 12x14pcs/16pcs">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-ec04bc2a3005ac2f6d42.jpg" alt="Bama Mayonnaise 12x14pcs/16pcs" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/bama-mayonnaise-12x14pcs16pcs" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Bama Mayonnaise 12x14pcs/16pcs
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/benny-powder-chicken-flavour" class="relative block bg-white" aria-label="Benny Powder Chicken Flavour">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-7521c3b83b36e94fe4de.png" alt="Benny Powder Chicken Flavour" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/benny-powder-chicken-flavour" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Benny Powder Chicken Flavour
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                            <div class="group relative bg-white rounded-lg overflow-hidden border border-gray-200/80 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col">
+
+    
+    <a href="http://127.0.0.1:8000/shop/product/blue-band-25pcs-x-10pks-x-12g" class="relative block bg-white" aria-label="Blue Band 25Pcs x 10pks x 12g">
+        <div class="relative w-full aspect-square bg-white overflow-hidden">
+                            <img src="/images/products/fumi-f435bdb3319f2564f2f1.jpg" alt="Blue Band 25Pcs x 10pks x 12g" loading="lazy" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';"
+                     class="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105">
+            
+            
+                    </div>
+    </a>
+
+    
+    
+    
+    <div class="px-2.5 pt-2 flex-1 flex flex-col">
+        
+        
+        <a href="http://127.0.0.1:8000/shop/product/blue-band-25pcs-x-10pks-x-12g" class="block text-[13px] text-gray-700 leading-snug line-clamp-2 hover:text-emerald-700 flex-1">
+            Blue Band 25Pcs x 10pks x 12g
+        </a>
+
+        <div class="mt-1.5">
+            <div class="flex items-baseline gap-1.5 flex-wrap">
+                <span class="text-orange-500 font-bold text-[15px] leading-tight">₦1,020</span>
+                            </div>
+                                        <p class="text-[10px] text-gray-400 mt-0.5 truncate">Sold by Fumi Store</p>
+                    </div>
+    </div>
+
+    
+    <div class="p-2.5 pt-2">
+                    <a href="http://127.0.0.1:8000/login" class="block w-full text-center border border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-md py-2 text-xs font-bold uppercase tracking-wide transition-colors">Login to Buy</a>
+            </div>
+</div>
+                    </div>
+        <div class="mt-6"><nav role="navigation" aria-label="Pagination Navigation">
+
+        <div class="flex gap-2 items-center justify-between sm:hidden">
+
+                            <span class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 cursor-not-allowed leading-5 rounded-md dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                    &laquo; Previous
+                </span>
+            
+                            <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=2" rel="next" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-gray-200">
+                    Next &raquo;
+                </a>
+            
+        </div>
+
+        <div class="hidden sm:flex-1 sm:flex sm:gap-2 sm:items-center sm:justify-between">
+
+            <div>
+                <p class="text-sm text-gray-700 leading-5 dark:text-gray-600">
+                    Showing
+                                            <span class="font-medium">1</span>
+                        to
+                        <span class="font-medium">24</span>
+                                        of
+                    <span class="font-medium">187</span>
+                    results
+                </p>
+            </div>
+
+            <div>
+                <span class="inline-flex rtl:flex-row-reverse shadow-sm rounded-md">
+
+                    
+                                            <span aria-disabled="true" aria-label="&amp;laquo; Previous">
+                            <span class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-not-allowed rounded-l-md leading-5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400" aria-hidden="true">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </span>
+                    
+                    
+                                            
+                        
+                        
+                                                                                                                        <span aria-current="page">
+                                        <span class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-gray-200 border border-gray-300 cursor-default leading-5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">1</span>
+                                    </span>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=2" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 2">
+                                        2
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=3" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 3">
+                                        3
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=4" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 4">
+                                        4
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=5" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 5">
+                                        5
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=6" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 6">
+                                        6
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=7" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 7">
+                                        7
+                                    </a>
+                                                                                                                                <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=8" class="inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 hover:text-gray-700 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:text-gray-300 dark:active:bg-gray-700 dark:focus:border-blue-800 hover:bg-gray-100 dark:hover:bg-gray-900" aria-label="Go to page 8">
+                                        8
+                                    </a>
+                                                                                                        
+                    
+                                            <a href="http://127.0.0.1:8000/shop/vendors/fumi-store?page=2" rel="next" class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:active:bg-gray-700 dark:focus:border-blue-800 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-300" aria-label="Next &amp;raquo;">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                                    </span>
+            </div>
+        </div>
+    </nav>
+</div>
+            </div>
+    </main>
+
+    
+    <footer class="bg-gradient-to-b from-emerald-950 to-emerald-900 text-emerald-200 mt-10 border-t border-emerald-800/60">
+        <div class="max-w-[1440px] mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+            <div>
+                <h3 class="text-white font-bold mb-3 flex items-center gap-2">
+                    <img src="http://127.0.0.1:8000/assets/landing/images/FCCEILOGO.png" alt="FCCEI Logo" class="w-8 h-8 rounded-lg object-contain bg-emerald-950 ring-1 ring-emerald-700/40">
+                    FoodChain Marketplace
+                </h3>
+                <p class="text-emerald-300/80 leading-relaxed">Quality Nigerian groceries and household essentials delivered to your doorstep. Empowering communities through affordable food.</p>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-3">Shop</h3>
+                <ul class="space-y-2">
+                                                            <li><a href="http://127.0.0.1:8000/shop/all" class="hover:text-white font-medium text-emerald-300">View all products</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-3">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="http://127.0.0.1:8000/shop/flash-sale" class="hover:text-white">Flash Sales</a></li>
+                    <li><a href="http://127.0.0.1:8000/shop/vendors" class="hover:text-white">Our Vendors</a></li>
+                    <li><a href="http://127.0.0.1:8000/marketplace/loyalty" class="hover:text-white">Loyalty Points</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-3">My Account</h3>
+                <ul class="space-y-2">
+                                            <li><a href="http://127.0.0.1:8000/login" class="hover:text-white">Login</a></li>
+                        <li><a href="http://127.0.0.1:8000/register" class="hover:text-white">Create Account</a></li>
+                                    </ul>
+                <div class="mt-4 rounded-lg bg-emerald-900/60 px-3 py-2.5 text-xs text-emerald-300/90">
+                    <p class="font-semibold text-emerald-200 mb-0.5">We Accept</p>
+                    <p>FoodChain Wallet · Paystack · Flutterwave · Mono · Bank Transfer · Cash on Delivery</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-emerald-800/60 px-4 py-4 text-center text-xs text-emerald-300/80">
+            <p class="font-semibold text-emerald-200 mb-0.5">Office Address for Enquiry:</p>
+            <p class="mb-1">No. 9B, Adejumo Tennis Club Road, opposite DE-RESTED PHARMACY, Ilamoshe Estate, Oke Afa, Ejigbo, Lagos.</p>
+            <p class="mb-1">Central Warehouse 1: 31, Ofada Street, Off Ladipo Rd, Mushin.</p>
+            <p class="mb-2">Our Distribution Hubs in Lagos: Oyingbo, Ebutte-ero, Igando, Ikorodu (1 &amp; 2), Ladega, Sango, Ejigbo, Ojuwoye &amp; Mushin Post Office.</p>
+            <p>&copy; 2026 FoodChain Community Empowerment Initiative. All rights reserved.</p>
+        </div>
+    </footer>
+
+            <script>
+        // Flash auto-dismiss
+        document.querySelectorAll('.flash-item').forEach(item => {
+            setTimeout(() => item.classList.add('opacity-0', 'transition-opacity', 'duration-500'), 5000);
+            setTimeout(() => item.remove(), 5500);
+            item.querySelector('.close-flash')?.addEventListener('click', () => item.remove());
+        });
+
+        // Live search suggestions
+        const searchInput = document.getElementById('search-input');
+        const suggestionsBox = document.getElementById('search-suggestions');
+        if (searchInput) {
+            let debounceTimer;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                const term = searchInput.value.trim();
+                if (term.length < 2) { suggestionsBox.classList.add('hidden'); suggestionsBox.innerHTML = ''; return; }
+                debounceTimer = setTimeout(async () => {
+                    try {
+                        const res = await fetch(`/shop/autocomplete?q=${encodeURIComponent(term)}`);
+                        const data = await res.json();
+                        renderSuggestions(data, term);
+                    } catch (e) { suggestionsBox.classList.add('hidden'); }
+                }, 250);
+            });
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#search-form')) suggestionsBox.classList.add('hidden');
+            });
+        }
+        function renderSuggestions(data, term) {
+            let html = '';
+            if ((data.categories || []).length) {
+                html += '<div class="px-4 py-2 text-xs font-bold text-gray-400 uppercase">Categories</div>';
+                data.categories.forEach(c => { html += `<a href="/shop/category/${c.slug}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">${c.name}</a>`; });
+            }
+            if ((data.products || []).length) {
+                html += '<div class="px-4 py-2 text-xs font-bold text-gray-400 uppercase">Products</div>';
+                data.products.forEach(p => { html += `<a href="/shop/product/${p.slug}" class="flex items-center gap-3 px-4 py-2 hover:bg-emerald-50">${p.image ? `<img src="${p.image}" alt="" class="w-8 h-8 rounded object-cover" onerror="this.onerror=null;this.src='/images/product-placeholder.svg';">` : `<span class="w-8 h-8 rounded bg-gray-100"></span>`}<div><div class="text-sm text-gray-800">${p.name}</div><div class="text-xs text-emerald-600">${formatNaira(p.selling_price)}</div></div></a>`; });
+            }
+            if (!html) html = '<div class="px-4 py-4 text-sm text-gray-500">No results for "' + term + '"</div>';
+            suggestionsBox.innerHTML = html;
+            suggestionsBox.classList.remove('hidden');
+        }
+        function formatNaira(v) { return '₦' + Number(v).toLocaleString(undefined, { minimumFractionDigits: 2 }); }
+
+        // Cart badge update helper
+        window.updateCartCount = async function () {
+            const badge = document.getElementById('cart-count-badge');
+            if (!badge) return;
+            try {
+                const res = await fetch('/marketplace/cart/count', { headers: { 'Accept': 'application/json' } });
+                const data = await res.json();
+                badge.textContent = data.count;
+                badge.classList.toggle('hidden', data.count === 0);
+            } catch (e) {}
+        };
+    </script>
+</body>
+</html>
+

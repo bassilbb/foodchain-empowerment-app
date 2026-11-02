@@ -681,7 +681,7 @@
             </div>
         </section>
 
-        <!-- <section class="py-20 bg-gradient-to-r from-emerald-600 to-cyan-600">
+<!-- <section class="py-20 bg-gradient-to-r from-emerald-600 to-cyan-600">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-4xl font-bold text-white mb-6">{{ App\Models\PageContent::getContent('landing', 'cta_title', 'Ready to Make a Difference?') }}</h2>
                 <p class="text-xl text-white/90 max-w-2xl mx-auto mb-8">{{ App\Models\PageContent::getContent('landing', 'cta_content', 'Join thousands of members already benefiting from FoodChain community programs.') }}</p>

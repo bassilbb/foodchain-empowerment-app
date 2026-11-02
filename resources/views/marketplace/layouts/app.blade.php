@@ -144,7 +144,7 @@
                     </span>
                 </a>
 
-                <a href="{{ route('marketplace.vendor.dashboard') }}" class="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:-translate-y-0.5 text-white text-sm font-semibold rounded-full px-4 py-2.5 ml-1 shadow-lg shadow-emerald-600/25 transition-all">Sell on FoodChain</a>
+                <a href="{{ route('vendor.dashboard') }}" class="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:-translate-y-0.5 text-white text-sm font-semibold rounded-full px-4 py-2.5 ml-1 shadow-lg shadow-emerald-600/25 transition-all">Sell on FoodChain</a>
             </div>
         </div>
 

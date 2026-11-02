@@ -99,6 +99,9 @@
                 <div><span>Discount</span><span>-₦{{ number_format($order->discount_amount, 2) }}</span></div>
             @endif
             <div><span>Delivery</span><span>₦{{ number_format($order->shipping_fee, 2) }}</span></div>
+            @if (($order->service_charge ?? 0) > 0)
+                <div><span>Service Charge ({{ number_format(($order->service_charge_rate ?? 0) * 100, 0) }}%)</span><span>₦{{ number_format($order->service_charge, 2) }}</span></div>
+            @endif
             <div class="grand"><span>Total</span><span>₦{{ number_format($order->total, 2) }}</span></div>
 
             @if ($order->wallet_amount > 0)

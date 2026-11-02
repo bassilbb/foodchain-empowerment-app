@@ -90,6 +90,15 @@
                         <span class="badge badge-error">Inactive</span>
                         @endif
                     </td>
+                    <td>
+                        <form method="POST" action="{{ route('admin.users.toggle', ['user' => $user->id]) }}" class="d-inline">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-sm btn-{{ $user->is_active ? 'danger' : 'success' }}" title="{{ $user->is_active ? 'Deactivate user' : 'Activate user' }}">
+                                {{ $user->is_active ? 'Deactivate' : 'Activate' }}
+                            </button>
+                        </form>
+                    </td>
                     <td style="color: #64748b; font-size: 0.875rem;">
                         {{ $user->created_at->format('M d, Y') }}
                     </td>

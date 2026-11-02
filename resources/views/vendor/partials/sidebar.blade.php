@@ -7,6 +7,12 @@
 @php
 $vendor = auth()->user()->marketplaceVendor;
 
+// Injectable from any vendor view that extends the layout via a `sidebarBadges`
+// section. Without these the Low Stock / Earnings badges silently disappear on
+// every page except the dashboard, which is where they were defined.
+$lowStockCount = $lowStockCount ?? null;
+$pendingPayoutCount = $pendingPayoutCount ?? null;
+
 $menu = [
 [
 'heading' => null,
@@ -80,6 +86,8 @@ $icons = [
 ];
 @endphp
 
+@include('vendor.partials.brand', ['brandVendor' => $vendor])
+
 <nav class="flex-1 space-y-5 overflow-y-auto px-3 py-4">
     @foreach ($menu as $group)
     @php
@@ -143,6 +151,13 @@ $icons = [
 </nav>
 
 <div class="border-t border-white/10 p-3">
+    <a href="{{ route('dashboard') }}" class="mb-2 flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 px-3 py-2.5 text-xs font-bold text-emerald-100 ring-1 ring-inset ring-white/10 transition hover:bg-white/10">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Member Dashboard
+    </a>
+
     <a href="{{ route('marketplace.home') }}" class="mb-2 flex w-full items-center justify-center gap-2 rounded-xl bg-white/5 px-3 py-2.5 text-xs font-bold text-emerald-100 ring-1 ring-inset ring-white/10 transition hover:bg-white/10">
         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

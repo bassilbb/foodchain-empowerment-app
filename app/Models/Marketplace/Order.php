@@ -14,6 +14,7 @@ class Order extends Model
     protected $fillable = [
         'user_id', 'order_number', 'status', 'subtotal', 'discount_amount',
         'shipping_fee', 'total', 'coupon_id', 'coupon_code', 'coupon_discount',
+        'service_charge_rate', 'service_charge', 'service_charge_amount',
         'payment_method', 'payment_status', 'wallet_amount', 'cash_amount',
         'delivery_type', 'delivery_address', 'delivery_city', 'delivery_state',
         'delivery_lga', 'delivery_zone_id', 'estimated_delivery_date',
@@ -29,6 +30,9 @@ class Order extends Model
         'shipping_fee' => 'decimal:2',
         'total' => 'decimal:2',
         'coupon_discount' => 'decimal:2',
+        'service_charge_rate' => 'decimal:4',
+        'service_charge' => 'decimal:2',
+        'service_charge_amount' => 'decimal:2',
         'wallet_amount' => 'decimal:2',
         'cash_amount' => 'decimal:2',
         'refund_amount' => 'decimal:2',

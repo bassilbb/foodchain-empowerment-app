@@ -87,7 +87,9 @@ class Product extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('is_active', true)->where('approval_status', 'approved');
+        return $query->where('is_active', true)
+            ->where('approval_status', 'approved')
+            ->whereHas('vendor', fn ($q) => $q->where('status', 'approved'));
     }
 
     public function scopeApproved($query)

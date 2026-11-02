@@ -132,6 +132,7 @@
                         @if ($data['coupon_discount'] > 0)
                             <div class="flex justify-between text-emerald-600"><span>Coupon ({{ $data['coupon_code'] }})</span><span>-₦{{ number_format($data['coupon_discount'], 2) }}</span></div>
                         @endif
+                        <div class="flex justify-between text-gray-600"><span>Service Charge ({{ number_format($data['service_charge_rate'] * 100, 0) }}%)</span><span>₦{{ number_format($data['service_charge'], 2) }}</span></div>
                         <div class="flex justify-between text-gray-600"><span>Delivery</span><span id="checkout-delivery-fee">₦{{ number_format($data['shipping_fee'], 2) }}</span></div>
                     </div>
 
@@ -190,6 +191,9 @@
             const data = await res.json();
             if (data.delivery_fee !== undefined) {
                 document.getElementById('checkout-delivery-fee').textContent = '₦' + Number(data.delivery_fee).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                const baseTotal = {{ (float) $data['subtotal'] + (float) $data['service_charge'] }};
+                const newTotal = baseTotal + Number(data.delivery_fee) - {{ (float) $data['coupon_discount'] }};
+                document.getElementById('checkout-total').textContent = '₦' + newTotal.toLocaleString(undefined, { minimumFractionDigits: 2 });
             }
         }
         deliveryType.addEventListener('change', updateDelivery);

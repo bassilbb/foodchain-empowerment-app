@@ -58,6 +58,8 @@ class CheckoutController extends Controller
 
         $user = auth()->user();
         $subtotal = $this->cartService->getSubtotal($user);
+        $serviceChargeRate = ($subtotal >= 500000) ? 0.03 : 0.05;
+        $serviceCharge = round($subtotal * $serviceChargeRate, 2);
         $weight = $this->cartService->getCart($user)->sum(fn ($item) => (float) $item->product->weight * $item->quantity);
 
         $result = $this->deliveryService->calculate([
@@ -71,9 +73,11 @@ class CheckoutController extends Controller
 
         return response()->json([
             'delivery_fee' => (float) $result['delivery_fee'],
+            'service_charge' => $serviceCharge,
+            'service_charge_rate' => $serviceChargeRate,
             'estimated_days' => $result['estimated_days'],
             'estimated_delivery_date' => $result['estimated_delivery_date'] ?? null,
-            'total' => round($subtotal + (float) $result['delivery_fee'], 2),
+            'total' => round($subtotal + (float) $result['delivery_fee'] + $serviceCharge, 2),
         ]);
     }
 

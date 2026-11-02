@@ -68,7 +68,9 @@ class OrderService
         ]);
 
         $shippingFee = (float) $delivery['delivery_fee'];
-        $total = max(0, $subtotal - $couponDiscount + $shippingFee);
+        $serviceChargeRate = ($subtotal >= 500000) ? 0.03 : 0.05;
+        $serviceCharge = round($subtotal * $serviceChargeRate, 2);
+        $total = max(0, $subtotal - $couponDiscount + $shippingFee + $serviceCharge);
 
         return [
             'success' => true,
@@ -79,6 +81,9 @@ class OrderService
             'coupon_code' => $couponCode,
             'coupon_discount' => round($couponDiscount, 2),
             'shipping_fee' => $shippingFee,
+            'service_charge_rate' => $serviceChargeRate,
+            'service_charge' => $serviceCharge,
+            'service_charge_amount' => $serviceCharge,
             'estimated_delivery_date' => $delivery['estimated_delivery_date'] ?? null,
             'delivery_type' => $data['delivery_type'] ?? 'home_delivery',
             'total' => round($total, 2),
@@ -126,6 +131,9 @@ class OrderService
                     'discount_amount' => 0,
                     'shipping_fee' => $checkout['shipping_fee'],
                     'total' => $checkout['total'],
+                    'service_charge_rate' => $checkout['service_charge_rate'] ?? 0,
+                    'service_charge' => $checkout['service_charge'] ?? 0,
+                    'service_charge_amount' => $checkout['service_charge_amount'] ?? 0,
                     'coupon_id' => $checkout['coupon_id'],
                     'coupon_code' => $checkout['coupon_code'],
                     'coupon_discount' => $checkout['coupon_discount'],
@@ -143,6 +151,8 @@ class OrderService
                     'note' => $data['note'] ?? null,
                     'meta' => ['customer_note' => $data['note'] ?? null, 'pricing_state' => mp_state()],
                 ]);
+
+                $verifiedSubtotal = 0.0;
 
                 foreach ($checkout['cart_items'] as $item) {
                     $product = Product::where('id', $item->product_id)->lockForUpdate()->first();
@@ -165,6 +175,7 @@ class OrderService
 
                     $unitPrice = app(MarketplacePricingService::class)->priceFor($product);
                     $lineTotal = $unitPrice * $item->quantity;
+                    $verifiedSubtotal += $lineTotal;
 
                     OrderItem::create([
                         'order_id' => $order->id,
@@ -190,6 +201,19 @@ class OrderService
                         'changed_by_id' => $user->id,
                     ]);
                 }
+
+                $verifiedSubtotal = round($verifiedSubtotal, 2);
+                $serviceChargeRate = ($verifiedSubtotal >= 500000) ? 0.03 : 0.05;
+                $serviceCharge = round($verifiedSubtotal * $serviceChargeRate, 2);
+                $total = max(0, $verifiedSubtotal - (float) $checkout['coupon_discount'] + (float) $checkout['shipping_fee'] + $serviceCharge);
+
+                $order->update([
+                    'subtotal' => $verifiedSubtotal,
+                    'service_charge_rate' => $serviceChargeRate,
+                    'service_charge' => $serviceCharge,
+                    'service_charge_amount' => $serviceCharge,
+                    'total' => $total,
+                ]);
 
                 $order->updateStatus('pending', 'Order placed.');
 
@@ -363,7 +387,7 @@ class OrderService
                         'success' => true,
                         'message' => 'Order placed. Please complete payment via bank transfer and your order will be confirmed.',
                         'order' => $order,
-                        'redirect' => route('marketplace.orders.show', $order->id),
+                        'redirect' => route('marketplace.orders.show', $order).'?bank_transfer=1',
                     ];
                 }
 

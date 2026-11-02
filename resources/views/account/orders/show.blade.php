@@ -253,6 +253,13 @@
                     <dd class="font-semibold text-slate-800">{{ format_currency($order->shipping_fee) }}</dd>
                 </div>
 
+                @if (($order->service_charge ?? 0) > 0)
+                <div class="flex items-center justify-between">
+                    <dt class="text-slate-600">Service Charge ({{ number_format(($order->service_charge_rate ?? 0) * 100, 0) }}%)</dt>
+                    <dd class="font-semibold text-slate-800">{{ format_currency($order->service_charge) }}</dd>
+                </div>
+                @endif
+
                 <div class="mt-1 flex items-center justify-between border-t border-slate-100 pt-3">
                     <dt class="text-sm font-extrabold text-slate-800">Grand Total</dt>
                     <dd class="text-lg font-extrabold text-emerald-700">{{ format_currency($order->total) }}</dd>

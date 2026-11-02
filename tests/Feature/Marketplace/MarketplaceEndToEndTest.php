@@ -328,8 +328,8 @@ class MarketplaceEndToEndTest extends TestCase
                 // surcharge for shipping.
                 return $data['subtotal'] === 23000.00
                     && $data['shipping_fee'] === 2500.00
-                    && $data['total'] === 25500.00
-                    && $data['points_to_earn'] === 255;
+                    && $data['total'] === 26650.00
+                    && $data['points_to_earn'] === 266;
             });
 
         $this->asBuyer()->postJson(route('marketplace.checkout.estimate'), [
@@ -386,7 +386,7 @@ class MarketplaceEndToEndTest extends TestCase
         $order = Order::latest('id')->firstOrFail();
 
         $this->assertSame(2300.00, (float) $order->coupon_discount);
-        $this->assertSame(23200.00, (float) $order->total);
+        $this->assertSame(24350.00, (float) $order->total);
         $this->assertSame(1, (int) $coupon->fresh()->used_count);
     }
 
@@ -424,10 +424,10 @@ class MarketplaceEndToEndTest extends TestCase
 
         $this->assertSame('paid', $order->payment_status);
         $this->assertSame('paid', $order->status);
-        $this->assertSame(25500.00, (float) $order->total);
-        $this->assertEquals(474500.0, (float) $this->buyer->fresh()->wallet_balance);
+        $this->assertSame(26650.00, (float) $order->total);
+        $this->assertEquals(473350.0, (float) $this->buyer->fresh()->wallet_balance);
         $this->assertSame(18, $this->product->fresh()->stock_quantity);
-        $this->assertSame(255, (int) $this->buyer->fresh()->loyalty_points_balance);
+        $this->assertSame(266, (int) $this->buyer->fresh()->loyalty_points_balance);
         $this->assertSame(0, CartItem::where('user_id', $this->buyer->id)->count());
 
         $item = $order->items()->firstOrFail();

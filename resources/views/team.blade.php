@@ -423,7 +423,7 @@ function closeTeamModal() {
 
 
 <!-- Newsletter -->
-<section class="py-16 bg-gradient-to-r from-emerald-600 to-teal-600">
+<section class="pt-16 pb-24 -mb-16 bg-gradient-to-r from-emerald-600 to-emerald-800">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-white mb-4 font-display">Stay Updated</h2>
     <p class="text-white/90 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest tips, success stories, and platform updates</p>
@@ -434,8 +434,6 @@ function closeTeamModal() {
       </form>
   </div>
 </section>
-
-<!-- Footer (Your provided detailed footer) -->
 @include('partials.site-footer')
 <a href="https://wa.me/+2348168018123" target="_blank" class="fixed bottom-8 right-8 z-[60] group">
         <span

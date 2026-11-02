@@ -54,6 +54,7 @@ class Post extends Model
      * storage/app/public failed, so the blog never renders a broken image.
      */
     private const LEGACY_ASSETS = [
+        'how-we-keep-your-groceries-quality-safe-and-approved' => 'assets/landing/images/blogsa.jpeg',
         'how-community-bulk-purchasing-helps-your-household-save' => 'assets/landing/images/blogsa.jpeg',
         'from-local-stall-to-nationwide-marketplace-store' => 'assets/landing/images/blogpost.jpeg',
         'getting-better-grocery-value-with-loyalty-points' => 'assets/landing/images/about-uss.webp',

@@ -209,8 +209,8 @@ class CheckoutPaymentTest extends TestCase
         $this->assertSame('paid', $order->payment_status);
         $this->assertSame(23000.00, (float) $order->subtotal);
         $this->assertSame(1500.00, (float) $order->shipping_fee);
-        $this->assertSame(24500.00, (float) $order->total);
-        $this->assertSame(24500.00, (float) $order->wallet_amount);
+        $this->assertSame(25650.00, (float) $order->total);
+        $this->assertSame(25650.00, (float) $order->wallet_amount);
 
         $this->assertDatabaseHas('marketplace_order_items', [
             'order_id' => $order->id,
@@ -221,7 +221,7 @@ class CheckoutPaymentTest extends TestCase
             'total_price' => 23000.00,
         ]);
 
-        $this->assertEquals(25500.00, (float) $this->buyer->fresh()->wallet_balance);
+        $this->assertEquals(24350.00, (float) $this->buyer->fresh()->wallet_balance);
         $this->assertSame(18, $this->product->fresh()->stock_quantity);
         $this->assertSame(0, CartItem::where('user_id', $this->buyer->id)->count());
     }
@@ -252,13 +252,13 @@ class CheckoutPaymentTest extends TestCase
             $mock->shouldReceive('initializePayment')->never();
         });
 
-        $this->placeOrder('wallet_paystack', ['wallet_amount' => 24500])
+        $this->placeOrder('wallet_paystack', ['wallet_amount' => 25650])
             ->assertRedirect(route('marketplace.orders.show', Order::firstOrFail()->id));
 
         $order = Order::first();
 
         $this->assertSame('paid', $order->payment_status);
-        $this->assertSame(24500.00, (float) $order->wallet_amount);
+        $this->assertSame(25650.00, (float) $order->wallet_amount);
     }
 
     public function test_wallet_paystack_with_a_remainder_debits_wallet_and_redirects_to_the_gateway(): void
@@ -272,7 +272,7 @@ class CheckoutPaymentTest extends TestCase
             'user_id' => $this->buyer->id,
             'reference' => 'PAY-REMAINDER-1',
             'type' => 'marketplace_order',
-            'amount' => 14500,
+            'amount' => 15650,
             'status' => 'pending',
             'payment_method' => 'paystack',
         ]);
@@ -282,7 +282,7 @@ class CheckoutPaymentTest extends TestCase
                 ->once()
                 ->withArgs(function ($user, $type, $amount, $meta) {
                     return $type === 'marketplace_order'
-                        && abs($amount - 14500.0) < 0.001
+                        && abs($amount - 15650.0) < 0.001
                         && ($meta['order_number'] ?? null) !== null;
                 })
                 ->andReturn([
@@ -303,7 +303,7 @@ class CheckoutPaymentTest extends TestCase
         $this->assertSame(10000.00, (float) $order->wallet_amount);
         $this->assertSame('PSK-REMAINDER-1', $order->payment_reference);
         $this->assertSame($payment->id, $order->payment_id);
-        $this->assertEquals(14500.00, (float) ($order->meta['remaining_paystack_amount'] ?? 0));
+        $this->assertEquals(15650.00, (float) ($order->meta['remaining_paystack_amount'] ?? 0));
 
         $this->assertEquals(0.0, (float) $this->buyer->fresh()->wallet_balance);
         $this->assertSame(18, $this->product->fresh()->stock_quantity);
@@ -508,5 +508,63 @@ class CheckoutPaymentTest extends TestCase
         $payment = Payment::where('payment_method', 'mono')->first();
         $this->assertNotNull($payment);
         $this->assertSame('pending', $payment->status);
+    }
+
+    public function test_bank_transfer_checkout_applies_service_charge_and_redirects_to_order(): void
+    {
+        $this->withLagosPrice();
+        $this->addToCart(2);
+
+        $bankAccount = \App\Models\BankAccount::create([
+            'bank_name' => 'Test Bank',
+            'account_number' => '0123456789',
+            'account_name' => 'FoodChain',
+            'is_active' => true,
+            'is_default' => true,
+        ]);
+
+        $response = $this->placeOrder('bank_transfer');
+
+        $order = Order::first();
+        $this->assertNotNull($order);
+        $this->assertSame('bank_transfer', $order->payment_method);
+        $this->assertSame('pending', $order->payment_status);
+        // subtotal 23000 -> 5% service charge = 1150; + delivery + (no coupon)
+        $this->assertSame(23000.0, (float) $order->subtotal);
+        $this->assertSame(0.05, (float) $order->service_charge_rate);
+        $this->assertSame(1150.0, (float) $order->service_charge);
+        $this->assertEqualsWithDelta((float) $order->subtotal + (float) $order->service_charge + (float) $order->shipping_fee, (float) $order->total, 0.01);
+
+        $response->assertRedirect(route('marketplace.orders.show', $order->id).'?bank_transfer=1');
+    }
+
+    public function test_submit_bank_transfer_creates_pending_manual_payment(): void
+    {
+        $this->withLagosPrice();
+        $this->addToCart(1);
+
+        $bankAccount = \App\Models\BankAccount::create([
+            'bank_name' => 'Test Bank',
+            'account_number' => '0123456789',
+            'account_name' => 'FoodChain',
+            'is_active' => true,
+            'is_default' => true,
+        ]);
+
+        $this->placeOrder('bank_transfer');
+
+        $order = Order::first();
+
+        $this->actingAs($this->buyer)
+            ->post(route('marketplace.orders.bank-transfer', $order), [
+                'sender_name' => 'Buyer Name',
+            ])
+            ->assertRedirect(route('marketplace.orders.show', $order));
+
+        $this->assertDatabaseHas('manual_payments', [
+            'marketplace_order_id' => $order->id,
+            'status' => 'pending',
+            'type' => 'marketplace_order',
+        ]);
     }
 }

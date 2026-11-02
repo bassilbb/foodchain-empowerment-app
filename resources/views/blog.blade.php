@@ -371,8 +371,6 @@
               </form>
         </div>
     </section>
-
-    <!-- Footer -->
     @include('partials.site-footer')
 
     <!-- Script for mobile menu toggle -->

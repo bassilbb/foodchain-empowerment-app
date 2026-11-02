@@ -184,6 +184,7 @@ class AdminPageRenderTest extends TestCase
 
         $this->ids = [
             'admin_user' => $this->admin->id,
+            'adminUser' => $this->admin->id,
             'user' => $buyer->id,
             'vendor' => $vendor->id,
             'product' => $product->id,

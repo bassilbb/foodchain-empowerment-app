@@ -10,7 +10,7 @@ use App\Http\Controllers\Marketplace\LoyaltyController;
 use App\Http\Controllers\Marketplace\OrderController;
 use App\Http\Controllers\Marketplace\ReviewController;
 use App\Http\Controllers\Marketplace\ShopController;
-use App\Http\Controllers\Marketplace\VendorController;
+use App\Http\Controllers\Marketplace\VendorCentreRedirectController;
 use App\Http\Controllers\Marketplace\WalletController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +56,8 @@ Route::middleware(['auth', 'membership'])->prefix('marketplace')->name('marketpl
         Route::get('/', [OrderController::class, 'index'])->name('index');
         Route::get('/{order}', [OrderController::class, 'show'])->name('show');
         Route::post('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel');
+        Route::post('/{order}/bank-transfer', [OrderController::class, 'submitBankTransfer'])->name('bank-transfer');
+        Route::post('/{order}/bank_transfer', [OrderController::class, 'submitBankTransfer'])->name('bank_transfer');
         Route::post('/{order}/confirm-delivery', [OrderController::class, 'confirmDelivery'])->name('confirm-delivery');
         Route::post('/{order}/reorder', [OrderController::class, 'reorder'])->name('reorder');
         Route::post('/{order}/request-return', [OrderController::class, 'requestReturn'])->name('request-return');
@@ -90,20 +92,20 @@ Route::middleware(['auth', 'membership'])->prefix('marketplace')->name('marketpl
         Route::post('/{bulkOrder}/contribute', [BulkOrderController::class, 'contribute'])->name('contribute');
     });
 
-    // Vendor dashboard
-    Route::middleware('vendor')->prefix('vendor')->name('vendor.')->group(function () {
-        Route::get('/', [VendorController::class, 'dashboard'])->name('dashboard');
-        Route::get('/products', [VendorController::class, 'products'])->name('products');
-        Route::get('/products/create', [VendorController::class, 'productCreate'])->name('products.create');
-        Route::post('/products', [VendorController::class, 'productStore'])->name('products.store');
-        Route::get('/products/{product}/edit', [VendorController::class, 'productEdit'])->name('products.edit');
-        Route::put('/products/{product}', [VendorController::class, 'productUpdate'])->name('products.update');
-        Route::delete('/products/{product}', [VendorController::class, 'deleteProduct'])->name('products.delete');
-        Route::get('/inventory', [VendorController::class, 'inventory'])->name('inventory');
-        Route::post('/inventory/{product}/adjust', [VendorController::class, 'adjustStock'])->name('inventory.adjust');
-        Route::get('/orders', [VendorController::class, 'orders'])->name('orders');
-        Route::post('/orders/{item}/status', [VendorController::class, 'updateItemStatus'])->name('orders.status');
-        Route::get('/packing-slips', [VendorController::class, 'packingSlips'])->name('packing-slips');
-        Route::get('/reports', [VendorController::class, 'reports'])->name('reports');
+    // Legacy /marketplace/vendor centre.
+    //
+    // The Vendor Centre at /vendor (routes/vendor.php) is the single source of
+    // truth. This surface used to be a full duplicate with its own blades and
+    // its own status rules; it now only redirects so bookmarks, old links and
+    // emails keep working without a second implementation to maintain.
+    Route::middleware('auth')->prefix('vendor')->name('vendor.')->group(function () {
+        Route::get('/', [VendorCentreRedirectController::class, 'dashboard'])->name('dashboard');
+        Route::get('/products', [VendorCentreRedirectController::class, 'products'])->name('products');
+        Route::get('/products/create', [VendorCentreRedirectController::class, 'productCreate'])->name('products.create');
+        Route::get('/products/{product}/edit', [VendorCentreRedirectController::class, 'productEdit'])->name('products.edit');
+        Route::get('/inventory', [VendorCentreRedirectController::class, 'inventory'])->name('inventory');
+        Route::get('/orders', [VendorCentreRedirectController::class, 'orders'])->name('orders');
+        Route::get('/packing-slips', [VendorCentreRedirectController::class, 'packingSlips'])->name('packing-slips');
+        Route::get('/reports', [VendorCentreRedirectController::class, 'reports'])->name('reports');
     });
 });
