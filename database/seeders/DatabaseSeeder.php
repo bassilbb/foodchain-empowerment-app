@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             FoodItemSeeder::class,
             FoodPackageSeeder::class,
             AdminPermissionSeeder::class,
+            AdminUserSeeder::class,
             BankAccountSeeder::class,
             PickupLocationSeeder::class,
             SettingsSeeder::class,
@@ -28,17 +29,6 @@ class DatabaseSeeder extends Seeder
             FumiStoreSeeder::class,
             OpeyemiSeeder::class,
             BlogPostSeeder::class,
-        ]);
-
-        // Create default super admin
-        DB::table('admin_users')->insert([
-            'name' => 'Super Admin',
-            'email' => 'admin@foodchain.ng',
-            'password' => bcrypt('password'), // Change in production!
-            'role' => 'super_admin',
-            'is_active' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
     }
 }
