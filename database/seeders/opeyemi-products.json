@@ -1,0 +1,4128 @@
+{
+    "count": 589,
+    "products": [
+        {
+            "num": 1,
+            "name": "ACTIVA VEG OIL 45ML*100 SACHET",
+            "img": "https://chomart.com/storage/images/activa-pure-vegetable-oil-v2hzw77788.webp",
+            "slug": "opeyemi-activa-veg-oil-45ml100-sachet",
+            "sku": "OPEY-0001"
+        },
+        {
+            "num": 2,
+            "name": "ACTIVE GOLD OIL 3LT*4",
+            "img": "https://www.agtplaza.com/cdn/shop/files/background-editor_output_d5ed5bf9-8cf6-4cfe-b9cf-844ea8fc9a59.png?v=1753784782",
+            "slug": "opeyemi-active-gold-oil-3lt4",
+            "sku": "OPEY-0002"
+        },
+        {
+            "num": 3,
+            "name": "ACTIVE GOLD OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-active-gold-oil-5lt4",
+            "sku": "OPEY-0003"
+        },
+        {
+            "num": 4,
+            "name": "ACTIVE VEG OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-active-veg-oil-5lt4",
+            "sku": "OPEY-0004"
+        },
+        {
+            "num": 5,
+            "name": "AKTIV FLAVOURED MILK OTHER FLV 500ML*12",
+            "img": "https://www.supermart.ng/cdn/shop/files/spxvl3150_64c59b94-fc8b-49c8-b9b9-97a784d87360.jpg?v=1756132613&width=460",
+            "slug": "opeyemi-aktiv-flavoured-milk-other-flv-500ml12",
+            "sku": "OPEY-0005"
+        },
+        {
+            "num": 6,
+            "name": "AKTIV YO FLAVOURED MILK APPLE 500ML*12",
+            "img": "https://gomed.ng/_next/image?q=75&url=https%3A%2F%2Fdirectus.gomed.ng%2Fassets%2Fbbd3660c-5cf9-42cb-bbc8-9055eca9c7d9%3Fwidth%3D400%26quality%3D65%26format%3Dwebp&w=640",
+            "slug": "opeyemi-aktiv-yo-flavoured-milk-apple-500ml12",
+            "sku": "OPEY-0006"
+        },
+        {
+            "num": 7,
+            "name": "ALL BUTTER SHORTBREAD 82G*24",
+            "img": null,
+            "slug": "opeyemi-all-butter-shortbread-82g24",
+            "sku": "OPEY-0007"
+        },
+        {
+            "num": 8,
+            "name": "AMAIZING DAY 45G*100 by 11 PROMO",
+            "img": null,
+            "slug": "opeyemi-amaizing-day-45g100-by-11-promo",
+            "sku": "OPEY-0008"
+        },
+        {
+            "num": 9,
+            "name": "AMAIZING DAY 600G*6",
+            "img": "https://beta.ebeosi.com.ng/public/uploads/products/photos/ezxuYTwSIRniseyLF2YzKP0zOl9M4rXcTB2ENfj8.jpeg",
+            "slug": "opeyemi-amaizing-day-600g6",
+            "sku": "OPEY-0009"
+        },
+        {
+            "num": 10,
+            "name": "AMAIZING DAY 650G*12",
+            "img": null,
+            "slug": "opeyemi-amaizing-day-650g12",
+            "sku": "OPEY-0010"
+        },
+        {
+            "num": 11,
+            "name": "ASSAM MILK TEA DRINK 400ML",
+            "img": null,
+            "slug": "opeyemi-assam-milk-tea-drink-400ml",
+            "sku": "OPEY-0011"
+        },
+        {
+            "num": 12,
+            "name": "AUNTIE B SEMOLINA 10KG",
+            "img": null,
+            "slug": "opeyemi-auntie-b-semolina-10kg",
+            "sku": "OPEY-0012"
+        },
+        {
+            "num": 13,
+            "name": "AUNTIE B SEMOLINA 1KG*10",
+            "img": "https://beta.ebeosi.com.ng/public/uploads/products/photos/Wx68JzsHhuVLYL2pYxyleYbBn4e4HZJVXTLcW9vg.jpeg",
+            "slug": "opeyemi-auntie-b-semolina-1kg10",
+            "sku": "OPEY-0013"
+        },
+        {
+            "num": 14,
+            "name": "AUNTIE B SEMOLINA 5KG",
+            "img": null,
+            "slug": "opeyemi-auntie-b-semolina-5kg",
+            "sku": "OPEY-0014"
+        },
+        {
+            "num": 15,
+            "name": "AUNTIE B SPAG FAT 500G BY 20",
+            "img": null,
+            "slug": "opeyemi-auntie-b-spag-fat-500g-by-20",
+            "sku": "OPEY-0015"
+        },
+        {
+            "num": 16,
+            "name": "AUNTIE B SPAG SLIM 500G BY 20",
+            "img": null,
+            "slug": "opeyemi-auntie-b-spag-slim-500g-by-20",
+            "sku": "OPEY-0016"
+        },
+        {
+            "num": 17,
+            "name": "BETASOL CREAM 30G X 12 X 24",
+            "img": null,
+            "slug": "opeyemi-betasol-cream-30g-x-12-x-24",
+            "sku": "OPEY-0017"
+        },
+        {
+            "num": 18,
+            "name": "BETASOL LOTION 30ML X 12 X 20",
+            "img": null,
+            "slug": "opeyemi-betasol-lotion-30ml-x-12-x-20",
+            "sku": "OPEY-0018"
+        },
+        {
+            "num": 19,
+            "name": "BIG BULL RICE 10KG",
+            "img": null,
+            "slug": "opeyemi-big-bull-rice-10kg",
+            "sku": "OPEY-0019"
+        },
+        {
+            "num": 20,
+            "name": "BIG BULL RICE 50KG",
+            "img": null,
+            "slug": "opeyemi-big-bull-rice-50kg",
+            "sku": "OPEY-0020"
+        },
+        {
+            "num": 21,
+            "name": "BIG BULL RICE 5KG",
+            "img": null,
+            "slug": "opeyemi-big-bull-rice-5kg",
+            "sku": "OPEY-0021"
+        },
+        {
+            "num": 22,
+            "name": "BOW SOYA OIL 1.5LT*6",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-15lt6",
+            "sku": "OPEY-0022"
+        },
+        {
+            "num": 23,
+            "name": "BOW SOYA OIL 10LT",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-10lt",
+            "sku": "OPEY-0023"
+        },
+        {
+            "num": 24,
+            "name": "BOW SOYA OIL 1LTR*12",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-1ltr12",
+            "sku": "OPEY-0024"
+        },
+        {
+            "num": 25,
+            "name": "BOW SOYA OIL 2LT*6",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-2lt6",
+            "sku": "OPEY-0025"
+        },
+        {
+            "num": 26,
+            "name": "BOW SOYA OIL 3LT*6",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-3lt6",
+            "sku": "OPEY-0026"
+        },
+        {
+            "num": 27,
+            "name": "BOW SOYA OIL 4LT*4",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-4lt4",
+            "sku": "OPEY-0027"
+        },
+        {
+            "num": 28,
+            "name": "BOW SOYA OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-5lt4",
+            "sku": "OPEY-0028"
+        },
+        {
+            "num": 29,
+            "name": "BOW SOYA OIL 750ML",
+            "img": null,
+            "slug": "opeyemi-bow-soya-oil-750ml",
+            "sku": "OPEY-0029"
+        },
+        {
+            "num": 30,
+            "name": "BOXI ENERGY 400ML",
+            "img": null,
+            "slug": "opeyemi-boxi-energy-400ml",
+            "sku": "OPEY-0030"
+        },
+        {
+            "num": 31,
+            "name": "BUA RICE 50KG",
+            "img": null,
+            "slug": "opeyemi-bua-rice-50kg",
+            "sku": "OPEY-0031"
+        },
+        {
+            "num": 32,
+            "name": "BUA RICE 50KG LONG GRAIN",
+            "img": null,
+            "slug": "opeyemi-bua-rice-50kg-long-grain",
+            "sku": "OPEY-0032"
+        },
+        {
+            "num": 33,
+            "name": "BUBA 14.4G*48",
+            "img": null,
+            "slug": "opeyemi-buba-144g48",
+            "sku": "OPEY-0033"
+        },
+        {
+            "num": 34,
+            "name": "BUBA 27.5g*48",
+            "img": null,
+            "slug": "opeyemi-buba-275g48",
+            "sku": "OPEY-0034"
+        },
+        {
+            "num": 35,
+            "name": "BUBA 31g*48",
+            "img": null,
+            "slug": "opeyemi-buba-31g48",
+            "sku": "OPEY-0035"
+        },
+        {
+            "num": 36,
+            "name": "BUBA 6.5g*72",
+            "img": null,
+            "slug": "opeyemi-buba-65g72",
+            "sku": "OPEY-0036"
+        },
+        {
+            "num": 37,
+            "name": "CAFE COFFEE MILK DRINK 400ML",
+            "img": null,
+            "slug": "opeyemi-cafe-coffee-milk-drink-400ml",
+            "sku": "OPEY-0037"
+        },
+        {
+            "num": 38,
+            "name": "CALIFORNIA SUN FRUIT JUICE 150ML*36",
+            "img": null,
+            "slug": "opeyemi-california-sun-fruit-juice-150ml36",
+            "sku": "OPEY-0038"
+        },
+        {
+            "num": 39,
+            "name": "CAPPUCCINO COFFEE MILK DRINK 400ML*12",
+            "img": null,
+            "slug": "opeyemi-cappuccino-coffee-milk-drink-400ml12",
+            "sku": "OPEY-0039"
+        },
+        {
+            "num": 40,
+            "name": "CAPRI-SUN 100ml*40",
+            "img": null,
+            "slug": "opeyemi-capri-sun-100ml40",
+            "sku": "OPEY-0040"
+        },
+        {
+            "num": 41,
+            "name": "CAPRI-SUN APPLE 200ML*16",
+            "img": null,
+            "slug": "opeyemi-capri-sun-apple-200ml16",
+            "sku": "OPEY-0041"
+        },
+        {
+            "num": 42,
+            "name": "CAPRI-SUN APPLE 200ML*40",
+            "img": null,
+            "slug": "opeyemi-capri-sun-apple-200ml40",
+            "sku": "OPEY-0042"
+        },
+        {
+            "num": 43,
+            "name": "CAPRI-SUN ORANGE 200ml*16",
+            "img": null,
+            "slug": "opeyemi-capri-sun-orange-200ml16",
+            "sku": "OPEY-0043"
+        },
+        {
+            "num": 44,
+            "name": "CAPRI-SUN ORANGE 200ml*40",
+            "img": null,
+            "slug": "opeyemi-capri-sun-orange-200ml40",
+            "sku": "OPEY-0044"
+        },
+        {
+            "num": 45,
+            "name": "CFRESH 500ML*12",
+            "img": null,
+            "slug": "opeyemi-cfresh-500ml12",
+            "sku": "OPEY-0045"
+        },
+        {
+            "num": 46,
+            "name": "CHCEKERS CUSTARD PAP JAR 1.5KG*3",
+            "img": null,
+            "slug": "opeyemi-chcekers-custard-pap-jar-15kg3",
+            "sku": "OPEY-0046"
+        },
+        {
+            "num": 47,
+            "name": "CHCEKERS CUSTARD PAP REFILL 400G*8",
+            "img": null,
+            "slug": "opeyemi-chcekers-custard-pap-refill-400g8",
+            "sku": "OPEY-0047"
+        },
+        {
+            "num": 48,
+            "name": "CHCEKERS CUSTARD PAP REFILL 700G*6",
+            "img": null,
+            "slug": "opeyemi-chcekers-custard-pap-refill-700g6",
+            "sku": "OPEY-0048"
+        },
+        {
+            "num": 49,
+            "name": "CHECKERS CUSTARD 400g Refill *16",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-400g-refill-16",
+            "sku": "OPEY-0049"
+        },
+        {
+            "num": 50,
+            "name": "CHECKERS CUSTARD CHOCOLATE 1KG*3",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-chocolate-1kg3",
+            "sku": "OPEY-0050"
+        },
+        {
+            "num": 51,
+            "name": "CHECKERS CUSTARD 1KG*4 BANANA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-1kg4-banana",
+            "sku": "OPEY-0051"
+        },
+        {
+            "num": 52,
+            "name": "CHECKERS CUSTARD 1KG*4 VANILLA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-1kg4-vanilla",
+            "sku": "OPEY-0052"
+        },
+        {
+            "num": 53,
+            "name": "CHECKERS CUSTARD 1KG*8 REFILL VANILLA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-1kg8-refill-vanilla",
+            "sku": "OPEY-0053"
+        },
+        {
+            "num": 54,
+            "name": "CHECKERS CUSTARD 2KG*3 BANANA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-2kg3-banana",
+            "sku": "OPEY-0054"
+        },
+        {
+            "num": 55,
+            "name": "CHECKERS CUSTARD 2KG*3 VANILLA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-2kg3-vanilla",
+            "sku": "OPEY-0055"
+        },
+        {
+            "num": 56,
+            "name": "CHECKERS CUSTARD 3IN1 1.5KG*3",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-3in1-15kg3",
+            "sku": "OPEY-0056"
+        },
+        {
+            "num": 57,
+            "name": "CHECKERS CUSTARD 3IN1 1KG*3",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-3in1-1kg3",
+            "sku": "OPEY-0057"
+        },
+        {
+            "num": 58,
+            "name": "CHECKERS CUSTARD 3IN1 400G*6 JAR",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-3in1-400g6-jar",
+            "sku": "OPEY-0058"
+        },
+        {
+            "num": 59,
+            "name": "CHECKERS CUSTARD 3IN1 700G*6 REFILL",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-3in1-700g6-refill",
+            "sku": "OPEY-0059"
+        },
+        {
+            "num": 60,
+            "name": "CHECKERS CUSTARD 400G*12 JAR VANILLA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-400g12-jar-vanilla",
+            "sku": "OPEY-0060"
+        },
+        {
+            "num": 61,
+            "name": "CHECKERS CUSTARD BANANA 400G*12 JAR",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-banana-400g12-jar",
+            "sku": "OPEY-0061"
+        },
+        {
+            "num": 62,
+            "name": "CHECKERS CUSTARD CHOCOLATE 400G*6",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-chocolate-400g6",
+            "sku": "OPEY-0062"
+        },
+        {
+            "num": 63,
+            "name": "CHECKERS CUSTARD CHOCOLATE 40G*80",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-chocolate-40g80",
+            "sku": "OPEY-0063"
+        },
+        {
+            "num": 64,
+            "name": "CHECKERS CUSTARD PAP 400G JAR*6",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-pap-400g-jar6",
+            "sku": "OPEY-0064"
+        },
+        {
+            "num": 65,
+            "name": "CHECKERS CUSTARD PAP 45G*64 SACHET",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-pap-45g64-sachet",
+            "sku": "OPEY-0065"
+        },
+        {
+            "num": 66,
+            "name": "CHECKERS CUSTARD PAP 45GM*64 SACHETSPIECES",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-pap-45gm64-sachetspieces",
+            "sku": "OPEY-0066"
+        },
+        {
+            "num": 67,
+            "name": "CHECKERS CUSTARD SACHET 3IN1 45G*80",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-sachet-3in1-45g80",
+            "sku": "OPEY-0067"
+        },
+        {
+            "num": 68,
+            "name": "CHECKERS CUSTARD SACHET 45G VANILLA PIECES",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-sachet-45g-vanilla-pieces",
+            "sku": "OPEY-0068"
+        },
+        {
+            "num": 69,
+            "name": "CHECKERS CUSTARD SACHET 45G*96 BANANA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-sachet-45g96-banana",
+            "sku": "OPEY-0069"
+        },
+        {
+            "num": 70,
+            "name": "CHECKERS CUSTARD SACHET 45G*96 VANILLA",
+            "img": null,
+            "slug": "opeyemi-checkers-custard-sachet-45g96-vanilla",
+            "sku": "OPEY-0070"
+        },
+        {
+            "num": 71,
+            "name": "CHECKERS PEANUT 72* 25g",
+            "img": null,
+            "slug": "opeyemi-checkers-peanut-72-25g",
+            "sku": "OPEY-0071"
+        },
+        {
+            "num": 72,
+            "name": "CHEF SALT 1KG*20",
+            "img": null,
+            "slug": "opeyemi-chef-salt-1kg20",
+            "sku": "OPEY-0072"
+        },
+        {
+            "num": 73,
+            "name": "CHEF SALT 250G*80",
+            "img": null,
+            "slug": "opeyemi-chef-salt-250g80",
+            "sku": "OPEY-0073"
+        },
+        {
+            "num": 74,
+            "name": "CHEF SALT 500G*40",
+            "img": null,
+            "slug": "opeyemi-chef-salt-500g40",
+            "sku": "OPEY-0074"
+        },
+        {
+            "num": 75,
+            "name": "CHI ACTIVE 125ML*24",
+            "img": null,
+            "slug": "opeyemi-chi-active-125ml24",
+            "sku": "OPEY-0075"
+        },
+        {
+            "num": 76,
+            "name": "CHI ACTIVE 1LT*10",
+            "img": null,
+            "slug": "opeyemi-chi-active-1lt10",
+            "sku": "OPEY-0076"
+        },
+        {
+            "num": 77,
+            "name": "CHI ACTIVE 315ML*12",
+            "img": null,
+            "slug": "opeyemi-chi-active-315ml12",
+            "sku": "OPEY-0077"
+        },
+        {
+            "num": 78,
+            "name": "CHI ACTIVE ZEST 1LT*10",
+            "img": null,
+            "slug": "opeyemi-chi-active-zest-1lt10",
+            "sku": "OPEY-0078"
+        },
+        {
+            "num": 79,
+            "name": "CHI ACTIVE ZEST 330ML*24 CAN",
+            "img": null,
+            "slug": "opeyemi-chi-active-zest-330ml24-can",
+            "sku": "OPEY-0079"
+        },
+        {
+            "num": 80,
+            "name": "CHI ACTIVE ZEST 350ML*12 PET",
+            "img": null,
+            "slug": "opeyemi-chi-active-zest-350ml12-pet",
+            "sku": "OPEY-0080"
+        },
+        {
+            "num": 81,
+            "name": "CHI ACTIVE ZEST 350ML*12 PET PROMO",
+            "img": null,
+            "slug": "opeyemi-chi-active-zest-350ml12-pet-promo",
+            "sku": "OPEY-0081"
+        },
+        {
+            "num": 82,
+            "name": "CHI ACTIVE ZEST 50ML*48",
+            "img": null,
+            "slug": "opeyemi-chi-active-zest-50ml48",
+            "sku": "OPEY-0082"
+        },
+        {
+            "num": 83,
+            "name": "CHI EXOTIC 125ML*24",
+            "img": null,
+            "slug": "opeyemi-chi-exotic-125ml24",
+            "sku": "OPEY-0083"
+        },
+        {
+            "num": 84,
+            "name": "CHI EXOTIC 1LT*10",
+            "img": null,
+            "slug": "opeyemi-chi-exotic-1lt10",
+            "sku": "OPEY-0084"
+        },
+        {
+            "num": 85,
+            "name": "CHI EXOTIC 315ML*12",
+            "img": null,
+            "slug": "opeyemi-chi-exotic-315ml12",
+            "sku": "OPEY-0085"
+        },
+        {
+            "num": 86,
+            "name": "CHI EXOTIC 330ML*24 CAN",
+            "img": null,
+            "slug": "opeyemi-chi-exotic-330ml24-can",
+            "sku": "OPEY-0086"
+        },
+        {
+            "num": 87,
+            "name": "CHI EXOTIC 500ML*10",
+            "img": null,
+            "slug": "opeyemi-chi-exotic-500ml10",
+            "sku": "OPEY-0087"
+        },
+        {
+            "num": 88,
+            "name": "CHI HAPPY HOUR 125ML*24",
+            "img": null,
+            "slug": "opeyemi-chi-happy-hour-125ml24",
+            "sku": "OPEY-0088"
+        },
+        {
+            "num": 89,
+            "name": "CHI HAPPY HOUR 1LT*10",
+            "img": null,
+            "slug": "opeyemi-chi-happy-hour-1lt10",
+            "sku": "OPEY-0089"
+        },
+        {
+            "num": 90,
+            "name": "CHI HAPPY HOUR 330ML*24 CAN",
+            "img": null,
+            "slug": "opeyemi-chi-happy-hour-330ml24-can",
+            "sku": "OPEY-0090"
+        },
+        {
+            "num": 91,
+            "name": "CHI HAPPY HOUR 90ML*24",
+            "img": null,
+            "slug": "opeyemi-chi-happy-hour-90ml24",
+            "sku": "OPEY-0091"
+        },
+        {
+            "num": 92,
+            "name": "CHI ICE TEA 125ML",
+            "img": null,
+            "slug": "opeyemi-chi-ice-tea-125ml",
+            "sku": "OPEY-0092"
+        },
+        {
+            "num": 93,
+            "name": "CHI ICE TEA 1LT*10",
+            "img": null,
+            "slug": "opeyemi-chi-ice-tea-1lt10",
+            "sku": "OPEY-0093"
+        },
+        {
+            "num": 94,
+            "name": "CHI ICE TEA 315ML*12",
+            "img": null,
+            "slug": "opeyemi-chi-ice-tea-315ml12",
+            "sku": "OPEY-0094"
+        },
+        {
+            "num": 95,
+            "name": "CHI ICE TEA 330ML*24 CAN",
+            "img": null,
+            "slug": "opeyemi-chi-ice-tea-330ml24-can",
+            "sku": "OPEY-0095"
+        },
+        {
+            "num": 96,
+            "name": "CHI ICE TEA 350ML*12 PET",
+            "img": null,
+            "slug": "opeyemi-chi-ice-tea-350ml12-pet",
+            "sku": "OPEY-0096"
+        },
+        {
+            "num": 97,
+            "name": "CHIC CHOC WAFERS 19g *120",
+            "img": null,
+            "slug": "opeyemi-chic-choc-wafers-19g-120",
+            "sku": "OPEY-0097"
+        },
+        {
+            "num": 98,
+            "name": "CHIKKI CHICKEN NOODLES 100G*40",
+            "img": null,
+            "slug": "opeyemi-chikki-chicken-noodles-100g40",
+            "sku": "OPEY-0098"
+        },
+        {
+            "num": 99,
+            "name": "CHIKKI CHICKEN NOODLES 70G*40",
+            "img": null,
+            "slug": "opeyemi-chikki-chicken-noodles-70g40",
+            "sku": "OPEY-0099"
+        },
+        {
+            "num": 100,
+            "name": "CHIVITA 100% 1LT*10 ORANGE",
+            "img": null,
+            "slug": "opeyemi-chivita-100-1lt10-orange",
+            "sku": "OPEY-0100"
+        },
+        {
+            "num": 101,
+            "name": "CHIVITA 100% 1LT*10 OTHER FLAVOURS",
+            "img": null,
+            "slug": "opeyemi-chivita-100-1lt10-other-flavours",
+            "sku": "OPEY-0101"
+        },
+        {
+            "num": 102,
+            "name": "CROWN PREMIUM SPAG SLIM Pack (PROMO)",
+            "img": null,
+            "slug": "opeyemi-crown-premium-spag-slim-pack-promo",
+            "sku": "OPEY-0102"
+        },
+        {
+            "num": 103,
+            "name": "CROWN PREMIUM SPAGHETTI 500G*20+1",
+            "img": null,
+            "slug": "opeyemi-crown-premium-spaghetti-500g201",
+            "sku": "OPEY-0103"
+        },
+        {
+            "num": 104,
+            "name": "CROWN PREMIUM SPAGHETTINI 500G*20",
+            "img": null,
+            "slug": "opeyemi-crown-premium-spaghettini-500g20",
+            "sku": "OPEY-0104"
+        },
+        {
+            "num": 105,
+            "name": "CROWN PREMIUM SPAGHETTINI 500G*20 + 1",
+            "img": null,
+            "slug": "opeyemi-crown-premium-spaghettini-500g20-1",
+            "sku": "OPEY-0105"
+        },
+        {
+            "num": 106,
+            "name": "CWAY DARJEELING ICE TEA-PEACH 400ML",
+            "img": null,
+            "slug": "opeyemi-cway-darjeeling-ice-tea-peach-400ml",
+            "sku": "OPEY-0106"
+        },
+        {
+            "num": 107,
+            "name": "CWAY FIZZY APPLE DRINK 600ml",
+            "img": null,
+            "slug": "opeyemi-cway-fizzy-apple-drink-600ml",
+            "sku": "OPEY-0107"
+        },
+        {
+            "num": 108,
+            "name": "CWAY MACA-PLUS 600ML*12",
+            "img": null,
+            "slug": "opeyemi-cway-maca-plus-600ml12",
+            "sku": "OPEY-0108"
+        },
+        {
+            "num": 109,
+            "name": "CWAY MALT FLAVOR SOYA MILK 400ml",
+            "img": null,
+            "slug": "opeyemi-cway-malt-flavor-soya-milk-400ml",
+            "sku": "OPEY-0109"
+        },
+        {
+            "num": 110,
+            "name": "CWAY PEACH-JUICE 500ML",
+            "img": null,
+            "slug": "opeyemi-cway-peach-juice-500ml",
+            "sku": "OPEY-0110"
+        },
+        {
+            "num": 111,
+            "name": "DANGOTE SUGAR 250g*40",
+            "img": null,
+            "slug": "opeyemi-dangote-sugar-250g40",
+            "sku": "OPEY-0111"
+        },
+        {
+            "num": 112,
+            "name": "DANGOTE SUGAR 500g*20",
+            "img": null,
+            "slug": "opeyemi-dangote-sugar-500g20",
+            "sku": "OPEY-0112"
+        },
+        {
+            "num": 113,
+            "name": "DANGOTE SEMOLINA 10KG",
+            "img": null,
+            "slug": "opeyemi-dangote-semolina-10kg",
+            "sku": "OPEY-0113"
+        },
+        {
+            "num": 114,
+            "name": "DANGOTE SEMOLINA 5KG",
+            "img": null,
+            "slug": "opeyemi-dangote-semolina-5kg",
+            "sku": "OPEY-0114"
+        },
+        {
+            "num": 115,
+            "name": "DANGOTE SUGAR 100G*100",
+            "img": null,
+            "slug": "opeyemi-dangote-sugar-100g100",
+            "sku": "OPEY-0115"
+        },
+        {
+            "num": 116,
+            "name": "DANGOTE SUGAR 1KG*10",
+            "img": null,
+            "slug": "opeyemi-dangote-sugar-1kg10",
+            "sku": "OPEY-0116"
+        },
+        {
+            "num": 117,
+            "name": "DANO CHOCOLATE DRINK 22G*210",
+            "img": null,
+            "slug": "opeyemi-dano-chocolate-drink-22g210",
+            "sku": "OPEY-0117"
+        },
+        {
+            "num": 118,
+            "name": "DANO COOLCOW 12G*260",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-12g260",
+            "sku": "OPEY-0118"
+        },
+        {
+            "num": 119,
+            "name": "DANO COOLCOW 12G*260+10PCS CHOCO",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-12g26010pcs-choco",
+            "sku": "OPEY-0119"
+        },
+        {
+            "num": 120,
+            "name": "DANO COOLCOW 150G*36",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-150g36",
+            "sku": "OPEY-0120"
+        },
+        {
+            "num": 121,
+            "name": "DANO COOLCOW 25KG",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-25kg",
+            "sku": "OPEY-0121"
+        },
+        {
+            "num": 122,
+            "name": "DANO COOLCOW 2KG*6",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-2kg6",
+            "sku": "OPEY-0122"
+        },
+        {
+            "num": 123,
+            "name": "DANO COOLCOW 320G *12",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-320g-12",
+            "sku": "OPEY-0123"
+        },
+        {
+            "num": 124,
+            "name": "DANO COOLCOW 320G *12+10PCS CHOCO",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-320g-1210pcs-choco",
+            "sku": "OPEY-0124"
+        },
+        {
+            "num": 125,
+            "name": "DANO COOLCOW 750G*12",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-750g12",
+            "sku": "OPEY-0125"
+        },
+        {
+            "num": 126,
+            "name": "DANO COOLCOW 750G*12+10PCS CHOCO",
+            "img": null,
+            "slug": "opeyemi-dano-coolcow-750g1210pcs-choco",
+            "sku": "OPEY-0126"
+        },
+        {
+            "num": 127,
+            "name": "DANO EVAP COOL COW 150G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-dano-evap-cool-cow-150g24-tin",
+            "sku": "OPEY-0127"
+        },
+        {
+            "num": 128,
+            "name": "DANO EVAP FULL CREAM 150G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-dano-evap-full-cream-150g24-tin",
+            "sku": "OPEY-0128"
+        },
+        {
+            "num": 129,
+            "name": "DANO FULLCREAM 2KG*6",
+            "img": null,
+            "slug": "opeyemi-dano-fullcream-2kg6",
+            "sku": "OPEY-0129"
+        },
+        {
+            "num": 130,
+            "name": "DANO FULLCREAM 350G*12",
+            "img": null,
+            "slug": "opeyemi-dano-fullcream-350g12",
+            "sku": "OPEY-0130"
+        },
+        {
+            "num": 131,
+            "name": "DANO FULLCREAM 800G*12",
+            "img": null,
+            "slug": "opeyemi-dano-fullcream-800g12",
+            "sku": "OPEY-0131"
+        },
+        {
+            "num": 132,
+            "name": "DANO SABI 12G*200",
+            "img": null,
+            "slug": "opeyemi-dano-sabi-12g200",
+            "sku": "OPEY-0132"
+        },
+        {
+            "num": 133,
+            "name": "DANO UHT FULL CREAM",
+            "img": null,
+            "slug": "opeyemi-dano-uht-full-cream",
+            "sku": "OPEY-0133"
+        },
+        {
+            "num": 134,
+            "name": "DE VINO SOYA OIL 1LT",
+            "img": null,
+            "slug": "opeyemi-de-vino-soya-oil-1lt",
+            "sku": "OPEY-0134"
+        },
+        {
+            "num": 135,
+            "name": "DE VINO SOYA OIL 3LT",
+            "img": null,
+            "slug": "opeyemi-de-vino-soya-oil-3lt",
+            "sku": "OPEY-0135"
+        },
+        {
+            "num": 136,
+            "name": "DE VINO SOYA OIL 5LT",
+            "img": null,
+            "slug": "opeyemi-de-vino-soya-oil-5lt",
+            "sku": "OPEY-0136"
+        },
+        {
+            "num": 137,
+            "name": "DE VINO VEG OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-de-vino-veg-oil-25lt",
+            "sku": "OPEY-0137"
+        },
+        {
+            "num": 138,
+            "name": "DERICA TOMATO 210G*24",
+            "img": null,
+            "slug": "opeyemi-derica-tomato-210g24",
+            "sku": "OPEY-0138"
+        },
+        {
+            "num": 139,
+            "name": "DERICA TOMATO 400G*24",
+            "img": null,
+            "slug": "opeyemi-derica-tomato-400g24",
+            "sku": "OPEY-0139"
+        },
+        {
+            "num": 140,
+            "name": "DERICA TOMATO 60g*50",
+            "img": null,
+            "slug": "opeyemi-derica-tomato-60g50",
+            "sku": "OPEY-0140"
+        },
+        {
+            "num": 141,
+            "name": "DUBBLE BUBBLE GUM TUTTI FRUTTI 20*50",
+            "img": null,
+            "slug": "opeyemi-dubble-bubble-gum-tutti-frutti-2050",
+            "sku": "OPEY-0141"
+        },
+        {
+            "num": 142,
+            "name": "DUBBLE BUBBLE GUM WATERMELON 20*50",
+            "img": null,
+            "slug": "opeyemi-dubble-bubble-gum-watermelon-2050",
+            "sku": "OPEY-0142"
+        },
+        {
+            "num": 143,
+            "name": "EMPEROR OIL 1LT*12 PILLOW",
+            "img": null,
+            "slug": "opeyemi-emperor-oil-1lt12-pillow",
+            "sku": "OPEY-0143"
+        },
+        {
+            "num": 144,
+            "name": "EMPEROR OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-emperor-oil-5lt4",
+            "sku": "OPEY-0144"
+        },
+        {
+            "num": 145,
+            "name": "EMPEROR OIL 700ML*12",
+            "img": null,
+            "slug": "opeyemi-emperor-oil-700ml12",
+            "sku": "OPEY-0145"
+        },
+        {
+            "num": 146,
+            "name": "ENDY DELIGHTFUL PALM OIL 1LT*12",
+            "img": null,
+            "slug": "opeyemi-endy-delightful-palm-oil-1lt12",
+            "sku": "OPEY-0146"
+        },
+        {
+            "num": 147,
+            "name": "ENDY DELIGHTFUL PALM OIL 2LT*6",
+            "img": null,
+            "slug": "opeyemi-endy-delightful-palm-oil-2lt6",
+            "sku": "OPEY-0147"
+        },
+        {
+            "num": 148,
+            "name": "ENERGRO EGGRICH 14G*48",
+            "img": null,
+            "slug": "opeyemi-energro-eggrich-14g48",
+            "sku": "OPEY-0148"
+        },
+        {
+            "num": 149,
+            "name": "ENERGRO EGGRICH 27G*36",
+            "img": null,
+            "slug": "opeyemi-energro-eggrich-27g36",
+            "sku": "OPEY-0149"
+        },
+        {
+            "num": 150,
+            "name": "EPIDERM CREAM 30G X 12 X 24",
+            "img": null,
+            "slug": "opeyemi-epiderm-cream-30g-x-12-x-24",
+            "sku": "OPEY-0150"
+        },
+        {
+            "num": 151,
+            "name": "EPIGLOW SOAP 125G",
+            "img": null,
+            "slug": "opeyemi-epiglow-soap-125g",
+            "sku": "OPEY-0151"
+        },
+        {
+            "num": 152,
+            "name": "FESTIN TOMATO 210G*24",
+            "img": null,
+            "slug": "opeyemi-festin-tomato-210g24",
+            "sku": "OPEY-0152"
+        },
+        {
+            "num": 153,
+            "name": "FESTIN TOMATO 400G*24",
+            "img": null,
+            "slug": "opeyemi-festin-tomato-400g24",
+            "sku": "OPEY-0153"
+        },
+        {
+            "num": 154,
+            "name": "FESTIN TOMATO 55G*50",
+            "img": null,
+            "slug": "opeyemi-festin-tomato-55g50",
+            "sku": "OPEY-0154"
+        },
+        {
+            "num": 155,
+            "name": "FIGO TOMATO MIX 1.1KG*12 SACHET",
+            "img": null,
+            "slug": "opeyemi-figo-tomato-mix-11kg12-sachet",
+            "sku": "OPEY-0155"
+        },
+        {
+            "num": 156,
+            "name": "FIGO TOMATO MIX 210G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-figo-tomato-mix-210g24-sachet",
+            "sku": "OPEY-0156"
+        },
+        {
+            "num": 157,
+            "name": "FIGO TOMATO MIX 400G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-figo-tomato-mix-400g24-sachet",
+            "sku": "OPEY-0157"
+        },
+        {
+            "num": 158,
+            "name": "FIGO TOMATO MIX 55G*50",
+            "img": null,
+            "slug": "opeyemi-figo-tomato-mix-55g50",
+            "sku": "OPEY-0158"
+        },
+        {
+            "num": 159,
+            "name": "FLODENT ACTIVE GEL TOOTHPASTE 140G X 6 X 6",
+            "img": null,
+            "slug": "opeyemi-flodent-active-gel-toothpaste-140g-x-6-x-6",
+            "sku": "OPEY-0159"
+        },
+        {
+            "num": 160,
+            "name": "FLODENT TOOTHPASTE 140G X 6 X 6",
+            "img": null,
+            "slug": "opeyemi-flodent-toothpaste-140g-x-6-x-6",
+            "sku": "OPEY-0160"
+        },
+        {
+            "num": 161,
+            "name": "FRESHYO 115ML*16 PLAIN",
+            "img": null,
+            "slug": "opeyemi-freshyo-115ml16-plain",
+            "sku": "OPEY-0161"
+        },
+        {
+            "num": 162,
+            "name": "FRESHYO 115ML*16 STRAWBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-115ml16-strawberry",
+            "sku": "OPEY-0162"
+        },
+        {
+            "num": 163,
+            "name": "FRESHYO 1LT*6 PLAIN",
+            "img": null,
+            "slug": "opeyemi-freshyo-1lt6-plain",
+            "sku": "OPEY-0163"
+        },
+        {
+            "num": 164,
+            "name": "FRESHYO 1LT*6 STARWBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-1lt6-starwberry",
+            "sku": "OPEY-0164"
+        },
+        {
+            "num": 165,
+            "name": "FRESHYO 375ML*12 MIXBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-375ml12-mixberry",
+            "sku": "OPEY-0165"
+        },
+        {
+            "num": 166,
+            "name": "FRESHYO 375ML*12 PLAIN",
+            "img": null,
+            "slug": "opeyemi-freshyo-375ml12-plain",
+            "sku": "OPEY-0166"
+        },
+        {
+            "num": 167,
+            "name": "FRESHYO 375ML*12 STRAWBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-375ml12-strawberry",
+            "sku": "OPEY-0167"
+        },
+        {
+            "num": 168,
+            "name": "FRESHYO 650ML*6 MIXBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-650ml6-mixberry",
+            "sku": "OPEY-0168"
+        },
+        {
+            "num": 169,
+            "name": "FRESHYO 650ML*6 PLAIN",
+            "img": null,
+            "slug": "opeyemi-freshyo-650ml6-plain",
+            "sku": "OPEY-0169"
+        },
+        {
+            "num": 170,
+            "name": "FRESHYO 650ML*6 STRAWBERRY",
+            "img": null,
+            "slug": "opeyemi-freshyo-650ml6-strawberry",
+            "sku": "OPEY-0170"
+        },
+        {
+            "num": 171,
+            "name": "FRUTTA FRUIT JUICE 500ML*12 PET BOTTLE",
+            "img": null,
+            "slug": "opeyemi-frutta-fruit-juice-500ml12-pet-bottle",
+            "sku": "OPEY-0171"
+        },
+        {
+            "num": 172,
+            "name": "FRUTTA FRUIT JUICE 350ML*12 PET",
+            "img": null,
+            "slug": "opeyemi-frutta-fruit-juice-350ml12-pet",
+            "sku": "OPEY-0172"
+        },
+        {
+            "num": 173,
+            "name": "FRUTTA NATURAL FRUIT JUICE 1LT*10",
+            "img": null,
+            "slug": "opeyemi-frutta-natural-fruit-juice-1lt10",
+            "sku": "OPEY-0173"
+        },
+        {
+            "num": 174,
+            "name": "FUJI PROBIOTIC DRINK 400ML",
+            "img": null,
+            "slug": "opeyemi-fuji-probiotic-drink-400ml",
+            "sku": "OPEY-0174"
+        },
+        {
+            "num": 175,
+            "name": "GALACTIC MILK CANDY 20 X 50",
+            "img": null,
+            "slug": "opeyemi-galactic-milk-candy-20-x-50",
+            "sku": "OPEY-0175"
+        },
+        {
+            "num": 176,
+            "name": "GERMOL ANTICEPTIC LIQUID 250ML",
+            "img": null,
+            "slug": "opeyemi-germol-anticeptic-liquid-250ml",
+            "sku": "OPEY-0176"
+        },
+        {
+            "num": 177,
+            "name": "GERMOL ANTISEPTIC LIQUID 100ML",
+            "img": null,
+            "slug": "opeyemi-germol-antiseptic-liquid-100ml",
+            "sku": "OPEY-0177"
+        },
+        {
+            "num": 178,
+            "name": "GERMOL ANTISEPTIC LIQUID 50ML",
+            "img": null,
+            "slug": "opeyemi-germol-antiseptic-liquid-50ml",
+            "sku": "OPEY-0178"
+        },
+        {
+            "num": 179,
+            "name": "GERMOL BAR SOAP 110G X 6 X 8",
+            "img": null,
+            "slug": "opeyemi-germol-bar-soap-110g-x-6-x-8",
+            "sku": "OPEY-0179"
+        },
+        {
+            "num": 180,
+            "name": "GERMOL BAR SOAP 65G X 6 X 12",
+            "img": null,
+            "slug": "opeyemi-germol-bar-soap-65g-x-6-x-12",
+            "sku": "OPEY-0180"
+        },
+        {
+            "num": 181,
+            "name": "GERMOL COOL MENTHOL BAR SOAP 110G X 6 X 8",
+            "img": null,
+            "slug": "opeyemi-germol-cool-menthol-bar-soap-110g-x-6-x-8",
+            "sku": "OPEY-0181"
+        },
+        {
+            "num": 182,
+            "name": "GERMOL COOL MENTHOL BAR SOAP 65G X 6 X 12",
+            "img": null,
+            "slug": "opeyemi-germol-cool-menthol-bar-soap-65g-x-6-x-12",
+            "sku": "OPEY-0182"
+        },
+        {
+            "num": 183,
+            "name": "GERMOL FRESH - LEMON BAR SOAP 110G X 6 X 8",
+            "img": null,
+            "slug": "opeyemi-germol-fresh-lemon-bar-soap-110g-x-6-x-8",
+            "sku": "OPEY-0183"
+        },
+        {
+            "num": 184,
+            "name": "GERMOL FRESH - LEMON BAR SOAP 65G X 6 X 12",
+            "img": null,
+            "slug": "opeyemi-germol-fresh-lemon-bar-soap-65g-x-6-x-12",
+            "sku": "OPEY-0184"
+        },
+        {
+            "num": 185,
+            "name": "GIN GIN GINGER 15G*48",
+            "img": null,
+            "slug": "opeyemi-gin-gin-ginger-15g48",
+            "sku": "OPEY-0185"
+        },
+        {
+            "num": 186,
+            "name": "GOLDEN BITE CHIN CHIN 50g*80",
+            "img": null,
+            "slug": "opeyemi-golden-bite-chin-chin-50g80",
+            "sku": "OPEY-0186"
+        },
+        {
+            "num": 187,
+            "name": "GOLDEN TERRA SOYA OIL 1.4LT*6",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-14lt6",
+            "sku": "OPEY-0187"
+        },
+        {
+            "num": 188,
+            "name": "GOLDEN TERRA SOYA OIL 1LT PILLOW",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-1lt-pillow",
+            "sku": "OPEY-0188"
+        },
+        {
+            "num": 189,
+            "name": "GOLDEN TERRA SOYA OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-25lt",
+            "sku": "OPEY-0189"
+        },
+        {
+            "num": 190,
+            "name": "GOLDEN TERRA SOYA OIL 3LT*6",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-3lt6",
+            "sku": "OPEY-0190"
+        },
+        {
+            "num": 191,
+            "name": "GOLDEN TERRA SOYA OIL 45ML*",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-45ml",
+            "sku": "OPEY-0191"
+        },
+        {
+            "num": 192,
+            "name": "GOLDEN TERRA SOYA OIL 5LT",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-5lt",
+            "sku": "OPEY-0192"
+        },
+        {
+            "num": 193,
+            "name": "GOLDEN TERRA SOYA OIL 700ML*12",
+            "img": null,
+            "slug": "opeyemi-golden-terra-soya-oil-700ml12",
+            "sku": "OPEY-0193"
+        },
+        {
+            "num": 194,
+            "name": "GOLDEN TERRA VEG OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-golden-terra-veg-oil-25lt",
+            "sku": "OPEY-0194"
+        },
+        {
+            "num": 195,
+            "name": "GOLDENVITA 1KG",
+            "img": null,
+            "slug": "opeyemi-goldenvita-1kg",
+            "sku": "OPEY-0195"
+        },
+        {
+            "num": 196,
+            "name": "GOLDENVITA 5KG",
+            "img": null,
+            "slug": "opeyemi-goldenvita-5kg",
+            "sku": "OPEY-0196"
+        },
+        {
+            "num": 197,
+            "name": "GOOD EARTH HOT PEPPE POWDER 5G*140",
+            "img": null,
+            "slug": "opeyemi-good-earth-hot-peppe-powder-5g140",
+            "sku": "OPEY-0197"
+        },
+        {
+            "num": 198,
+            "name": "GOODTIME ORANGE 14G*48",
+            "img": null,
+            "slug": "opeyemi-goodtime-orange-14g48",
+            "sku": "OPEY-0198"
+        },
+        {
+            "num": 199,
+            "name": "GP CHOCO SPREAD 15G*200",
+            "img": null,
+            "slug": "opeyemi-gp-choco-spread-15g200",
+            "sku": "OPEY-0199"
+        },
+        {
+            "num": 200,
+            "name": "GP CHOCO SPREAD 325G*24",
+            "img": null,
+            "slug": "opeyemi-gp-choco-spread-325g24",
+            "sku": "OPEY-0200"
+        },
+        {
+            "num": 201,
+            "name": "GP CHOCO SPREAD 585g*12",
+            "img": null,
+            "slug": "opeyemi-gp-choco-spread-585g12",
+            "sku": "OPEY-0201"
+        },
+        {
+            "num": 202,
+            "name": "GP CUBE SUGAR 500G",
+            "img": null,
+            "slug": "opeyemi-gp-cube-sugar-500g",
+            "sku": "OPEY-0202"
+        },
+        {
+            "num": 203,
+            "name": "GP GARRI 100G",
+            "img": null,
+            "slug": "opeyemi-gp-garri-100g",
+            "sku": "OPEY-0203"
+        },
+        {
+            "num": 204,
+            "name": "GP GARRI 1KG*10",
+            "img": null,
+            "slug": "opeyemi-gp-garri-1kg10",
+            "sku": "OPEY-0204"
+        },
+        {
+            "num": 205,
+            "name": "GP GARRI 5KG",
+            "img": null,
+            "slug": "opeyemi-gp-garri-5kg",
+            "sku": "OPEY-0205"
+        },
+        {
+            "num": 206,
+            "name": "GP MAYONNAISE 15G*200",
+            "img": null,
+            "slug": "opeyemi-gp-mayonnaise-15g200",
+            "sku": "OPEY-0206"
+        },
+        {
+            "num": 207,
+            "name": "GP MAYONNAISE 250G*24",
+            "img": null,
+            "slug": "opeyemi-gp-mayonnaise-250g24",
+            "sku": "OPEY-0207"
+        },
+        {
+            "num": 208,
+            "name": "GP MAYONNAISE 450G*12",
+            "img": null,
+            "slug": "opeyemi-gp-mayonnaise-450g12",
+            "sku": "OPEY-0208"
+        },
+        {
+            "num": 209,
+            "name": "GP MULTIPURPOSE FLOUR 1KG*10",
+            "img": null,
+            "slug": "opeyemi-gp-multipurpose-flour-1kg10",
+            "sku": "OPEY-0209"
+        },
+        {
+            "num": 210,
+            "name": "GP NOODLES CHICKEN 70G*40 PROMO",
+            "img": null,
+            "slug": "opeyemi-gp-noodles-chicken-70g40-promo",
+            "sku": "OPEY-0210"
+        },
+        {
+            "num": 211,
+            "name": "GP NOODLES GOAT MEAT 70G*40 PROMO",
+            "img": null,
+            "slug": "opeyemi-gp-noodles-goat-meat-70g40-promo",
+            "sku": "OPEY-0211"
+        },
+        {
+            "num": 212,
+            "name": "GP NOODLES JOLLOF 70G*40 PROMO",
+            "img": null,
+            "slug": "opeyemi-gp-noodles-jollof-70g40-promo",
+            "sku": "OPEY-0212"
+        },
+        {
+            "num": 213,
+            "name": "GP SACHET SUGAR 1KG*10",
+            "img": null,
+            "slug": "opeyemi-gp-sachet-sugar-1kg10",
+            "sku": "OPEY-0213"
+        },
+        {
+            "num": 214,
+            "name": "GP SACHET SUGAR 250G*40",
+            "img": null,
+            "slug": "opeyemi-gp-sachet-sugar-250g40",
+            "sku": "OPEY-0214"
+        },
+        {
+            "num": 215,
+            "name": "GP SACHET SUGAR 500G*20",
+            "img": null,
+            "slug": "opeyemi-gp-sachet-sugar-500g20",
+            "sku": "OPEY-0215"
+        },
+        {
+            "num": 216,
+            "name": "GP SEMOVITA 10KG",
+            "img": null,
+            "slug": "opeyemi-gp-semovita-10kg",
+            "sku": "OPEY-0216"
+        },
+        {
+            "num": 217,
+            "name": "GP SEMOVITA 1KG*10",
+            "img": null,
+            "slug": "opeyemi-gp-semovita-1kg10",
+            "sku": "OPEY-0217"
+        },
+        {
+            "num": 218,
+            "name": "GP SEMOVITA 2KG*5",
+            "img": null,
+            "slug": "opeyemi-gp-semovita-2kg5",
+            "sku": "OPEY-0218"
+        },
+        {
+            "num": 219,
+            "name": "GP SEMOVITA 500G*20",
+            "img": null,
+            "slug": "opeyemi-gp-semovita-500g20",
+            "sku": "OPEY-0219"
+        },
+        {
+            "num": 220,
+            "name": "GP SEMOVITA 5KG",
+            "img": null,
+            "slug": "opeyemi-gp-semovita-5kg",
+            "sku": "OPEY-0220"
+        },
+        {
+            "num": 221,
+            "name": "GP SOYA OIL 1LT*12",
+            "img": null,
+            "slug": "opeyemi-gp-soya-oil-1lt12",
+            "sku": "OPEY-0221"
+        },
+        {
+            "num": 222,
+            "name": "GP SOYA OIL 2.75LT*6",
+            "img": null,
+            "slug": "opeyemi-gp-soya-oil-275lt6",
+            "sku": "OPEY-0222"
+        },
+        {
+            "num": 223,
+            "name": "GP SOYA OIL 45ML*60",
+            "img": null,
+            "slug": "opeyemi-gp-soya-oil-45ml60",
+            "sku": "OPEY-0223"
+        },
+        {
+            "num": 224,
+            "name": "GP SOYA OIL 4LT*6",
+            "img": null,
+            "slug": "opeyemi-gp-soya-oil-4lt6",
+            "sku": "OPEY-0224"
+        },
+        {
+            "num": 225,
+            "name": "GP SOYA OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-gp-soya-oil-5lt4",
+            "sku": "OPEY-0225"
+        },
+        {
+            "num": 226,
+            "name": "GP SOYA SOYA 750ML*12",
+            "img": null,
+            "slug": "opeyemi-gp-soya-soya-750ml12",
+            "sku": "OPEY-0226"
+        },
+        {
+            "num": 227,
+            "name": "GP SPAGHETTI 500G PACK",
+            "img": null,
+            "slug": "opeyemi-gp-spaghetti-500g-pack",
+            "sku": "OPEY-0227"
+        },
+        {
+            "num": 228,
+            "name": "GP SPAGHETTI 500G*20",
+            "img": null,
+            "slug": "opeyemi-gp-spaghetti-500g20",
+            "sku": "OPEY-0228"
+        },
+        {
+            "num": 229,
+            "name": "GP SPAGHETTINI 500G*20",
+            "img": null,
+            "slug": "opeyemi-gp-spaghettini-500g20",
+            "sku": "OPEY-0229"
+        },
+        {
+            "num": 230,
+            "name": "GP SPREAD 15G*200",
+            "img": null,
+            "slug": "opeyemi-gp-spread-15g200",
+            "sku": "OPEY-0230"
+        },
+        {
+            "num": 231,
+            "name": "GP SPREAD 250G*24",
+            "img": null,
+            "slug": "opeyemi-gp-spread-250g24",
+            "sku": "OPEY-0231"
+        },
+        {
+            "num": 232,
+            "name": "GP SPREAD 450G*12",
+            "img": null,
+            "slug": "opeyemi-gp-spread-450g12",
+            "sku": "OPEY-0232"
+        },
+        {
+            "num": 233,
+            "name": "GP SPREAD 900G*6",
+            "img": null,
+            "slug": "opeyemi-gp-spread-900g6",
+            "sku": "OPEY-0233"
+        },
+        {
+            "num": 234,
+            "name": "GP TWIST 200G*20",
+            "img": null,
+            "slug": "opeyemi-gp-twist-200g20",
+            "sku": "OPEY-0234"
+        },
+        {
+            "num": 235,
+            "name": "GP TWIST 500G*20",
+            "img": null,
+            "slug": "opeyemi-gp-twist-500g20",
+            "sku": "OPEY-0235"
+        },
+        {
+            "num": 236,
+            "name": "GP VEG OIL 10L",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-10l",
+            "sku": "OPEY-0236"
+        },
+        {
+            "num": 237,
+            "name": "GP VEG OIL 1LT*12",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-1lt12",
+            "sku": "OPEY-0237"
+        },
+        {
+            "num": 238,
+            "name": "GP VEG OIL 2.75LT*6",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-275lt6",
+            "sku": "OPEY-0238"
+        },
+        {
+            "num": 239,
+            "name": "GP VEG OIL 4LT*6",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-4lt6",
+            "sku": "OPEY-0239"
+        },
+        {
+            "num": 240,
+            "name": "GP VEG OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-5lt4",
+            "sku": "OPEY-0240"
+        },
+        {
+            "num": 241,
+            "name": "GP VEG OIL 750ML*12",
+            "img": null,
+            "slug": "opeyemi-gp-veg-oil-750ml12",
+            "sku": "OPEY-0241"
+        },
+        {
+            "num": 242,
+            "name": "GWEALTH PALM OIL 1LT*12",
+            "img": null,
+            "slug": "opeyemi-gwealth-palm-oil-1lt12",
+            "sku": "OPEY-0242"
+        },
+        {
+            "num": 243,
+            "name": "GWEALTH PALM OIL 2LT*6",
+            "img": null,
+            "slug": "opeyemi-gwealth-palm-oil-2lt6",
+            "sku": "OPEY-0243"
+        },
+        {
+            "num": 244,
+            "name": "HAANO CREAMER 12G*200",
+            "img": null,
+            "slug": "opeyemi-haano-creamer-12g200",
+            "sku": "OPEY-0244"
+        },
+        {
+            "num": 245,
+            "name": "HAANO MACKEREL 155G*10PCS",
+            "img": null,
+            "slug": "opeyemi-haano-mackerel-155g10pcs",
+            "sku": "OPEY-0245"
+        },
+        {
+            "num": 246,
+            "name": "HOLLANDIA 120G*24 FC",
+            "img": null,
+            "slug": "opeyemi-hollandia-120g24-fc",
+            "sku": "OPEY-0246"
+        },
+        {
+            "num": 247,
+            "name": "HOLLANDIA 190G*24 FC",
+            "img": null,
+            "slug": "opeyemi-hollandia-190g24-fc",
+            "sku": "OPEY-0247"
+        },
+        {
+            "num": 248,
+            "name": "HOLLANDIA 50G*48 FC",
+            "img": null,
+            "slug": "opeyemi-hollandia-50g48-fc",
+            "sku": "OPEY-0248"
+        },
+        {
+            "num": 249,
+            "name": "HOLLANDIA LACTOSE FREE MILK 1LT*10",
+            "img": null,
+            "slug": "opeyemi-hollandia-lactose-free-milk-1lt10",
+            "sku": "OPEY-0249"
+        },
+        {
+            "num": 250,
+            "name": "HOLLANDIA UHT 1LT*10",
+            "img": null,
+            "slug": "opeyemi-hollandia-uht-1lt10",
+            "sku": "OPEY-0250"
+        },
+        {
+            "num": 251,
+            "name": "HOLLANDIA YOGHURT 1LT*10 PLAIN",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-1lt10-plain",
+            "sku": "OPEY-0251"
+        },
+        {
+            "num": 252,
+            "name": "HOLLANDIA YOGHURT 1LT*10 SB",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-1lt10-sb",
+            "sku": "OPEY-0252"
+        },
+        {
+            "num": 253,
+            "name": "HOLLANDIA YOGHURT 1LT*10 VANILLA",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-1lt10-vanilla",
+            "sku": "OPEY-0253"
+        },
+        {
+            "num": 254,
+            "name": "HOLLANDIA YOGHURT 90ML*24",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-90ml24",
+            "sku": "OPEY-0254"
+        },
+        {
+            "num": 255,
+            "name": "HOLLANDIA YOGHURT 180ML*24 PLAIN",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-180ml24-plain",
+            "sku": "OPEY-0255"
+        },
+        {
+            "num": 256,
+            "name": "HOLLANDIA YOGHURT 180ML*24 SB",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-180ml24-sb",
+            "sku": "OPEY-0256"
+        },
+        {
+            "num": 257,
+            "name": "HOLLANDIA YOGHURT 315ML*12 PLAIN",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-315ml12-plain",
+            "sku": "OPEY-0257"
+        },
+        {
+            "num": 258,
+            "name": "HOLLANDIA YOGHURT 315ML*12 SB",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-315ml12-sb",
+            "sku": "OPEY-0258"
+        },
+        {
+            "num": 259,
+            "name": "HOLLANDIA YOGHURT 315ML*12 VANILLA",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-315ml12-vanilla",
+            "sku": "OPEY-0259"
+        },
+        {
+            "num": 260,
+            "name": "HOLLANDIA YOGHURT 500ML*10 PLAIN",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-500ml10-plain",
+            "sku": "OPEY-0260"
+        },
+        {
+            "num": 261,
+            "name": "HOLLANDIA YOGHURT 500ML*10 SB",
+            "img": null,
+            "slug": "opeyemi-hollandia-yoghurt-500ml10-sb",
+            "sku": "OPEY-0261"
+        },
+        {
+            "num": 262,
+            "name": "HONEYWELL SEMOLINA 10KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-semolina-10kg",
+            "sku": "OPEY-0262"
+        },
+        {
+            "num": 263,
+            "name": "HONEYWELL SEMOLINA 1KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-semolina-1kg",
+            "sku": "OPEY-0263"
+        },
+        {
+            "num": 264,
+            "name": "HONEYWELL SEMOLINA 2KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-semolina-2kg",
+            "sku": "OPEY-0264"
+        },
+        {
+            "num": 265,
+            "name": "HONEYWELL SEMOLINA 5KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-semolina-5kg",
+            "sku": "OPEY-0265"
+        },
+        {
+            "num": 266,
+            "name": "HONEYWELL WHEAT 1KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-wheat-1kg",
+            "sku": "OPEY-0266"
+        },
+        {
+            "num": 267,
+            "name": "HONEYWELL WHEAT 5KG",
+            "img": null,
+            "slug": "opeyemi-honeywell-wheat-5kg",
+            "sku": "OPEY-0267"
+        },
+        {
+            "num": 268,
+            "name": "HUNGRYMAN CHICKEN 180G*24",
+            "img": null,
+            "slug": "opeyemi-hungryman-chicken-180g24",
+            "sku": "OPEY-0268"
+        },
+        {
+            "num": 269,
+            "name": "INDOMIE ORIENTAL FRIED 70G BY 40",
+            "img": null,
+            "slug": "opeyemi-indomie-oriental-fried-70g-by-40",
+            "sku": "OPEY-0269"
+        },
+        {
+            "num": 270,
+            "name": "INDOMIE REG CHICKEN 280G BY 16 BELLEFUL",
+            "img": null,
+            "slug": "opeyemi-indomie-reg-chicken-280g-by-16-belleful",
+            "sku": "OPEY-0270"
+        },
+        {
+            "num": 271,
+            "name": "INDOMIE SUPERPACK 120G*40+2",
+            "img": null,
+            "slug": "opeyemi-indomie-superpack-120g402",
+            "sku": "OPEY-0271"
+        },
+        {
+            "num": 272,
+            "name": "INDOMIE SUPERPACK 120G*40+4",
+            "img": null,
+            "slug": "opeyemi-indomie-superpack-120g404",
+            "sku": "OPEY-0272"
+        },
+        {
+            "num": 273,
+            "name": "INDOMIE SUPERPACK ONION 120G*40",
+            "img": null,
+            "slug": "opeyemi-indomie-superpack-onion-120g40",
+            "sku": "OPEY-0273"
+        },
+        {
+            "num": 274,
+            "name": "INDOMITABLE CHICKEN 70G*42",
+            "img": null,
+            "slug": "opeyemi-indomitable-chicken-70g42",
+            "sku": "OPEY-0274"
+        },
+        {
+            "num": 275,
+            "name": "INDOMITABLE CHICKEN 70G*44",
+            "img": null,
+            "slug": "opeyemi-indomitable-chicken-70g44",
+            "sku": "OPEY-0275"
+        },
+        {
+            "num": 276,
+            "name": "INDOMITABLE ONION 70G*40",
+            "img": null,
+            "slug": "opeyemi-indomitable-onion-70g40",
+            "sku": "OPEY-0276"
+        },
+        {
+            "num": 277,
+            "name": "IRS CAVATTO 500G*20",
+            "img": null,
+            "slug": "opeyemi-irs-cavatto-500g20",
+            "sku": "OPEY-0277"
+        },
+        {
+            "num": 278,
+            "name": "IRS SEMOLINA 1KG*5",
+            "img": null,
+            "slug": "opeyemi-irs-semolina-1kg5",
+            "sku": "OPEY-0278"
+        },
+        {
+            "num": 279,
+            "name": "IRS SEMOLINA 5KG",
+            "img": null,
+            "slug": "opeyemi-irs-semolina-5kg",
+            "sku": "OPEY-0279"
+        },
+        {
+            "num": 280,
+            "name": "IRS SPAGHETTI 500G*20",
+            "img": null,
+            "slug": "opeyemi-irs-spaghetti-500g20",
+            "sku": "OPEY-0280"
+        },
+        {
+            "num": 281,
+            "name": "IRS SPAGHETTINNI 500G*20",
+            "img": null,
+            "slug": "opeyemi-irs-spaghettinni-500g20",
+            "sku": "OPEY-0281"
+        },
+        {
+            "num": 282,
+            "name": "JDOE VEG OIL 10LT",
+            "img": null,
+            "slug": "opeyemi-jdoe-veg-oil-10lt",
+            "sku": "OPEY-0282"
+        },
+        {
+            "num": 283,
+            "name": "JDOE VEG OIL 1LT*10",
+            "img": null,
+            "slug": "opeyemi-jdoe-veg-oil-1lt10",
+            "sku": "OPEY-0283"
+        },
+        {
+            "num": 284,
+            "name": "JDOE VEG OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-jdoe-veg-oil-25lt",
+            "sku": "OPEY-0284"
+        },
+        {
+            "num": 285,
+            "name": "JDOE VEG OIL 5LT",
+            "img": null,
+            "slug": "opeyemi-jdoe-veg-oil-5lt",
+            "sku": "OPEY-0285"
+        },
+        {
+            "num": 286,
+            "name": "JELLY FUN MIX FLAVOUR",
+            "img": null,
+            "slug": "opeyemi-jelly-fun-mix-flavour",
+            "sku": "OPEY-0286"
+        },
+        {
+            "num": 287,
+            "name": "KINGS BULK BUTTER 15KG",
+            "img": null,
+            "slug": "opeyemi-kings-bulk-butter-15kg",
+            "sku": "OPEY-0287"
+        },
+        {
+            "num": 288,
+            "name": "KINGS SACHET BUTTER 250G",
+            "img": null,
+            "slug": "opeyemi-kings-sachet-butter-250g",
+            "sku": "OPEY-0288"
+        },
+        {
+            "num": 289,
+            "name": "KINGS SOYA OIL 1LT PET",
+            "img": null,
+            "slug": "opeyemi-kings-soya-oil-1lt-pet",
+            "sku": "OPEY-0289"
+        },
+        {
+            "num": 290,
+            "name": "KINGS SOYA OIL 1LT*12 PILLOW",
+            "img": null,
+            "slug": "opeyemi-kings-soya-oil-1lt12-pillow",
+            "sku": "OPEY-0290"
+        },
+        {
+            "num": 291,
+            "name": "KINGS SOYA OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-kings-soya-oil-25lt",
+            "sku": "OPEY-0291"
+        },
+        {
+            "num": 292,
+            "name": "KINGS SOYA OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-kings-soya-oil-5lt4",
+            "sku": "OPEY-0292"
+        },
+        {
+            "num": 293,
+            "name": "KINGS SPREAD 250G*24",
+            "img": null,
+            "slug": "opeyemi-kings-spread-250g24",
+            "sku": "OPEY-0293"
+        },
+        {
+            "num": 294,
+            "name": "KINGS SPREAD 450G*24",
+            "img": null,
+            "slug": "opeyemi-kings-spread-450g24",
+            "sku": "OPEY-0294"
+        },
+        {
+            "num": 295,
+            "name": "KINGS VEG OIL 10LT",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-10lt",
+            "sku": "OPEY-0295"
+        },
+        {
+            "num": 296,
+            "name": "KINGS VEG OIL 1LT*12 PET",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-1lt12-pet",
+            "sku": "OPEY-0296"
+        },
+        {
+            "num": 297,
+            "name": "KINGS VEG OIL 1LT*12 PILLOW",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-1lt12-pillow",
+            "sku": "OPEY-0297"
+        },
+        {
+            "num": 298,
+            "name": "KINGS VEG OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-25lt",
+            "sku": "OPEY-0298"
+        },
+        {
+            "num": 299,
+            "name": "KINGS VEG OIL 2LT*6",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-2lt6",
+            "sku": "OPEY-0299"
+        },
+        {
+            "num": 300,
+            "name": "KINGS VEG OIL 3LT*6",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-3lt6",
+            "sku": "OPEY-0300"
+        },
+        {
+            "num": 301,
+            "name": "KINGS VEG OIL 45ML*50",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-45ml50",
+            "sku": "OPEY-0301"
+        },
+        {
+            "num": 302,
+            "name": "KINGS VEG OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-5lt4",
+            "sku": "OPEY-0302"
+        },
+        {
+            "num": 303,
+            "name": "KINGS VEG OIL 750ML*12 PET",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-750ml12-pet",
+            "sku": "OPEY-0303"
+        },
+        {
+            "num": 304,
+            "name": "KINGS VEG OIL 750ML*16 PILLOW",
+            "img": null,
+            "slug": "opeyemi-kings-veg-oil-750ml16-pillow",
+            "sku": "OPEY-0304"
+        },
+        {
+            "num": 305,
+            "name": "KIVO GOODTIME GARRI MIX 100g*40",
+            "img": null,
+            "slug": "opeyemi-kivo-goodtime-garri-mix-100g40",
+            "sku": "OPEY-0305"
+        },
+        {
+            "num": 306,
+            "name": "KIVO GOODTIME GARRI MIX 50g*60",
+            "img": null,
+            "slug": "opeyemi-kivo-goodtime-garri-mix-50g60",
+            "sku": "OPEY-0306"
+        },
+        {
+            "num": 307,
+            "name": "KIVO GOODTIME MILK 12G*220",
+            "img": null,
+            "slug": "opeyemi-kivo-goodtime-milk-12g220",
+            "sku": "OPEY-0307"
+        },
+        {
+            "num": 308,
+            "name": "KIVO GOODTIME MILK 350G*12",
+            "img": null,
+            "slug": "opeyemi-kivo-goodtime-milk-350g12",
+            "sku": "OPEY-0308"
+        },
+        {
+            "num": 309,
+            "name": "KIVO GOODTIME MILK 35G*288",
+            "img": null,
+            "slug": "opeyemi-kivo-goodtime-milk-35g288",
+            "sku": "OPEY-0309"
+        },
+        {
+            "num": 310,
+            "name": "LACTORICH MILK 12G*200",
+            "img": null,
+            "slug": "opeyemi-lactorich-milk-12g200",
+            "sku": "OPEY-0310"
+        },
+        {
+            "num": 311,
+            "name": "LAZIZ CHOCOLATE COFFEE 3IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-chocolate-coffee-3in1",
+            "sku": "OPEY-0311"
+        },
+        {
+            "num": 312,
+            "name": "LAZIZ CHOCOLATE DRINK 20G* 200",
+            "img": null,
+            "slug": "opeyemi-laziz-chocolate-drink-20g-200",
+            "sku": "OPEY-0312"
+        },
+        {
+            "num": 313,
+            "name": "LAZIZ CUSTARD 1.5KG 3IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-15kg-3in1",
+            "sku": "OPEY-0313"
+        },
+        {
+            "num": 314,
+            "name": "LAZIZ CUSTARD 1.5KG 4IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-15kg-4in1",
+            "sku": "OPEY-0314"
+        },
+        {
+            "num": 315,
+            "name": "LAZIZ CUSTARD 1KG 3IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-1kg-3in1",
+            "sku": "OPEY-0315"
+        },
+        {
+            "num": 316,
+            "name": "LAZIZ CUSTARD 1KG 4IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-1kg-4in1",
+            "sku": "OPEY-0316"
+        },
+        {
+            "num": 317,
+            "name": "LAZIZ CUSTARD 40G 3IN1",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-40g-3in1",
+            "sku": "OPEY-0317"
+        },
+        {
+            "num": 318,
+            "name": "LAZIZ CUSTARD VANILLA 1KG",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-vanilla-1kg",
+            "sku": "OPEY-0318"
+        },
+        {
+            "num": 319,
+            "name": "LAZIZ CUSTARD VANILLA 2KG",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-vanilla-2kg",
+            "sku": "OPEY-0319"
+        },
+        {
+            "num": 320,
+            "name": "LAZIZ CUSTARD VANILLA 400G",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-vanilla-400g",
+            "sku": "OPEY-0320"
+        },
+        {
+            "num": 321,
+            "name": "LAZIZ CUSTARD VANILLA 40G* 80",
+            "img": null,
+            "slug": "opeyemi-laziz-custard-vanilla-40g-80",
+            "sku": "OPEY-0321"
+        },
+        {
+            "num": 322,
+            "name": "LAZIZ MAYONNAISE 473ML",
+            "img": null,
+            "slug": "opeyemi-laziz-mayonnaise-473ml",
+            "sku": "OPEY-0322"
+        },
+        {
+            "num": 323,
+            "name": "LAZIZ MAYONNAISE 946ML",
+            "img": null,
+            "slug": "opeyemi-laziz-mayonnaise-946ml",
+            "sku": "OPEY-0323"
+        },
+        {
+            "num": 324,
+            "name": "LAZIZ NON-DAIRY CREAMER 12G*200",
+            "img": null,
+            "slug": "opeyemi-laziz-non-dairy-creamer-12g200",
+            "sku": "OPEY-0324"
+        },
+        {
+            "num": 325,
+            "name": "LAZIZ PREMIUM VEG OIL 3LT*4",
+            "img": null,
+            "slug": "opeyemi-laziz-premium-veg-oil-3lt4",
+            "sku": "OPEY-0325"
+        },
+        {
+            "num": 326,
+            "name": "LAZIZ PREMIUM VEG OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-laziz-premium-veg-oil-5lt4",
+            "sku": "OPEY-0326"
+        },
+        {
+            "num": 327,
+            "name": "LAZIZ SEASONING CUBE 4G*1000 CHICKEN",
+            "img": null,
+            "slug": "opeyemi-laziz-seasoning-cube-4g1000-chicken",
+            "sku": "OPEY-0327"
+        },
+        {
+            "num": 328,
+            "name": "LAZIZ SEASONING CUBE 4G*2000 CHICKEN",
+            "img": null,
+            "slug": "opeyemi-laziz-seasoning-cube-4g2000-chicken",
+            "sku": "OPEY-0328"
+        },
+        {
+            "num": 329,
+            "name": "LAZIZ SEASONING CUBE 4G*300 CHICKEN",
+            "img": null,
+            "slug": "opeyemi-laziz-seasoning-cube-4g300-chicken",
+            "sku": "OPEY-0329"
+        },
+        {
+            "num": 330,
+            "name": "LAZIZ SEASONING CUBE 4G*350 BEEF",
+            "img": null,
+            "slug": "opeyemi-laziz-seasoning-cube-4g350-beef",
+            "sku": "OPEY-0330"
+        },
+        {
+            "num": 331,
+            "name": "LAZIZ VEG OIL 1.6LT*6",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-16lt6",
+            "sku": "OPEY-0331"
+        },
+        {
+            "num": 332,
+            "name": "LAZIZ VEG OIL 1LT*12",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-1lt12",
+            "sku": "OPEY-0332"
+        },
+        {
+            "num": 333,
+            "name": "LAZIZ VEG OIL 1LT*12 PILLOW",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-1lt12-pillow",
+            "sku": "OPEY-0333"
+        },
+        {
+            "num": 334,
+            "name": "LAZIZ VEG OIL 3LT*6",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-3lt6",
+            "sku": "OPEY-0334"
+        },
+        {
+            "num": 335,
+            "name": "LAZIZ VEG OIL 45ML*80",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-45ml80",
+            "sku": "OPEY-0335"
+        },
+        {
+            "num": 336,
+            "name": "LAZIZ VEG OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-5lt4",
+            "sku": "OPEY-0336"
+        },
+        {
+            "num": 337,
+            "name": "LAZIZ VEG OIL 750ML*12",
+            "img": null,
+            "slug": "opeyemi-laziz-veg-oil-750ml12",
+            "sku": "OPEY-0337"
+        },
+        {
+            "num": 338,
+            "name": "LIORGA OIL 3LT PIECES",
+            "img": null,
+            "slug": "opeyemi-liorga-oil-3lt-pieces",
+            "sku": "OPEY-0338"
+        },
+        {
+            "num": 339,
+            "name": "LIORGA SOYA OIL 25LTR",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil-25ltr",
+            "sku": "OPEY-0339"
+        },
+        {
+            "num": 340,
+            "name": "LIORGA SOYA OIL 3LTR BY 4",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil-3ltr-by-4",
+            "sku": "OPEY-0340"
+        },
+        {
+            "num": 341,
+            "name": "LIORGA SOYA OIL 50ML BY 80",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil-50ml-by-80",
+            "sku": "OPEY-0341"
+        },
+        {
+            "num": 342,
+            "name": "LIORGA SOYA OIL 5LTR BY 4",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil-5ltr-by-4",
+            "sku": "OPEY-0342"
+        },
+        {
+            "num": 343,
+            "name": "LIORGA SOYA OIL10LTR",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil10ltr",
+            "sku": "OPEY-0343"
+        },
+        {
+            "num": 344,
+            "name": "LIORGA SOYA OIL1LTR BY 12",
+            "img": null,
+            "slug": "opeyemi-liorga-soya-oil1ltr-by-12",
+            "sku": "OPEY-0344"
+        },
+        {
+            "num": 345,
+            "name": "LUCOZADE ENERGY BOOST CAN 330ML*24",
+            "img": null,
+            "slug": "opeyemi-lucozade-energy-boost-can-330ml24",
+            "sku": "OPEY-0345"
+        },
+        {
+            "num": 346,
+            "name": "LUCOZADE ENERGY BOOST PET 450ML*12",
+            "img": null,
+            "slug": "opeyemi-lucozade-energy-boost-pet-450ml12",
+            "sku": "OPEY-0346"
+        },
+        {
+            "num": 347,
+            "name": "LUCOZADE ENERGY BOOST TETRA 125ML*16",
+            "img": null,
+            "slug": "opeyemi-lucozade-energy-boost-tetra-125ml16",
+            "sku": "OPEY-0347"
+        },
+        {
+            "num": 348,
+            "name": "MACCAW DRINK 1LT",
+            "img": null,
+            "slug": "opeyemi-maccaw-drink-1lt",
+            "sku": "OPEY-0348"
+        },
+        {
+            "num": 349,
+            "name": "MAGNATE TOMATO 2.2KG*6 TIN",
+            "img": null,
+            "slug": "opeyemi-magnate-tomato-22kg6-tin",
+            "sku": "OPEY-0349"
+        },
+        {
+            "num": 350,
+            "name": "MAGNATE TOMATO 210G*48 TIN",
+            "img": null,
+            "slug": "opeyemi-magnate-tomato-210g48-tin",
+            "sku": "OPEY-0350"
+        },
+        {
+            "num": 351,
+            "name": "MAGNATE TOMATO 400G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-magnate-tomato-400g24-tin",
+            "sku": "OPEY-0351"
+        },
+        {
+            "num": 352,
+            "name": "MAGNATE TOMATO 800G*12 TIN",
+            "img": null,
+            "slug": "opeyemi-magnate-tomato-800g12-tin",
+            "sku": "OPEY-0352"
+        },
+        {
+            "num": 353,
+            "name": "MAGNATE TOMATO SACHET 70G*50",
+            "img": null,
+            "slug": "opeyemi-magnate-tomato-sachet-70g50",
+            "sku": "OPEY-0353"
+        },
+        {
+            "num": 354,
+            "name": "MAMA AFRICA RICE 50KG",
+            "img": null,
+            "slug": "opeyemi-mama-africa-rice-50kg",
+            "sku": "OPEY-0354"
+        },
+        {
+            "num": 355,
+            "name": "MAMA'S PRIDE CAVATTO 500G*20",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-cavatto-500g20",
+            "sku": "OPEY-0355"
+        },
+        {
+            "num": 356,
+            "name": "MAMA'S PRIDE SPAG FAT 500G*20+1",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-spag-fat-500g201",
+            "sku": "OPEY-0356"
+        },
+        {
+            "num": 357,
+            "name": "MAMA'S PRIDE SPAG SLIM",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-spag-slim",
+            "sku": "OPEY-0357"
+        },
+        {
+            "num": 358,
+            "name": "MAMA'S PRIDE SPAG SLIM 500G*20+1",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-spag-slim-500g201",
+            "sku": "OPEY-0358"
+        },
+        {
+            "num": 359,
+            "name": "MAMA'S PRIDE SPAG SLIM Pack (PROMO)",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-spag-slim-pack-promo",
+            "sku": "OPEY-0359"
+        },
+        {
+            "num": 360,
+            "name": "MAMA's PRIDE SOYA OIL 1L X 12",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-soya-oil-1l-x-12",
+            "sku": "OPEY-0360"
+        },
+        {
+            "num": 361,
+            "name": "MAMA's PRIDE SOYA OIL 2L X 6",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-soya-oil-2l-x-6",
+            "sku": "OPEY-0361"
+        },
+        {
+            "num": 362,
+            "name": "MAMA's PRIDE SOYA OIL 500L X 24",
+            "img": null,
+            "slug": "opeyemi-mamas-pride-soya-oil-500l-x-24",
+            "sku": "OPEY-0362"
+        },
+        {
+            "num": 363,
+            "name": "MAMADOR OIL 45ML*120",
+            "img": null,
+            "slug": "opeyemi-mamador-oil-45ml120",
+            "sku": "OPEY-0363"
+        },
+        {
+            "num": 364,
+            "name": "MAMADOR SPREAD 250G",
+            "img": null,
+            "slug": "opeyemi-mamador-spread-250g",
+            "sku": "OPEY-0364"
+        },
+        {
+            "num": 365,
+            "name": "MAMADOR SPREAD 450G",
+            "img": null,
+            "slug": "opeyemi-mamador-spread-450g",
+            "sku": "OPEY-0365"
+        },
+        {
+            "num": 366,
+            "name": "MAMADOR VEG OIL 1.5LT*6",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-15lt6",
+            "sku": "OPEY-0366"
+        },
+        {
+            "num": 367,
+            "name": "MAMADOR VEG OIL 1LT*12 PILLOW",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-1lt12-pillow",
+            "sku": "OPEY-0367"
+        },
+        {
+            "num": 368,
+            "name": "MAMADOR VEG OIL 2.5LT*4",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-25lt4",
+            "sku": "OPEY-0368"
+        },
+        {
+            "num": 369,
+            "name": "MAMADOR VEG OIL 3.5LT*4",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-35lt4",
+            "sku": "OPEY-0369"
+        },
+        {
+            "num": 370,
+            "name": "MAMADOR VEG OIL 500ML",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-500ml",
+            "sku": "OPEY-0370"
+        },
+        {
+            "num": 371,
+            "name": "MAMADOR VEG OIL 900ML*12",
+            "img": null,
+            "slug": "opeyemi-mamador-veg-oil-900ml12",
+            "sku": "OPEY-0371"
+        },
+        {
+            "num": 372,
+            "name": "MAMAGOLD SEMO 10KG",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-10kg",
+            "sku": "OPEY-0372"
+        },
+        {
+            "num": 373,
+            "name": "MAMAGOLD SEMO 1KG*10",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-1kg10",
+            "sku": "OPEY-0373"
+        },
+        {
+            "num": 374,
+            "name": "MAMAGOLD SEMO 2KG*5",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-2kg5",
+            "sku": "OPEY-0374"
+        },
+        {
+            "num": 375,
+            "name": "MAMAGOLD SEMO 500G*20",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-500g20",
+            "sku": "OPEY-0375"
+        },
+        {
+            "num": 376,
+            "name": "MAMAGOLD SEMO 500G*20 CLOSE TO EXPIRATION",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-500g20-close-to-expiration",
+            "sku": "OPEY-0376"
+        },
+        {
+            "num": 377,
+            "name": "MAMAGOLD SEMO 5KG",
+            "img": null,
+            "slug": "opeyemi-mamagold-semo-5kg",
+            "sku": "OPEY-0377"
+        },
+        {
+            "num": 378,
+            "name": "MIMEE NOODLES 100G*40",
+            "img": null,
+            "slug": "opeyemi-mimee-noodles-100g40",
+            "sku": "OPEY-0378"
+        },
+        {
+            "num": 379,
+            "name": "MIMEE NOODLES 70G*42",
+            "img": null,
+            "slug": "opeyemi-mimee-noodles-70g42",
+            "sku": "OPEY-0379"
+        },
+        {
+            "num": 380,
+            "name": "MIMEE NOODLES 70G*44",
+            "img": null,
+            "slug": "opeyemi-mimee-noodles-70g44",
+            "sku": "OPEY-0380"
+        },
+        {
+            "num": 381,
+            "name": "MINIMIE CHINCHIN 40g *120",
+            "img": null,
+            "slug": "opeyemi-minimie-chinchin-40g-120",
+            "sku": "OPEY-0381"
+        },
+        {
+            "num": 382,
+            "name": "MINIMIE CHINCHIN 900G*6 JAR",
+            "img": null,
+            "slug": "opeyemi-minimie-chinchin-900g6-jar",
+            "sku": "OPEY-0382"
+        },
+        {
+            "num": 383,
+            "name": "MINIMIE CHINCHIN BOKU PACK 150G*30",
+            "img": null,
+            "slug": "opeyemi-minimie-chinchin-boku-pack-150g30",
+            "sku": "OPEY-0383"
+        },
+        {
+            "num": 384,
+            "name": "MINIMIE NAIJA PEPPER NOODLES 70G*40",
+            "img": null,
+            "slug": "opeyemi-minimie-naija-pepper-noodles-70g40",
+            "sku": "OPEY-0384"
+        },
+        {
+            "num": 385,
+            "name": "MINIMIE NOODLES CHICKEN 70G*40",
+            "img": null,
+            "slug": "opeyemi-minimie-noodles-chicken-70g40",
+            "sku": "OPEY-0385"
+        },
+        {
+            "num": 386,
+            "name": "MINIMIE PARTYJOLLOF NOODLES 70G*40",
+            "img": null,
+            "slug": "opeyemi-minimie-partyjollof-noodles-70g40",
+            "sku": "OPEY-0386"
+        },
+        {
+            "num": 387,
+            "name": "MR CHEFF AKARA MIX 150",
+            "img": null,
+            "slug": "opeyemi-mr-cheff-akara-mix-150",
+            "sku": "OPEY-0387"
+        },
+        {
+            "num": 388,
+            "name": "NAPA SARDINE",
+            "img": null,
+            "slug": "opeyemi-napa-sardine",
+            "sku": "OPEY-0388"
+        },
+        {
+            "num": 389,
+            "name": "NUTRI-CHOC0 210ML",
+            "img": null,
+            "slug": "opeyemi-nutri-choc0-210ml",
+            "sku": "OPEY-0389"
+        },
+        {
+            "num": 390,
+            "name": "NUTRI-CHOCO 400ML*12",
+            "img": null,
+            "slug": "opeyemi-nutri-choco-400ml12",
+            "sku": "OPEY-0390"
+        },
+        {
+            "num": 391,
+            "name": "NUTRI-MILK (APPLE) 500ML*12",
+            "img": null,
+            "slug": "opeyemi-nutri-milk-apple-500ml12",
+            "sku": "OPEY-0391"
+        },
+        {
+            "num": 392,
+            "name": "NUTRI-MILK (OTHER FLAVOUR) 500ML*12",
+            "img": null,
+            "slug": "opeyemi-nutri-milk-other-flavour-500ml12",
+            "sku": "OPEY-0392"
+        },
+        {
+            "num": 393,
+            "name": "NUTRI-SOYA 400ML*12",
+            "img": null,
+            "slug": "opeyemi-nutri-soya-400ml12",
+            "sku": "OPEY-0393"
+        },
+        {
+            "num": 394,
+            "name": "NUTRI-SOYA BANANA 400ML*12",
+            "img": null,
+            "slug": "opeyemi-nutri-soya-banana-400ml12",
+            "sku": "OPEY-0394"
+        },
+        {
+            "num": 395,
+            "name": "NUTRI-YO 125ML",
+            "img": null,
+            "slug": "opeyemi-nutri-yo-125ml",
+            "sku": "OPEY-0395"
+        },
+        {
+            "num": 396,
+            "name": "NUTRI-YO 500ML",
+            "img": null,
+            "slug": "opeyemi-nutri-yo-500ml",
+            "sku": "OPEY-0396"
+        },
+        {
+            "num": 397,
+            "name": "NUTRISNAX BREAKFAST 30G*36",
+            "img": null,
+            "slug": "opeyemi-nutrisnax-breakfast-30g36",
+            "sku": "OPEY-0397"
+        },
+        {
+            "num": 398,
+            "name": "NUTRISNAX BREAKFAST CC 30G*36",
+            "img": null,
+            "slug": "opeyemi-nutrisnax-breakfast-cc-30g36",
+            "sku": "OPEY-0398"
+        },
+        {
+            "num": 399,
+            "name": "NUTRISNAX OAT DIGESTIVE 28G*48",
+            "img": null,
+            "slug": "opeyemi-nutrisnax-oat-digestive-28g48",
+            "sku": "OPEY-0399"
+        },
+        {
+            "num": 400,
+            "name": "NUTRISNAX OAT DIGESTIVE 86g*36",
+            "img": null,
+            "slug": "opeyemi-nutrisnax-oat-digestive-86g36",
+            "sku": "OPEY-0400"
+        },
+        {
+            "num": 401,
+            "name": "NUTRISNAX OATS DIGESTIVE 42G*24",
+            "img": null,
+            "slug": "opeyemi-nutrisnax-oats-digestive-42g24",
+            "sku": "OPEY-0401"
+        },
+        {
+            "num": 402,
+            "name": "OK CHIC CHOC BANANA CB 26G BY 36",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-banana-cb-26g-by-36",
+            "sku": "OPEY-0402"
+        },
+        {
+            "num": 403,
+            "name": "OK CHIC CHOC BISCUIT BANANA/VANILLA 24G*48",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-biscuit-bananavanilla-24g48",
+            "sku": "OPEY-0403"
+        },
+        {
+            "num": 404,
+            "name": "OK CHIC CHOC CHOCO COOKIES 14G*48",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-choco-cookies-14g48",
+            "sku": "OPEY-0404"
+        },
+        {
+            "num": 405,
+            "name": "OK CHIC CHOC CHOCO COOKIES 26G*36",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-choco-cookies-26g36",
+            "sku": "OPEY-0405"
+        },
+        {
+            "num": 406,
+            "name": "OK CHIC CHOC DOUBLE CREAM 28G BY 36 CHOCO",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-double-cream-28g-by-36-choco",
+            "sku": "OPEY-0406"
+        },
+        {
+            "num": 407,
+            "name": "OK CHIC CHOC DOUBLE CREAM 28G BY 36 SB",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-double-cream-28g-by-36-sb",
+            "sku": "OPEY-0407"
+        },
+        {
+            "num": 408,
+            "name": "OK CHIC CHOC DOUBLE CREAM 32G*72 SV",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-double-cream-32g72-sv",
+            "sku": "OPEY-0408"
+        },
+        {
+            "num": 409,
+            "name": "OK CHIC CHOC VANILLA CB 26G BY 36",
+            "img": null,
+            "slug": "opeyemi-ok-chic-choc-vanilla-cb-26g-by-36",
+            "sku": "OPEY-0409"
+        },
+        {
+            "num": 410,
+            "name": "OK CLASSIC COASTER 12G*72",
+            "img": null,
+            "slug": "opeyemi-ok-classic-coaster-12g72",
+            "sku": "OPEY-0410"
+        },
+        {
+            "num": 411,
+            "name": "OK ENERGRO ALL MILK 14g*48",
+            "img": null,
+            "slug": "opeyemi-ok-energro-all-milk-14g48",
+            "sku": "OPEY-0411"
+        },
+        {
+            "num": 412,
+            "name": "OK ENERGRO ALL MILK 27G*36",
+            "img": null,
+            "slug": "opeyemi-ok-energro-all-milk-27g36",
+            "sku": "OPEY-0412"
+        },
+        {
+            "num": 413,
+            "name": "OK FUN POP CHOC LOLLIPOP 11.2g*50",
+            "img": null,
+            "slug": "opeyemi-ok-fun-pop-choc-lollipop-112g50",
+            "sku": "OPEY-0413"
+        },
+        {
+            "num": 414,
+            "name": "OK GOODTIME BAN WAFERS 10.5G BY 48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-ban-wafers-105g-by-48",
+            "sku": "OPEY-0414"
+        },
+        {
+            "num": 415,
+            "name": "OK GOODTIME BANANA 14G*48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-banana-14g48",
+            "sku": "OPEY-0415"
+        },
+        {
+            "num": 416,
+            "name": "OK GOODTIME BANANA 27G BY 36",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-banana-27g-by-36",
+            "sku": "OPEY-0416"
+        },
+        {
+            "num": 417,
+            "name": "OK GOODTIME BANANA WAFERS 21G BY 24",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-banana-wafers-21g-by-24",
+            "sku": "OPEY-0417"
+        },
+        {
+            "num": 418,
+            "name": "OK GOODTIME DIGESTIVE 14G*48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-digestive-14g48",
+            "sku": "OPEY-0418"
+        },
+        {
+            "num": 419,
+            "name": "OK GOODTIME DIGESTIVE 44G*24",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-digestive-44g24",
+            "sku": "OPEY-0419"
+        },
+        {
+            "num": 420,
+            "name": "OK GOODTIME DIGESTIVE 67.6G*24",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-digestive-676g24",
+            "sku": "OPEY-0420"
+        },
+        {
+            "num": 421,
+            "name": "OK GOODTIME FIBRE HONEY 15G*48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-fibre-honey-15g48",
+            "sku": "OPEY-0421"
+        },
+        {
+            "num": 422,
+            "name": "OK GOODTIME MALT SHORTCAKE 26G*36",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-malt-shortcake-26g36",
+            "sku": "OPEY-0422"
+        },
+        {
+            "num": 423,
+            "name": "OK GOODTIME VAN WAFERS 10.5G BY 48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-van-wafers-105g-by-48",
+            "sku": "OPEY-0423"
+        },
+        {
+            "num": 424,
+            "name": "OK GOODTIME VANILLA 14G*48",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-vanilla-14g48",
+            "sku": "OPEY-0424"
+        },
+        {
+            "num": 425,
+            "name": "OK GOODTIME VANILLA WAFERS 21G BY 24",
+            "img": null,
+            "slug": "opeyemi-ok-goodtime-vanilla-wafers-21g-by-24",
+            "sku": "OPEY-0425"
+        },
+        {
+            "num": 426,
+            "name": "OK KING CREAM CRACKER 13G*48",
+            "img": null,
+            "slug": "opeyemi-ok-king-cream-cracker-13g48",
+            "sku": "OPEY-0426"
+        },
+        {
+            "num": 427,
+            "name": "OK KING CREAM CRACKER 27G*48",
+            "img": null,
+            "slug": "opeyemi-ok-king-cream-cracker-27g48",
+            "sku": "OPEY-0427"
+        },
+        {
+            "num": 428,
+            "name": "OK MAXIFRUITY ASSORTED CANDY 20G*50",
+            "img": null,
+            "slug": "opeyemi-ok-maxifruity-assorted-candy-20g50",
+            "sku": "OPEY-0428"
+        },
+        {
+            "num": 429,
+            "name": "OK MAXIFRUITY CANDY WATERMELON 20g* 50",
+            "img": null,
+            "slug": "opeyemi-ok-maxifruity-candy-watermelon-20g-50",
+            "sku": "OPEY-0429"
+        },
+        {
+            "num": 430,
+            "name": "OK MAXIFRUITY STRAWBERRY 20g*50",
+            "img": null,
+            "slug": "opeyemi-ok-maxifruity-strawberry-20g50",
+            "sku": "OPEY-0430"
+        },
+        {
+            "num": 431,
+            "name": "OK MILK CANDY 20*50",
+            "img": null,
+            "slug": "opeyemi-ok-milk-candy-2050",
+            "sku": "OPEY-0431"
+        },
+        {
+            "num": 432,
+            "name": "OK MILKRICH CANDY 20*50",
+            "img": null,
+            "slug": "opeyemi-ok-milkrich-candy-2050",
+            "sku": "OPEY-0432"
+        },
+        {
+            "num": 433,
+            "name": "OK MILKRICH POP 10*50",
+            "img": null,
+            "slug": "opeyemi-ok-milkrich-pop-1050",
+            "sku": "OPEY-0433"
+        },
+        {
+            "num": 434,
+            "name": "OK MILKRICH POP 12G*25",
+            "img": null,
+            "slug": "opeyemi-ok-milkrich-pop-12g25",
+            "sku": "OPEY-0434"
+        },
+        {
+            "num": 435,
+            "name": "OK NUTRISNAX GRANOLA BAR 46G*36",
+            "img": null,
+            "slug": "opeyemi-ok-nutrisnax-granola-bar-46g36",
+            "sku": "OPEY-0435"
+        },
+        {
+            "num": 436,
+            "name": "OK PICNIC MILKY SHORTCAKE 11G*120",
+            "img": null,
+            "slug": "opeyemi-ok-picnic-milky-shortcake-11g120",
+            "sku": "OPEY-0436"
+        },
+        {
+            "num": 437,
+            "name": "OK PICNIC MILKY SHORTCAKE 13G*48",
+            "img": null,
+            "slug": "opeyemi-ok-picnic-milky-shortcake-13g48",
+            "sku": "OPEY-0437"
+        },
+        {
+            "num": 438,
+            "name": "OK PICNIC MILKY SHORTCAKE 24G*36",
+            "img": null,
+            "slug": "opeyemi-ok-picnic-milky-shortcake-24g36",
+            "sku": "OPEY-0438"
+        },
+        {
+            "num": 439,
+            "name": "OK POP ASSORTED {M & M}10*50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-assorted-m-m1050",
+            "sku": "OPEY-0439"
+        },
+        {
+            "num": 440,
+            "name": "OK POP BANANA & CREAM LOLLIPOP 10g*52",
+            "img": null,
+            "slug": "opeyemi-ok-pop-banana-cream-lollipop-10g52",
+            "sku": "OPEY-0440"
+        },
+        {
+            "num": 441,
+            "name": "OK POP COCORICH 10*52",
+            "img": null,
+            "slug": "opeyemi-ok-pop-cocorich-1052",
+            "sku": "OPEY-0441"
+        },
+        {
+            "num": 442,
+            "name": "OK POP FRESHYO YOGHURT",
+            "img": null,
+            "slug": "opeyemi-ok-pop-freshyo-yoghurt",
+            "sku": "OPEY-0442"
+        },
+        {
+            "num": 443,
+            "name": "OK POP MILK LOLLIPOP BANANA & STR 10G*50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milk-lollipop-banana-str-10g50",
+            "sku": "OPEY-0443"
+        },
+        {
+            "num": 444,
+            "name": "OK POP MILKITS 10g*50 (#50)",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milkits-10g50-50",
+            "sku": "OPEY-0444"
+        },
+        {
+            "num": 445,
+            "name": "OK POP MILKITS 16g*50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milkits-16g50",
+            "sku": "OPEY-0445"
+        },
+        {
+            "num": 446,
+            "name": "OK POP MILKITS DP10g*50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milkits-dp10g50",
+            "sku": "OPEY-0446"
+        },
+        {
+            "num": 447,
+            "name": "OK POP MILKITS MILK & BUTTER 6g*50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milkits-milk-butter-6g50",
+            "sku": "OPEY-0447"
+        },
+        {
+            "num": 448,
+            "name": "OK POP MILKPOP ASSORTED 10* 50",
+            "img": null,
+            "slug": "opeyemi-ok-pop-milkpop-assorted-10-50",
+            "sku": "OPEY-0448"
+        },
+        {
+            "num": 449,
+            "name": "OK POP TONGUE PAINTER 12*25 BB",
+            "img": null,
+            "slug": "opeyemi-ok-pop-tongue-painter-1225-bb",
+            "sku": "OPEY-0449"
+        },
+        {
+            "num": 450,
+            "name": "OK POP TONGUE PAINTER 12G*26 AS",
+            "img": null,
+            "slug": "opeyemi-ok-pop-tongue-painter-12g26-as",
+            "sku": "OPEY-0450"
+        },
+        {
+            "num": 451,
+            "name": "OK POPZILLA MANGO 16*50",
+            "img": null,
+            "slug": "opeyemi-ok-popzilla-mango-1650",
+            "sku": "OPEY-0451"
+        },
+        {
+            "num": 452,
+            "name": "OK POPZILLA TONGUE PAINTER GUM 10*50",
+            "img": null,
+            "slug": "opeyemi-ok-popzilla-tongue-painter-gum-1050",
+            "sku": "OPEY-0452"
+        },
+        {
+            "num": 453,
+            "name": "OK POPZILLA TONGUE PAINTER GUM SB16*50",
+            "img": null,
+            "slug": "opeyemi-ok-popzilla-tongue-painter-gum-sb1650",
+            "sku": "OPEY-0453"
+        },
+        {
+            "num": 454,
+            "name": "OK PURE BLISS CHOCO COOKIES 11G*48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-choco-cookies-11g48",
+            "sku": "OPEY-0454"
+        },
+        {
+            "num": 455,
+            "name": "OK PURE BLISS CHOCO COOKIES 11G*72",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-choco-cookies-11g72",
+            "sku": "OPEY-0455"
+        },
+        {
+            "num": 456,
+            "name": "OK PURE BLISS CHOCO WAFERS 21G48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-choco-wafers-21g48",
+            "sku": "OPEY-0456"
+        },
+        {
+            "num": 457,
+            "name": "OK PURE BLISS CHOCORICH WAFERS 46G*48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-chocorich-wafers-46g48",
+            "sku": "OPEY-0457"
+        },
+        {
+            "num": 458,
+            "name": "OK PURE BLISS GOLD CHOCO CHIP COOKIES 85G*24",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-gold-choco-chip-cookies-85g24",
+            "sku": "OPEY-0458"
+        },
+        {
+            "num": 459,
+            "name": "OK PURE BLISS GOLD COCONUT COOKIES 85G*24",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-gold-coconut-cookies-85g24",
+            "sku": "OPEY-0459"
+        },
+        {
+            "num": 460,
+            "name": "OK PURE BLISS GOLD RICH MILK COOKIES 85G*24",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-gold-rich-milk-cookies-85g24",
+            "sku": "OPEY-0460"
+        },
+        {
+            "num": 461,
+            "name": "OK PURE BLISS MILK CHOCO COOKIES 27*72",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-choco-cookies-2772",
+            "sku": "OPEY-0461"
+        },
+        {
+            "num": 462,
+            "name": "OK PURE BLISS MILK COOKIES 13g*48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-cookies-13g48",
+            "sku": "OPEY-0462"
+        },
+        {
+            "num": 463,
+            "name": "OK PURE BLISS MILK COOKIES 23G*36",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-cookies-23g36",
+            "sku": "OPEY-0463"
+        },
+        {
+            "num": 464,
+            "name": "OK PURE BLISS MILK COOKIES 27G*72",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-cookies-27g72",
+            "sku": "OPEY-0464"
+        },
+        {
+            "num": 465,
+            "name": "OK PURE BLISS MILK COOKIES 46G*36",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-cookies-46g36",
+            "sku": "OPEY-0465"
+        },
+        {
+            "num": 466,
+            "name": "OK PURE BLISS MILK COOKIES 54G*24",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-cookies-54g24",
+            "sku": "OPEY-0466"
+        },
+        {
+            "num": 467,
+            "name": "OK PURE BLISS MILK SB CREAM WAFERS 16G*48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-sb-cream-wafers-16g48",
+            "sku": "OPEY-0467"
+        },
+        {
+            "num": 468,
+            "name": "OK PURE BLISS MILK WAFERS 21g*72",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milk-wafers-21g72",
+            "sku": "OPEY-0468"
+        },
+        {
+            "num": 469,
+            "name": "OK PURE BLISS MILKRICH COOKIES 65G*24",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-milkrich-cookies-65g24",
+            "sku": "OPEY-0469"
+        },
+        {
+            "num": 470,
+            "name": "OK PURE BLISS WAFERS 24G*48",
+            "img": null,
+            "slug": "opeyemi-ok-pure-bliss-wafers-24g48",
+            "sku": "OPEY-0470"
+        },
+        {
+            "num": 471,
+            "name": "OK TOPMINT CANDY 20g*50",
+            "img": null,
+            "slug": "opeyemi-ok-topmint-candy-20g50",
+            "sku": "OPEY-0471"
+        },
+        {
+            "num": 472,
+            "name": "OK TOPMINT JAR 6g* 175",
+            "img": null,
+            "slug": "opeyemi-ok-topmint-jar-6g-175",
+            "sku": "OPEY-0472"
+        },
+        {
+            "num": 473,
+            "name": "OK TOPMINT MENTHOL FLAVOUR CANDY 12G*38",
+            "img": null,
+            "slug": "opeyemi-ok-topmint-menthol-flavour-candy-12g38",
+            "sku": "OPEY-0473"
+        },
+        {
+            "num": 474,
+            "name": "OK TROPICAL COCONUT GINGER CANDY 20G*50",
+            "img": null,
+            "slug": "opeyemi-ok-tropical-coconut-ginger-candy-20g50",
+            "sku": "OPEY-0474"
+        },
+        {
+            "num": 475,
+            "name": "OKUMU BANGA 2LT*6",
+            "img": null,
+            "slug": "opeyemi-okumu-banga-2lt6",
+            "sku": "OPEY-0475"
+        },
+        {
+            "num": 476,
+            "name": "OKUMU BANGA 4LT*6",
+            "img": null,
+            "slug": "opeyemi-okumu-banga-4lt6",
+            "sku": "OPEY-0476"
+        },
+        {
+            "num": 477,
+            "name": "PEAK MILK 14G*210 SACHET",
+            "img": null,
+            "slug": "opeyemi-peak-milk-14g210-sachet",
+            "sku": "OPEY-0477"
+        },
+        {
+            "num": 478,
+            "name": "PEAK MILK 150G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-peak-milk-150g24-tin",
+            "sku": "OPEY-0478"
+        },
+        {
+            "num": 479,
+            "name": "PEAK MILK 350G*12 REFILL",
+            "img": null,
+            "slug": "opeyemi-peak-milk-350g12-refill",
+            "sku": "OPEY-0479"
+        },
+        {
+            "num": 480,
+            "name": "POWER HORSE REGULAR 250ML*24",
+            "img": null,
+            "slug": "opeyemi-power-horse-regular-250ml24",
+            "sku": "OPEY-0480"
+        },
+        {
+            "num": 481,
+            "name": "POWER OIL 1.4LT*8",
+            "img": null,
+            "slug": "opeyemi-power-oil-14lt8",
+            "sku": "OPEY-0481"
+        },
+        {
+            "num": 482,
+            "name": "POWER OIL 110ML*43",
+            "img": null,
+            "slug": "opeyemi-power-oil-110ml43",
+            "sku": "OPEY-0482"
+        },
+        {
+            "num": 483,
+            "name": "POWER OIL 2.6LT*8",
+            "img": null,
+            "slug": "opeyemi-power-oil-26lt8",
+            "sku": "OPEY-0483"
+        },
+        {
+            "num": 484,
+            "name": "POWER OIL 4.5LT*4",
+            "img": null,
+            "slug": "opeyemi-power-oil-45lt4",
+            "sku": "OPEY-0484"
+        },
+        {
+            "num": 485,
+            "name": "POWER OIL 45ML*104",
+            "img": null,
+            "slug": "opeyemi-power-oil-45ml104",
+            "sku": "OPEY-0485"
+        },
+        {
+            "num": 486,
+            "name": "POWER OIL 75CL*12",
+            "img": null,
+            "slug": "opeyemi-power-oil-75cl12",
+            "sku": "OPEY-0486"
+        },
+        {
+            "num": 487,
+            "name": "POWER OIL LITE 1LT*12",
+            "img": null,
+            "slug": "opeyemi-power-oil-lite-1lt12",
+            "sku": "OPEY-0487"
+        },
+        {
+            "num": 488,
+            "name": "POWER OIL LITE 3LT*6",
+            "img": null,
+            "slug": "opeyemi-power-oil-lite-3lt6",
+            "sku": "OPEY-0488"
+        },
+        {
+            "num": 489,
+            "name": "POWER PASTA 475G*20 SLIM",
+            "img": null,
+            "slug": "opeyemi-power-pasta-475g20-slim",
+            "sku": "OPEY-0489"
+        },
+        {
+            "num": 490,
+            "name": "POWER PASTA CAVATTO(DANO PROMO)",
+            "img": null,
+            "slug": "opeyemi-power-pasta-cavattodano-promo",
+            "sku": "OPEY-0490"
+        },
+        {
+            "num": 491,
+            "name": "PURE SEMOLINA 10KG",
+            "img": null,
+            "slug": "opeyemi-pure-semolina-10kg",
+            "sku": "OPEY-0491"
+        },
+        {
+            "num": 492,
+            "name": "PURE SEMOLINA 1KG*10",
+            "img": null,
+            "slug": "opeyemi-pure-semolina-1kg10",
+            "sku": "OPEY-0492"
+        },
+        {
+            "num": 493,
+            "name": "RAFA DETERGENT 125G*28+3",
+            "img": null,
+            "slug": "opeyemi-rafa-detergent-125g283",
+            "sku": "OPEY-0493"
+        },
+        {
+            "num": 494,
+            "name": "RAFA DETERGENT 45G*78+6",
+            "img": null,
+            "slug": "opeyemi-rafa-detergent-45g786",
+            "sku": "OPEY-0494"
+        },
+        {
+            "num": 495,
+            "name": "RAFA DETERGENT 850G*6+1",
+            "img": null,
+            "slug": "opeyemi-rafa-detergent-850g61",
+            "sku": "OPEY-0495"
+        },
+        {
+            "num": 496,
+            "name": "RAFA DETERGENT 85G*48+8",
+            "img": null,
+            "slug": "opeyemi-rafa-detergent-85g488",
+            "sku": "OPEY-0496"
+        },
+        {
+            "num": 497,
+            "name": "RIBENA RTD BLACKCURRANT PET 450ML*12",
+            "img": null,
+            "slug": "opeyemi-ribena-rtd-blackcurrant-pet-450ml12",
+            "sku": "OPEY-0497"
+        },
+        {
+            "num": 498,
+            "name": "RIBENA RTD BLACKCURRANT TETRA 125ML*16",
+            "img": null,
+            "slug": "opeyemi-ribena-rtd-blackcurrant-tetra-125ml16",
+            "sku": "OPEY-0498"
+        },
+        {
+            "num": 499,
+            "name": "RIBENA RTD BLACKCURRANT TETRA 250ML*12",
+            "img": null,
+            "slug": "opeyemi-ribena-rtd-blackcurrant-tetra-250ml12",
+            "sku": "OPEY-0499"
+        },
+        {
+            "num": 500,
+            "name": "RIBENA SPARKLING BLACKCURRANT CAN 330ML*24",
+            "img": null,
+            "slug": "opeyemi-ribena-sparkling-blackcurrant-can-330ml24",
+            "sku": "OPEY-0500"
+        },
+        {
+            "num": 501,
+            "name": "SARAH GREEN PEAS 200G*24",
+            "img": null,
+            "slug": "opeyemi-sarah-green-peas-200g24",
+            "sku": "OPEY-0501"
+        },
+        {
+            "num": 502,
+            "name": "SARAH GREEN PEAS 300G*12",
+            "img": null,
+            "slug": "opeyemi-sarah-green-peas-300g12",
+            "sku": "OPEY-0502"
+        },
+        {
+            "num": 503,
+            "name": "SARAH SARDINE",
+            "img": null,
+            "slug": "opeyemi-sarah-sardine",
+            "sku": "OPEY-0503"
+        },
+        {
+            "num": 504,
+            "name": "SARAH TOMATO 2.2KG*6 TIN",
+            "img": null,
+            "slug": "opeyemi-sarah-tomato-22kg6-tin",
+            "sku": "OPEY-0504"
+        },
+        {
+            "num": 505,
+            "name": "SARAH TOMATO 210G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-sarah-tomato-210g24-tin",
+            "sku": "OPEY-0505"
+        },
+        {
+            "num": 506,
+            "name": "SARAH TOMATO 210G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-sarah-tomato-210g24-tin",
+            "sku": "OPEY-0506"
+        },
+        {
+            "num": 507,
+            "name": "SARAH TOMATO 400G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-sarah-tomato-400g24-tin",
+            "sku": "OPEY-0507"
+        },
+        {
+            "num": 508,
+            "name": "SARAH TOMATO 800G*12 TIN",
+            "img": null,
+            "slug": "opeyemi-sarah-tomato-800g12-tin",
+            "sku": "OPEY-0508"
+        },
+        {
+            "num": 509,
+            "name": "SHALTOUX HNY LMN LOZENGES 200 X 12 JAR",
+            "img": null,
+            "slug": "opeyemi-shaltoux-hny-lmn-lozenges-200-x-12-jar",
+            "sku": "OPEY-0509"
+        },
+        {
+            "num": 510,
+            "name": "SHALTOUX NATURAL LOZENGES 200 X 12 JAR",
+            "img": null,
+            "slug": "opeyemi-shaltoux-natural-lozenges-200-x-12-jar",
+            "sku": "OPEY-0510"
+        },
+        {
+            "num": 511,
+            "name": "SHALTOUX NATURAL LOZENGES BOX 3 X 4 X 20",
+            "img": null,
+            "slug": "opeyemi-shaltoux-natural-lozenges-box-3-x-4-x-20",
+            "sku": "OPEY-0511"
+        },
+        {
+            "num": 512,
+            "name": "SHALTOUX NATURAL ORANGE LOZN 200 X 12 JAR",
+            "img": null,
+            "slug": "opeyemi-shaltoux-natural-orange-lozn-200-x-12-jar",
+            "sku": "OPEY-0512"
+        },
+        {
+            "num": 513,
+            "name": "SMART MALT 125ML*24",
+            "img": null,
+            "slug": "opeyemi-smart-malt-125ml24",
+            "sku": "OPEY-0513"
+        },
+        {
+            "num": 514,
+            "name": "SONIA CHILLI PEPPE POWDER 5G PROMO",
+            "img": null,
+            "slug": "opeyemi-sonia-chilli-peppe-powder-5g-promo",
+            "sku": "OPEY-0514"
+        },
+        {
+            "num": 515,
+            "name": "SONIA CHILLI PEPPE POWDER 5G*120",
+            "img": null,
+            "slug": "opeyemi-sonia-chilli-peppe-powder-5g120",
+            "sku": "OPEY-0515"
+        },
+        {
+            "num": 516,
+            "name": "SONIA GINGER POWDER 5G*120",
+            "img": null,
+            "slug": "opeyemi-sonia-ginger-powder-5g120",
+            "sku": "OPEY-0516"
+        },
+        {
+            "num": 517,
+            "name": "SONIA TOMATO 2.2KG TIN PIECES",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-22kg-tin-pieces",
+            "sku": "OPEY-0517"
+        },
+        {
+            "num": 518,
+            "name": "SONIA TOMATO MIX 1.1KG SUP PROMO (PIECES)",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-11kg-sup-promo-pieces",
+            "sku": "OPEY-0518"
+        },
+        {
+            "num": 519,
+            "name": "SONIA TOMATO MIX 1.1KG*12 SACHET",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-11kg12-sachet",
+            "sku": "OPEY-0519"
+        },
+        {
+            "num": 520,
+            "name": "SONIA TOMATO MIX 2.2KG*6 TIN",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-22kg6-tin",
+            "sku": "OPEY-0520"
+        },
+        {
+            "num": 521,
+            "name": "SONIA TOMATO MIX 210G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-210g24-sachet",
+            "sku": "OPEY-0521"
+        },
+        {
+            "num": 522,
+            "name": "SONIA TOMATO MIX 210G*24 SUP PROMO (PIECES)",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-210g24-sup-promo-pieces",
+            "sku": "OPEY-0522"
+        },
+        {
+            "num": 523,
+            "name": "SONIA TOMATO MIX 210G*48 TIN",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-210g48-tin",
+            "sku": "OPEY-0523"
+        },
+        {
+            "num": 524,
+            "name": "SONIA TOMATO MIX 400G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-400g24-sachet",
+            "sku": "OPEY-0524"
+        },
+        {
+            "num": 525,
+            "name": "SONIA TOMATO MIX 400G*24 SUP PROMO (PIECES)",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-400g24-sup-promo-pieces",
+            "sku": "OPEY-0525"
+        },
+        {
+            "num": 526,
+            "name": "SONIA TOMATO MIX 400G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-400g24-tin",
+            "sku": "OPEY-0526"
+        },
+        {
+            "num": 527,
+            "name": "SONIA TOMATO MIX 55G*50",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-55g50",
+            "sku": "OPEY-0527"
+        },
+        {
+            "num": 528,
+            "name": "SONIA TOMATO MIX 55G*60",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-mix-55g60",
+            "sku": "OPEY-0528"
+        },
+        {
+            "num": 529,
+            "name": "SONIA TOMATO P & O 210G SUP PROMO (PIECES)",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-p-o-210g-sup-promo-pieces",
+            "sku": "OPEY-0529"
+        },
+        {
+            "num": 530,
+            "name": "SONIA TOMATO P & O 400G SUP PROMO (PIECES)",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-p-o-400g-sup-promo-pieces",
+            "sku": "OPEY-0530"
+        },
+        {
+            "num": 531,
+            "name": "SONIA TOMATO PEPPE AND ONION 210G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-peppe-and-onion-210g24-sachet",
+            "sku": "OPEY-0531"
+        },
+        {
+            "num": 532,
+            "name": "SONIA TOMATO PEPPE AND ONION 400G*24 SACHET",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-peppe-and-onion-400g24-sachet",
+            "sku": "OPEY-0532"
+        },
+        {
+            "num": 533,
+            "name": "SONIA TOMATO PEPPE AND ONION 50G*50",
+            "img": null,
+            "slug": "opeyemi-sonia-tomato-peppe-and-onion-50g50",
+            "sku": "OPEY-0533"
+        },
+        {
+            "num": 534,
+            "name": "STARLIGHT 17G BY 72",
+            "img": null,
+            "slug": "opeyemi-starlight-17g-by-72",
+            "sku": "OPEY-0534"
+        },
+        {
+            "num": 535,
+            "name": "STARLIGHT 32g BY 48",
+            "img": null,
+            "slug": "opeyemi-starlight-32g-by-48",
+            "sku": "OPEY-0535"
+        },
+        {
+            "num": 536,
+            "name": "SUNOLA CUBE SUGAR",
+            "img": null,
+            "slug": "opeyemi-sunola-cube-sugar",
+            "sku": "OPEY-0536"
+        },
+        {
+            "num": 537,
+            "name": "SUNOLA SACHET SUGAR 15G X 200",
+            "img": null,
+            "slug": "opeyemi-sunola-sachet-sugar-15g-x-200",
+            "sku": "OPEY-0537"
+        },
+        {
+            "num": 538,
+            "name": "SUNOLA SOYA OIL 1.9LT*8",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-19lt8",
+            "sku": "OPEY-0538"
+        },
+        {
+            "num": 539,
+            "name": "SUNOLA SOYA OIL 1LT",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-1lt",
+            "sku": "OPEY-0539"
+        },
+        {
+            "num": 540,
+            "name": "SUNOLA SOYA OIL 2.75LT*6",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-275lt6",
+            "sku": "OPEY-0540"
+        },
+        {
+            "num": 541,
+            "name": "SUNOLA SOYA OIL 3LT*6",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-3lt6",
+            "sku": "OPEY-0541"
+        },
+        {
+            "num": 542,
+            "name": "SUNOLA SOYA OIL 4.5LT*4",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-45lt4",
+            "sku": "OPEY-0542"
+        },
+        {
+            "num": 543,
+            "name": "SUNOLA SOYA OIL 5LT*4",
+            "img": null,
+            "slug": "opeyemi-sunola-soya-oil-5lt4",
+            "sku": "OPEY-0543"
+        },
+        {
+            "num": 544,
+            "name": "SUPER COW MILK 12G*200",
+            "img": null,
+            "slug": "opeyemi-super-cow-milk-12g200",
+            "sku": "OPEY-0544"
+        },
+        {
+            "num": 545,
+            "name": "SUPERKIDS (OTHER FLAVOUR) 210ML",
+            "img": null,
+            "slug": "opeyemi-superkids-other-flavour-210ml",
+            "sku": "OPEY-0545"
+        },
+        {
+            "num": 546,
+            "name": "SUPERKIDS APPLE 210ML",
+            "img": null,
+            "slug": "opeyemi-superkids-apple-210ml",
+            "sku": "OPEY-0546"
+        },
+        {
+            "num": 547,
+            "name": "SUPREME SEMO 10KG",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-10kg",
+            "sku": "OPEY-0547"
+        },
+        {
+            "num": 548,
+            "name": "SUPREME SEMO 1KG",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-1kg",
+            "sku": "OPEY-0548"
+        },
+        {
+            "num": 549,
+            "name": "SUPREME SEMO 2KG",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-2kg",
+            "sku": "OPEY-0549"
+        },
+        {
+            "num": 550,
+            "name": "SUPREME SEMO 500G BY 20",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-500g-by-20",
+            "sku": "OPEY-0550"
+        },
+        {
+            "num": 551,
+            "name": "SUPREME SEMO 500G BY 20 CLOSE TO EXPIRATION",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-500g-by-20-close-to-expiration",
+            "sku": "OPEY-0551"
+        },
+        {
+            "num": 552,
+            "name": "SUPREME SEMO 5KG",
+            "img": null,
+            "slug": "opeyemi-supreme-semo-5kg",
+            "sku": "OPEY-0552"
+        },
+        {
+            "num": 553,
+            "name": "TASTY TOM 2IN1 CHICKEN SEASONING 11g*20*10",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-2in1-chicken-seasoning-11g2010",
+            "sku": "OPEY-0553"
+        },
+        {
+            "num": 554,
+            "name": "TASTY TOM 2in1 BEEF SEASONING 11g*200",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-2in1-beef-seasoning-11g200",
+            "sku": "OPEY-0554"
+        },
+        {
+            "num": 555,
+            "name": "TASTY TOM CURRY SEASONING POWDER 3.5G*200",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-curry-seasoning-powder-35g200",
+            "sku": "OPEY-0555"
+        },
+        {
+            "num": 556,
+            "name": "TASTY TOM JOLLOF MIX 400G",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-jollof-mix-400g",
+            "sku": "OPEY-0556"
+        },
+        {
+            "num": 557,
+            "name": "TASTY TOM JOLLOF MIX 60g*50",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-jollof-mix-60g50",
+            "sku": "OPEY-0557"
+        },
+        {
+            "num": 558,
+            "name": "TASTY TOM PEPPER AND ONIONS 50g*50",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-pepper-and-onions-50g50",
+            "sku": "OPEY-0558"
+        },
+        {
+            "num": 559,
+            "name": "TASTY TOM STEW&JOLLOF SEASONING POWDER 10gx20x10",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-stewjollof-seasoning-powder-10gx20x10",
+            "sku": "OPEY-0559"
+        },
+        {
+            "num": 560,
+            "name": "TASTY TOM SUPA CHICKEN 70G*40",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-supa-chicken-70g40",
+            "sku": "OPEY-0560"
+        },
+        {
+            "num": 561,
+            "name": "TASTY TOM TOMATO 1.1KG*12",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-tomato-11kg12",
+            "sku": "OPEY-0561"
+        },
+        {
+            "num": 562,
+            "name": "TASTY TOM TOMATO 210g* 24",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-tomato-210g-24",
+            "sku": "OPEY-0562"
+        },
+        {
+            "num": 563,
+            "name": "TASTY TOM TOMATO 400g*24",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-tomato-400g24",
+            "sku": "OPEY-0563"
+        },
+        {
+            "num": 564,
+            "name": "TASTY TOM TOMATO MIX 55g*50",
+            "img": null,
+            "slug": "opeyemi-tasty-tom-tomato-mix-55g50",
+            "sku": "OPEY-0564"
+        },
+        {
+            "num": 565,
+            "name": "THREE CROWN MILK 12G*210 SACHET",
+            "img": null,
+            "slug": "opeyemi-three-crown-milk-12g210-sachet",
+            "sku": "OPEY-0565"
+        },
+        {
+            "num": 566,
+            "name": "THREE CROWN MILK 150G*24 TIN",
+            "img": null,
+            "slug": "opeyemi-three-crown-milk-150g24-tin",
+            "sku": "OPEY-0566"
+        },
+        {
+            "num": 567,
+            "name": "THREE CROWN MILK 320G*12 REFILL",
+            "img": null,
+            "slug": "opeyemi-three-crown-milk-320g12-refill",
+            "sku": "OPEY-0567"
+        },
+        {
+            "num": 568,
+            "name": "TINKI CUBE SUGAR 500G*10*5",
+            "img": null,
+            "slug": "opeyemi-tinki-cube-sugar-500g105",
+            "sku": "OPEY-0568"
+        },
+        {
+            "num": 569,
+            "name": "TITUS SARDINE 125G*50",
+            "img": null,
+            "slug": "opeyemi-titus-sardine-125g50",
+            "sku": "OPEY-0569"
+        },
+        {
+            "num": 570,
+            "name": "TOMATO JOS 65G*50",
+            "img": null,
+            "slug": "opeyemi-tomato-jos-65g50",
+            "sku": "OPEY-0570"
+        },
+        {
+            "num": 571,
+            "name": "TWINS-DA REFINED OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-twins-da-refined-oil-25lt",
+            "sku": "OPEY-0571"
+        },
+        {
+            "num": 572,
+            "name": "VEDAN 2G*25*40",
+            "img": null,
+            "slug": "opeyemi-vedan-2g2540",
+            "sku": "OPEY-0572"
+        },
+        {
+            "num": 573,
+            "name": "VEDAN 300G*25",
+            "img": null,
+            "slug": "opeyemi-vedan-300g25",
+            "sku": "OPEY-0573"
+        },
+        {
+            "num": 574,
+            "name": "VEDAN 454G*50",
+            "img": null,
+            "slug": "opeyemi-vedan-454g50",
+            "sku": "OPEY-0574"
+        },
+        {
+            "num": 575,
+            "name": "VEDAN 6G*28 BY 10",
+            "img": null,
+            "slug": "opeyemi-vedan-6g28-by-10",
+            "sku": "OPEY-0575"
+        },
+        {
+            "num": 576,
+            "name": "VITALI GINGER GARLIC PASTE 20G*120",
+            "img": null,
+            "slug": "opeyemi-vitali-ginger-garlic-paste-20g120",
+            "sku": "OPEY-0576"
+        },
+        {
+            "num": 577,
+            "name": "VITALI GINGER GARLIC POWDER 5G*180",
+            "img": null,
+            "slug": "opeyemi-vitali-ginger-garlic-powder-5g180",
+            "sku": "OPEY-0577"
+        },
+        {
+            "num": 578,
+            "name": "VITALI TOMATO MIX 60G*50",
+            "img": null,
+            "slug": "opeyemi-vitali-tomato-mix-60g50",
+            "sku": "OPEY-0578"
+        },
+        {
+            "num": 579,
+            "name": "VITAMILK BANANA SOYMILK DRINK 300ML*24",
+            "img": null,
+            "slug": "opeyemi-vitamilk-banana-soymilk-drink-300ml24",
+            "sku": "OPEY-0579"
+        },
+        {
+            "num": 580,
+            "name": "VITAMILK DOUBLE CHOCO SHAKE 300ML*24",
+            "img": null,
+            "slug": "opeyemi-vitamilk-double-choco-shake-300ml24",
+            "sku": "OPEY-0580"
+        },
+        {
+            "num": 581,
+            "name": "VITAMILK ENERGY BLACK CERIAL SOYAMILK 300ml*4*6",
+            "img": null,
+            "slug": "opeyemi-vitamilk-energy-black-cerial-soyamilk-300ml46",
+            "sku": "OPEY-0581"
+        },
+        {
+            "num": 582,
+            "name": "VITAMILK RICE 10KG",
+            "img": null,
+            "slug": "opeyemi-vitamilk-rice-10kg",
+            "sku": "OPEY-0582"
+        },
+        {
+            "num": 583,
+            "name": "VITAMILK RICE 1KG",
+            "img": null,
+            "slug": "opeyemi-vitamilk-rice-1kg",
+            "sku": "OPEY-0583"
+        },
+        {
+            "num": 584,
+            "name": "VITAMILK SOYAMILK 300ML*24",
+            "img": null,
+            "slug": "opeyemi-vitamilk-soyamilk-300ml24",
+            "sku": "OPEY-0584"
+        },
+        {
+            "num": 585,
+            "name": "VITAMILK STRAWBERRY 300ML*24",
+            "img": null,
+            "slug": "opeyemi-vitamilk-strawberry-300ml24",
+            "sku": "OPEY-0585"
+        },
+        {
+            "num": 586,
+            "name": "WGO SOYA OIL 25LT",
+            "img": null,
+            "slug": "opeyemi-wgo-soya-oil-25lt",
+            "sku": "OPEY-0586"
+        },
+        {
+            "num": 587,
+            "name": "YUMBOWL INSTANT CEREAL 400G*12",
+            "img": null,
+            "slug": "opeyemi-yumbowl-instant-cereal-400g12",
+            "sku": "OPEY-0587"
+        },
+        {
+            "num": 588,
+            "name": "YUMBOWL INSTANT CEREAL 45G*100",
+            "img": null,
+            "slug": "opeyemi-yumbowl-instant-cereal-45g100",
+            "sku": "OPEY-0588"
+        },
+        {
+            "num": 589,
+            "name": "ZESTLE SARDINE",
+            "img": null,
+            "slug": "opeyemi-zestle-sardine",
+            "sku": "OPEY-0589"
+        }
+    ]
+}
