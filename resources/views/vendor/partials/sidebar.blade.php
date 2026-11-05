@@ -100,7 +100,7 @@ $icons = [
 
     <div>
         @if ($group['heading'])
-        <p class="px-3 pb-2 text-[10px] font-extrabold uppercase tracking-[0.14em] text-emerald-200/80">{{ $group['heading'] }}</p>
+        <p class="px-3 pb-2 text-[12px] font-extrabold uppercase tracking-[0.14em] text-emerald-200/80">{{ $group['heading'] }}</p>
         @endif
 
         <ul class="space-y-0.5">
@@ -113,11 +113,7 @@ $icons = [
             @endphp
 
             <li>
-                <a href="{{ $href }}" {{ $target }}
-                    class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition
-                                  {{ $isActive
-                                        ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-900/30'
-                                        : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+                <a href="{{ $href }}" {{ $target }} aria-label="{{ $item['label'] }}">
                     <svg class="h-[18px] w-[18px] shrink-0 {{ $isActive ? 'text-white' : 'text-emerald-200/70 group-hover:text-white' }}"
                         fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="{{ $icons[$item['icon']] ?? $icons['home'] }}" />
@@ -126,7 +122,7 @@ $icons = [
                     <span class="truncate">{{ $item['label'] }}</span>
 
                     @if ($badge)
-                    <span class="ml-auto rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">{{ $badge > 99 ? '99+' : $badge }}</span>
+                    <span class="ml-auto rounded-full bg-orange-500 px-2 py-0.5 text-[12px] font-bold text-white">{{ $badge > 99 ? '99+' : $badge }}</span>
                     @endif
                 </a>
             </li>

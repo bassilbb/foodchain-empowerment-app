@@ -224,13 +224,17 @@
         .main-content {
             flex: 1;
             margin-left: 264px;
+            margin-top: 0;
             min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
         }
         
         .top-header {
-            background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.97) 100%);
-            backdrop-filter: blur(20px) saturate(1.2);
+            background: rgba(255, 255, 255, 0.92);
             -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            backdrop-filter: blur(20px) saturate(1.2);
             border-bottom: 1px solid rgba(16,185,129,0.15);
             box-shadow: 0 1px 0 rgba(16,185,129,0.05), 0 4px 20px rgba(0,0,0,0.04);
             padding: 1rem 2rem;

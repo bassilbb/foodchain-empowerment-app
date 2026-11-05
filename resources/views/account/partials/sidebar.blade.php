@@ -100,7 +100,7 @@
 
         <div>
             @if ($group['heading'])
-                <p class="px-3 pb-2 text-[10px] font-extrabold uppercase tracking-[0.14em] text-emerald-200/80">{{ $group['heading'] }}</p>
+                <p class="px-3 pb-2 text-[12px] font-extrabold uppercase tracking-[0.14em] text-emerald-200/80">{{ $group['heading'] }}</p>
             @endif
 
             <ul class="space-y-0.5">
@@ -113,6 +113,7 @@
 
                     <li>
                         <a href="{{ $href }}"
+                           aria-label="{{ $item['label'] }}"
                            class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition
                                   {{ $isActive
                                         ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-900/30'
@@ -125,7 +126,7 @@
                             <span class="truncate">{{ $item['label'] }}</span>
 
                             @if ($badge)
-                                <span class="ml-auto rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">{{ $badge > 99 ? '99+' : $badge }}</span>
+                                <span class="ml-auto rounded-full bg-orange-500 px-2 py-0.5 text-[12px] font-bold text-white">{{ $badge > 99 ? '99+' : $badge }}</span>
                             @endif
                         </a>
                     </li>
