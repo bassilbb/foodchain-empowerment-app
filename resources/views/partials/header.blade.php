@@ -6,11 +6,11 @@
                 <!-- Logo -->
                 <a href="{{ route('landing') }}" class="group flex items-center gap-3 shrink-0">
                     <span class="w-14 h-14 rounded-2xl bg-white ring-1 ring-emerald-100 shadow-sm shadow-emerald-600/10 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:-translate-y-0.5">
-                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full p-1">
+                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="Food Chain Enterprises Limited Logo" class="object-contain w-full h-full p-1">
                     </span>
                     <span class="hidden sm:flex flex-col leading-tight">
-                        <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">FCCEI</span>
-                        <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Food Chain Community Empowerment</span>
+                        <span class="text-[1.35rem] font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Food Chain Enterprises</span>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Limited</span>
                     </span>
                 </a>
 
@@ -24,9 +24,9 @@
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="desktop-about" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
-                            <a href="{{ route('team') }}" class="dropdown-item">Team</a>
-                            <a href="{{ route('csr') }}" class="dropdown-item">CSR</a>
-                            <a href="{{ route('franchise') }}" class="dropdown-item">Franchise</a>
+                            <a href="{{ route('team') }}" class="dropdown-item{{ request()->routeIs('team') ? ' is-active' : '' }}">Team</a>
+                            <a href="{{ route('csr') }}" class="dropdown-item{{ request()->routeIs('csr') ? ' is-active' : '' }}">CSR</a>
+                            <a href="{{ route('franchise') }}" class="dropdown-item{{ request()->routeIs('franchise') ? ' is-active' : '' }}">Franchise</a>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="desktop-blog" class="dropdown-menu absolute left-0 mt-3 w-52 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
-                            <a href="{{ route('gallery') }}" class="dropdown-item">Gallery</a>
+                            <a href="{{ route('gallery') }}" class="dropdown-item{{ request()->routeIs('gallery') ? ' is-active' : '' }}">Gallery</a>
                         </div>
                     </div>
 
@@ -48,9 +48,9 @@
                             <svg class="ml-1 w-3.5 h-3.5 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="desktop-partner" class="dropdown-menu absolute right-0 mt-3 w-64 bg-white shadow-xl rounded-2xl p-2 z-20 ring-1 ring-slate-100">
-                            <a href="{{ route('sponsor') }}" class="dropdown-item">Become Our Sponsor</a>
-                            <a href="{{ route('supplier') }}" class="dropdown-item">Become Supplier</a>
-                            <a href="{{ route('rider') }}" class="dropdown-item">Become Our Logistics Channel</a>
+                            <a href="{{ route('sponsor') }}" class="dropdown-item{{ request()->routeIs('sponsor') ? ' is-active' : '' }}">Become Our Sponsor</a>
+                            <a href="{{ route('supplier') }}" class="dropdown-item{{ request()->routeIs('supplier') ? ' is-active' : '' }}">Become Supplier</a>
+                            <a href="{{ route('rider') }}" class="dropdown-item{{ request()->routeIs('rider') ? ' is-active' : '' }}">Become Our Logistics Channel</a>
                         </div>
                     </div>
 
@@ -85,9 +85,9 @@
                             <svg id="mobile-about-icon" class="w-4 h-4 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="mobile-about" class="hidden pl-4 mt-1 space-y-1 border-l-2 border-emerald-100">
-                            <a href="{{ route('team') }}" class="mobile-sub">Team</a>
-                            <a href="{{ route('csr') }}" class="mobile-sub">CSR</a>
-                            <a href="{{ route('franchise') }}" class="mobile-sub">Franchise</a>
+                            <a href="{{ route('team') }}" class="mobile-sub{{ request()->routeIs('team') ? ' is-active' : '' }}">Team</a>
+                            <a href="{{ route('csr') }}" class="mobile-sub{{ request()->routeIs('csr') ? ' is-active' : '' }}">CSR</a>
+                            <a href="{{ route('franchise') }}" class="mobile-sub{{ request()->routeIs('franchise') ? ' is-active' : '' }}">Franchise</a>
                         </div>
                     </div>
 
@@ -99,7 +99,7 @@
                             <svg id="mobile-blog-icon" class="w-4 h-4 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="mobile-blog" class="hidden pl-4 mt-1 space-y-1 border-l-2 border-emerald-100">
-                            <a href="{{ route('gallery') }}" class="mobile-sub">Gallery</a>
+                            <a href="{{ route('gallery') }}" class="mobile-sub{{ request()->routeIs('gallery') ? ' is-active' : '' }}">Gallery</a>
                         </div>
                     </div>
 
@@ -109,9 +109,9 @@
                             <svg id="mobile-partner-icon" class="w-4 h-4 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                         </button>
                         <div id="mobile-partner" class="hidden pl-4 mt-1 space-y-1 border-l-2 border-emerald-100">
-                            <a href="{{ route('sponsor') }}" class="mobile-sub">Become Our Sponsor</a>
-                            <a href="{{ route('supplier') }}" class="mobile-sub">Become Supplier</a>
-                            <a href="{{ route('rider') }}" class="mobile-sub">Become Our Logistics Channel</a>
+                            <a href="{{ route('sponsor') }}" class="mobile-sub{{ request()->routeIs('sponsor') ? ' is-active' : '' }}">Become Our Sponsor</a>
+                            <a href="{{ route('supplier') }}" class="mobile-sub{{ request()->routeIs('supplier') ? ' is-active' : '' }}">Become Supplier</a>
+                            <a href="{{ route('rider') }}" class="mobile-sub{{ request()->routeIs('rider') ? ' is-active' : '' }}">Become Our Logistics Channel</a>
                         </div>
                     </div>
 
@@ -138,11 +138,11 @@
         .dropdown-menu.is-open { display: block !important; z-index: 10001 !important; }
         .dropdown-toggle:focus-visible, .dropdown-item:focus-visible, .mobile-link:focus-visible, .mobile-sub:focus-visible { outline: 3px solid rgba(16,185,129,.35); outline-offset: 2px; }
         .dropdown-item { display: block; padding: 0.65rem 0.85rem; border-radius: 0.75rem; font-size: 0.875rem; font-weight: 600; color: #475569; transition: all 0.15s ease; cursor: pointer; position: relative; z-index: 1; }
-        .dropdown-item:hover { background: #ecfdf5; color: #047857; }
+        .dropdown-item:hover, .dropdown-item.is-active { background: #ecfdf5; color: #047857; }
         .mobile-link { display: flex; align-items: center; padding: 0.8rem 0.9rem; border-radius: 0.9rem; font-size: 0.95rem; font-weight: 600; color: #334155; transition: all 0.15s ease; }
-        .mobile-link:hover { background: #ecfdf5; color: #047857; }
+        .mobile-link:hover, .mobile-link.is-active { background: #ecfdf5; color: #047857; }
         .mobile-sub { display: block; padding: 0.5rem 0.75rem; border-radius: 0.6rem; font-size: 0.875rem; font-weight: 500; color: #64748b; transition: all 0.15s ease; }
-        .mobile-sub:hover { color: #047857; }
+        .mobile-sub:hover, .mobile-sub.is-active { color: #047857; font-weight: 700; }
         .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.68rem 1.15rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: #ffffff; background-image: linear-gradient(110deg, #047857, #059669, #0d9488); box-shadow: 0 10px 22px -7px rgba(5,150,105,0.60); transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 24px -6px rgba(5,150,105,0.65); }
         .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.68rem 1.15rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; color: #047857; background: #ffffff; border: 1.5px solid #a7f3d0; transition: transform .18s ease, background-color .18s ease, border-color .18s ease; }

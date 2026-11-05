@@ -15,7 +15,7 @@ $brandVendor = $brandVendor ?? auth()->user()?->marketplaceVendor;
         <p class="truncate text-sm font-extrabold leading-tight text-white">
             {{ $brandVendor?->business_name ?: ($brandVendor?->name ?? 'Vendor') }}
         </p>
-        <p class="mt-0.5 truncate text-[11px] font-medium text-emerald-200/80">
+        <p class="mt-0.5 truncate text-[11px] font-medium text-white/85">
             @if ($brandVendor)
             Vendor ID: #{{ $brandVendor->id }} · {{ ucfirst($brandVendor->status) }}
             @else

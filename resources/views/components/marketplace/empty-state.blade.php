@@ -33,17 +33,17 @@ $paths = [
 $path = $paths[$icon] ?? $paths['inbox'];
 @endphp
 
-<div class="flex flex-col items-center justify-center px-6 py-14 text-center">
-    <span class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 ring-1 ring-emerald-100">
-        <svg class="h-8 w-8 text-emerald-500" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+<div {{ $attributes->merge(['class' => 'flex flex-col items-center justify-center px-6 py-12 text-center sm:py-14']) }}>
+    <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100/80">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="{{ $path }}" />
         </svg>
     </span>
 
-    <h3 class="text-base font-bold text-slate-800">{{ $title }}</h3>
+    <h3 class="text-[0.95rem] font-bold text-slate-800">{{ $title }}</h3>
 
     @if ($message)
-    <p class="mt-1 max-w-sm text-sm text-slate-500">{{ $message }}</p>
+    <p class="mt-1.5 max-w-sm text-sm leading-relaxed text-slate-500">{{ $message }}</p>
     @endif
 
     @if ($actionUrl && $actionLabel)

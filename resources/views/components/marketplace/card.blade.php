@@ -19,12 +19,12 @@
 'padded' => true,
 ])
 
-<section class="overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-3d-card transition duration-300 hover:shadow-3d-hover">
+<section {{ $attributes->merge(['class' => 'overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm shadow-slate-900/5 transition duration-200 hover:shadow-md hover:shadow-slate-900/5']) }}>
     @if ($title || isset($actions))
-    <header class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
+    <header class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 bg-white px-5 py-4 sm:px-6">
         <div class="min-w-0">
             @if ($title)
-            <h2 class="text-sm font-bold text-slate-800">{{ $title }}</h2>
+            <h2 class="text-[0.95rem] font-bold tracking-[-0.01em] text-slate-800">{{ $title }}</h2>
             @endif
             @if ($subtitle)
             <p class="mt-0.5 text-xs text-slate-500">{{ $subtitle }}</p>
@@ -37,7 +37,7 @@
     </header>
     @endif
 
-    <div class="{{ $flush ? '' : ($padded ? 'p-5' : '') }}">
+    <div class="{{ $flush ? '' : ($padded ? 'p-5 sm:p-6' : '') }}">
         {{ $slot }}
     </div>
 </section>

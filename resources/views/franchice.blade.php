@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,7 @@
     <title>FCCEI Franchise</title>
     @include('partials.seo-meta', [
         'seoTitle' => 'Join the FCCEI Franchise Network',
-        'seoDesc' => 'Partner with FoodChain Community Empowerment Initiative as a franchise owner and bring affordable food security delivery to underserved communities across Nigeria.',
+        'seoDesc' => 'Partner with Food Chain Enterprises Limited as a franchise owner and bring affordable food security delivery to underserved communities across Nigeria.',
         'schema' => [
             [
                 '@context' => 'https://schema.org',
@@ -28,47 +28,8 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
     @include('partials.skip-link', ['skipTarget' => '#home'])
 
-    <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white shadow-sm">
-        <nav class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo Section -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
-                        <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">
-                            Food Chain Community Empowerment Initiative
-                        </span>
-                    </div>
-                </div>
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home"
-                        class="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
-                    <a href="#about"
-                        class="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">About</a>
-                    <a href="#services"
-                        class="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Services</a>
-                    <a href="#contact"
-                        class="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Contact</a>
-                </div>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">About</a>
-                <a href="#services" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Services</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Contact</a>
-            </div>
-        </nav>
-    </header>
+@include('partials.header')
+
 
     <!-- Hero Section -->
     <section class="py-12 bg-gray-50 text-center" id="home">

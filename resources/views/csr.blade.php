@@ -28,40 +28,8 @@
 @include('partials.skip-link', ['skipTarget' => '#about'])
 
 <!-- HEADER -->
-<header class="sticky top-0 bg-white shadow z-50">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <!-- Logo & Title -->
-    <div class="flex items-center space-x-3">
-      <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="w-16 h-16 object-contain" />
-      <div>
-        <p class="text-3xl font-bold text-[#10B981] m-0">FCCEI</p>
-        <p class="text-sm uppercase tracking-widest text-[#047857]">Corporate Social Responsibility</p>
-      </div>
-    </div>
-    <!-- Navigation -->
-    <nav class="hidden md:flex space-x-8 font-medium text-gray-700">
-      <a href="#about" class="hover:text-[#10B981] transition">About CSR</a>
-      <a href="#initiatives" class="hover:text-[#10B981] transition">Initiatives</a>
-      <a href="#impact" class="hover:text-[#10B981] transition">Impact</a>
-      <a href="#get-involved" class="hover:text-[#10B981] transition">Get Involved</a>
-      <a href="#contact" class="hover:text-[#10B981] transition">Contact</a>
-    </nav>
-    <!-- Mobile menu button -->
-    <div class="md:hidden">
-      <button id="menu-toggle" class="text-gray-700 focus:outline-none">
-        <i class="fas fa-bars text-2xl"></i>
-      </button>
-    </div>
-  </div>
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-4 bg-white border-t border-gray-200">
-    <a href="#about" class="block py-2 hover:text-[#10B981] transition">About CSR</a>
-    <a href="#initiatives" class="block py-2 hover:text-[#10B981] transition">Initiatives</a>
-    <a href="#impact" class="block py-2 hover:text-[#10B981] transition">Impact</a>
-    <a href="#get-involved" class="block py-2 hover:text-[#10B981] transition">Get Involved</a>
-    <a href="#contact" class="block py-2 hover:text-[#10B981] transition">Contact</a>
-  </div>
-</header>
+@include('partials.header')
+
 
 <!-- HERO: About CSR -->
 <section class="relative bg-[#F0F9FA] py-20" id="about">

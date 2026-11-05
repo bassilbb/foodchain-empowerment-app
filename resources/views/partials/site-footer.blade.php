@@ -6,11 +6,11 @@
             <div>
                 <div class="flex items-center gap-4 mb-6">
                     <span class="w-16 h-16 rounded-2xl bg-white/95 ring-1 ring-emerald-700/40 flex items-center justify-center overflow-hidden shrink-0">
-                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full p-1">
+                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="Food Chain Enterprises Limited Logo" class="object-contain w-full h-full p-1">
                     </span>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-extrabold leading-none text-white">FCCEI</span>
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-300/80">Food Chain Community Empowerment Initiative</span>
+                        <span class="text-xl font-extrabold leading-tight text-white">Food Chain Enterprises</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-300/80">Limited</span>
                     </div>
                 </div>
                 <p class="text-emerald-300/80 mb-6 -mt-2 leading-relaxed">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="border-t border-emerald-800/60 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-sm text-emerald-300/70">
-            <p>&copy; {{ date('Y') }} FCCEI. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Food Chain Enterprises Limited. All rights reserved.</p>
             <p>Designed by Bassiprog Digital Solution</p>
         </div>
     </div>

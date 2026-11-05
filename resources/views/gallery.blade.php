@@ -1,4 +1,4 @@
-@if(!App\Models\PageContent::isPageActive('gallery'))
+﻿@if(!App\Models\PageContent::isPageActive('gallery'))
     <!DOCTYPE html>
     <html lang="en">
     <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
@@ -100,152 +100,8 @@
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
     @include('partials.skip-link')
-    <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white shadow-sm">
-        <nav class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full">
-                    </div>
+@include('partials.header')
 
-                    <div class="flex flex-col justify-center">
-                        <span class="text-3xl font-extrabold leading-tight" style="color: #10B981;">FCCEI</span>
-
-                        <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">
-                            Food Chain Community Empowerment Initiative
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Home</a>
-
-                    <!-- About with dropdown -->
-                    <div class="relative group">
-                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        About
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
-                        </div>
-                    </div>
-
-                    <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Membership</a>
-
-                    <!-- Blog dropdown -->
-                    <div class="relative group">
-                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        Blog
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
-                        </div>
-                    </div>
-
-                    <!-- Partner dropdown -->
-                    <div class="relative group">
-                        <a href="#" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        Partner
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Sponsor</a>
-                        <a href="{{ route('supplier') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become supplier</a>
-                        <a href="{{ route('rider') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Logistics Channel (Rider Only)</a>
-                        </div>
-
-                    </div>
-
-                    <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200">Contact</a>
-                </div>
-
-                <!-- Auth Buttons -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="{{ route('login') }}" class="px-6 py-2 text-[#059669] font-medium hover:bg-[#059669] hover:text-white border-2 border-[#059669] rounded-lg transition-all duration-200">Login</a>
-                    <a href="{{ route('register') }}" class="px-6 py-2 bg-[#059669] text-white font-medium hover:bg-[#047857] rounded-lg transition-all duration-200">Get Started</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-                <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Home</a>
-
-                 <!-- About with dropdown -->
-                    <div class="relative group">
-                        <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        About
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
-                        </div>
-                    </div>
-
-                <a href="{{ route('landing') }}#products" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Membership</a>
-
-                  <!-- Blog dropdown -->
-                    <div class="relative group">
-                        <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        Blog
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
-                        </div>
-                    </div>
-
-                    <!-- Partner dropdown -->
-                    <div class="relative group">
-                        <a href="#" class="nav-link text-gray-700 hover:text-[#059669] font-medium transition-colors duration-200 flex items-center">
-                        Partner
-                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-
-                        <!-- Dropdown menu -->
-                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-                        <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Sponsor</a>
-                        <a href="{{ route('supplier') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become supplier</a>
-                        <a href="{{ route('rider') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Logistics Channel (Rider Only)</a>
-                        </div>
-
-                    </div>
-
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-[#059669] font-medium">Contact</a>
-                <div class="pt-4 space-y-2">
-                    <a href="{{ route('login') }}" class="block py-2 text-center text-[#059669] font-medium border-2 border-[#059669] rounded-lg">Login</a>
-                    <a href="{{ route('register') }}" class="block py-2 text-center bg-[#059669] text-white font-medium rounded-lg">Get Started</a>
-                </div>
-            </div>
-        </nav>
-    </header>
 
     <main class="container mx-auto px-4 py-12 flex-grow" id="main-content">
         <div class="flex justify-between items-end mb-12 border-b border-gray-100 pb-6">
@@ -266,7 +122,7 @@
                 <img src="{{ asset('assets/landing/images/rices.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Rice">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Premium Local Rice</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • 50kg</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains â€¢ 50kg</p>
                 </div>
             </div>
 
@@ -274,7 +130,7 @@
                 <img src="{{ asset('assets/landing/images/Beanscover.jpg') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Beans">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Honey Beans (Oloyin)</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Paint</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains â€¢ Paint</p>
                 </div>
             </div>
 
@@ -282,7 +138,7 @@
                 <img src="{{ asset('assets/landing/images/vegetable.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Oil">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Vegetable Oil</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • 5 Liters</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils â€¢ 5 Liters</p>
                 </div>
             </div>
 
@@ -290,7 +146,7 @@
                 <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=500&q=80" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Eggs">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Farm Fresh Eggs</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Protein • Crate</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Protein â€¢ Crate</p>
                 </div>
             </div>
 
@@ -298,7 +154,7 @@
                 <img src="{{ asset('assets/landing/images/semovita.webp') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Semo">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Semovita</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Flour • 10kg</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Flour â€¢ 10kg</p>
                 </div>
             </div>
 
@@ -306,7 +162,7 @@
                 <img src="{{ asset('assets/landing/images/plam.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Palm Oil" />
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Fresh Palm Oil</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils • Liters</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Oils â€¢ Liters</p>
                 </div>
             </div>
 
@@ -314,7 +170,7 @@
                 <img src="{{ asset('assets/landing/images/spaghetti.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Pasta">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg">Spaghetti</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Pasta • Carton</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Pasta â€¢ Carton</p>
                 </div>
             </div>
 
@@ -322,7 +178,7 @@
                 <img src="{{ asset('assets/landing/images/garrirbg.png') }}" class="w-full h-48 object-cover" loading="lazy" decoding="async" alt="Garri">
                 <div class="p-6">
                     <h3 class="font-black text-gray-800 text-lg"> Garri</h3>
-                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains • Bag</p>
+                    <p class="text-xs text-[#10B981] font-bold uppercase mb-3">Grains â€¢ Bag</p>
                 </div>
             </div>
 

@@ -25,7 +25,7 @@
             [
                 '@context' => 'https://schema.org',
                 '@type' => 'Organization',
-                'name' => config('app.name', 'FoodChain Community Empowerment Initiative'),
+                'name' => config('app.name', 'Food Chain Enterprises Limited'),
                 'url' => url('/'),
                 'logo' => asset('assets/landing/images/FCCEILOGO.png'),
                 'description' => 'A community-driven marketplace empowering low-income households across Nigeria with affordable staple foods and free membership.',
@@ -33,7 +33,7 @@
             [
                 '@context' => 'https://schema.org',
                 '@type' => 'WebSite',
-                'name' => config('app.name', 'FoodChain Community Empowerment Initiative'),
+                'name' => config('app.name', 'Food Chain Enterprises Limited'),
                 'url' => url('/'),
             ],
         ],

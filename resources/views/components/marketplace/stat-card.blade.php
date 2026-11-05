@@ -45,14 +45,13 @@ $tag = $href ? 'a' : 'div';
 @endphp
 
 <{{ $tag }} @if ($href) href="{{ $href }}" @endif
-    class="group relative block overflow-hidden rounded-2xl border border-slate-200/70 bg-white p-5 shadow-3d-card transition duration-300 hover:-translate-y-1 hover:border-emerald-300/70 hover:shadow-3d-hover">
+    {{ $attributes->merge(['class' => 'group relative block overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm shadow-slate-900/5 transition duration-200 hover:-translate-y-0.5 hover:border-emerald-200/80 hover:shadow-md hover:shadow-slate-900/5']) }}>
     <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r {{ $t['bar'] }}"></span>
-    <span class="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br {{ $t['bar'] }} opacity-10 blur-2xl transition group-hover:opacity-20"></span>
 
     <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
-            <p class="text-[12px] font-bold uppercase tracking-wider text-slate-400">{{ $label }}</p>
-            <p class="mt-1.5 truncate text-xl sm:text-2xl font-extrabold text-slate-800 leading-tight">{{ $value }}</p>
+            <p class="text-[11px] font-bold uppercase tracking-[0.06em] text-slate-500">{{ $label }}</p>
+            <p class="mt-1.5 truncate text-xl font-extrabold leading-tight tracking-[-0.02em] text-slate-800 sm:text-[1.65rem]">{{ $value }}</p>
             @if ($hint)
             <p class="mt-1 truncate text-xs text-slate-500">{{ $hint }}</p>
             @endif

@@ -1,13 +1,10 @@
 {{--
-    Customer account sidebar navigation.
-
-    Only renders menu items whose route actually exists, so the nav can never
-    advertise functionality the application does not have.
+    Customer account sidebar navigation (Admin class structure, exact Admin CSS via layout).
+    Only renders items whose route exists. Preserves all routes, params, guards, badges, and labels.
 --}}
 @php
     $user = auth()->user();
 
-    // Grouped menu definition. Each item may declare an `exists` route guard.
     $menu = [
         [
             'heading' => null,
@@ -72,7 +69,7 @@
         'home' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
         'orders' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
         'clock' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
-        'cog' => 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z',
+        'cog' => 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
         'truck' => 'M9 17a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0zM13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1',
         'check' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
         'x' => 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -89,76 +86,59 @@
     ];
 @endphp
 
-<nav class="flex-1 space-y-6 overflow-y-auto px-3 py-4">
+<nav class="sidebar-nav">
     @foreach ($menu as $group)
         @php
-            // Drop items whose route is not registered in this application.
             $items = collect($group['items'])->filter(fn ($i) => \Illuminate\Support\Facades\Route::has($i['route']));
         @endphp
 
         @continue($items->isEmpty())
 
-        <div>
+        <div class="nav-section">
             @if ($group['heading'])
-                <p class="px-3 pb-2 text-[12px] font-extrabold uppercase tracking-[0.14em] text-emerald-200/80">{{ $group['heading'] }}</p>
+                <div class="nav-section-title">{{ $group['heading'] }}</div>
             @endif
 
-            <ul class="space-y-0.5">
-                @foreach ($items as $item)
-                    @php
-                        $isActive = ! empty($item['active']) && request()->routeIs($item['active']);
-                        $href = route($item['route'], $item['params'] ?? []);
-                        $badge = $item['badge'] ?? null;
-                    @endphp
+            @foreach ($items as $item)
+                @php
+                    $isActive = ! empty($item['active']) && request()->routeIs($item['active']);
+                    $href = route($item['route'], $item['params'] ?? []);
+                    $badge = $item['badge'] ?? null;
+                @endphp
 
-                    <li>
-                        <a href="{{ $href }}"
-                           aria-label="{{ $item['label'] }}"
-                           class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition
-                                  {{ $isActive
-                                        ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-900/30'
-                                        : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
-                            <svg class="h-[18px] w-[18px] shrink-0 {{ $isActive ? 'text-white' : 'text-emerald-200/70 group-hover:text-white' }}"
-                                 fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPaths[$item['icon']] ?? $iconPaths['home'] }}" />
-                            </svg>
-
-                            <span class="truncate">{{ $item['label'] }}</span>
-
-                            @if ($badge)
-                                <span class="ml-auto rounded-full bg-orange-500 px-2 py-0.5 text-[12px] font-bold text-white">{{ $badge > 99 ? '99+' : $badge }}</span>
-                            @endif
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
+                <a href="{{ $href }}" aria-label="{{ $item['label'] }}"
+                   class="nav-link {{ $isActive ? 'active' : '' }}">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="{{ $iconPaths[$item['icon']] ?? $iconPaths['home'] }}" />
+                    </svg>
+                    <span class="nav-label">{{ $item['label'] }}</span>
+                    @if ($badge)
+                        <span class="nav-badge">{{ $badge > 99 ? '99+' : $badge }}</span>
+                    @endif
+                </a>
+            @endforeach
         </div>
     @endforeach
 
     {{-- Sell on FoodChain entry point --}}
     @if (\Illuminate\Support\Facades\Route::has('account.become-vendor.create'))
-        <div class="rounded-xl bg-white/5 p-3 ring-1 ring-inset ring-white/10">
-            <p class="text-xs font-bold text-white">Become a vendor</p>
-            <p class="mt-0.5 text-[11px] leading-relaxed text-white/70">List your products and reach thousands of buyers.</p>
+        <div class="sidebar-notice">
+            <div class="sidebar-notice-title">Become a vendor</div>
+            <div class="sidebar-notice-text">List your products and reach thousands of buyers.</div>
 
             @php($vendorEntry = $user->marketplaceVendor)
             @if ($vendorEntry && $vendorEntry->isApproved())
-                {{-- Vendor dashboard route is always registered; keep the guard for safety. --}}
                 @if (\Illuminate\Support\Facades\Route::has('vendor.dashboard'))
-                    <a href="{{ route('vendor.dashboard') }}" class="mt-2.5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 px-3 py-2 text-xs font-bold text-white">
+                    <a href="{{ route('vendor.dashboard') }}" class="footer-link">
                         Open Vendor Dashboard
                     </a>
                 @endif
             @elseif ($vendorEntry)
-                <a href="{{ route('vendor.dashboard') ?? '#' }}" class="mt-2.5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 px-3 py-2 text-xs font-bold text-white">
+                <a href="{{ route('vendor.dashboard') ?? '#' }}" class="footer-link">
                     Open Vendor Dashboard
                 </a>
-            @elseif ($vendorEntry)
-                <span class="mt-2.5 inline-flex w-full items-center justify-center rounded-lg bg-amber-500/20 px-3 py-2 text-xs font-bold text-amber-200 ring-1 ring-inset ring-amber-400/30">
-                    Application {{ ucfirst($vendorEntry->status) }}
-                </span>
             @else
-                <a href="{{ route('account.become-vendor.create') }}" class="mt-2.5 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-2 text-xs font-bold text-white">
+                <a href="{{ route('account.become-vendor.create') }}" class="footer-link">
                     Sell on FoodChain
                 </a>
             @endif
@@ -166,11 +146,11 @@
     @endif
 </nav>
 
-<div class="border-t border-white/10 p-3">
-    <form method="POST" action="{{ route('logout') }}">
+<div class="sidebar-footer">
+    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
         @csrf
-        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-rose-500/10 px-3 py-2.5 text-xs font-bold text-rose-300 ring-1 ring-inset ring-rose-400/20 transition hover:bg-rose-500/20 hover:text-rose-200">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <button type="submit" class="logout-btn">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Logout

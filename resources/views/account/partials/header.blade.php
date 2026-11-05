@@ -12,8 +12,8 @@ $latestNotifications = \App\Models\Notification::where('user_id', $user->id)->la
 $roleLabel = $user->marketplaceVendor ? 'Vendor' : 'Customer';
 @endphp
 
-<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-    <div class="flex items-center gap-3 px-4 py-3 sm:px-6">
+<header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/95 backdrop-blur-md shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+    <div class="flex min-h-[4.5rem] items-center gap-3 px-4 sm:px-6 lg:px-8">
 
         {{-- Drawer toggle --}}
         <button type="button" id="accountSidebarToggle"

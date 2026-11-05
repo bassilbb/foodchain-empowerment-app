@@ -1,4 +1,4 @@
-@if(!App\Models\PageContent::isPageActive('team'))
+﻿@if(!App\Models\PageContent::isPageActive('team'))
     <!DOCTYPE html>
     <html lang="en">
     <head><title>Page Unavailable</title><style>body{font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f1f5f9;color:#475569;text-align:center;padding:20px;}h1{font-size:2rem;margin-bottom:1rem;}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,0.08);}</style></head>
@@ -14,7 +14,7 @@
   <title>{{ App\Models\PageContent::getContent('team', 'page_title', 'Our Team') }}</title>
   @include('partials.seo-meta', [
       'seoTitle' => App\Models\PageContent::getContent('team', 'page_title', 'Our Team'),
-      'seoDesc' => 'Meet the leadership driving food security and community empowerment at FoodChain Community Empowerment Initiative — from the CEO and COO to directors across sustainable impact.',
+      'seoDesc' => 'Meet the leadership driving food security and community empowerment at Food Chain Enterprises Limited — from the CEO and COO to directors across sustainable impact.',
       'schema' => [
           [
               '@context' => 'https://schema.org',
@@ -44,88 +44,8 @@
 <body class="min-h-screen bg-gray-50 font-sans">
     @include('partials.skip-link')
 
-<!-- Header Navigation -->
-<header class="sticky top-0 z-50 bg-white shadow-sm">
-  <nav class="container mx-auto px-4 py-4">
-    <div class="flex justify-between items-center">
-      <!-- Logo & Title -->
-      <div class="flex items-center space-x-2">
-        <div class="w-20 h-15 flex items-center justify-center overflow-hidden">
-          <img src="{{ asset('assets/landing/images/FCCEILOGO.png') }}" alt="FCCEI Logo" class="object-contain w-full h-full" />
-        </div>
-        <div class="flex flex-col justify-center">
-          <span class="text-3xl font-extrabold leading-tight" style="color: #059669;">FCCEI</span>
-          <span class="text-sm font-bold uppercase tracking-widest" style="color: #047857;">Food Chain Community Empowerment Initiative</span>
-        </div>
-      </div>
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="{{ route('landing') }}" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Home</a>
-        <!-- About dropdown -->
-        <div class="relative group">
-          <a href="{{ route('landing') }}#about" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
-            About
-            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-          <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="{{ route('landing') }}#board-members" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Board Members</a>
-            <a href="{{ route('team') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Team</a>
-          </div>
-        </div>
-        <a href="{{ route('landing') }}#products" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Membership</a>
-        <!-- Blog dropdown -->
-        <div class="relative group">
-          <a href="{{ route('landing') }}#blog" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
-            Blog
-            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-            </svg>
-          </a>
-          <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="{{ route('gallery') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Gallery</a>
-          </div>
-        </div>
+@include('partials.header')
 
-        <!-- About with dropdown -->
-        <div class="relative group">
-            <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200 flex items-center">
-            Partner
-            <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.66a.75.75 0 01-1.08 0l-4.25-4.66a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-            </svg>
-            </a>
-
-            <!-- Dropdown menu -->
-            <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-2 py-2 w-48 z-10">
-            <a href="{{ route('sponsor') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Sponsor</a>
-            <a href="{{ route('supplier') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become supplier</a>
-            <a href="{{ route('rider') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Become Our Logistics Channel (Rider Only)</a>
-            </div>
-
-        </div>
-
-        <a href="{{ route('landing') }}#contact" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">Contact</a>
-        <!-- Auth buttons -->
-        <div class="flex items-center space-x-4">
-          <a href="{{ route('login') }}" class="px-6 py-2 text-emerald-600 font-medium hover:bg-emerald-600 hover:text-white border-2 border-emerald-600 rounded-lg transition-all duration-200">Login</a>
-          <a href="{{ route('register') }}" class="px-6 py-2 bg-emerald-600 text-white font-medium hover:bg-emerald-700 rounded-lg transition-all duration-200">Get Started</a>
-        </div>
-      </div>
-      <!-- Mobile menu button -->
-      <button id="mobile-menu-button" class="md:hidden text-gray-700">
-        <i class="fas fa-bars text-2xl"></i>
-      </button>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
-      <a href="{{ route('landing') }}" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
-      <!-- Repeat similar structure for mobile menu items with dropdowns as needed -->
-      <!-- ... -->
-    </div>
-  </nav>
-</header>
 
 <!-- Main Content -->
 <main class="flex-1" id="main-content">
@@ -179,7 +99,7 @@
 
         Currently serving as Project Manager at the Health Empowerment and Livelihood Promotion (H.E.L.P) Initiative, Kingsley oversees strategic and operational planning, resource management, risk mitigation, and performance reporting across multiple community-based programs. He has successfully coordinated multidisciplinary teams, strengthened partnerships with donors and community stakeholders, and ensured compliance with best practices in program delivery.
 
-        His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.
+        His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvementâ€”skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.
 
         Kingsley holds a Bachelor's degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.
 
@@ -349,7 +269,7 @@
         role: "Chief Operating Officer",
         img: "{{ asset('assets/landing/images/basspixxs.webp') }}",
         bio: `<p>Bassey Eno is the Chief Operating Officer (COO) of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's day-to-day operations and ensures seamless coordination across all departments. He plays a pivotal role in translating FCCEI's strategic vision into effective operational execution while maintaining high standards of efficiency, accountability, and organizational cohesion.</p>
-              <p>With over 10 years of experience in operations management and organizational strategy, Bassey brings a strong blend of leadership, business insight, and technical expertise to his role. He holds a Bachelor of Science degree from the National Open University of Nigeria, along with diplomas in IT Management and Software Systems and Executive Strategy and Management, and is a Cisco Certified Network Associate (CCNA – Networks). He is currently pursuing a Master of Business Administration (MBA) at the Atlanta College of Liberal Arts and Sciences, further strengthening his strategic, managerial, and organizational leadership capabilities.</p>
+              <p>With over 10 years of experience in operations management and organizational strategy, Bassey brings a strong blend of leadership, business insight, and technical expertise to his role. He holds a Bachelor of Science degree from the National Open University of Nigeria, along with diplomas in IT Management and Software Systems and Executive Strategy and Management, and is a Cisco Certified Network Associate (CCNA â€“ Networks). He is currently pursuing a Master of Business Administration (MBA) at the Atlanta College of Liberal Arts and Sciences, further strengthening his strategic, managerial, and organizational leadership capabilities.</p>
               <p>Throughout his career, Bassey has successfully designed and implemented systems and processes that enhance productivity, optimize resources, and foster collaboration across teams. His leadership approach is results-driven and anchored in continuous improvement, ensuring that organizational goals are met with precision and consistency.</p>
               <p>Bassey is deeply committed to sustainable growth and community development. He works closely with executive leadership to support long-term planning while safeguarding operational integrity and service excellence. Under his guidance, FCCEI has improved member engagement, strengthened service delivery, and expanded its reach and impact across both urban and rural communities.</p>
               <p>Known for his hands-on leadership style, strong problem-solving skills, and commitment to transparency, Bassey is focused on building efficient, inclusive systems that deliver lasting value and measurable impact to the communities FCCEI serves.</p>`
@@ -360,7 +280,7 @@
         img: "{{ asset('assets/landing/images/kingsleypics.jpeg') }}",
         bio: `<p>Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women's empowerment, household resilience, and sustainable social interventions.</p>
               <p>Currently serving as Project Manager at the Health Empowerment and Livelihood Promotion (H.E.L.P) Initiative, Kingsley oversees strategic and operational planning, resource management, risk mitigation, and performance reporting across multiple community-based programs. He has successfully coordinated multidisciplinary teams, strengthened partnerships with donors and community stakeholders, and ensured compliance with best practices in program delivery.</p>
-              <p>His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvement—skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.</p>
+              <p>His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvementâ€”skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.</p>
               <p>Kingsley holds a Bachelor's degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.</p>
               <p>As a Director of the Foodchain Community Empowerment Initiative (FCCEI), Kingsley provides strategic leadership, governance oversight, and operational guidance, ensuring that donor and investor resources are protected, programs are effectively implemented, and food security outcomes for women-led households are achieved sustainably.</p>`
 
@@ -381,7 +301,7 @@
         role: "Director, Technology infrastructure and Corporate Technical support",
         img: "{{ asset('assets/landing/images/sampics.webp') }}",
         bio: `<p>Uchendu Samuel serves as the Director, Technology infrastructure and Corporate Technical support of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this capacity, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.</p>
-              <p>With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu brings a strong academic and professional foundation to his role. He holds a Bachelor of Science degree in Computer Science and is professionally trained as a Network Administrator, with advanced expertise as a Cisco Certified Network Associate (CCNA – Networks). He is also a trained SAP SD (Sales and Distribution) personnel, equipping him with deep insight into enterprise systems, process optimization, and data-driven operations.</p>
+              <p>With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu brings a strong academic and professional foundation to his role. He holds a Bachelor of Science degree in Computer Science and is professionally trained as a Network Administrator, with advanced expertise as a Cisco Certified Network Associate (CCNA â€“ Networks). He is also a trained SAP SD (Sales and Distribution) personnel, equipping him with deep insight into enterprise systems, process optimization, and data-driven operations.</p>
               <p>Uchendu delivers robust technical leadership across all digital platforms, including the organization's website, member management systems, payment and financial solutions, analytics tools, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and long-term reliability.</p>
               <p>Working closely with executive leadership and key stakeholders, Uchendu defines and executes FCCEI's digital roadmap, introduces innovative technology solutions, and drives continuous improvement through automation and intelligent system design. He is deeply committed to leveraging modern technologies to enhance member experience, strengthen data integrity, and support sustainable community growth.</p>
               <p>Recognized for his strategic mindset, hands-on technical expertise, and strong problem-solving capabilities, Uchendu is dedicated to building robust, future-ready digital systems that empower FCCEI, enhance organizational performance, and deliver lasting value to its members.</p>`

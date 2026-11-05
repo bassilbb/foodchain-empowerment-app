@@ -225,10 +225,11 @@
             flex: 1;
             margin-left: 264px;
             margin-top: 0;
+            min-width: 0;
             min-height: 100vh;
-            padding: 2rem;
             display: flex;
             flex-direction: column;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .top-header {
@@ -238,12 +239,15 @@
             border-bottom: 1px solid rgba(16,185,129,0.15);
             box-shadow: 0 1px 0 rgba(16,185,129,0.05), 0 4px 20px rgba(0,0,0,0.04);
             padding: 1rem 2rem;
+            min-height: 4.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
             position: sticky;
             top: 0;
             z-index: 50;
+            flex-shrink: 0;
         }
         
         .header-title h2 {
@@ -304,8 +308,10 @@
             .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
             .sidebar-backdrop.show { display: block; }
             body.sidebar-open { overflow: hidden; }
-            .top-header { padding: 1rem; }
+            .top-header { padding: 0.875rem 1rem; min-height: 4rem; }
             .page-content { padding: 1rem; }
+            .header-user-info { display: none; }
+            .header-user { padding-left: 0; border-left: none; }
         }
         
         .header-user {
