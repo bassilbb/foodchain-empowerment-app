@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\MarketplaceReportController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StaffController;
@@ -182,6 +183,17 @@ Route::middleware(['admin'])->group(function () {
             Route::put('/{page}', [PageContentController::class, 'update'])->name('update');
             Route::put('/{page}/toggle', [PageContentController::class, 'toggle'])->name('toggle');
             Route::post('/seed', [PageContentController::class, 'seed'])->name('seed');
+        });
+
+        // Team Members
+        Route::prefix('team-members')->name('admin.team-members.')->group(function () {
+            Route::get('/', [TeamMemberController::class, 'index'])->name('index');
+            Route::get('/create', [TeamMemberController::class, 'create'])->name('create');
+            Route::post('/', [TeamMemberController::class, 'store'])->name('store');
+            Route::get('/{team_member}/edit', [TeamMemberController::class, 'edit'])->name('edit');
+            Route::put('/{team_member}', [TeamMemberController::class, 'update'])->name('update');
+            Route::put('/{team_member}/toggle', [TeamMemberController::class, 'toggle'])->name('toggle');
+            Route::delete('/{team_member}', [TeamMemberController::class, 'destroy'])->name('destroy');
         });
 
         // Blog Posts

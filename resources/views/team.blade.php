@@ -5,6 +5,7 @@
     <body><div class="card"><h1>Page Currently Unavailable</h1><p>This page has been disabled by the administrator. Please check back later.</p></div></body>
     </html>
 @else
+@php $teamMembers = \App\Models\TeamMember::active()->ordered()->get(); @endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,59 +153,24 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($teamMembers as $member)
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/frankojipicsxe.webp') }}" alt="Frank Orji" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
+                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md bg-gray-100">
+                    @if($member->photo_url)
+                        <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
+                    @else
+                        <div class="w-full h-full flex items-center justify-center text-emerald-700 font-bold text-2xl">{{ strtoupper(substr($member->name, 0, 1)) }}</div>
+                    @endif
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Frank Ogochukwu Orji</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">CEO & Founder</p>
-                <button onclick="openTeamModal('frank')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $member->name }}</h3>
+                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">{{ $member->role }}</p>
+                @if(filled($member->bio))
+                    <button onclick="openTeamModal({{ $member->id }})" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
+                @endif
             </div>
-
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/basspixxs.webp') }}" alt="Bassey Eno" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Bassey Eno</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Chief Operating Officer</p>
-                <button onclick="openTeamModal('bassey')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div>
-
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/kingsleypics.jpeg') }}" alt="Kingsley Johnson" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Kingsley Johnson</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Investment, Intervention and Sustainability</p>
-                <button onclick="openTeamModal('kingsley')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div>
-
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/Adenle.jpeg') }}" alt="Adenle Damola" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Adenle Olatunbosun Damola</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Non-Executive Director</p>
-                <button onclick="openTeamModal('damola')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div>
-
-            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/sampics.webp') }}" alt="Uchendu Samuel" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Uchendu Samuel</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Director, Technology infrastructure and Corporate Technical support</p>
-                <button onclick="openTeamModal('samuel')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div>
-
-            <!-- <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center transform transition hover:shadow-xl">
-                <div class="w-32 h-32 mb-6 rounded-full border-4 border-emerald-100 overflow-hidden shadow-md">
-                    <img src="{{ asset('assets/landing/images/patrickpics.jpeg') }}" alt="Patrick Ubi" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">Patrick Ubi</h3>
-                <p class="text-emerald-700 font-bold text-[10px] uppercase tracking-widest mb-4">Head, Digital Media and communication Strategy</p>
-                <button onclick="openTeamModal('patrick')" class="mt-auto bg-emerald-700 text-white py-2.5 px-8 rounded-full text-xs font-bold hover:bg-emerald-800 transition shadow-md">View Full Bio</button>
-            </div> -->
+            @empty
+            <div class="col-span-full text-center text-gray-500 py-10">Team information will be available soon.</div>
+            @endforelse
         </div>
     </div>
 </section>
@@ -251,79 +217,25 @@
 </style>
 
 <script>
-   const teamData = {
-    frank: {
-        name: "Frank Ogochukwu Orji",
-        role: "CEO & Founder",
-        img: "{{ asset('assets/landing/images/frankojipicsxe.webp') }}",
-        bio: `<p>Frank Ogochukwu Orji is the visionary Founder and Chief Executive Officer of Food Chain Community Empowerment Initiative, a dynamic social enterprise committed to delivering innovative solutions that transform lives of women from Low-income households, Low-income earners, small business owners and students of tertiary institutions. </p>
-              <p>With over 15 years of Business and leadership experience, Frank has built a reputation for strategic foresight, operational excellence, and an unwavering commitment to social impacts. Under his leadership, FCCEI has and will continue to achieve its strategic goals of Zero hunger, sustainability and food security for low-income households in Nigeria.</p>
-              <p>A passionate advocate for sustainability, innovation and community impact, Frank fosters a culture of collaboration and continuous improvement, empowering teams to exceed expectations and deliver measurable results. Beyond corporate success, Frank actively contributes to industry associations and community initiatives, reinforcing a belief that business growth and social responsibility go hand in hand.</p>
-              <p>Frank holds a Bachelor of Arts in Philosophy from the prestigious University of Nigeria, Nsukka. He is currently studying Business Leadership in the Executive Masters in Business Administration from the University of Nigeria Business School, Enugu Campus. He is also a member of Global Association of Risk Professionals; member, Advertising Regulatory Council of Nigeria; fellow, Institute of Health insurance and managed care of Nigeria. </p>
-              <p>He has other certifications including Health economics from World Bank Academy, Washington DC, USA; Advance Diploma from Digital Marketing Institute and continues to engage in lifelong learning to stay ahead in an ever-evolving business landscape. His experience span across Healthcare, Agri-Business, Logistics, FMCG and Insurance.</p>`
-
-
-    },
-    bassey: {
-        name: "Bassey Eno",
-        role: "Chief Operating Officer",
-        img: "{{ asset('assets/landing/images/basspixxs.webp') }}",
-        bio: `<p>Bassey Eno is the Chief Operating Officer (COO) of the Food Chain Community Empowerment Initiative (FCCEI), where he oversees the organization's day-to-day operations and ensures seamless coordination across all departments. He plays a pivotal role in translating FCCEI's strategic vision into effective operational execution while maintaining high standards of efficiency, accountability, and organizational cohesion.</p>
-              <p>With over 10 years of experience in operations management and organizational strategy, Bassey brings a strong blend of leadership, business insight, and technical expertise to his role. He holds a Bachelor of Science degree from the National Open University of Nigeria, along with diplomas in IT Management and Software Systems and Executive Strategy and Management, and is a Cisco Certified Network Associate (CCNA â€“ Networks). He is currently pursuing a Master of Business Administration (MBA) at the Atlanta College of Liberal Arts and Sciences, further strengthening his strategic, managerial, and organizational leadership capabilities.</p>
-              <p>Throughout his career, Bassey has successfully designed and implemented systems and processes that enhance productivity, optimize resources, and foster collaboration across teams. His leadership approach is results-driven and anchored in continuous improvement, ensuring that organizational goals are met with precision and consistency.</p>
-              <p>Bassey is deeply committed to sustainable growth and community development. He works closely with executive leadership to support long-term planning while safeguarding operational integrity and service excellence. Under his guidance, FCCEI has improved member engagement, strengthened service delivery, and expanded its reach and impact across both urban and rural communities.</p>
-              <p>Known for his hands-on leadership style, strong problem-solving skills, and commitment to transparency, Bassey is focused on building efficient, inclusive systems that deliver lasting value and measurable impact to the communities FCCEI serves.</p>`
-    },
-    kingsley: {
-        name: "Kingsley Johnson",
-        role: "Director, Investment, Intervention and Sustainability",
-        img: "{{ asset('assets/landing/images/kingsleypics.jpeg') }}",
-        bio: `<p>Kingsley Johnson is a seasoned Project Manager and development practitioner with over eight years of progressive experience in the non-profit and community development sector. His work spans project design, implementation, monitoring, and institutional strengthening, with a strong focus on women's empowerment, household resilience, and sustainable social interventions.</p>
-              <p>Currently serving as Project Manager at the Health Empowerment and Livelihood Promotion (H.E.L.P) Initiative, Kingsley oversees strategic and operational planning, resource management, risk mitigation, and performance reporting across multiple community-based programs. He has successfully coordinated multidisciplinary teams, strengthened partnerships with donors and community stakeholders, and ensured compliance with best practices in program delivery.</p>
-              <p>His background in research, data collection, and documentation enables him to support evidence-based decision-making and continuous program improvementâ€”skills that are critical to the success of innovative models such as FCCEI's revolving food loan initiative.</p>
-              <p>Kingsley holds a Bachelor's degree in Botany and Ecological Studies from the University of Uyo, a Non-Profit Leadership and Management certificate from Lagos Business School, and professional training in project management and performance improvement.</p>
-              <p>As a Director of the Foodchain Community Empowerment Initiative (FCCEI), Kingsley provides strategic leadership, governance oversight, and operational guidance, ensuring that donor and investor resources are protected, programs are effectively implemented, and food security outcomes for women-led households are achieved sustainably.</p>`
-
-    },
-    damola: {
-        name: "Adenle Olatunbosun Damola",
-        role: "Non-Executive Director",
-        img: "{{ asset('assets/landing/images/Adenle.jpeg') }}",
-        bio: `<p>Adenle Olatunbosun Damola is a seasoned finance and business strategy professional with over a decade of experience spanning financial services, health insurance, investment management, treasury operations, and business development.</p>
-              <p>He brings to the board strong expertise in financial oversight, strategic growth, sales leadership, liquidity management, and client relationship management, having worked across regulated and high-growth environments. His career reflects a consistent ability to improve profitability, strengthen governance processes, and support sustainable business expansion.</p>
-              <p>Olatunbosun has held senior roles including Senior Sales Executive at Reliance Health, Head of Sales and Business Development at NOLT Finance, and Business Strategy Manager at Enable Growth Africa, where he led strategic planning, identified operational gaps, and implemented growth frameworks aligned with organizational objectives. Earlier in his career, he worked in treasury, investment administration, and banking roles with Aquila Leasing, ARM Pension Managers, and Guaranty Trust Bank, building a solid foundation in financial controls, risk awareness, and regulatory discipline.</p>
-              <p>As a Non-Executive Director, he provides independent judgment, strategic insight, and disciplined financial perspective, supporting management while maintaining robust oversight. He is particularly skilled at evaluating growth opportunities, stress-testing business models, and strengthening stakeholder confidence through sound governance.</p>
-              <p>Olatunbosun holds a Bachelor of Science in Computer Science from Olabisi Onabanjo University and combines analytical rigor with commercial pragmatism in board deliberations.</p>`
-
-    },
-    samuel: {
-        name: "Uchendu Samuel",
-        role: "Director, Technology infrastructure and Corporate Technical support",
-        img: "{{ asset('assets/landing/images/sampics.webp') }}",
-        bio: `<p>Uchendu Samuel serves as the Director, Technology infrastructure and Corporate Technical support of the Food Chain Community Empowerment Initiative (FCCEI), where he provides strategic leadership for the planning, development, and management of all technology and digital systems across the organization. In this capacity, he ensures that FCCEI's technology infrastructure remains secure, scalable, resilient, and fully aligned with the cooperative's long-term vision and operational objectives.</p>
-              <p>With over a decade of hands-on experience in software development, systems architecture, and digital transformation, Uchendu brings a strong academic and professional foundation to his role. He holds a Bachelor of Science degree in Computer Science and is professionally trained as a Network Administrator, with advanced expertise as a Cisco Certified Network Associate (CCNA â€“ Networks). He is also a trained SAP SD (Sales and Distribution) personnel, equipping him with deep insight into enterprise systems, process optimization, and data-driven operations.</p>
-              <p>Uchendu delivers robust technical leadership across all digital platforms, including the organization's website, member management systems, payment and financial solutions, analytics tools, and administrative dashboards. He oversees system architecture, cybersecurity frameworks, data governance, and third-party technology integrations, ensuring seamless operations, transparency, and long-term reliability.</p>
-              <p>Working closely with executive leadership and key stakeholders, Uchendu defines and executes FCCEI's digital roadmap, introduces innovative technology solutions, and drives continuous improvement through automation and intelligent system design. He is deeply committed to leveraging modern technologies to enhance member experience, strengthen data integrity, and support sustainable community growth.</p>
-              <p>Recognized for his strategic mindset, hands-on technical expertise, and strong problem-solving capabilities, Uchendu is dedicated to building robust, future-ready digital systems that empower FCCEI, enhance organizational performance, and deliver lasting value to its members.</p>`
-
-    },
-    // patrick: {
-    //     name: "Patrick Ubi",
-    //     role: "Head, Digital Media and communication Strategy",
-    //     img: "{{ asset('assets/landing/images/patrickpics.jpeg') }}",
-    //     bio: `<p>Patrick Ubi is an experienced Social Media Manager responsible for overseeing the cooperative's online presence across all social media platforms. With over six years of professional experience, he creates compelling, purpose-driven content, manages community interactions, and drives digital engagement to strengthen communication, visibility, and brand consistency within and beyond the community.</p>
-    //           <p>Backed by an academic foundation in Computer Science (HND) and professional training in Business Administration, Patrick combines technical understanding with strategic communication skills. His expertise is further enhanced through Google Skillshop certifications, enabling him to apply data-driven insights, digital marketing best practices, and performance optimization strategies to every campaign.</p>
-    //           <p>Passionate about community building, Patrick prioritizes meaningful engagement across platforms, ensuring that every post delivers value, drives interaction, and supports the cooperative's growth and visibility.</p>`
-
-    // }
-};
+@php
+    $teamModalData = $teamMembers->mapWithKeys(fn ($m) => [
+        $m->id => [
+            'name' => $m->name,
+            'role' => $m->role,
+            'img' => $m->photo_url ?: '',
+            'bio' => $m->bio ?: '',
+        ],
+    ]);
+@endphp
+   const teamData = {!! json_encode($teamModalData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!};
 
 function openTeamModal(key) {
     const data = teamData[key];
-    document.getElementById('m-name').innerText = data.name;
-    document.getElementById('m-role').innerText = data.role;
-    document.getElementById('m-img').src = data.img;
-    document.getElementById('m-bio').innerHTML = data.bio;
+    if (!data) return;
+    document.getElementById('m-name').innerText = data.name || '';
+    document.getElementById('m-role').innerText = data.role || '';
+    document.getElementById('m-img').src = data.img || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23e5e7eb'/%3E%3Ccircle cx='200' cy='190' r='70' fill='%23b6c2cd'/%3E%3Cpath d='M60 500c0-80 63-130 140-130s140 50 140 130z' fill='%23b6c2cd'/%3E%3C/svg%3E";
+    document.getElementById('m-bio').innerHTML = data.bio || '';
 
     const modal = document.getElementById('bioModal');
     modal.classList.remove('hidden');
