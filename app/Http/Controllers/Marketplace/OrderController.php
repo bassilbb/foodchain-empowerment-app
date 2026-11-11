@@ -8,14 +8,19 @@ use App\Models\ManualPayment;
 use App\Models\Marketplace\Order;
 use App\Models\Marketplace\OrderItem;
 use App\Services\Marketplace\CartService;
+use App\Services\Marketplace\MarketplaceNotificationService;
 use App\Services\Marketplace\OrderService;
+use App\Services\Payments\PaymentMethodSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
     public function __construct(
         private OrderService $orderService,
         private CartService $cartService,
+        private PaymentMethodSettings $paymentMethods,
+        private MarketplaceNotificationService $notificationService,
     ) {
     }
 
@@ -50,11 +55,18 @@ class OrderController extends Controller
             ->latest()
             ->first();
 
+        $latestRejected = ManualPayment::where('marketplace_order_id', $order->id)
+            ->where('status', ManualPayment::STATUS_REJECTED)
+            ->latest()
+            ->first();
+
         return view('marketplace.orders.show', [
             'order' => $order,
             'title' => 'Order '.$order->order_number,
             'bankAccounts' => $bankAccounts,
             'bankTransferPayment' => $bankTransferPayment,
+            'latestRejectedPayment' => $latestRejected,
+            'bankTransferEnabled' => $this->paymentMethods->isAvailable(PaymentMethodSettings::BANK_TRANSFER),
             'showBankTransferModal' => request()->boolean('bank_transfer') || (request()->query('payment') === 'bank_transfer'),
         ]);
     }
@@ -68,13 +80,14 @@ class OrderController extends Controller
                 ->with('info', 'This order has already been paid.');
         }
 
-        $existingPending = ManualPayment::where('marketplace_order_id', $order->id)
-            ->where('status', 'pending')
-            ->first();
-
-        if ($existingPending) {
+        if ($order->payment_method !== PaymentMethodSettings::BANK_TRANSFER) {
             return redirect()->route('marketplace.orders.show', $order)
-                ->with('info', 'A bank transfer for this order is already awaiting verification.');
+                ->with('error', 'This order was not placed with bank transfer.');
+        }
+
+        if (! $this->paymentMethods->isAvailable(PaymentMethodSettings::BANK_TRANSFER)) {
+            return redirect()->route('marketplace.orders.show', $order)
+                ->with('error', 'Bank transfer is not available right now. Please contact support.');
         }
 
         $validated = $request->validate([
@@ -82,16 +95,13 @@ class OrderController extends Controller
             'sender_name' => 'nullable|string|max:255',
             'sender_account_number' => 'nullable|string|max:20',
             'sender_bank_name' => 'nullable|string|max:100',
-            'transfer_date' => 'nullable|date',
+            'transfer_date' => 'nullable|date|before_or_equal:today',
             'proof_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $bankAccount = null;
-        if (! empty($validated['bank_account_id'])) {
-            $bankAccount = BankAccount::findOrFail($validated['bank_account_id']);
-        } else {
-            $bankAccount = BankAccount::getActiveForPayment();
-        }
+        $bankAccount = ! empty($validated['bank_account_id'])
+            ? BankAccount::active()->find($validated['bank_account_id'])
+            : BankAccount::getActiveForPayment();
 
         if (! $bankAccount) {
             return back()->with('error', 'No bank account is configured for transfers. Please contact support.');
@@ -102,26 +112,60 @@ class OrderController extends Controller
             $proofPath = $request->file('proof_image')->store('manual-payments/proofs', 'public');
         }
 
-        $manualPayment = ManualPayment::create([
-            'user_id' => auth()->id(),
-            'marketplace_order_id' => $order->id,
-            'type' => 'marketplace_order',
-            'amount' => $order->total,
-            'reference' => ManualPayment::generateReference(),
-            'bank_account_id' => $bankAccount->id,
-            'sender_name' => $validated['sender_name'] ?? (auth()->user()->name ?? 'Customer'),
-            'sender_account_number' => $validated['sender_account_number'] ?? null,
-            'sender_bank_name' => $validated['sender_bank_name'] ?? null,
-            'transfer_date' => $validated['transfer_date'] ?? now(),
-            'proof_image_path' => $proofPath,
-            'status' => 'pending',
-        ]);
+        try {
+            $manualPayment = DB::transaction(function () use ($order, $bankAccount, $validated, $proofPath) {
+                // Lock the order so two concurrent clicks cannot both pass the
+                // duplicate check below.
+                $lockedOrder = Order::whereKey($order->id)->lockForUpdate()->firstOrFail();
 
-        $order->update(['payment_reference' => $manualPayment->reference]);
+                $existingPending = ManualPayment::where('marketplace_order_id', $lockedOrder->id)
+                    ->where('status', ManualPayment::STATUS_PENDING)
+                    ->lockForUpdate()
+                    ->first();
+
+                if ($existingPending) {
+                    return null;
+                }
+
+                $manualPayment = ManualPayment::create([
+                    'user_id' => auth()->id(),
+                    'marketplace_order_id' => $lockedOrder->id,
+                    'type' => 'marketplace_order',
+                    'amount' => $lockedOrder->total,
+                    'currency' => 'NGN',
+                    'reference' => ManualPayment::generateReference(),
+                    'bank_account_id' => $bankAccount->id,
+                    'sender_name' => $validated['sender_name'] ?? (auth()->user()->name ?? 'Customer'),
+                    'sender_account_number' => $validated['sender_account_number'] ?? null,
+                    'sender_bank_name' => $validated['sender_bank_name'] ?? null,
+                    'transfer_date' => $validated['transfer_date'] ?? now(),
+                    'proof_image_path' => $proofPath,
+                    'status' => ManualPayment::STATUS_PENDING,
+                    'payment_status' => 'pending',
+                    'verification_status' => 'pending',
+                ]);
+
+                $lockedOrder->update(['payment_reference' => $manualPayment->reference]);
+
+                return $manualPayment;
+            });
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
+            return redirect()->route('marketplace.orders.show', $order)
+                ->with('info', 'A payment notification for this order is already awaiting verification.');
+        }
+
+        if (! $manualPayment) {
+            return redirect()->route('marketplace.orders.show', $order)
+                ->with('info', 'A bank transfer for this order is already awaiting verification.');
+        }
+
+        $this->notificationService->bankTransferNotificationReceived($manualPayment);
 
         return redirect()->route('marketplace.orders.show', $order)
-            ->with('success', 'Bank transfer submitted. Your order will be confirmed once payment is verified.');
+            ->with('success', 'Payment notification submitted successfully. Your order is awaiting payment verification by our administration team.')
+            ->with('payment_notification_reference', $manualPayment->reference);
     }
+
     public function cancel(Request $request, Order $order)
     {
         abort_unless($order->user_id === auth()->id(), 403);

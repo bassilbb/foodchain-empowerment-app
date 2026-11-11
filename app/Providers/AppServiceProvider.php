@@ -9,6 +9,10 @@ use App\Services\PaymentService;
 use App\Services\InventoryService;
 use App\Services\DistributionService;
 use App\Services\NotificationService;
+use App\Services\Images\BingImageSearchProvider;
+use App\Services\Images\Contracts\ImageSearchProvider;
+use App\Services\Images\NullImageSearchProvider;
+use App\Services\Images\SerpApiImageSearchProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +28,23 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(InventoryService::class);
         $this->app->singleton(DistributionService::class);
         $this->app->singleton(NotificationService::class);
+
+        // Approved image-search API used by the packaging research workflow.
+        // With no key configured it degrades to manual mode instead of scraping.
+        $this->app->singleton(ImageSearchProvider::class, function () {
+            return match (strtolower((string) config('image_research.provider'))) {
+                'serpapi' => new SerpApiImageSearchProvider(
+                    config('image_research.serpapi.key'),
+                    (string) config('image_research.serpapi.endpoint'),
+                    (string) config('image_research.serpapi.engine'),
+                ),
+                'bing' => new BingImageSearchProvider(
+                    config('image_research.bing.key'),
+                    (string) config('image_research.bing.endpoint'),
+                ),
+                default => new NullImageSearchProvider,
+            };
+        });
     }
 
     /**

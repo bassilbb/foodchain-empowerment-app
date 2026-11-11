@@ -7,7 +7,9 @@ use App\Services\Marketplace\CartService;
 use App\Services\Marketplace\CouponService;
 use App\Services\Marketplace\MarketplaceDeliveryService;
 use App\Services\Marketplace\OrderService;
+use App\Services\Payments\PaymentMethodSettings;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CheckoutController extends Controller
 {
@@ -16,6 +18,7 @@ class CheckoutController extends Controller
         private CartService $cartService,
         private MarketplaceDeliveryService $deliveryService,
         private CouponService $couponService,
+        private PaymentMethodSettings $paymentMethods,
     ) {
     }
 
@@ -31,6 +34,11 @@ class CheckoutController extends Controller
             return redirect()->route('marketplace.cart.index')->with('error', $data['message']);
         }
 
+        // Only methods the administrator enabled (and that have the config
+        // they need) are offered. Nothing is hard-coded here.
+        $paymentMethods = $this->paymentMethods->enabledLabels();
+        $defaultPaymentMethod = array_key_first($paymentMethods);
+
         return view('marketplace.checkout', [
             'data' => $data,
             'states' => $this->deliveryService->getStates(),
@@ -43,7 +51,10 @@ class CheckoutController extends Controller
                 'pickup' => 'Pickup Station',
                 'community_delivery' => 'Community Delivery',
             ],
-            'paymentMethods' => \App\Models\Marketplace\Order::PAYMENT_METHODS,
+            'paymentMethods' => $paymentMethods,
+            'defaultPaymentMethod' => $defaultPaymentMethod,
+            'bankTransferDetails' => $this->paymentMethods->bankTransferDetails(),
+            'bankTransferEnabled' => $this->paymentMethods->isAvailable(PaymentMethodSettings::BANK_TRANSFER),
             'title' => 'Checkout',
         ]);
     }
@@ -102,8 +113,19 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+        $enabled = array_keys($this->paymentMethods->enabledLabels());
+
+        if (empty($enabled)) {
+            return back()->withInput()->with(
+                'error',
+                'No payment method is currently available. Please contact support.'
+            );
+        }
+
         $request->validate([
-            'payment_method' => 'required|in:wallet,wallet_cash,wallet_paystack,cash,paystack,flutterwave,mono,bank_transfer',
+            // Server-side enforcement: a disabled method cannot be posted even
+            // by crafting a request or replaying an old checkout session.
+            'payment_method' => ['required', 'string', Rule::in($enabled)],
             'wallet_amount' => 'nullable|numeric|min:0',
             'coupon_code' => 'nullable|string|max:50',
             'delivery_type' => 'required|in:home_delivery,express,same_day,pickup,community_delivery',
@@ -114,6 +136,8 @@ class CheckoutController extends Controller
             'pickup_location' => 'nullable|string|max:255',
             'delivery_notes' => 'nullable|string|max:1000',
             'note' => 'nullable|string|max:1000',
+        ], [
+            'payment_method.in' => 'The selected payment method is not available. Please choose another method.',
         ]);
 
         $result = $this->orderService->placeOrder(auth()->user(), $request->all());

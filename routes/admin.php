@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\FoodAssistancePlanTierController;
 use App\Http\Controllers\Admin\FoodItemController;
 use App\Http\Controllers\Admin\FoodLoanController;
 use App\Http\Controllers\Admin\FoodSupportController;
+use App\Http\Controllers\Admin\ImageResearchController;
 use App\Http\Controllers\Admin\IncidentController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\IssuanceController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Admin\MembershipTierController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\MarketplaceReportController;
@@ -176,6 +178,14 @@ Route::middleware(['admin'])->group(function () {
             Route::post('/favicon/delete', [SettingController::class, 'deleteFavicon'])->name('delete-favicon');
         });
 
+        // Payment Settings (method availability + bank transfer account)
+        Route::prefix('payment-settings')->name('admin.payment-settings.')->group(function () {
+            Route::get('/', [PaymentSettingsController::class, 'index'])->name('index');
+            Route::post('/methods', [PaymentSettingsController::class, 'updateMethods'])->name('methods');
+            Route::post('/bank-transfer', [PaymentSettingsController::class, 'saveBankTransfer'])->name('bank-transfer');
+            Route::get('/preview', [PaymentSettingsController::class, 'preview'])->name('preview');
+        });
+
         // Page Content Management
         Route::prefix('page-contents')->name('admin.page-contents.')->group(function () {
             Route::get('/', [PageContentController::class, 'index'])->name('index');
@@ -238,6 +248,18 @@ Route::middleware(['admin'])->group(function () {
             Route::post('/', [ManualPaymentController::class, 'storeBankAccount'])->name('store');
             Route::put('/{bankAccount}', [ManualPaymentController::class, 'updateBankAccount'])->name('update');
             Route::delete('/{bankAccount}', [ManualPaymentController::class, 'deleteBankAccount'])->name('destroy');
+        });
+
+        // Packaging Image Research & Verification
+        Route::prefix('image-research')->name('admin.image-research.')->group(function () {
+            Route::get('/', [ImageResearchController::class, 'index'])->name('index');
+            Route::post('/audit', [ImageResearchController::class, 'audit'])->name('audit');
+            Route::get('/{research}', [ImageResearchController::class, 'show'])->name('show');
+            Route::post('/{research}/research', [ImageResearchController::class, 'research'])->name('research');
+            Route::post('/{research}/verify', [ImageResearchController::class, 'verify'])->name('verify');
+            Route::post('/{research}/reject', [ImageResearchController::class, 'reject'])->name('reject');
+            Route::post('/{research}/download', [ImageResearchController::class, 'download'])->name('download');
+            Route::post('/{research}/upload', [ImageResearchController::class, 'upload'])->name('upload');
         });
 
         // Vouchers Management

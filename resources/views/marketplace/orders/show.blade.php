@@ -114,27 +114,63 @@
                 @endphp
                 <div class="bg-white rounded-2xl shadow-sm p-6">
                     <h3 class="font-bold text-gray-900 mb-4">Bank Transfer Payment</h3>
-                    @if ($bankAccounts->isEmpty())
+
+                    @if (session('payment_notification_reference'))
+                        <div class="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+                            <p class="text-sm font-bold text-emerald-900">Payment notification submitted</p>
+                            <p class="text-sm text-emerald-800 mt-1">Your payment notification has been received successfully. Your order is awaiting payment verification by our administration team.</p>
+                            <p class="text-xs text-emerald-900 mt-2">Reference: <span class="font-mono font-bold">{{ session('payment_notification_reference') }}</span></p>
+                            <p class="text-xs font-bold text-amber-700 mt-1">Status: Pending Admin Confirmation</p>
+                        </div>
+                    @endif
+
+                    @if (! $bankTransferEnabled)
+                        <p class="text-sm text-amber-800">Bank transfer is currently unavailable. Please contact support.</p>
+                    @elseif ($bankAccounts->isEmpty() || ! $defaultBankAccount)
                         <p class="text-sm text-gray-500">No bank account is configured for transfers. Please contact support.</p>
                     @else
                         <div class="space-y-2 text-sm text-gray-600">
                             <p><strong class="text-gray-800">Bank:</strong> {{ $defaultBankAccount->bank_name }}</p>
                             <p><strong class="text-gray-800">Account Name:</strong> {{ $defaultBankAccount->account_name }}</p>
-                            <p><strong class="text-gray-800">Account Number:</strong> <span class="font-mono font-bold text-gray-900">{{ $defaultBankAccount->account_number }}</span></p>
+                            <p class="flex items-center gap-2 flex-wrap">
+                                <strong class="text-gray-800">Account Number:</strong>
+                                <span id="order-bank-account-number" class="font-mono font-bold text-gray-900">{{ $defaultBankAccount->account_number }}</span>
+                                <button type="button" id="order-copy-account-number" class="text-xs font-semibold text-emerald-700 border border-emerald-300 rounded-lg px-2.5 py-1 hover:bg-emerald-50 transition-colors">Copy Account Number</button>
+                            </p>
                             <p><strong class="text-gray-800">Amount to Transfer:</strong> <span class="font-bold text-emerald-700">₦{{ number_format($order->total, 2) }}</span></p>
-                            <p><strong class="text-gray-800">Payment Reference:</strong> <span class="font-mono">{{ $order->order_number }}</span></p>
+                            <p><strong class="text-gray-800">Order Reference:</strong> <span class="font-mono">{{ $order->order_number }}</span></p>
                             @if ($defaultBankAccount->instructions)
                                 <p class="text-xs text-gray-500 mt-2">{{ $defaultBankAccount->instructions }}</p>
                             @endif
                         </div>
 
+                        <p class="mt-3 text-xs text-gray-500">Transfer the exact amount above. Your order is only confirmed after our administration team verifies the payment.</p>
+
                         @if ($bankTransferPayment && $bankTransferPayment->isPending())
                             <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
-                                Your transfer has been submitted (ref: {{ $bankTransferPayment->reference }}) and is awaiting verification.
+                                <p class="font-semibold">Payment notification submitted</p>
+                                <p class="mt-1">Your transfer notification (ref: <span class="font-mono font-bold">{{ $bankTransferPayment->reference }}</span>) is awaiting payment verification by our administration team.</p>
+                                <p class="mt-1 text-xs font-bold text-amber-700">Status: Pending Admin Confirmation</p>
                             </div>
                         @else
-                            <button type="button" onclick="document.getElementById('bank-transfer-modal').classList.remove('hidden')" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg py-3 text-sm transition-colors">
-                                I have completed the payment
+                            @if ($latestRejectedPayment)
+                                <div class="mt-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-800">
+                                    <p class="font-semibold">Previous notification rejected</p>
+                                    <p class="mt-1">{{ $latestRejectedPayment->rejection_reason ?: 'The transfer could not be confirmed.' }}</p>
+                                    <p class="mt-1 text-xs">You can submit a new notification once you have made the transfer.</p>
+                                </div>
+                            @endif
+
+                            <form action="{{ route('marketplace.orders.bank-transfer', $order) }}" method="POST" data-bank-transfer-form class="mt-4">
+                                @csrf
+                                <input type="hidden" name="bank_account_id" value="{{ $defaultBankAccount->id }}">
+                                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold rounded-lg py-3 text-sm transition-colors">
+                                    I Have Made Payment
+                                </button>
+                            </form>
+
+                            <button type="button" onclick="document.getElementById('bank-transfer-modal').classList.remove('hidden')" class="w-full mt-2 bg-white border border-emerald-300 text-emerald-700 hover:bg-emerald-50 font-semibold rounded-lg py-2.5 text-sm transition-colors">
+                                Add transfer details (optional)
                             </button>
                         @endif
                     @endif
@@ -234,7 +270,7 @@
     </div>
 
     {{-- Bank transfer modal --}}
-    @if ($order->payment_method === 'bank_transfer' && $order->payment_status !== 'paid' && ! $bankAccounts->isEmpty())
+    @if ($order->payment_method === 'bank_transfer' && $order->payment_status !== 'paid' && $bankTransferEnabled && ! $bankAccounts->isEmpty() && ! ($bankTransferPayment && $bankTransferPayment->isPending()))
         @php $defaultBankAccount = $bankAccounts->firstWhere('is_default', true) ?? $bankAccounts->first(); @endphp
         <div id="bank-transfer-modal" class="{{ $showBankTransferModal ? '' : 'hidden' }} fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4">
             <div class="bg-white rounded-2xl p-6 max-w-lg w-full">
@@ -244,7 +280,7 @@
                     <strong>{{ $defaultBankAccount->bank_name }}</strong>
                     ({{ $defaultBankAccount->account_number }}), then submit the details below.
                 </p>
-                <form action="{{ route('marketplace.orders.bank-transfer', $order) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('marketplace.orders.bank-transfer', $order) }}" method="POST" enctype="multipart/form-data" data-bank-transfer-form>
                     @csrf
                     @if ($bankAccounts->count() > 1)
                         <div class="mb-3">
@@ -287,12 +323,84 @@
         </div>
     @endif
 
+    {{-- Payment notification spinner overlay --}}
+    <div id="payment-spinner-overlay" class="hidden fixed inset-0 z-[2000] bg-black/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl px-8 py-7 max-w-sm w-full text-center">
+            <div class="mx-auto w-14 h-14 rounded-full border-4 border-emerald-100 border-t-emerald-600 animate-spin"></div>
+            <p class="mt-5 text-base font-bold text-gray-900">Submitting your payment notification…</p>
+            <p class="mt-2 text-sm text-gray-500">Please wait, this can take a few seconds. Do not close or refresh this page.</p>
+        </div>
+    </div>
+
     @push('scripts')
     <script>
         function openReview(itemId) {
             document.getElementById('review-form').action = '{{ route("marketplace.orders.review", [$order, ':itemId']) }}'.replace(':itemId', itemId);
             document.getElementById('review-modal').classList.remove('hidden');
         }
+
+        (function () {
+            const copyBtn = document.getElementById('order-copy-account-number');
+            const copyTarget = document.getElementById('order-bank-account-number');
+
+            if (copyBtn && copyTarget) {
+                copyBtn.addEventListener('click', async function () {
+                    const number = copyTarget.textContent.trim();
+                    const original = copyBtn.textContent;
+
+                    try {
+                        if (navigator.clipboard && window.isSecureContext) {
+                            await navigator.clipboard.writeText(number);
+                        } else {
+                            const input = document.createElement('textarea');
+                            input.value = number;
+                            input.style.position = 'fixed';
+                            input.style.opacity = '0';
+                            document.body.appendChild(input);
+                            input.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(input);
+                        }
+                        copyBtn.textContent = 'Copied!';
+                    } catch (e) {
+                        copyBtn.textContent = 'Copy failed';
+                    }
+
+                    setTimeout(function () { copyBtn.textContent = original; }, 2000);
+                });
+            }
+
+            const overlay = document.getElementById('payment-spinner-overlay');
+            let submitting = false;
+
+            document.querySelectorAll('[data-bank-transfer-form]').forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    // Guard against double clicks / double submit.
+                    if (submitting) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    event.preventDefault();
+                    submitting = true;
+
+                    form.querySelectorAll('button[type="submit"]').forEach(function (btn) {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-60', 'cursor-not-allowed');
+                        btn.textContent = 'Submitting…';
+                    });
+
+                    if (overlay) {
+                        overlay.classList.remove('hidden');
+                        overlay.classList.add('flex');
+                    }
+
+                    // Give the customer visible confirmation before the request
+                    // is sent, then perform a native submit (bypasses this handler).
+                    setTimeout(function () { form.submit(); }, 5000);
+                });
+            });
+        })();
     </script>
     @endpush
 @endsection

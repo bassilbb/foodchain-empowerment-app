@@ -5,6 +5,7 @@ namespace App\Services\Marketplace;
 use App\Mail\MarketplaceOrderMail;
 use App\Models\Marketplace\Order;
 use App\Models\Marketplace\BulkOrder;
+use App\Models\ManualPayment;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Marketplace\Product;
@@ -119,6 +120,74 @@ class MarketplaceNotificationService
                     route('marketplace.bulk.show', $bulkOrder->id), null);
             }
         }
+    }
+
+    /**
+     * Customer has told us they sent a bank transfer. This is NOT a payment
+     * confirmation — it only tells them we received the notification.
+     */
+    public function bankTransferNotificationReceived(ManualPayment $manualPayment): void
+    {
+        $order = $manualPayment->marketplaceOrder;
+        $user = $manualPayment->user;
+
+        if (! $user) {
+            return;
+        }
+
+        $message = 'Your payment notification '.$manualPayment->reference
+            .' has been received successfully. Your order is awaiting payment verification by our administration team.';
+
+        $this->notify(
+            $user,
+            'bank_transfer_submitted',
+            'Payment Notification Submitted',
+            $message,
+            $order ? route('marketplace.orders.show', $order->id) : null,
+            $order
+        );
+    }
+
+    public function bankTransferVerified(ManualPayment $manualPayment): void
+    {
+        $order = $manualPayment->marketplaceOrder;
+        $user = $manualPayment->user;
+
+        if (! $user) {
+            return;
+        }
+
+        $this->notify(
+            $user,
+            'bank_transfer_verified',
+            'Payment Verified',
+            'Your bank transfer '.$manualPayment->reference.' has been verified. Your order '
+                .($order?->order_number ?? '').' is now confirmed.',
+            $order ? route('marketplace.orders.show', $order->id) : null,
+            $order
+        );
+    }
+
+    public function bankTransferRejected(ManualPayment $manualPayment): void
+    {
+        $order = $manualPayment->marketplaceOrder;
+        $user = $manualPayment->user;
+
+        if (! $user) {
+            return;
+        }
+
+        $reason = $manualPayment->rejection_reason ?: 'The transfer could not be confirmed.';
+
+        $this->notify(
+            $user,
+            'bank_transfer_rejected',
+            'Payment Notification Rejected',
+            'Your payment notification '.$manualPayment->reference.' was rejected: '.$reason
+                .' You can submit a new notification once you have made the transfer.',
+            $order ? route('marketplace.orders.show', $order->id) : null,
+            $order
+        );
     }
 
     private function notify($user, string $type, string $title, string $message, ?string $actionUrl, ?Order $order): void

@@ -1249,7 +1249,14 @@
                     </div>
                 </div>
                 @php
-                    $settingsRoutes = ['admin.settings.*', 'admin.admin-users.*'];
+                    $settingsRoutes = [
+                        'admin.settings.*',
+                        'admin.admin-users.*',
+                        'admin.payment-settings.*',
+                        'admin.manual-payments.*',
+                        'admin.bank-accounts.*',
+                        'admin.image-research.*',
+                    ];
                     $isSettingsActive = request()->routeIs(implode('|', $settingsRoutes));
                 @endphp
                 <div class="nav-section">
@@ -1262,9 +1269,29 @@
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         General Settings
                     </a>
-                    <a href="{{ route('admin.settings.index') }}#payment-settings" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.payment-settings.index') }}" class="nav-link {{ request()->routeIs('admin.payment-settings.*') ? 'active' : '' }}">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                         Payment Settings
+                    </a>
+                    <a href="{{ route('admin.manual-payments.index') }}" class="nav-link {{ request()->routeIs('admin.manual-payments.*') ? 'active' : '' }}">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Payment Verification
+                        @php $pendingManualPayments = \App\Models\ManualPayment::pending()->count(); @endphp
+                        @if($pendingManualPayments > 0)<span class="nav-badge">{{ $pendingManualPayments }}</span>@endif
+                    </a>
+                    <a href="{{ route('admin.bank-accounts.index') }}" class="nav-link {{ request()->routeIs('admin.bank-accounts.*') ? 'active' : '' }}">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 6h18M5 6v12a2 2 0 002 2h10a2 2 0 002-2V6M9 10v4m6-4v4"></path></svg>
+                        Bank Accounts
+                    </a>
+                    <a href="{{ route('admin.image-research.index') }}" class="nav-link {{ request()->routeIs('admin.image-research.*') ? 'active' : '' }}">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Image Research
+                        @php
+                            $pendingImages = \Illuminate\Support\Facades\Schema::hasTable('marketplace_product_image_research')
+                                ? \App\Models\ProductImageResearch::where('status', \App\Models\ProductImageResearch::STATUS_PENDING_VERIFICATION)->count()
+                                : 0;
+                        @endphp
+                        @if($pendingImages > 0)<span class="nav-badge">{{ $pendingImages }}</span>@endif
                     </a>
                     <a href="{{ route('admin.admin-users.index') }}" class="nav-link {{ request()->routeIs('admin.admin-users.*') ? 'active' : '' }}">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>

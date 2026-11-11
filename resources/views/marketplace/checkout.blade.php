@@ -92,23 +92,56 @@
                 {{-- Payment --}}
                 <div class="bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,23,42,0.06)] border border-gray-100 p-6">
                     <h3 class="font-bold text-gray-900 mb-4">2. Payment Method</h3>
-                    <div class="space-y-3">
-                        @foreach ($paymentMethods as $key => $label)
-                            <label class="flex items-center gap-3 p-3 border-2 rounded-xl cursor-pointer transition-colors payment-option {{ old('payment_method', 'wallet') === $key ? 'border-emerald-600 bg-emerald-50' : 'border-gray-200 hover:border-emerald-300' }}" data-method="{{ $key }}">
-                                <input type="radio" name="payment_method" value="{{ $key }}" @checked(old('payment_method', 'wallet') === $key) class="text-emerald-600 focus:ring-emerald-500" onchange="onPaymentChange(this.value)">
-                                <span class="text-sm font-semibold text-gray-800">{{ $label }}</span>
-                                @if ($key === 'wallet')
-                                    <span class="ml-auto text-xs text-emerald-700 font-semibold">Balance: ₦{{ number_format($data['wallet_balance'], 2) }}</span>
-                                @endif
-                            </label>
-                        @endforeach
-                    </div>
 
-                    <div id="wallet-amount-wrap" class="hidden mt-4">
-                        <label class="text-xs font-semibold text-gray-500 uppercase mb-1.5 block">Amount to pay from wallet (₦)</label>
-                        <input type="number" name="wallet_amount" id="wallet-amount" min="0" max="{{ $data['wallet_balance'] }}" value="{{ old('wallet_amount', min($data['total'], $data['wallet_balance'])) }}" step="0.01" class="w-full sm:w-64 text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
-                        <p class="text-xs text-gray-500 mt-1">Remaining balance is payable via card.</p>
-                    </div>
+                    @if (empty($paymentMethods))
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+                            No payment method is currently available. Please contact support or try again later.
+                        </div>
+                    @else
+                        <div class="space-y-3">
+                            @foreach ($paymentMethods as $key => $label)
+                                <label class="flex items-center gap-3 p-3 border-2 rounded-xl cursor-pointer transition-colors payment-option {{ old('payment_method', $defaultPaymentMethod) === $key ? 'border-emerald-600 bg-emerald-50' : 'border-gray-200 hover:border-emerald-300' }}" data-method="{{ $key }}">
+                                    <input type="radio" name="payment_method" value="{{ $key }}" @checked(old('payment_method', $defaultPaymentMethod) === $key) class="text-emerald-600 focus:ring-emerald-500" onchange="onPaymentChange(this.value)">
+                                    <span class="text-sm font-semibold text-gray-800">{{ $label }}</span>
+                                    @if ($key === 'wallet')
+                                        <span class="ml-auto text-xs text-emerald-700 font-semibold">Balance: ₦{{ number_format($data['wallet_balance'], 2) }}</span>
+                                    @endif
+                                </label>
+                            @endforeach
+                        </div>
+
+                        {{-- Bank transfer details come from the admin configuration, never hard-coded. --}}
+                        <div id="bank-transfer-details" class="{{ old('payment_method', $defaultPaymentMethod) === 'bank_transfer' ? '' : 'hidden' }} mt-4 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+                            @if ($bankTransferEnabled && $bankTransferDetails)
+                                <p class="text-sm font-bold text-emerald-900">Transfer the exact order amount to:</p>
+                                <div class="mt-3 space-y-1.5 text-sm text-gray-700">
+                                    <p><span class="font-semibold text-gray-900">Bank:</span> {{ $bankTransferDetails['bank_name'] }}</p>
+                                    <p><span class="font-semibold text-gray-900">Account Name:</span> {{ $bankTransferDetails['account_name'] }}</p>
+                                    <p class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-semibold text-gray-900">Account Number:</span>
+                                        <span id="bank-account-number" class="font-mono font-bold text-gray-900">{{ $bankTransferDetails['account_number'] }}</span>
+                                        <button type="button" id="copy-account-number" class="text-xs font-semibold text-emerald-700 border border-emerald-300 rounded-lg px-2.5 py-1 hover:bg-emerald-100 transition-colors">Copy Account Number</button>
+                                    </p>
+                                    <p><span class="font-semibold text-gray-900">Amount to Transfer:</span> <span class="font-bold text-emerald-700">₦{{ number_format($data['total'], 2) }}</span></p>
+                                    <p><span class="font-semibold text-gray-900">Order Reference:</span> <span class="font-mono">Your order number (shown after you place the order)</span></p>
+                                </div>
+                                <p class="mt-3 text-xs text-emerald-800">
+                                    Please transfer the exact amount. Your order is only confirmed after our administration team verifies the payment.
+                                </p>
+                                @if (! empty($bankTransferDetails['instructions']))
+                                    <p class="mt-2 text-xs text-gray-600">{{ $bankTransferDetails['instructions'] }}</p>
+                                @endif
+                            @else
+                                <p class="text-sm text-amber-800">Bank transfer is currently unavailable. Please choose another payment method.</p>
+                            @endif
+                        </div>
+
+                        <div id="wallet-amount-wrap" class="hidden mt-4">
+                            <label class="text-xs font-semibold text-gray-500 uppercase mb-1.5 block">Amount to pay from wallet (₦)</label>
+                            <input type="number" name="wallet_amount" id="wallet-amount" min="0" max="{{ $data['wallet_balance'] }}" value="{{ old('wallet_amount', min($data['total'], $data['wallet_balance'])) }}" step="0.01" class="w-full sm:w-64 text-sm rounded-lg border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                            <p class="text-xs text-gray-500 mt-1">Remaining balance is payable via card.</p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -173,9 +206,47 @@
                 el.classList.toggle('bg-emerald-50', el.dataset.method === method);
             });
             const wrap = document.getElementById('wallet-amount-wrap');
-            wrap.classList.toggle('hidden', !['wallet_cash', 'wallet_paystack'].includes(method));
+            if (wrap) {
+                wrap.classList.toggle('hidden', !['wallet_cash', 'wallet_paystack'].includes(method));
+            }
+            const bankPanel = document.getElementById('bank-transfer-details');
+            if (bankPanel) {
+                bankPanel.classList.toggle('hidden', method !== 'bank_transfer');
+            }
         }
-        onPaymentChange(document.querySelector('input[name="payment_method"]:checked').value);
+
+        const selectedPayment = document.querySelector('input[name="payment_method"]:checked');
+        if (selectedPayment) {
+            onPaymentChange(selectedPayment.value);
+        }
+
+        const copyBtn = document.getElementById('copy-account-number');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', async function () {
+                const number = document.getElementById('bank-account-number').textContent.trim();
+                const original = copyBtn.textContent;
+
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(number);
+                    } else {
+                        const input = document.createElement('textarea');
+                        input.value = number;
+                        input.style.position = 'fixed';
+                        input.style.opacity = '0';
+                        document.body.appendChild(input);
+                        input.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(input);
+                    }
+                    copyBtn.textContent = 'Copied!';
+                } catch (e) {
+                    copyBtn.textContent = 'Copy failed';
+                }
+
+                setTimeout(() => { copyBtn.textContent = original; }, 2000);
+            });
+        }
 
         const deliveryType = document.getElementById('delivery-type');
         const deliveryState = document.getElementById('delivery-state');

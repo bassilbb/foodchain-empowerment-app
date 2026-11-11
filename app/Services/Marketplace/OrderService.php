@@ -101,6 +101,17 @@ class OrderService
         }
 
         $paymentMethod = $data['payment_method'] ?? 'wallet';
+
+        // Enforce administrator-controlled availability at the service layer
+        // as well, so direct service calls / stale sessions cannot bypass the
+        // checkout validation.
+        if (! app(\App\Services\Payments\PaymentMethodSettings::class)->isAvailable($paymentMethod)) {
+            return [
+                'success' => false,
+                'message' => 'The selected payment method is not available. Please choose another method.',
+            ];
+        }
+
         $total = $checkout['total'];
         $walletBalance = (float) $user->wallet_balance;
 
