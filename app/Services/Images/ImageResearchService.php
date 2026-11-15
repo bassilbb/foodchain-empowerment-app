@@ -409,11 +409,19 @@ class ImageResearchService
                 'image_path' => $relativePath,
             ]);
 
+            $isPrimary = $replace || ! $hasPrimary;
+
             $image->fill([
-                'is_primary' => $hasPrimary ? (bool) $image->is_primary : true,
+                'is_primary' => $isPrimary,
                 'is_placeholder' => false,
                 'sort_order' => $image->sort_order ?? 0,
             ])->save();
+
+            if ($isPrimary) {
+                ProductImage::where('product_id', $product->id)
+                    ->where('id', '!=', $image->id)
+                    ->update(['is_primary' => false]);
+            }
 
             if ($replace && $previousPath && $previousPath !== $relativePath) {
                 ProductImage::where('product_id', $product->id)
