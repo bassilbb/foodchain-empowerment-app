@@ -18,6 +18,7 @@ use App\Models\Marketplace\WalletTransaction;
 use App\Models\Marketplace\Brand;
 use App\Models\Marketplace\DeliveryZone;
 use App\Models\Marketplace\ProductImage;
+use App\Models\Marketplace\ProductPriceHistory;
 use App\Models\Marketplace\ProductStatePrice;
 use App\Models\AdminAuditLog;
 use App\Models\NigerianState;
@@ -157,7 +158,12 @@ class MarketplaceController extends Controller
     {
         $product->load('category', 'brand', 'vendor', 'images', 'inventoryMovements');
 
-        return view('admin.marketplace.product-show', ['product' => $product]);
+        return view('admin.marketplace.product-show', [
+            'product' => $product,
+            'priceHistories' => $product->priceHistories()
+                ->with('admin')
+                ->paginate(20, ['*'], 'price_history_page'),
+        ]);
     }
 
     public function productEdit(Product $product)
@@ -199,10 +205,31 @@ class MarketplaceController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
+        $oldPrice = round((float) $product->price, 2);
+
         $product->update($data + [
             'is_active' => $request->boolean('is_active'),
             'is_featured' => $request->boolean('is_featured'),
         ]);
+
+        $newPrice = round((float) $product->price, 2);
+
+        if (abs($newPrice - $oldPrice) >= 0.01) {
+            ProductPriceHistory::create([
+                'product_id' => $product->id,
+                'vendor_id' => $product->vendor_id,
+                'admin_user_id' => auth('admin')->id(),
+                'product_name' => $product->name,
+                'sku' => $product->sku,
+                'source' => ProductPriceHistory::SOURCE_MANUAL,
+                'old_price' => $oldPrice,
+                'new_price' => $newPrice,
+                'difference' => round($newPrice - $oldPrice, 2),
+                'percent_change' => $oldPrice > 0 ? round((($newPrice - $oldPrice) / $oldPrice) * 100, 2) : null,
+                'status' => ProductPriceHistory::STATUS_APPLIED,
+                'note' => 'Price changed from the admin product editor.',
+            ]);
+        }
 
         if ($request->hasFile('images')) {
             $hasRealPrimary = $product->images()->where('is_placeholder', false)->where('is_primary', true)->exists();

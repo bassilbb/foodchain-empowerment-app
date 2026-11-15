@@ -23,6 +23,10 @@ tunnel.log.*
 Homestead.json
 Homestead.yaml
 Thumbs.db
+/database/playwright.sqlite
+/test-results
+/playwright-report
+/blob-report
 
 nul
 null

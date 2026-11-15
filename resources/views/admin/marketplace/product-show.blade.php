@@ -266,4 +266,57 @@
         </tbody>
     </table>
 </div>
+
+<!-- Price Change History -->
+<div class="page-card" style="margin-top: 2rem;">
+    <div class="page-card-header">
+        <div>
+            <h3 class="page-card-title">Price Change History</h3>
+            <p class="page-card-subtitle">Manual edits, bulk supplier uploads and rollbacks.</p>
+        </div>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Old price</th>
+                <th>New price</th>
+                <th>Difference</th>
+                <th>Source</th>
+                <th>Admin</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($priceHistories as $history)
+            <tr>
+                <td style="white-space: nowrap;">{{ $history->created_at?->format('M d, Y h:i A') }}</td>
+                <td>{{ $history->old_price === null ? '—' : format_currency($history->old_price) }}</td>
+                <td style="font-weight: 600;">{{ $history->new_price === null ? '—' : format_currency($history->new_price) }}</td>
+                <td>
+                    @if($history->difference === null)
+                        —
+                    @else
+                        <span style="color: {{ $history->difference > 0 ? '#b45309' : ($history->difference < 0 ? '#0369a1' : '#64748b') }}; font-weight: 600;">
+                            {{ $history->difference > 0 ? '+' : '' }}{{ format_currency($history->difference) }}
+                        </span>
+                    @endif
+                </td>
+                <td>{{ $history->sourceLabel() }}</td>
+                <td>{{ $history->admin?->name ?? '—' }}</td>
+                <td>
+                    <span class="badge {{ $history->status === 'rolled_back' ? 'badge-error' : ($history->status === 'created' ? 'badge-success' : 'badge-info') }}">
+                        {{ ucfirst(str_replace('_', ' ', $history->status)) }}
+                    </span>
+                </td>
+            </tr>
+            @empty
+            <tr><td colspan="7"><div class="empty-state">No price changes recorded yet.</div></td></tr>
+            @endforelse
+        </tbody>
+    </table>
+    @if($priceHistories->hasPages())
+    <div class="page-card-body">{{ $priceHistories->links() }}</div>
+    @endif
+</div>
 @endsection

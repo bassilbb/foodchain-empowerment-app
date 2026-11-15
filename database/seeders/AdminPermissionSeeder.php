@@ -45,6 +45,10 @@ class AdminPermissionSeeder extends Seeder
             // Reports
             ['name' => 'View Reports', 'slug' => 'view_reports', 'module' => 'reports'],
             ['name' => 'Export Data', 'slug' => 'export_data', 'module' => 'reports'],
+
+            // Marketplace bulk price updates
+            ['name' => 'View Bulk Price Uploads', 'slug' => 'view_price_imports', 'module' => 'marketplace'],
+            ['name' => 'Manage Bulk Price Uploads', 'slug' => 'manage_price_imports', 'module' => 'marketplace'],
         ];
 
         foreach ($permissions as $permission) {
@@ -71,7 +75,8 @@ class AdminPermissionSeeder extends Seeder
 
         // Inventory Manager permissions
         $inventoryPerms = ['view_inventory', 'manage_inventory', 'add_stock', 'remove_stock',
-            'view_distributions', 'manage_distribution_schedule', 'view_users'];
+            'view_distributions', 'manage_distribution_schedule', 'view_users',
+            'view_price_imports', 'manage_price_imports'];
         $this->assignRolePermissions('inventory_manager', $inventoryPerms);
 
         // Customer Support permissions

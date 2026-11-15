@@ -14,7 +14,7 @@ class Product extends Model
     protected $table = 'marketplace_products';
 
     protected $fillable = [
-        'vendor_id', 'category_id', 'brand_id', 'name', 'slug', 'sku', 'barcode',
+        'vendor_id', 'category_id', 'brand_id', 'name', 'slug', 'sku', 'supplier_product_code', 'barcode',
         'unit', 'weight', 'weight_unit', 'price', 'discount_price', 'member_price',
         'stock_quantity', 'low_stock_threshold', 'description', 'ingredients',
         'nutritional_info', 'storage_instructions', 'expiry_date', 'manufacturing_date',
@@ -83,6 +83,11 @@ class Product extends Model
     public function statePrices(): HasMany
     {
         return $this->hasMany(ProductStatePrice::class, 'product_id');
+    }
+
+    public function priceHistories(): HasMany
+    {
+        return $this->hasMany(ProductPriceHistory::class, 'product_id')->latest('id');
     }
 
     public function scopeActive($query)

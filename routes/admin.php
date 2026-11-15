@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\PageContentController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PaymentSettingsController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProductPriceImportController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\MarketplaceReportController;
 use App\Http\Controllers\Admin\SettingController;
@@ -330,6 +331,18 @@ Route::middleware(['admin'])->group(function () {
             Route::get('/', [\App\Http\Controllers\Admin\MarketplaceController::class, 'dashboard'])->name('dashboard');
             Route::get('/reports', [MarketplaceReportController::class, 'sales'])->name('reports');
             Route::get('/audit-logs', [\App\Http\Controllers\Admin\MarketplaceController::class, 'auditLogs'])->name('audit-logs.index');
+
+            // Bulk Product Price Update (CSV / XML)
+            Route::prefix('price-imports')->name('price-imports.')->group(function () {
+                Route::get('/', [ProductPriceImportController::class, 'index'])->name('index');
+                Route::post('/', [ProductPriceImportController::class, 'store'])->name('store');
+                Route::get('/template/{format}', [ProductPriceImportController::class, 'template'])->name('template');
+                Route::get('/{batch}', [ProductPriceImportController::class, 'show'])->name('show');
+                Route::post('/{batch}/apply', [ProductPriceImportController::class, 'apply'])->name('apply');
+                Route::post('/{batch}/rollback', [ProductPriceImportController::class, 'rollback'])->name('rollback');
+                Route::get('/{batch}/status', [ProductPriceImportController::class, 'status'])->name('status');
+                Route::get('/{batch}/export/{type}', [ProductPriceImportController::class, 'export'])->name('export');
+            });
 
             // Products
             Route::prefix('products')->name('products.')->group(function () {
