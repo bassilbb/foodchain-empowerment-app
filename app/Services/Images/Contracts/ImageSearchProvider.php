@@ -13,7 +13,8 @@ interface ImageSearchProvider
      *     image_url: string,
      *     source_url: ?string,
      *     source_site: ?string,
-     *     title: ?string
+     *     title: ?string,
+     *     score?: float
      * }>
      */
     public function search(string $query, int $limit = 5): array;

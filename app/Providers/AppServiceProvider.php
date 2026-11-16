@@ -10,6 +10,7 @@ use App\Services\InventoryService;
 use App\Services\DistributionService;
 use App\Services\NotificationService;
 use App\Services\Images\BingImageSearchProvider;
+use App\Services\Images\CatalogueImageSearchProvider;
 use App\Services\Images\Contracts\ImageSearchProvider;
 use App\Services\Images\NullImageSearchProvider;
 use App\Services\Images\SerpApiImageSearchProvider;
@@ -41,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
                 'bing' => new BingImageSearchProvider(
                     config('image_research.bing.key'),
                     (string) config('image_research.bing.endpoint'),
+                ),
+                'catalogue' => new CatalogueImageSearchProvider(
+                    path: (string) config('image_research.catalogue.path'),
+                    sourceSite: (string) config('image_research.catalogue.source_site'),
                 ),
                 default => new NullImageSearchProvider,
             };

@@ -59,6 +59,8 @@ class ProductImageResearch extends Model
         'candidate_source_url',
         'candidate_source_site',
         'candidate_title',
+        'candidate_confidence',
+        'candidate_match_method',
         'candidate_query',
         'downloaded_path',
         'download_status',
@@ -78,6 +80,7 @@ class ProductImageResearch extends Model
         'downloaded_at' => 'datetime',
         'last_researched_at' => 'datetime',
         'research_attempts' => 'integer',
+        'candidate_confidence' => 'float',
     ];
 
     public function product(): BelongsTo

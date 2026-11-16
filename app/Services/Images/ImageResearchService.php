@@ -142,6 +142,8 @@ class ImageResearchService
             'candidate_source_url' => $candidate['source_url'] ?? null,
             'candidate_source_site' => $candidate['source_site'] ?? null,
             'candidate_title' => $candidate['title'] ?? null,
+            'candidate_confidence' => $candidate['score'] ?? null,
+            'candidate_match_method' => isset($candidate['score']) ? 'provider-score' : null,
             'rejection_reason' => null,
         ])->save();
 
